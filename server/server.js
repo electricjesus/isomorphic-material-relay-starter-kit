@@ -7,8 +7,8 @@ import auth from './auth'; // Authentication server
 import webapp from '../webapp/server'; // React server
 import { schema } from '../graphql/schema'; // Schema for GraphQL server
 
-const host = process.env.NODE_HOST || process.env.npm_package_config_appServerHost;
-const port = process.env.NODE_PORT || process.env.npm_package_config_appServerPort;
+const host = process.env.OPENSHIFT_INTERNAL_IP   || process.env.NODE_HOST || process.env.npm_package_config_appServerHost;
+const port = process.env.OPENSHIFT_INTERNAL_PORT || process.env.NODE_PORT || process.env.npm_package_config_appServerPort;
 const publicPath = path.resolve( __dirname + '/public/' );
 
 console.log( '--------------------------------------------------------------------------------' );

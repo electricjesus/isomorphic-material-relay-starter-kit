@@ -13,7 +13,7 @@
     "schema-update": "babel-node ./scripts/updateSchema.js",
     "webpack-start": "webpack-dev-server --hot --inline --progress --colors",
     "webpack-build": "webpack -p",
-    "start-prod": "export NODE_ENV=production && babel-node ./server/server.js",
+    "start": "export NODE_ENV=production && babel-node ./server/server.js",
     "start-dev": "export NODE_ENV=development && nodemon --exec babel-node -- ./server/server.js"
   },
   "metadata": {

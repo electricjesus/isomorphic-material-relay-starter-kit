@@ -48,7 +48,7 @@ Every time you change the application and want to make it ready to run in produc
 
 # Running in production
 
-* Run `npm run start-prod`
+* Run `npm run start`
 * Navigate to `http://localhost:4444`, unless you specified a different port.
 
 # Configuration using environment variables

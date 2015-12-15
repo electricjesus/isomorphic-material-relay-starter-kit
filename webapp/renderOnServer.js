@@ -8,7 +8,7 @@ import {match, RoutingContext} from 'react-router';
 
 import routes from './routes';
 
-const port = process.env.NODE_PORT || process.env.npm_package_config_appServerPort;
+const port = process.env.OPENSHIFT_INTERNAL_PORT || process.env.NODE_PORT || process.env.npm_package_config_appServerPort;
 const GRAPHQL_URL = `http://localhost:${ port }/graphql`;
 
 Relay.injectNetworkLayer(new Relay.DefaultNetworkLayer(GRAPHQL_URL));
