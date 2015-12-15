@@ -1,0 +1,6 @@
+.env
+.DS_Store
+graphql/schema.graphql
+node_modules
+npm-debug.log
+public/assets

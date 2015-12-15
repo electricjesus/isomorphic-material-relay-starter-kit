@@ -1,0 +1,63 @@
+{
+  "name": "isomorphic-material-relay-starter-kit",
+  "description": "Starter kit for isomorphic applications using React/Relay and Material-UI",
+  "private": true,
+  "version": "0.1.1",
+  "config": {
+    "appWebpackBaseUrl": "http://localhost:8080",
+    "appWebpackBuildPath": "public/assets",
+    "appServerHost": "127.0.0.1",
+    "appServerPort": 4444
+  },
+  "scripts": {
+    "schema-update": "babel-node ./scripts/updateSchema.js",
+    "webpack-start": "webpack-dev-server --hot --inline --progress --colors",
+    "webpack-build": "webpack -p",
+    "start-prod": "export NODE_ENV=production && babel-node ./server/server.js",
+    "start-dev": "export NODE_ENV=development && nodemon --exec babel-node -- ./server/server.js"
+  },
+  "metadata": {
+    "graphql": {
+      "schema": "./graphql/schema.json"
+    }
+  },
+  "dependencies": {
+    "babel": "5.8.23",
+    "babel-core": "^5.8.25",
+    "babel-relay-plugin": "^0.6.0",
+    "body-parser": "^1.14.1",
+    "classnames": "^2.1.5",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "express-graphql": "^0.4.0",
+    "graphql": "0.4.14",
+    "graphql-relay": "^0.3.5",
+    "history": "^1.13.1",
+    "isomorphic-relay": "^0.4.0",
+    "isomorphic-relay-router": "^0.4.0",
+    "jwt-simple": "^0.4.0",
+    "material-ui": "^0.13.4",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-helmet": "^2.1.0",
+    "react-relay": "^0.6.0",
+    "react-router": "^1.0.2",
+    "react-router-relay": "^0.8.0",
+    "react-tap-event-plugin": "^0.2.1"
+  },
+  "devDependencies": {
+    "babel-loader": "^5.3.2",
+    "babel-plugin-react-transform": "^1.1.1",
+    "babel-relay-plugin-loader": "^0.6.0",
+    "css-loader": "^0.19.0",
+    "extract-text-webpack-plugin": "^0.8.2",
+    "nib": "^1.1.0",
+    "nodemon": "^1.7.1",
+    "react-hot-loader": "^1.3.0",
+    "style-loader": "^0.12.4",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.0"
+  }
+}
