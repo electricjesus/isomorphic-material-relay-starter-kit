@@ -10,11 +10,11 @@
     "appServerPort": 4444
   },
   "scripts": {
-    "schema-update": "babel-node ./scripts/updateSchema.js",
+    "schema-update": "./node_modules/.bin/babel-node ./scripts/updateSchema.js",
     "webpack-start": "webpack-dev-server --hot --inline --progress --colors",
     "webpack-build": "webpack -p",
-    "start": "export NODE_ENV=production && babel-node ./server/server.js",
-    "start-dev": "export NODE_ENV=development && nodemon --exec babel-node -- ./server/server.js"
+    "start": "export NODE_ENV=production && ./node_modules/.bin/babel-node ./server/server.js",
+    "start-dev": "export NODE_ENV=development && nodemon --exec ./node_modules/.bin/babel-node -- ./server/server.js"
   },
   "metadata": {
     "graphql": {
@@ -45,9 +45,8 @@
     "react-relay": "^0.6.0",
     "react-router": "^1.0.2",
     "react-router-relay": "^0.8.0",
-    "react-tap-event-plugin": "^0.2.1"
-  },
-  "devDependencies": {
+    "react-tap-event-plugin": "^0.2.1",
+
     "babel-loader": "^5.3.2",
     "babel-plugin-react-transform": "^1.1.1",
     "babel-relay-plugin-loader": "^0.6.0",

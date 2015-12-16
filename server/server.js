@@ -9,7 +9,7 @@ import { schema } from '../graphql/schema'; // Schema for GraphQL server
 
 const host = process.env.OPENSHIFT_INTERNAL_IP   || process.env.NODE_HOST || process.env.npm_package_config_appServerHost;
 const port = process.env.OPENSHIFT_INTERNAL_PORT || process.env.NODE_PORT || process.env.npm_package_config_appServerPort;
-const publicPath = path.resolve( __dirname + '/public/' );
+const publicPath = path.resolve( __dirname + '/../public/' );
 
 console.log( '--------------------------------------------------------------------------------' );
 console.log( process.env.npm_package_name + ' ' + process.env.npm_package_version + ' running as ' + process.env.NODE_ENV );
