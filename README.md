@@ -1,4 +1,4 @@
-# Code Foundries' Isomorphic Material Relay Starter Kit
+# Isomorphic Material Relay Starter Kit
 
 This project serves as a starter kit for projects utilizing the following technologies:
 
@@ -78,3 +78,7 @@ You can also create your own runXX.sh files
 * `/public/assets/` - This folder is generated and re-built by webpack build. Do not place any files in this folder.
 * `/server/server.js` - Express server for the HTML of the SPA. Serves the HTML, as well as supports isomorphism. If any changes need to be done to the header of the HTML for the SPA, they can be made in this file in the sections [Custom meta tags] and [Custom link tags].
 * `/webapp/styles/` - folder for any styles that will be processed by webpack.
+
+# Final word of caution
+
+This project in its current state is for educational purposes only and is not suitable for production deployment.

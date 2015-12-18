@@ -1,5 +1,6 @@
 import 'babel/polyfill';
-import {createHashHistory} from 'history';
+//import {createBrowserHistory} from 'history';
+let history = require('history');
 import {IndexRoute, Route} from 'react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -24,7 +25,7 @@ import './styles/main.css';
 */
 
 ReactDOM.render(
-  <RelayRouter history={createHashHistory({queryKey: false})}>
+  <RelayRouter history={history.createHistory( )}>
     <Route path="/" component={ App } queries={ ViewerQueries }>
       <IndexRoute component={ Home } queries={ViewerQueries}/>
       <Route path="/todos" component={TodoApp} queries={ViewerQueries}>

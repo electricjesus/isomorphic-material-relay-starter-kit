@@ -1,8 +1,13 @@
 {
   "name": "isomorphic-material-relay-starter-kit",
   "description": "Starter kit for isomorphic applications using React/Relay and Material-UI",
-  "private": true,
-  "version": "0.1.1",
+  "author": "Aleksandar Chalakov and Code Foundries",
+  "homepage": "https://github.com/codefoundries/isomorphic-material-relay-starter-kit",
+  "version": "0.1.2",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codefoundries/isomorphic-material-relay-starter-kit.git"
+  },
   "config": {
     "appWebpackBaseUrl": "http://localhost:8080",
     "appWebpackBuildPath": "public/assets",
