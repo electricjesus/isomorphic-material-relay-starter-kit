@@ -8,6 +8,8 @@ import {RelayRouter} from 'react-router-relay';
 
 import App from './components/App';
 import Home from './components/Home';
+import MUI_Icons from './components/MUI_Icons';
+import MUI_Home from './components/MUI_Home';
 import TodoApp from './components/TodoApp';
 import TodoList from './components/TodoList';
 import ViewerQueries from './queries/ViewerQueries';
@@ -21,16 +23,17 @@ injectTapEventPlugin( );
 
 import './styles/main.css';
 
-/*
-*/
-
 ReactDOM.render(
   <RelayRouter history={history.createHistory( )}>
     <Route path="/" component={ App } queries={ ViewerQueries }>
       <IndexRoute component={ Home } queries={ViewerQueries}/>
-      <Route path="/todos" component={TodoApp} queries={ViewerQueries}>
+      <Route path="todos" component={TodoApp} queries={ViewerQueries}>
         <IndexRoute component={TodoList} queries={ViewerQueries} prepareParams={() => ({status: 'any'})}/>
         <Route path=":status" component={TodoList} queries={ViewerQueries}/>
+      </Route>
+      <Route path="mui">
+        <IndexRoute component={MUI_Home} queries={ViewerQueries}/>
+        <Route path="icons" component={MUI_Icons} queries={ViewerQueries}/>
       </Route>
     </Route>
   </RelayRouter>,
