@@ -1,8 +1,6 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import jwt from 'jwt-simple';
-import passport from 'passport';
-import passportLocal from 'passport-local';
 
 import User from '../data/User';
 

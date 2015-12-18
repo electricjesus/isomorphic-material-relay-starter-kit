@@ -1,5 +1,3 @@
-#!/usr/bin/env babel-node --optional es7.asyncFunctions
-
 import fs from 'fs';
 import path from 'path';
 import { schema } from '../graphql/schema';
@@ -20,7 +18,7 @@ async () => {
       JSON.stringify(result, null, 2)
     );
   }
-}();
+};
 
 // Save user readable type system shorthand of schema
 fs.writeFileSync(
