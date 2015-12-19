@@ -3,31 +3,33 @@
   "description": "Starter kit for isomorphic applications using React/Relay and Material-UI",
   "author": "Aleksandar Chalakov and Code Foundries",
   "homepage": "https://github.com/codefoundries/isomorphic-material-relay-starter-kit",
-  "version": "0.1.0",
-  "repository": {
+  "version": "0.1.1",
+  "repository":
+  {
     "type": "git",
     "url": "git+https://github.com/codefoundries/isomorphic-material-relay-starter-kit.git"
   },
   "license": "MIT",
-  "config": {
-    "appWebpackBaseUrl": "http://localhost:8080",
-    "appWebpackBuildPath": "public/assets",
-    "appServerHost": "127.0.0.1",
-    "appServerPort": 4444
-  },
-  "scripts": {
+  "scripts":
+  {
+    "initial-setup": "cp ./doc/Example.env ./.env && npm run schema-update && npm run webpack-build",
+
     "schema-update": "./node_modules/.bin/babel-node ./scripts/updateSchema.js",
-    "webpack-start": "webpack-dev-server --hot --inline --progress --colors",
     "webpack-build": "webpack -p",
-    "start": "export NODE_ENV=production && ./node_modules/.bin/babel-node ./server/server.js",
-    "start-dev": "export NODE_ENV=development && nodemon --exec ./node_modules/.bin/babel-node -- ./server/server.js"
+
+    "webpack-start": "webpack-dev-server --hot --inline --progress --colors",
+    "start-dev": "export NODE_ENV=development && nodemon --exec ./node_modules/.bin/babel-node -- ./server/server.js",
+
+    "start": "export NODE_ENV=production && ./node_modules/.bin/babel-node ./server/server.js"
   },
-  "metadata": {
+  "metadata":
+  {
     "graphql": {
       "schema": "./graphql/schema.json"
     }
   },
-  "dependencies": {
+  "dependencies":
+  {
     "babel-cli": "^6.3.17",
     "babel-core": "^6.3.21",
     "babel-loader": "^6.2.0",
@@ -44,6 +46,7 @@
     "body-parser": "^1.14.1",
     "classnames": "^2.1.5",
     "css-loader": "^0.19.0",
+    "dotenv": "^1.2.0",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
     "express-graphql": "^0.4.0",
@@ -69,7 +72,8 @@
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.12.0"
   },
-  "devDependencies": {
+  "devDependencies":
+  {
     "babel-plugin-transform-runtime": "^6.3.13"
   }
 }

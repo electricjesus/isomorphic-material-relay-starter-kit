@@ -8,11 +8,14 @@ import {match, RoutingContext} from 'react-router';
 
 import routes from './routes';
 
-const port = process.env.NODE_PORT || process.env.npm_package_config_appServerPort;
-const GRAPHQL_URL = `http://localhost:${ port }/graphql`;
+// Read environment
+require( 'dotenv' ).load( );
 
-Relay.injectNetworkLayer(new Relay.DefaultNetworkLayer(GRAPHQL_URL));
-RelayStoreData.getDefaultInstance().getChangeEmitter().injectBatchingStrategy(() => {});
+let port = require( '../package.json' )
+const GRAPHQL_URL = `http://localhost:${process.env.PORT}/graphql`;
+
+Relay.injectNetworkLayer( new Relay.DefaultNetworkLayer( GRAPHQL_URL ) );
+RelayStoreData.getDefaultInstance( ).getChangeEmitter( ).injectBatchingStrategy(() => { } );
 
 export default ( req, res, next, assetsPath ) => {
     match({routes, location: req.originalUrl}, (error, redirectLocation, renderProps) => {

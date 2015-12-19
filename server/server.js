@@ -7,13 +7,12 @@ import auth from './auth'; // Authentication server
 import webapp from '../webapp/server'; // React server
 import { schema } from '../graphql/schema'; // Schema for GraphQL server
 
-const host = process.env.NODE_HOST || process.env.npm_package_config_appServerHost;
-const port = process.env.NODE_PORT || process.env.npm_package_config_appServerPort;
-const publicPath = path.resolve( __dirname + '/../public/' );
+// Read environment
+require( 'dotenv' ).load( );
 
 console.log( '--------------------------------------------------------------------------------' );
 console.log( process.env.npm_package_name + ' ' + process.env.npm_package_version + ' running as ' + process.env.NODE_ENV );
-console.log( 'serving at ' + host + ':' + port );
+console.log( 'Serving at ' + process.env.HOST + ':' + process.env.PORT );
 console.log( '--------------------------------------------------------------------------------' );
 
 let router = express( );
@@ -29,11 +28,11 @@ router.use( '/graphql', graphQLHTTP( { schema, pretty: true } ) );
 router.use( '/auth', auth );
 
 // Static assets server
-router.use( express.static( publicPath ) );
+router.use( express.static( path.resolve( __dirname + '/../public/' ) ) );
 
 // Application with routes
 router.use( '/*', webapp );
 
-let server = router.listen( port, host );
+let server = router.listen( process.env.PORT, process.env.HOST );
 
 export default server;

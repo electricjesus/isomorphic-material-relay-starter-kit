@@ -2,19 +2,16 @@ import path from 'path';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-const env = process.env;
-const version = env.npm_package_version;
-const buildPath = env.npm_package_config_appWebpackBuildPath;
-const baseUrl = env.npm_package_config_appWebpackBaseUrl;
+var version = require('./package.json').version;
 
 let config = {
   entry: {
     app: path.resolve('webapp/app.js')
   },
   output: {
-    path: path.resolve(`${buildPath}/${version}`),
+    path: path.resolve(`public/assets/${version}`),
     filename: '[name].js',
-    publicPath: `${baseUrl}/${version}/`
+    publicPath: `http://localhost:8080/${version}/`
   },
   module: {
     loaders: [
@@ -25,7 +22,7 @@ let config = {
   },
   plugins: [
     new webpack.NoErrorsPlugin(),
-    new webpack.EnvironmentPlugin(Object.keys(env)),
+    new webpack.EnvironmentPlugin(Object.keys(process.env)),
     new ExtractTextPlugin('[name].css')
   ]
 };

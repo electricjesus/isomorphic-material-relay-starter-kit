@@ -1,76 +1,16 @@
 # Isomorphic Material Relay Starter Kit
 
-This project serves as a starter kit for projects utilizing the following technologies:
+This project has dual purpose:
 
-* [React JS](https://facebook.github.io/react/)
-* [Relay / GrpahQL](https://facebook.github.io/relay/)
-* [Isomorphic Relay](https://github.com/denvned/isomorphic-relay)
-* [Material-UI](http://www.material-ui.com/)
+* To server as boilerplate for projects involving react/relay and materual-ui.
+* To host examples of using those technologies.
 
-It contains a boilerplate with several simple code examples. It consists of modified versions of the following projects:
+## Table of contents
 
-* [Facebook Relay Starter Kit TODO example](https://github.com/facebook/relay/tree/master/examples/todo). Implementation of the TODO MVC using Relay.
-* [Isomorphic react-router-relay TODO example](https://github.com/denvned/isomorphic-relay-router/tree/master/examples/todo). The Facebook TODO example in this project has been modified to support isomorphism.
-* [Xpepermint's isomorphic-react-relay-boilerplate](https://github.com/xpepermint/isomorphic-react-relay-boilerplate). The project organization is largely borrowed from this project.
-
-Examples from other projects have also been incorporated.
-
-# Initial setup
-
-* Clone from git using `git clone https://github.com/codefoundries/isomorphic-material-relay-starter-kit`.
-* Install node modules with `npm install`.
-* Update the schema by running `npm run schema-update`.
-* Build the webpack for the first time with `npm run webpack-build`.
-* Set the permissions on `run80.sh` with `chmod +x ./run80.sh`.
-
-# Schema changes
-
-Whenever you change the schema, regenerate in the folowing way:
-
-* Run: `npm run schema-update`.
-
-# Running in development mode
-
-Two separate servers need to be started. The first one is the actual application in development mode. The second server is the webpack server which is to be run at all times for hot replace
-
-* Start application HTTP server: `npm run start-dev`.
-* Start application Webpack server: `npm run webpack-start`.
-
-If you are running this on Mac, you would use two separate terminal windows and leave both servers running. To open the app:
-
-* Navigate to `http://localhost:4444`, unless you specified a different port.
-
-# Building
-
-Every time you change the application and want to make it ready to run in production, you need to perform this step:
-
-* Run `npm run webpack-build`.
-
-# Running in production
-
-* Run `npm run start`
-* Navigate to `http://localhost:4444`, unless you specified a different port.
-
-# Configuration using environment variables
-
-## Changing server port
-
-* Before starting the app server, use `export NODE_PORT=5555`. In this example we set the port to 5555.
-
-## Changing server host name
-
-* Before starting the app server, use `export NODE_HOST="mydomain.com"`. In this example we set the host to mydomain.com.
-
-## Running locally on port 80 - NOT for production setup
-
-This is just a simplified shortcut for development purposes.
-
-* As a preparation step that needs to be run only once run `chmod +x ./run80.sh`
-* Run `sudo -s ./run80.sh`.
-* Start application Webpack server: `npm run webpack-start`.
-* Navigate to `http://localhost`.
-
-You can also create your own runXX.sh files
+* [Credits and sources](./doc/Credits.md)
+* [Project Setup](./doc/Setup.md)
+* [Environment Variables](./doc/Environment.md)
+* [Building and Running](./doc/BuildRun.md)
 
 # Important pieces of code
 
