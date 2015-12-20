@@ -1,0 +1,77 @@
+const fs = require('fs');
+const rrs = require('recursive-readdir-sync');
+
+let importsSource = [ ];
+let cardItemsSource = [ ];
+let key = 0;
+
+rrs('./node_modules/material-ui/src/svg-icons/').forEach(function(file) {
+	if( file !== 'node_modules/material-ui/src/svg-icons/index-generator.js' && file !== 'node_modules/material-ui/src/svg-icons/index.js' )
+	{
+		let fileLines = fs.readFileSync(file, 'utf8').split('\n');
+		let index = 0, found = false;
+
+		while(found === false && index < fileLines.length)
+		{
+			if(fileLines[index].indexOf('module.exports') > -1)
+			{
+        let fileName = file.substring(0, file.length - 4).replace( 'node_modules/', '' ).replace( 'src/svg-icons', 'lib/svg-icons' );
+				let moduleName = fileLines[index].split('=')[1].replace(';','').trim( );
+
+        importsSource.push( `import ${moduleName} from '${fileName}';` );
+        cardItemsSource.push( `            <ListItem key="${key++}" primaryText="${moduleName}" leftIcon={<${moduleName} />} />` );
+        cardItemsSource.push( `            <ListDivider inset={true} />` );
+
+				found = true;
+			}
+
+			else
+			{
+				index++;
+			}
+		}
+	}
+});
+
+let sourceCode = [
+  `import React from 'react';`,
+  `import Relay from 'react-relay';`,
+  ``,
+  `import Card from 'material-ui/lib/card/card';`,
+  `import List from 'material-ui/lib/lists/list';`,
+  `import ListDivider from 'material-ui/lib/lists/list-divider';`,
+  `import ListItem from 'material-ui/lib/lists/list-item';`,
+  ``,
+  importsSource.join( '\n' ),
+  // `import IconNotificationsEventAvailable from 'material-ui/lib/svg-icons/notification/event-available';`,
+  ``,
+  `class MUI_Icons extends React.Component`,
+  `{`,
+  `  render( )`,
+  `  {`,
+  `    return (`,
+  `      <div>`,
+  `        <Card>`,
+  `          <List>`,
+  cardItemsSource.join( '\n' ),
+  // `            <ListItem key="2" primaryText="IconNotificationsEventAvailable" leftIcon={<IconNotificationsEventAvailable />} />`,
+  // `            <ListDivider inset={true} />`,
+  `          </List>`,
+  `        </Card>`,
+  `      </div>`,
+  `    )`,
+  `  }`,
+  `};`,
+  ``,
+  `export default Relay.createContainer(MUI_Icons, {`,
+  `  fragments: {`,
+  `    viewer: () => Relay.QL\``,
+  `      fragment on User {`,
+  `        totalCount,`,
+  `      }`,
+  `    \`,`,
+  `  },`,
+  `});`,
+];
+
+fs.writeFileSync('./webapp/components/MUI_Icons.js', sourceCode.join('\n'));
