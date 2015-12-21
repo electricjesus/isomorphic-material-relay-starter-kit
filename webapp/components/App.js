@@ -2,6 +2,7 @@ import React from 'react';
 import Relay from 'react-relay';
 
 import AppBar from 'material-ui/lib/app-bar';
+import AppCanvas from 'material-ui/lib/app-canvas';
 import Colors from 'material-ui/lib/styles/colors';
 import Badge from 'material-ui/lib/badge';
 import Dialog from 'material-ui/lib/dialog';
@@ -60,7 +61,7 @@ class App extends React.Component
       );
 
     return (
-      <div>
+      <AppCanvas>
         <AppBar
           title="TODO: Populate from helmet"
           iconElementRight={
@@ -79,7 +80,7 @@ class App extends React.Component
 
         {this.props.children}
 
-      </div>
+      </AppCanvas>
     )
   }
 };

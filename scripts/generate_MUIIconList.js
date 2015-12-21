@@ -13,14 +13,14 @@ rrs('./node_modules/material-ui/src/svg-icons/').forEach(function(file) {
 
 		while(found === false && index < fileLines.length)
 		{
-			if(fileLines[index].indexOf('module.exports') > -1)
+			if(fileLines[index].indexOf('export default ') > -1)
 			{
         let fileName = file.substring(0, file.length - 4).replace( 'node_modules/', '' ).replace( 'src/svg-icons', 'lib/svg-icons' );
-				let moduleName = fileLines[index].split('=')[1].replace(';','').trim( );
+				let moduleName = fileLines[index].replace('export default ', '').replace(';','').trim( );
 
         importsSource.push( `import ${moduleName} from '${fileName}';` );
         cardItemsSource.push( `            <ListItem key="${key++}" primaryText="${moduleName}" leftIcon={<${moduleName} />} />` );
-        cardItemsSource.push( `            <ListDivider inset={true} />` );
+        cardItemsSource.push( `            <Divider inset={true} />` );
 
 				found = true;
 			}
@@ -39,7 +39,7 @@ let sourceCode = [
   ``,
   `import Card from 'material-ui/lib/card/card';`,
   `import List from 'material-ui/lib/lists/list';`,
-  `import ListDivider from 'material-ui/lib/lists/list-divider';`,
+  `import Divider from 'material-ui/lib/divider';`,
   `import ListItem from 'material-ui/lib/lists/list-item';`,
   ``,
   importsSource.join( '\n' ),
@@ -55,7 +55,7 @@ let sourceCode = [
   `          <List>`,
   cardItemsSource.join( '\n' ),
   // `            <ListItem key="2" primaryText="IconNotificationsEventAvailable" leftIcon={<IconNotificationsEventAvailable />} />`,
-  // `            <ListDivider inset={true} />`,
+  // `            <Divider inset={true} />`,
   `          </List>`,
   `        </Card>`,
   `      </div>`,
