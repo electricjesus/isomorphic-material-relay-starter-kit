@@ -20,12 +20,6 @@ const containerStyle = {
   paddingTop: 200,
 };
 
-const standardActions = [
-  {
-    text: 'Okay',
-  },
-];
-
 class Home extends React.Component
 {
   constructor( props )
@@ -60,8 +54,10 @@ class Home extends React.Component
           <Dialog
             open={this.state.open}
             title="Super Secret Password"
-            actions={standardActions}
-            onRequestClose={ ( ) => this._handleRequestClose( ) }
+            actions={ [
+              <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ ( ) => this._handleRequestClose( ) } />,
+            ] }
+            zzzonRequestClose={ ( ) => this._handleRequestClose( ) }
           >
             1-2-3-4-5
           </Dialog>

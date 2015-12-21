@@ -52,7 +52,7 @@ class App extends React.Component
 
     if( incompleteCount > 0 )
       incompleteNotification.push(
-        <Badge badgeContent={ incompleteCount } primary={ true } badgeStyle={{top:12, right:12}}>
+        <Badge key="top-incomplete" badgeContent={ incompleteCount } primary={ true } badgeStyle={{top:12, right:12}}>
           <IconButton tooltip="Incomplete TODOs" onFocus={ ( ) => this._handleTouchIncomplete( ) }>
             <IconNotificationsEventAvailable />
           </IconButton>
@@ -66,12 +66,12 @@ class App extends React.Component
           iconElementRight={
             <div>
               { incompleteNotification }
-              <IconMenu iconButtonElement={
+              <IconMenu key="top-menu" iconButtonElement={
                 <IconButton><NavigationMoreVert /></IconButton>
               }>
-                <MenuItem primaryText="Refresh" />
-                <MenuItem primaryText="Help" />
-                <MenuItem primaryText="Sign out" />
+                <MenuItem key="1" primaryText="Refresh" />
+                <MenuItem key="2" primaryText="Help" />
+                <MenuItem key="3" primaryText="Sign out" />
               </IconMenu>
             </div>
           }
