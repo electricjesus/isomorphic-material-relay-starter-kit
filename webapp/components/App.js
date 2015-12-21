@@ -21,12 +21,9 @@ class App extends React.Component
   constructor( )
   {
     super( );
-    this.state = {
-      muiTheme: ThemeManager.getMuiTheme(LightRawTheme),
-    };
 
-    this.childContextTypes ={
-      muiTheme: React.PropTypes.object,
+    this.state = {
+      muiTheme: ThemeManager.getMuiTheme( LightRawTheme ),
     };
   }
 
@@ -86,7 +83,8 @@ class App extends React.Component
 };
 
 App.contextTypes = {
-    history: React.PropTypes.object
+    history: React.PropTypes.object,
+    muiTheme: React.PropTypes.object,
 };
 
 export default Relay.createContainer(App, {
