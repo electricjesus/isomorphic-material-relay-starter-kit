@@ -36,10 +36,9 @@ class App extends React.Component
     this.setState({muiTheme: newMuiTheme});
   }
 
-  _handleTouchIncomplete( )
+  _handleOnFocusIncomplete( )
   {
-    console.log( 'Incomplete touched!!!!' );
-    this.context.history.pushState(null, '/todos/active');
+    this.context.history.pushState( null, '/todos/active' );
   }
 
   render( )
@@ -51,7 +50,7 @@ class App extends React.Component
     if( incompleteCount > 0 )
       incompleteNotification.push(
         <Badge key="top-incomplete" badgeContent={ incompleteCount } primary={ true } badgeStyle={{top:12, right:12}}>
-          <IconButton tooltip="Incomplete TODOs" onFocus={ ( ) => this._handleTouchIncomplete( ) }>
+          <IconButton tooltip="Incomplete TODOs" onFocus={ this._handleOnFocusIncomplete.bind( this ) }>
             <IconNotificationsEventAvailable />
           </IconButton>
         </Badge>
@@ -83,8 +82,8 @@ class App extends React.Component
 };
 
 App.contextTypes = {
-    history: React.PropTypes.object,
-    muiTheme: React.PropTypes.object,
+  history: React.PropTypes.object,
+  muiTheme: React.PropTypes.object,
 };
 
 export default Relay.createContainer(App, {

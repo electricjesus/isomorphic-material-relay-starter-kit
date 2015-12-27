@@ -50,14 +50,14 @@ class Home extends React.Component
       <div style={containerStyle}>
         <h1>material-ui</h1>
         <h2>example project</h2>
-        <RaisedButton label="Super Secret Password" primary={true} onTouchTap={ ( ) => this._handleTouchTap( ) } />
+        <RaisedButton label="Super Secret Password" primary={true} onTouchTap={ this._handleTouchTap.bind( this ) } />
           <Dialog
             open={this.state.open}
             title="Super Secret Password"
             actions={ [
-              <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ ( ) => this._handleRequestClose( ) } />,
+              <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handleRequestClose.bind( this ) } />,
             ] }
-            zzzonRequestClose={ ( ) => this._handleRequestClose( ) }
+            zzzonRequestClose={ this._handleRequestClose.bind( this ) }
           >
             1-2-3-4-5
           </Dialog>
@@ -65,9 +65,6 @@ class Home extends React.Component
     )
   }
 };
-
-/*
-*/
 
 export default Relay.createContainer(Home, {
   fragments: {
