@@ -1,6 +1,8 @@
 import React from 'react';
 import Relay from 'react-relay';
 
+import Card from 'material-ui/lib/card/card';
+import Checkbox from 'material-ui/lib/checkbox';
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 
@@ -9,12 +11,11 @@ import Todo from './Todo';
 
 class TodoList extends React.Component
 {
-  _handleMarkAllChange( e )
+  _handleMarkAllOnCheck( event, checked )
   {
-    var complete = e.target.checked;
     Relay.Store.update(
       new MarkAllTodosMutation( {
-        complete,
+        complete: checked,
         todos: this.props.viewer.todos,
         viewer: this.props.viewer,
       } )
@@ -53,27 +54,17 @@ class TodoList extends React.Component
     var numTodos = this.props.viewer.totalCount;
     var numCompletedTodos = this.props.viewer.completedCount;
     return (
-      <section className="main">
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+      <Card>
         { this.renderTabs( ) }
-        <input
-          checked={numTodos === numCompletedTodos}
-          className="toggle-all"
-          onChange={ this._handleMarkAllChange.bind( this ) }
-          type="checkbox"
+        <Checkbox
+          label="Mark all as complete"
+          defaultChecked={ numTodos === numCompletedTodos }
+          onCheck={ this._handleMarkAllOnCheck.bind( this ) }
         />
-        <label htmlFor="toggle-all">
-          Mark all as complete
-        </label>
         <ul className="todo-list">
           { this.renderTodos( ) }
         </ul>
-      </section>
+      </Card>
     );
   }
 }

@@ -19,11 +19,11 @@ class TodoApp extends React.Component
     var hasTodos = this.props.viewer.totalCount > 0;
     return (
       <div>
+        <br/><br/>
+        <br/><br/>
+        <br/><br/>
         <section className="todoapp">
           <header className="header">
-            <h1>
-              todos
-            </h1>
             <TodoTextInput
               autoFocus={true}
               className="new-todo"
