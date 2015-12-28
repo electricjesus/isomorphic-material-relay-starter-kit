@@ -1,7 +1,6 @@
 import React from 'react';
 import Relay from 'react-relay';
 
-import Card from 'material-ui/lib/card/card';
 import Checkbox from 'material-ui/lib/checkbox';
 import List from 'material-ui/lib/lists/list';
 import Tabs from 'material-ui/lib/tabs/tabs';
@@ -55,7 +54,7 @@ class ToDo_List extends React.Component
     var numTodos = this.props.viewer.totalCount;
     var numCompletedTodos = this.props.viewer.completedCount;
     return (
-      <Card>
+      <div>
         { this.renderTabs( ) }
         <Checkbox
           label="Mark all as complete"
@@ -65,7 +64,7 @@ class ToDo_List extends React.Component
         <List>
           { this.renderTodos( ) }
         </List>
-      </Card>
+      </div>
     );
   }
 }
