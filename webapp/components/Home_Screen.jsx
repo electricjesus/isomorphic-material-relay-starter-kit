@@ -20,7 +20,7 @@ const containerStyle = {
   paddingTop: 200,
 };
 
-class Home extends React.Component
+class Home_Screen extends React.Component
 {
   constructor( props )
   {
@@ -66,7 +66,7 @@ class Home extends React.Component
   }
 };
 
-export default Relay.createContainer(Home, {
+export default Relay.createContainer( Home_Screen, {
   fragments: {
     viewer: () => Relay.QL`
       fragment on User {

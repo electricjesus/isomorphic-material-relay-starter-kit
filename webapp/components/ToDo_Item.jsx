@@ -12,7 +12,7 @@ import ChangeTodoStatusMutation from '../mutations/ChangeTodoStatusMutation';
 import RemoveTodoMutation from '../mutations/RemoveTodoMutation';
 import RenameTodoMutation from '../mutations/RenameTodoMutation';
 
-class ToDoItem extends React.Component
+class ToDo_Item extends React.Component
 {
   state =
   {
@@ -88,7 +88,7 @@ class ToDoItem extends React.Component
   }
 }
 
-export default Relay.createContainer( ToDoItem, {
+export default Relay.createContainer( ToDo_Item, {
   fragments: {
     todo: () => Relay.QL`
       fragment on Todo {

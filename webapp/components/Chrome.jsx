@@ -16,7 +16,7 @@ import NavigationMoreVert from 'material-ui/lib/svg-icons/navigation/more-vert';
 import RaisedButton from 'material-ui/lib/raised-button';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 
-class App extends React.Component
+class Chrome extends React.Component
 {
   constructor( )
   {
@@ -85,12 +85,12 @@ class App extends React.Component
 
 //
 
-App.contextTypes = {
+Chrome.contextTypes = {
   history: React.PropTypes.object,
   muiTheme: React.PropTypes.object,
 };
 
-export default Relay.createContainer(App, {
+export default Relay.createContainer( Chrome, {
   fragments: {
     viewer: () => Relay.QL`
       fragment on User {

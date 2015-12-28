@@ -4,7 +4,7 @@ import Relay from 'react-relay';
 import AddTodoMutation from '../mutations/AddTodoMutation';
 import TodoTextInput from './TodoTextInput';
 
-class TodoApp extends React.Component
+class ToDo_Screen extends React.Component
 {
 
   _handleTextInputSave = (text) => {
@@ -25,13 +25,13 @@ class TodoApp extends React.Component
         />
 
         {this.props.children}
-        
+
       </div>
     );
   }
 }
 
-export default Relay.createContainer(TodoApp, {
+export default Relay.createContainer( ToDo_Screen, {
   fragments: {
     viewer: () => Relay.QL`
       fragment on User {

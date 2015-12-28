@@ -6,12 +6,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {RelayRouter} from 'react-router-relay';
 
-import App from './components/App';
-import Home from './components/Home';
-import MUI_Icons from './components/MUI_Icons';
-import MUI_Home from './components/MUI_Home';
-import TodoApp from './components/TodoApp';
-import TodoList from './components/TodoList';
+import Chrome from './components/Chrome.jsx';
+import Home_Screen from './components/Home_Screen.jsx';
+import MUI_Icons from './components/MUI_Icons.jsx';
+import MUI_Home from './components/MUI_Home.jsx';
+import ToDo_Screen from './components/ToDo_Screen.jsx';
+import ToDo_List from './components/ToDo_List.jsx';
 import ViewerQueries from './queries/ViewerQueries';
 
 //Needed for onTouchTap
@@ -25,11 +25,11 @@ import './styles/main.css';
 
 ReactDOM.render(
   <RelayRouter history={history.createHistory( )}>
-    <Route path="/" component={ App } queries={ ViewerQueries }>
-      <IndexRoute component={ Home } queries={ViewerQueries}/>
-      <Route path="todos" component={TodoApp} queries={ViewerQueries}>
-        <IndexRoute component={TodoList} queries={ViewerQueries} prepareParams={() => ({status: 'any'})}/>
-        <Route path=":status" component={TodoList} queries={ViewerQueries}/>
+    <Route path="/" component={ Chrome } queries={ ViewerQueries }>
+      <IndexRoute component={ Home_Screen } queries={ViewerQueries}/>
+      <Route path="todos" component={ ToDo_Screen } queries={ViewerQueries}>
+        <IndexRoute component={ToDo_List} queries={ViewerQueries} prepareParams={() => ({status: 'any'})}/>
+        <Route path=":status" component={ToDo_List} queries={ViewerQueries}/>
       </Route>
       <Route path="mui">
         <IndexRoute component={MUI_Home} queries={ViewerQueries}/>

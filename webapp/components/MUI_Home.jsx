@@ -1,7 +1,7 @@
 import React from 'react';
 import Relay from 'react-relay';
 
-class MUI_List extends React.Component
+class MUI_Home extends React.Component
 {
   render( )
   {
@@ -13,13 +13,7 @@ class MUI_List extends React.Component
   }
 };
 
-
-MUI_List.contextTypes = {
-    history: React.PropTypes.object
-};
-
-
-export default Relay.createContainer(MUI_List, {
+export default Relay.createContainer( MUI_Home, {
   fragments: {
     viewer: () => Relay.QL`
       fragment on User {
