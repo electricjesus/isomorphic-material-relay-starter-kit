@@ -3,11 +3,12 @@ import Relay from 'react-relay';
 
 import Card from 'material-ui/lib/card/card';
 import Checkbox from 'material-ui/lib/checkbox';
+import List from 'material-ui/lib/lists/list';
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 
 import MarkAllTodosMutation from '../mutations/MarkAllTodosMutation';
-import Todo from './Todo';
+import ToDoItem from './ToDoItem.jsx';
 
 class TodoList extends React.Component
 {
@@ -25,7 +26,7 @@ class TodoList extends React.Component
   renderTodos( )
   {
     return this.props.viewer.todos.edges.map(edge =>
-      <Todo
+      <ToDoItem
         key={edge.node.id}
         todo={edge.node}
         viewer={this.props.viewer}
@@ -61,9 +62,9 @@ class TodoList extends React.Component
           defaultChecked={ numTodos === numCompletedTodos }
           onCheck={ this._handleMarkAllOnCheck.bind( this ) }
         />
-        <ul className="todo-list">
+        <List>
           { this.renderTodos( ) }
-        </ul>
+        </List>
       </Card>
     );
   }
@@ -103,14 +104,14 @@ export default Relay.createContainer( TodoList, {
           edges {
             node {
               id,
-              ${Todo.getFragment('todo')},
+              ${ToDoItem.getFragment('todo')},
             },
           },
           ${MarkAllTodosMutation.getFragment('todos')},
         },
         totalCount,
         ${MarkAllTodosMutation.getFragment('viewer')},
-        ${Todo.getFragment('viewer')},
+        ${ToDoItem.getFragment('viewer')},
       }
     `,
   },

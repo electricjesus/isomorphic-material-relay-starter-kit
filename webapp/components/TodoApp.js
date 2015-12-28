@@ -2,7 +2,6 @@ import React from 'react';
 import Relay from 'react-relay';
 
 import AddTodoMutation from '../mutations/AddTodoMutation';
-import TodoListFooter from './TodoListFooter';
 import TodoTextInput from './TodoTextInput';
 
 class TodoApp extends React.Component
@@ -16,31 +15,16 @@ class TodoApp extends React.Component
 
   render( )
   {
-    var hasTodos = this.props.viewer.totalCount > 0;
     return (
       <div>
-        <br/><br/>
-        <br/><br/>
-        <br/><br/>
-        <section className="todoapp">
-          <header className="header">
-            <TodoTextInput
-              autoFocus={true}
-              className="new-todo"
-              onSave={this._handleTextInputSave}
-              placeholder="What needs to be done?"
-            />
-          </header>
+        <TodoTextInput
+          autoFocus={true}
+          className="new-todo"
+          onSave={this._handleTextInputSave}
+          placeholder="What needs to be done?"
+        />
 
-          {this.props.children}
-
-          {hasTodos &&
-            <TodoListFooter
-              todos={this.props.viewer.todos}
-              viewer={this.props.viewer}
-            />
-          }
-        </section>
+        {this.props.children}
       </div>
     );
   }
@@ -52,7 +36,6 @@ export default Relay.createContainer(TodoApp, {
       fragment on User {
         totalCount,
         ${AddTodoMutation.getFragment('viewer')},
-        ${TodoListFooter.getFragment('viewer')},
       }
     `,
   },

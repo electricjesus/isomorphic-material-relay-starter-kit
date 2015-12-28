@@ -7,8 +7,8 @@ import Colors from 'material-ui/lib/styles/colors';
 import Badge from 'material-ui/lib/badge';
 import Dialog from 'material-ui/lib/dialog';
 import LightRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
-import IconButton from 'material-ui/lib/icon-button';
 import IconMenu from 'material-ui/lib/menus/icon-menu';
+import IconButton from 'material-ui/lib/icon-button';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import IconNotificationsEventAvailable from 'material-ui/lib/svg-icons/notification/event-available';
@@ -74,12 +74,16 @@ class App extends React.Component
           }
         />
 
-        {this.props.children}
+        <div style={ { paddingTop: 100, } }>
+          {this.props.children}
+        </div>
 
       </AppCanvas>
     )
   }
 };
+
+//
 
 App.contextTypes = {
   history: React.PropTypes.object,
