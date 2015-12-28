@@ -11,6 +11,9 @@ rrs('./node_modules/material-ui/src/svg-icons/').forEach(function(file) {
 		let fileLines = fs.readFileSync(file, 'utf8').split('\n');
 		let index = 0, found = false;
 
+		// In order to display all the icons, comment out the following:
+		if( key > 50 ) return;
+
 		while(found === false && index < fileLines.length)
 		{
 			if(fileLines[index].indexOf('export default ') > -1)
@@ -24,11 +27,8 @@ rrs('./node_modules/material-ui/src/svg-icons/').forEach(function(file) {
 
 				found = true;
 			}
-
 			else
-			{
 				index++;
-			}
 		}
 	}
 });

@@ -24,18 +24,20 @@ class ToDo_Screen extends React.Component
   render( )
   {
     return (
-      <Card style={ { margin: 5 } }>
+      <Card>
 
         <CardHeader title="TO DOs" subtitle="List of TO DOs for user" />
 
         { this.props.children }
 
-        <TextField
-          ref="addToDo"
-          floatingLabelText="What needs to be done?"
-          fullWidth={ true }
-          onEnterKeyDown={ this._handleAddToDo.bind( this ) }
-        />
+        <div style={ { marginLeft: 4, marginRight: 4, } }>
+          <TextField
+            ref="addToDo"
+            floatingLabelText="What needs to be done?"
+            fullWidth={ true }
+            onEnterKeyDown={ this._handleAddToDo.bind( this ) }
+          />
+        </div>
 
       </Card>
     );
