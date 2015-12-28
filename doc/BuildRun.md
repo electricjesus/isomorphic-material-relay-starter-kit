@@ -27,14 +27,3 @@ Every time you change the application and want to make it ready to run in produc
 
 * Run `npm run start`
 * Navigate to `http://localhost:4444`, unless you specified a different port.
-
-## Running locally on port 80 - NOT for production setup
-
-This is just a simplified shortcut for development purposes.
-
-* As a preparation step that needs to be run only once run `chmod +x ./run80.sh`
-* Run `sudo -s ./run80.sh`.
-* Start application Webpack server: `npm run webpack-start`.
-* Navigate to `http://localhost`.
-
-You can also create your own runXX.sh files
