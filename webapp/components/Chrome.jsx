@@ -69,7 +69,7 @@ class Chrome extends React.Component
             <AppBar_NavigationMenu />
           </ToolbarGroup>
           <ToolbarGroup float="left">
-            <ToolbarTitle text="TODO: Populate from helmet" />
+            <ToolbarTitle text="Demo!!!" />
           </ToolbarGroup>
           <ToolbarGroup float="right">
             { incompleteNotification }
