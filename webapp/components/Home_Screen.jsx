@@ -1,65 +1,37 @@
 import React from 'react';
 import Relay from 'react-relay';
 
-import AppBar from 'material-ui/lib/app-bar';
-import Colors from 'material-ui/lib/styles/colors';
-import Badge from 'material-ui/lib/badge';
-import Dialog from 'material-ui/lib/dialog';
-import LightRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
-import IconButton from 'material-ui/lib/icon-button';
-import IconMenu from 'material-ui/lib/menus/icon-menu';
-import MenuItem from 'material-ui/lib/menus/menu-item';
-import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
-import IconNotificationsEventAvailable from 'material-ui/lib/svg-icons/notification/event-available';
-import NavigationMoreVert from 'material-ui/lib/svg-icons/navigation/more-vert';
-import RaisedButton from 'material-ui/lib/raised-button';
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
-
-const containerStyle = {
-  textAlign: 'center',
-  paddingTop: 200,
-};
+import Card from 'material-ui/lib/card/card';
+import CardHeader from 'material-ui/lib/card/card-header';
+import CardText from 'material-ui/lib/card/card-text';
 
 class Home_Screen extends React.Component
 {
-  constructor( props )
-  {
-    super( props );
-    this.state = {
-      open: false,
-    }
-  }
-
-  _handleRequestClose( )
-  {
-    this.setState({
-      open: false,
-    });
-  }
-
-  _handleTouchTap( )
-  {
-    this.setState({
-      open: true,
-    });
-  }
-
   render( )
   {
     return (
-      <div style={containerStyle}>
-        <h1>material-ui</h1>
-        <h2>example project</h2>
-        <RaisedButton label="Super Secret Password" primary={true} onTouchTap={ this._handleTouchTap.bind( this ) } />
-          <Dialog
-            open={this.state.open}
-            title="Super Secret Password"
-            actions={ [
-              <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handleRequestClose.bind( this ) } />,
-            ] }
-          >
-          </Dialog>
-      </div>
+      <Card>
+        <CardHeader
+          title="Isomorphic Material-UI Relay starter kit"
+          subtitle="Boilerplate + examples"
+        />
+        <CardText>
+          This project has dual purpose:
+          <ul>
+            <li>To server as boilerplate for projects involving react/relay and materual-ui.</li>
+            <li>To host examples of using those technologies.</li>
+          </ul>
+          This project serves as a starter kit for projects utilizing the following technologies:
+          <ul>
+            <li><a href="https://facebook.github.io/react/">React JS</a></li>
+            <li><a href="https://facebook.github.io/relay/">Relay / GrpahQL</a></li>
+            <li><a href="https://github.com/denvned/isomorphic-relay">Isomorphic Relay</a></li>
+            <li><a href="http://www.material-ui.com/">Material-UI</a></li>
+            <li><a href="https://jwt.io/">Java Web Tokens</a></li>
+          </ul>
+          The project source is <a href="https://github.com/codefoundries/isomorphic-material-relay-starter-kit">available on GitHub</a>.
+        </CardText>
+      </Card>
     )
   }
 };

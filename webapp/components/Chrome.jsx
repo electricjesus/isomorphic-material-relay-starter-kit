@@ -78,7 +78,7 @@ class Chrome extends React.Component
           </ToolbarGroup>
         </ToolBar>
 
-        <div style={ { paddingTop: 80, paddingLeft: 4, paddingRight: 4, } }>
+        <div style={ { paddingTop: 10, paddingLeft: 4, paddingRight: 4, } }>
           {this.props.children}
         </div>
 

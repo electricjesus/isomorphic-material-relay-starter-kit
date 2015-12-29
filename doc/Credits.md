@@ -6,6 +6,7 @@ This project serves as a starter kit for projects utilizing the following techno
 * [Relay / GrpahQL](https://facebook.github.io/relay/)
 * [Isomorphic Relay](https://github.com/denvned/isomorphic-relay)
 * [Material-UI](http://www.material-ui.com/)
+* [Java Web Tokens](https://jwt.io/)
 
 It contains a boilerplate with several simple code examples. It consists of modified versions of the following projects:
 
@@ -13,4 +14,4 @@ It contains a boilerplate with several simple code examples. It consists of modi
 * [Isomorphic react-router-relay TODO example](https://github.com/denvned/isomorphic-relay-router/tree/master/examples/todo). The Facebook TODO example in this project has been modified to support isomorphism.
 * [Xpepermint's isomorphic-react-relay-boilerplate](https://github.com/xpepermint/isomorphic-react-relay-boilerplate). The project organization is largely borrowed from this project.
 
-Examples from other projects have also been incorporated.
+Examples from other open source projects have also been incorporated.
