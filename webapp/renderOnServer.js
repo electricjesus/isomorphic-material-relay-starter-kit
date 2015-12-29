@@ -29,16 +29,21 @@ export default ( req, res, next, assetsPath ) => {
             res.status(404).send('Not Found');
         }
 
-        function render(data) {
-          // TODO HACK This is a total hack and shod be fixed somehow.
-          GLOBAL.navigator = { userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36"};
+        function render(data)
+        {
+            // TODO HACK This is a total hack and shod be fixed somehow.
+            GLOBAL.navigator = { userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36"};
+
+            //var isomorphicVars = { testVariable: "Hello World" };
             const reactOutput = ReactDOMServer.renderToString(
                 <IsomorphicRouter.RoutingContext {...renderProps} />
             );
             res.render(path.resolve(__dirname, '..', 'webapp/views', 'index.ejs'), {
                 preloadedData: JSON.stringify(data),
                 assetsPath: assetsPath,
-                reactOutput
+                reactOutput,
+                //isomorphicVars: JSON.stringify( isomorphicVars )
+                // <script>var isomorphicVars = <%- isomorphicVars %></script>
             });
         }
     });

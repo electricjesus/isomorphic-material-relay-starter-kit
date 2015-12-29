@@ -9,6 +9,8 @@ class Home_Screen extends React.Component
 {
   render( )
   {
+    //console.log( "isomorphicVars = " + isomorphicVars );
+
     return (
       <Card>
         <CardHeader

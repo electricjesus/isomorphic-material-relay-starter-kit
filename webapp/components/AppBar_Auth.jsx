@@ -19,16 +19,16 @@ export default class AppBar_Auth extends React.Component
     super( props );
 
     this.state = {
-      LogInDialogOpen: false,
-      LoggingInDialogOpen: false,
-      LoggInFailureDialogOpen: false,
+      Dialog_UserNameAndPassword_IsOpen: false,
+      Dialog_LoginInProgress_IsOpen: false,
+      Dialog_LoginFaulure_IsOpen: false,
     };
   }
 
-  _handleOpenLogInDialog( )
+  _handle_Open_Dialog_UserNameAndPassword( )
   {
     this.setState( {
-      LogInDialogOpen: true
+      Dialog_UserNameAndPassword_IsOpen: true
     } );
   }
 
@@ -45,8 +45,8 @@ export default class AppBar_Auth extends React.Component
   _handleLogInOK( )
   {
     this.setState( {
-      LogInDialogOpen: false,
-      LoggingInDialogOpen: true,
+      Dialog_UserNameAndPassword_IsOpen: false,
+      Dialog_LoginInProgress_IsOpen: true,
     } );
 
     var loc = window.location;
@@ -66,14 +66,14 @@ export default class AppBar_Auth extends React.Component
   _handleLogInCancel( )
   {
     this.setState( {
-      LogInDialogOpen: false
+      Dialog_UserNameAndPassword_IsOpen: false
     } );
   }
 
   _handleLoggingInCancel( )
   {
     this.setState( {
-      LoggingInDialogOpen: false
+      Dialog_LoginInProgress_IsOpen: false
     } );
   }
 
@@ -99,16 +99,16 @@ export default class AppBar_Auth extends React.Component
     } catch( err ) { message = "Improper server response"; }
 
     this.setState( {
-      LoggingInDialogOpen: false,
-      LogInFaulureDialogOpen: true,
-      LogInFaulureDialogMessage: message,
+      Dialog_LoginInProgress_IsOpen: false,
+      Dialog_LoginFaulure_IsOpen: true,
+      Dialog_LoginFaulure_Message: message,
     } );
   }
 
   _handleLogInFaulureCancel( )
   {
     this.setState( {
-      LogInFaulureDialogOpen: false
+      Dialog_LoginFaulure_IsOpen: false
     } );
   }
 
@@ -128,11 +128,11 @@ export default class AppBar_Auth extends React.Component
 </IconMenu>
 */
 
-  loginDialog( )
+  Dialog_UserNameAndPassword( )
   {
     return(
       <Dialog
-        open={ this.state.LogInDialogOpen }
+        open={ this.state.Dialog_UserNameAndPassword_IsOpen }
         title="Log In"
         actions={ [
           <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handleLogInCancel.bind( this ) } />,
@@ -156,11 +156,11 @@ export default class AppBar_Auth extends React.Component
     );
   }
 
-  loggingInDialog( )
+  Dialog_LoginInProgress( )
   {
     return(
       <Dialog
-        open={ this.state.LoggingInDialogOpen }
+        open={ this.state.Dialog_LoginInProgress_IsOpen }
         title="Logging In ..."
         actions={ [
           <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handleLoggingInCancel.bind( this ) } />,
@@ -171,17 +171,17 @@ export default class AppBar_Auth extends React.Component
     );
   }
 
-  LogInFaulureDialog( )
+  Dialog_LoginFaulure( )
   {
     return(
       <Dialog
-        open={ this.state.LogInFaulureDialogOpen }
+        open={ this.state.Dialog_LoginFaulure_IsOpen }
         title="Login failed"
         actions={ [
           <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handleLogInFaulureCancel.bind( this ) } />,
         ] }
       >
-        { this.state.LogInFaulureDialogMessage }
+        { this.state.Dialog_LoginFaulure_Message }
       </Dialog>
     );
   }
@@ -189,11 +189,11 @@ export default class AppBar_Auth extends React.Component
   render( )
   {
     return(
-      <IconButton key='login' tooltip="Log In"onTouchTap={ this._handleOpenLogInDialog.bind( this ) }>
+      <IconButton key='login' tooltip="Log In"onTouchTap={ this._handle_Open_Dialog_UserNameAndPassword.bind( this ) }>
         <IconSocialPersonOutline />
-        { this.loginDialog( ) }
-        { this.loggingInDialog( ) }
-        { this.LogInFaulureDialog( ) }
+        { this.Dialog_UserNameAndPassword( ) }
+        { this.Dialog_LoginInProgress( ) }
+        { this.Dialog_LoginFaulure( ) }
       </IconButton>
     );
   }

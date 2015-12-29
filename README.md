@@ -6,7 +6,7 @@ The purpose of this project is:
 * To host examples of using those technologies.
 * To implement some common functionality like user authentication using react/relay.
 
-## Live Demo
+Live Demo:
 
 [http://isomorphic-material-relay.herokuapp.com/](http://isomorphic-material-relay.herokuapp.com/)
 
