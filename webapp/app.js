@@ -1,4 +1,3 @@
-import 'babel/polyfill';
 //import {createBrowserHistory} from 'history';
 let history = require('history');
 import {IndexRoute, Route} from 'react-router';
