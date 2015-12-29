@@ -1,9 +1,10 @@
 # Isomorphic Material Relay Starter Kit
 
-This project has dual purpose:
+The purpose of this project is:
 
 * To server as boilerplate for projects involving react/relay and materual-ui.
 * To host examples of using those technologies.
+* To implement some common functionality like user authentication using react/relay.
 
 ## Live Demo
 

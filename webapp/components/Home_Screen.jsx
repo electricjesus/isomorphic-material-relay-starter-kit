@@ -16,10 +16,11 @@ class Home_Screen extends React.Component
           subtitle="Boilerplate + examples"
         />
         <CardText>
-          This project has dual purpose:
+          The purpose of this project is:
           <ul>
             <li>To server as boilerplate for projects involving react/relay and materual-ui.</li>
             <li>To host examples of using those technologies.</li>
+            <li>To implement some common functionality like user authentication using react/relay.</li>
           </ul>
           This project serves as a starter kit for projects utilizing the following technologies:
           <ul>
