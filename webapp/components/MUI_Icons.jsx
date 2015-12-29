@@ -66,107 +66,107 @@ class MUI_Icons extends React.Component
       <div>
         <Card>
           <List>
-            <ListItem key="0" primaryText="ActionAccessibility" leftIcon={<ActionAccessibility />} />
+            <ListItem key="0" primaryText="ActionAccessibility" secondaryText="material-ui/lib/svg-icons/action/accessibility" leftIcon={<ActionAccessibility />} />
             <Divider inset={true} />
-            <ListItem key="1" primaryText="ActionAccessible" leftIcon={<ActionAccessible />} />
+            <ListItem key="1" primaryText="ActionAccessible" secondaryText="material-ui/lib/svg-icons/action/accessible" leftIcon={<ActionAccessible />} />
             <Divider inset={true} />
-            <ListItem key="2" primaryText="ActionAccountBalanceWallet" leftIcon={<ActionAccountBalanceWallet />} />
+            <ListItem key="2" primaryText="ActionAccountBalanceWallet" secondaryText="material-ui/lib/svg-icons/action/account-balance-wallet" leftIcon={<ActionAccountBalanceWallet />} />
             <Divider inset={true} />
-            <ListItem key="3" primaryText="ActionAccountBalance" leftIcon={<ActionAccountBalance />} />
+            <ListItem key="3" primaryText="ActionAccountBalance" secondaryText="material-ui/lib/svg-icons/action/account-balance" leftIcon={<ActionAccountBalance />} />
             <Divider inset={true} />
-            <ListItem key="4" primaryText="ActionAccountBox" leftIcon={<ActionAccountBox />} />
+            <ListItem key="4" primaryText="ActionAccountBox" secondaryText="material-ui/lib/svg-icons/action/account-box" leftIcon={<ActionAccountBox />} />
             <Divider inset={true} />
-            <ListItem key="5" primaryText="ActionAccountCircle" leftIcon={<ActionAccountCircle />} />
+            <ListItem key="5" primaryText="ActionAccountCircle" secondaryText="material-ui/lib/svg-icons/action/account-circle" leftIcon={<ActionAccountCircle />} />
             <Divider inset={true} />
-            <ListItem key="6" primaryText="ActionAddShoppingCart" leftIcon={<ActionAddShoppingCart />} />
+            <ListItem key="6" primaryText="ActionAddShoppingCart" secondaryText="material-ui/lib/svg-icons/action/add-shopping-cart" leftIcon={<ActionAddShoppingCart />} />
             <Divider inset={true} />
-            <ListItem key="7" primaryText="ActionAlarmAdd" leftIcon={<ActionAlarmAdd />} />
+            <ListItem key="7" primaryText="ActionAlarmAdd" secondaryText="material-ui/lib/svg-icons/action/alarm-add" leftIcon={<ActionAlarmAdd />} />
             <Divider inset={true} />
-            <ListItem key="8" primaryText="ActionAlarmOff" leftIcon={<ActionAlarmOff />} />
+            <ListItem key="8" primaryText="ActionAlarmOff" secondaryText="material-ui/lib/svg-icons/action/alarm-off" leftIcon={<ActionAlarmOff />} />
             <Divider inset={true} />
-            <ListItem key="9" primaryText="ActionAlarmOn" leftIcon={<ActionAlarmOn />} />
+            <ListItem key="9" primaryText="ActionAlarmOn" secondaryText="material-ui/lib/svg-icons/action/alarm-on" leftIcon={<ActionAlarmOn />} />
             <Divider inset={true} />
-            <ListItem key="10" primaryText="ActionAlarm" leftIcon={<ActionAlarm />} />
+            <ListItem key="10" primaryText="ActionAlarm" secondaryText="material-ui/lib/svg-icons/action/alarm" leftIcon={<ActionAlarm />} />
             <Divider inset={true} />
-            <ListItem key="11" primaryText="ActionAllOut" leftIcon={<ActionAllOut />} />
+            <ListItem key="11" primaryText="ActionAllOut" secondaryText="material-ui/lib/svg-icons/action/all-out" leftIcon={<ActionAllOut />} />
             <Divider inset={true} />
-            <ListItem key="12" primaryText="ActionAndroid" leftIcon={<ActionAndroid />} />
+            <ListItem key="12" primaryText="ActionAndroid" secondaryText="material-ui/lib/svg-icons/action/android" leftIcon={<ActionAndroid />} />
             <Divider inset={true} />
-            <ListItem key="13" primaryText="ActionAnnouncement" leftIcon={<ActionAnnouncement />} />
+            <ListItem key="13" primaryText="ActionAnnouncement" secondaryText="material-ui/lib/svg-icons/action/announcement" leftIcon={<ActionAnnouncement />} />
             <Divider inset={true} />
-            <ListItem key="14" primaryText="ActionAspectRatio" leftIcon={<ActionAspectRatio />} />
+            <ListItem key="14" primaryText="ActionAspectRatio" secondaryText="material-ui/lib/svg-icons/action/aspect-ratio" leftIcon={<ActionAspectRatio />} />
             <Divider inset={true} />
-            <ListItem key="15" primaryText="ActionAssessment" leftIcon={<ActionAssessment />} />
+            <ListItem key="15" primaryText="ActionAssessment" secondaryText="material-ui/lib/svg-icons/action/assessment" leftIcon={<ActionAssessment />} />
             <Divider inset={true} />
-            <ListItem key="16" primaryText="ActionAssignmentInd" leftIcon={<ActionAssignmentInd />} />
+            <ListItem key="16" primaryText="ActionAssignmentInd" secondaryText="material-ui/lib/svg-icons/action/assignment-ind" leftIcon={<ActionAssignmentInd />} />
             <Divider inset={true} />
-            <ListItem key="17" primaryText="ActionAssignmentLate" leftIcon={<ActionAssignmentLate />} />
+            <ListItem key="17" primaryText="ActionAssignmentLate" secondaryText="material-ui/lib/svg-icons/action/assignment-late" leftIcon={<ActionAssignmentLate />} />
             <Divider inset={true} />
-            <ListItem key="18" primaryText="ActionAssignmentReturn" leftIcon={<ActionAssignmentReturn />} />
+            <ListItem key="18" primaryText="ActionAssignmentReturn" secondaryText="material-ui/lib/svg-icons/action/assignment-return" leftIcon={<ActionAssignmentReturn />} />
             <Divider inset={true} />
-            <ListItem key="19" primaryText="ActionAssignmentReturned" leftIcon={<ActionAssignmentReturned />} />
+            <ListItem key="19" primaryText="ActionAssignmentReturned" secondaryText="material-ui/lib/svg-icons/action/assignment-returned" leftIcon={<ActionAssignmentReturned />} />
             <Divider inset={true} />
-            <ListItem key="20" primaryText="ActionAssignmentTurnedIn" leftIcon={<ActionAssignmentTurnedIn />} />
+            <ListItem key="20" primaryText="ActionAssignmentTurnedIn" secondaryText="material-ui/lib/svg-icons/action/assignment-turned-in" leftIcon={<ActionAssignmentTurnedIn />} />
             <Divider inset={true} />
-            <ListItem key="21" primaryText="ActionAssignment" leftIcon={<ActionAssignment />} />
+            <ListItem key="21" primaryText="ActionAssignment" secondaryText="material-ui/lib/svg-icons/action/assignment" leftIcon={<ActionAssignment />} />
             <Divider inset={true} />
-            <ListItem key="22" primaryText="ActionAutorenew" leftIcon={<ActionAutorenew />} />
+            <ListItem key="22" primaryText="ActionAutorenew" secondaryText="material-ui/lib/svg-icons/action/autorenew" leftIcon={<ActionAutorenew />} />
             <Divider inset={true} />
-            <ListItem key="23" primaryText="ActionBackup" leftIcon={<ActionBackup />} />
+            <ListItem key="23" primaryText="ActionBackup" secondaryText="material-ui/lib/svg-icons/action/backup" leftIcon={<ActionBackup />} />
             <Divider inset={true} />
-            <ListItem key="24" primaryText="ActionBook" leftIcon={<ActionBook />} />
+            <ListItem key="24" primaryText="ActionBook" secondaryText="material-ui/lib/svg-icons/action/book" leftIcon={<ActionBook />} />
             <Divider inset={true} />
-            <ListItem key="25" primaryText="ActionBookmarkBorder" leftIcon={<ActionBookmarkBorder />} />
+            <ListItem key="25" primaryText="ActionBookmarkBorder" secondaryText="material-ui/lib/svg-icons/action/bookmark-border" leftIcon={<ActionBookmarkBorder />} />
             <Divider inset={true} />
-            <ListItem key="26" primaryText="ActionBookmark" leftIcon={<ActionBookmark />} />
+            <ListItem key="26" primaryText="ActionBookmark" secondaryText="material-ui/lib/svg-icons/action/bookmark" leftIcon={<ActionBookmark />} />
             <Divider inset={true} />
-            <ListItem key="27" primaryText="ActionBugReport" leftIcon={<ActionBugReport />} />
+            <ListItem key="27" primaryText="ActionBugReport" secondaryText="material-ui/lib/svg-icons/action/bug-report" leftIcon={<ActionBugReport />} />
             <Divider inset={true} />
-            <ListItem key="28" primaryText="ActionBuild" leftIcon={<ActionBuild />} />
+            <ListItem key="28" primaryText="ActionBuild" secondaryText="material-ui/lib/svg-icons/action/build" leftIcon={<ActionBuild />} />
             <Divider inset={true} />
-            <ListItem key="29" primaryText="ActionCached" leftIcon={<ActionCached />} />
+            <ListItem key="29" primaryText="ActionCached" secondaryText="material-ui/lib/svg-icons/action/cached" leftIcon={<ActionCached />} />
             <Divider inset={true} />
-            <ListItem key="30" primaryText="ActionCameraEnhance" leftIcon={<ActionCameraEnhance />} />
+            <ListItem key="30" primaryText="ActionCameraEnhance" secondaryText="material-ui/lib/svg-icons/action/camera-enhance" leftIcon={<ActionCameraEnhance />} />
             <Divider inset={true} />
-            <ListItem key="31" primaryText="ActionCardGiftcard" leftIcon={<ActionCardGiftcard />} />
+            <ListItem key="31" primaryText="ActionCardGiftcard" secondaryText="material-ui/lib/svg-icons/action/card-giftcard" leftIcon={<ActionCardGiftcard />} />
             <Divider inset={true} />
-            <ListItem key="32" primaryText="ActionCardMembership" leftIcon={<ActionCardMembership />} />
+            <ListItem key="32" primaryText="ActionCardMembership" secondaryText="material-ui/lib/svg-icons/action/card-membership" leftIcon={<ActionCardMembership />} />
             <Divider inset={true} />
-            <ListItem key="33" primaryText="ActionCardTravel" leftIcon={<ActionCardTravel />} />
+            <ListItem key="33" primaryText="ActionCardTravel" secondaryText="material-ui/lib/svg-icons/action/card-travel" leftIcon={<ActionCardTravel />} />
             <Divider inset={true} />
-            <ListItem key="34" primaryText="ActionChangeHistory" leftIcon={<ActionChangeHistory />} />
+            <ListItem key="34" primaryText="ActionChangeHistory" secondaryText="material-ui/lib/svg-icons/action/change-history" leftIcon={<ActionChangeHistory />} />
             <Divider inset={true} />
-            <ListItem key="35" primaryText="ActionCheckCircle" leftIcon={<ActionCheckCircle />} />
+            <ListItem key="35" primaryText="ActionCheckCircle" secondaryText="material-ui/lib/svg-icons/action/check-circle" leftIcon={<ActionCheckCircle />} />
             <Divider inset={true} />
-            <ListItem key="36" primaryText="ActionChromeReaderMode" leftIcon={<ActionChromeReaderMode />} />
+            <ListItem key="36" primaryText="ActionChromeReaderMode" secondaryText="material-ui/lib/svg-icons/action/chrome-reader-mode" leftIcon={<ActionChromeReaderMode />} />
             <Divider inset={true} />
-            <ListItem key="37" primaryText="ActionClass" leftIcon={<ActionClass />} />
+            <ListItem key="37" primaryText="ActionClass" secondaryText="material-ui/lib/svg-icons/action/class" leftIcon={<ActionClass />} />
             <Divider inset={true} />
-            <ListItem key="38" primaryText="ActionCode" leftIcon={<ActionCode />} />
+            <ListItem key="38" primaryText="ActionCode" secondaryText="material-ui/lib/svg-icons/action/code" leftIcon={<ActionCode />} />
             <Divider inset={true} />
-            <ListItem key="39" primaryText="ActionCompareArrows" leftIcon={<ActionCompareArrows />} />
+            <ListItem key="39" primaryText="ActionCompareArrows" secondaryText="material-ui/lib/svg-icons/action/compare-arrows" leftIcon={<ActionCompareArrows />} />
             <Divider inset={true} />
-            <ListItem key="40" primaryText="ActionCopyright" leftIcon={<ActionCopyright />} />
+            <ListItem key="40" primaryText="ActionCopyright" secondaryText="material-ui/lib/svg-icons/action/copyright" leftIcon={<ActionCopyright />} />
             <Divider inset={true} />
-            <ListItem key="41" primaryText="ActionCreditCard" leftIcon={<ActionCreditCard />} />
+            <ListItem key="41" primaryText="ActionCreditCard" secondaryText="material-ui/lib/svg-icons/action/credit-card" leftIcon={<ActionCreditCard />} />
             <Divider inset={true} />
-            <ListItem key="42" primaryText="ActionDashboard" leftIcon={<ActionDashboard />} />
+            <ListItem key="42" primaryText="ActionDashboard" secondaryText="material-ui/lib/svg-icons/action/dashboard" leftIcon={<ActionDashboard />} />
             <Divider inset={true} />
-            <ListItem key="43" primaryText="ActionDateRange" leftIcon={<ActionDateRange />} />
+            <ListItem key="43" primaryText="ActionDateRange" secondaryText="material-ui/lib/svg-icons/action/date-range" leftIcon={<ActionDateRange />} />
             <Divider inset={true} />
-            <ListItem key="44" primaryText="ActionDelete" leftIcon={<ActionDelete />} />
+            <ListItem key="44" primaryText="ActionDelete" secondaryText="material-ui/lib/svg-icons/action/delete" leftIcon={<ActionDelete />} />
             <Divider inset={true} />
-            <ListItem key="45" primaryText="ActionDescription" leftIcon={<ActionDescription />} />
+            <ListItem key="45" primaryText="ActionDescription" secondaryText="material-ui/lib/svg-icons/action/description" leftIcon={<ActionDescription />} />
             <Divider inset={true} />
-            <ListItem key="46" primaryText="ActionDns" leftIcon={<ActionDns />} />
+            <ListItem key="46" primaryText="ActionDns" secondaryText="material-ui/lib/svg-icons/action/dns" leftIcon={<ActionDns />} />
             <Divider inset={true} />
-            <ListItem key="47" primaryText="ActionDoneAll" leftIcon={<ActionDoneAll />} />
+            <ListItem key="47" primaryText="ActionDoneAll" secondaryText="material-ui/lib/svg-icons/action/done-all" leftIcon={<ActionDoneAll />} />
             <Divider inset={true} />
-            <ListItem key="48" primaryText="ActionDone" leftIcon={<ActionDone />} />
+            <ListItem key="48" primaryText="ActionDone" secondaryText="material-ui/lib/svg-icons/action/done" leftIcon={<ActionDone />} />
             <Divider inset={true} />
-            <ListItem key="49" primaryText="ActionDonutLarge" leftIcon={<ActionDonutLarge />} />
+            <ListItem key="49" primaryText="ActionDonutLarge" secondaryText="material-ui/lib/svg-icons/action/donut-large" leftIcon={<ActionDonutLarge />} />
             <Divider inset={true} />
-            <ListItem key="50" primaryText="ActionDonutSmall" leftIcon={<ActionDonutSmall />} />
+            <ListItem key="50" primaryText="ActionDonutSmall" secondaryText="material-ui/lib/svg-icons/action/donut-small" leftIcon={<ActionDonutSmall />} />
             <Divider inset={true} />
           </List>
         </Card>

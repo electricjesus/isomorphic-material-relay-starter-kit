@@ -58,7 +58,6 @@ class Home_Screen extends React.Component
               <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handleRequestClose.bind( this ) } />,
             ] }
           >
-            1-2-3-4-5
           </Dialog>
       </div>
     )

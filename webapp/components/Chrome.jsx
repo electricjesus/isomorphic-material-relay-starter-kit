@@ -1,21 +1,20 @@
 import React from 'react';
 import Relay from 'react-relay';
 
-import AppBar from 'material-ui/lib/app-bar';
+//import AppBar from 'material-ui/lib/app-bar';
 import AppCanvas from 'material-ui/lib/app-canvas';
 import Colors from 'material-ui/lib/styles/colors';
 import Badge from 'material-ui/lib/badge';
-//import Dialog from 'material-ui/lib/dialog';
 import LightRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
-//import IconMenu from 'material-ui/lib/menus/icon-menu';
 import IconButton from 'material-ui/lib/icon-button';
-//import MenuItem from 'material-ui/lib/menus/menu-item';
-//import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import IconNotificationsEventAvailable from 'material-ui/lib/svg-icons/notification/event-available';
-//import NavigationMoreVert from 'material-ui/lib/svg-icons/navigation/more-vert';
-//import RaisedButton from 'material-ui/lib/raised-button';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
+import ToolBar from 'material-ui/lib/toolbar/toolbar';
+import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
+import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
+import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 
+import AppBar_Auth from './AppBar_Auth.jsx'
 import AppBar_NavigationMenu from './AppBar_NavigationMenu.jsx'
 
 class Chrome extends React.Component
@@ -51,7 +50,7 @@ class Chrome extends React.Component
 
     if( incompleteCount > 0 )
       incompleteNotification.push(
-        <Badge key="top-incomplete" badgeContent={ incompleteCount } primary={ true } badgeStyle={{top:12, right:12}}>
+        <Badge key="top-incomplete" style={ { marginTop: -11, marginBottom: -17 } } badgeContent={ incompleteCount } primary={ true } badgeStyle={{top:20, right:16}}>
           <IconButton tooltip="Incomplete TODOs" onFocus={ this._handleOnFocusIncomplete.bind( this ) }>
             <IconNotificationsEventAvailable />
           </IconButton>
@@ -60,17 +59,26 @@ class Chrome extends React.Component
 
     return (
       <AppCanvas>
-        <AppBar
-          title="TODO: Populate from helmet"
-          iconElementLeft={ <AppBar_NavigationMenu /> }
-          iconElementRight={
-            <div style={ { marginTop: -13, marginBottom: -15 } }>
-              { incompleteNotification }
-            </div>
-          }
-        />
+        <ToolBar
+          style={ {
+            backgroundColor: 'rgba(125, 88, 88, 0.06)',
+            boxShadow: '0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24)',
+          } }
+        >
+          <ToolbarGroup firstChild={true} float="left">
+            <AppBar_NavigationMenu />
+          </ToolbarGroup>
+          <ToolbarGroup float="left">
+            <ToolbarTitle text="TODO: Populate from helmet" />
+          </ToolbarGroup>
+          <ToolbarGroup float="right">
+            { incompleteNotification }
+            <ToolbarSeparator />
+            <AppBar_Auth />
+          </ToolbarGroup>
+        </ToolBar>
 
-      <div style={ { paddingTop: 80, paddingLeft: 4, paddingRight: 4, } }>
+        <div style={ { paddingTop: 80, paddingLeft: 4, paddingRight: 4, } }>
           {this.props.children}
         </div>
 

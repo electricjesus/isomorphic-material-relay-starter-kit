@@ -22,7 +22,7 @@ rrs('./node_modules/material-ui/src/svg-icons/').forEach(function(file) {
 				let moduleName = fileLines[index].replace('export default ', '').replace(';','').trim( );
 
         importsSource.push( `import ${moduleName} from '${fileName}';` );
-        cardItemsSource.push( `            <ListItem key="${key++}" primaryText="${moduleName}" leftIcon={<${moduleName} />} />` );
+        cardItemsSource.push( `            <ListItem key="${key++}" primaryText="${moduleName}" secondaryText="${fileName}" leftIcon={<${moduleName} />} />` );
         cardItemsSource.push( `            <Divider inset={true} />` );
 
 				found = true;
