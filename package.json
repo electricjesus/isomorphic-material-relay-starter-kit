@@ -4,7 +4,7 @@
   "author": "Aleksandar Chalakov and Code Foundries",
   "homepage": "https://github.com/codefoundries/isomorphic-material-relay-starter-kit",
 
-  "version": "0.1.9",
+  "version": "0.1.10",
 
   "repository":
   {
@@ -14,7 +14,8 @@
   "license": "MIT",
   "engines":
   {
-    "node": "4.2.4"
+    "node": "4.2.4",
+    "npm": "3.3.6"
   },
   "scripts":
   {
