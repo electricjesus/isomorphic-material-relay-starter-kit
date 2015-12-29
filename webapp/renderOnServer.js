@@ -7,6 +7,7 @@ import RelayStoreData from 'react-relay/lib/RelayStoreData';
 import {match, RoutingContext} from 'react-router';
 
 import routes from './routes';
+import {isomorphicVars} from './scripts/isomorphicVars';
 
 // Read environment
 require( 'dotenv' ).load( );
@@ -34,16 +35,19 @@ export default ( req, res, next, assetsPath ) => {
             // TODO HACK This is a total hack and shod be fixed somehow.
             GLOBAL.navigator = { userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36"};
 
-            //var isomorphicVars = { testVariable: "Hello World" };
+            console.log( 'server render, before iso vars' );
+            let isoVars = JSON.stringify( isomorphicVars( ) );
+            console.log( 'server render, iso vars = ' + isoVars );
+
             const reactOutput = ReactDOMServer.renderToString(
                 <IsomorphicRouter.RoutingContext {...renderProps} />
             );
+
             res.render(path.resolve(__dirname, '..', 'webapp/views', 'index.ejs'), {
                 preloadedData: JSON.stringify(data),
                 assetsPath: assetsPath,
                 reactOutput,
-                //isomorphicVars: JSON.stringify( isomorphicVars )
-                // <script>var isomorphicVars = <%- isomorphicVars %></script>
+                isomorphicVars: isoVars
             });
         }
     });

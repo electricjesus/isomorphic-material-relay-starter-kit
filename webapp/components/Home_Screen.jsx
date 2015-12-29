@@ -5,17 +5,19 @@ import Card from 'material-ui/lib/card/card';
 import CardHeader from 'material-ui/lib/card/card-header';
 import CardText from 'material-ui/lib/card/card-text';
 
+import {isomorphicVars} from '../scripts/isomorphicVars';
+
 class Home_Screen extends React.Component
 {
   render( )
   {
-    //console.log( "isomorphicVars = " + isomorphicVars );
+    var isoVars = isomorphicVars( );
 
     return (
       <Card>
         <CardHeader
           title="Isomorphic Material-UI Relay starter kit"
-          subtitle="Boilerplate + examples"
+          subtitle={ "Version " + isoVars.version }
         />
         <CardText>
           The purpose of this project is:

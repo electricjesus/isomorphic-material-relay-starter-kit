@@ -29,6 +29,7 @@
       s.parentNode.insertBefore(wf, s);
     })();
   </script>
+  <script>window.isomorphicVars = <%- isomorphicVars %></script>
   <div id="root"><%- reactOutput %></div>
   <script id="preloadedData" type="application/json"><%- preloadedData %></script>
   <script src="<%- assetsPath %>/app.js"></script>
