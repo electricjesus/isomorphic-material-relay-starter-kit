@@ -3,7 +3,9 @@
   "description": "Starter kit for isomorphic applications using React/Relay and Material-UI",
   "author": "Aleksandar Chalakov and Code Foundries",
   "homepage": "https://github.com/codefoundries/isomorphic-material-relay-starter-kit",
-  "version": "0.1.8",
+
+  "version": "0.1.9",
+
   "repository":
   {
     "type": "git",
@@ -16,7 +18,8 @@
   },
   "scripts":
   {
-    "postinstall": "cp ./doc/Example.env ./.env && npm run schema-update && npm run webpack-build",
+    "postinstall": "npm run schema-update && npm run webpack-build",
+    "setup-local": "cp ./doc/Example.env ./.env",
 
     "schema-update": "./node_modules/.bin/babel-node ./scripts/updateSchema.js",
     "webpack-build": "webpack -p",
