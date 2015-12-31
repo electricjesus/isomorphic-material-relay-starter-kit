@@ -4,7 +4,7 @@
   "author": "Aleksandar Chalakov and Code Foundries",
   "homepage": "https://github.com/codefoundries/isomorphic-material-relay-starter-kit",
 
-  "version": "0.1.19",
+  "version": "0.1.20",
 
   "repository":
   {
@@ -19,7 +19,7 @@
   },
   "scripts":
   {
-    "postinstall": "npm run schema-update && npm run build-webpack",
+    "postinstall": "npm run build-schema && npm run build-webpack",
     "setup-local": "cp ./doc/Example.env ./.env",
 
     "build-schema": "./node_modules/.bin/babel-node ./scripts/updateSchema.js",
