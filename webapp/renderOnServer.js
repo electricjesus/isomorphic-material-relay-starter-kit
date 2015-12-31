@@ -12,7 +12,6 @@ import {isomorphicVars} from './scripts/isomorphicVars';
 // Read environment
 require( 'dotenv' ).load( );
 
-let port = require( '../package.json' )
 const GRAPHQL_URL = `http://localhost:${process.env.PORT}/graphql`;
 
 Relay.injectNetworkLayer( new Relay.DefaultNetworkLayer( GRAPHQL_URL ) );
@@ -35,9 +34,8 @@ export default ( req, res, next, assetsPath ) => {
             // TODO HACK This is a total hack and shod be fixed somehow.
             GLOBAL.navigator = { userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36"};
 
-            console.log( 'server render, before iso vars' );
+            // Load up isomorphic vars here, for server rendering
             let isoVars = JSON.stringify( isomorphicVars( ) );
-            console.log( 'server render, iso vars = ' + isoVars );
 
             const reactOutput = ReactDOMServer.renderToString(
                 <IsomorphicRouter.RoutingContext {...renderProps} />

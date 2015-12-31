@@ -1,7 +1,6 @@
 import React from 'react';
 import Relay from 'react-relay';
 
-//import AppBar from 'material-ui/lib/app-bar';
 import AppCanvas from 'material-ui/lib/app-canvas';
 import Colors from 'material-ui/lib/styles/colors';
 import Badge from 'material-ui/lib/badge';
@@ -84,6 +83,11 @@ class Chrome extends React.Component
 
       </AppCanvas>
     )
+  }
+
+  zzrender( )
+  {
+    return( <AppCanvas/> );
   }
 };
 

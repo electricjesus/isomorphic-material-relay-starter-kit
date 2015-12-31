@@ -9,7 +9,6 @@ export default class AppBar_NavigationMenu extends React.Component
 {
   _handleLeftMenuTouchTap( e, item )
   {
-    console.log( 'Menu jump to: ' + item.key );
     this.context.history.pushState( null, item.key );
   }
 

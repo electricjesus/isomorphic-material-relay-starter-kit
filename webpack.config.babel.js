@@ -23,7 +23,7 @@ let config = {
   plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.EnvironmentPlugin(Object.keys(process.env)),
-    new ExtractTextPlugin('[name].css')
+    new ExtractTextPlugin('[name].css'),
   ]
 };
 

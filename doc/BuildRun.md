@@ -11,7 +11,7 @@ Whenever you change the schema, regenerate in the following way:
 Two separate servers need to be started. The first one is the actual application in development mode. The second server is the webpack server which is to be run at all times for hot replace
 
 * Start application HTTP server: `npm run start-dev`.
-* Start application Webpack server: `npm run webpack-start`.
+* Start application Webpack server: `npm run start-webpack`.
 
 If you are running this on Mac, you would use two separate terminal windows and leave both servers running. To open the app:
 
@@ -21,7 +21,7 @@ If you are running this on Mac, you would use two separate terminal windows and 
 
 Every time you change the application and want to make it ready to run in production, you need to perform this step:
 
-* Run `npm run webpack-build`.
+* Run `npm run build-webpack`.
 
 ## Running in production
 

@@ -22,7 +22,7 @@ class MUI_Home extends React.Component
           </pre>
           in scripts/generate_MUIIconList.js and run
           <pre>
-            npm run generate-mui-icon-list
+            npm run build-mui-icon-list
           </pre>
         </CardText>
       </Card>

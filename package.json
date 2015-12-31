@@ -4,7 +4,7 @@
   "author": "Aleksandar Chalakov and Code Foundries",
   "homepage": "https://github.com/codefoundries/isomorphic-material-relay-starter-kit",
 
-  "version": "0.1.18",
+  "version": "0.1.19",
 
   "repository":
   {
@@ -19,14 +19,14 @@
   },
   "scripts":
   {
-    "postinstall": "npm run schema-update && npm run webpack-build",
+    "postinstall": "npm run schema-update && npm run build-webpack",
     "setup-local": "cp ./doc/Example.env ./.env",
 
-    "schema-update": "./node_modules/.bin/babel-node ./scripts/updateSchema.js",
-    "webpack-build": "webpack -p",
-    "generate-mui-icon-list": "./node_modules/.bin/babel-node ./scripts/generate_MUIIconList.js",
+    "build-schema": "./node_modules/.bin/babel-node ./scripts/updateSchema.js",
+    "build-webpack": "webpack -p",
+    "build-mui-icon-list": "./node_modules/.bin/babel-node ./scripts/generate_MUIIconList.js",
 
-    "webpack-start": "webpack-dev-server --hot --inline --progress --colors",
+    "start-webpack": "webpack-dev-server --hot --inline --progress --colors",
     "start-dev": "export NODE_ENV=development && nodemon --exec ./node_modules/.bin/babel-node -- ./server/server.js",
     "start": "export NODE_ENV=production && ./node_modules/.bin/babel-node ./server/server.js"
   },
