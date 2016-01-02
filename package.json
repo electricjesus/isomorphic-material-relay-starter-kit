@@ -1,43 +1,55 @@
 {
   "name": "isomorphic-material-relay-starter-kit",
-  "description": "Starter kit for isomorphic applications using React/Relay and Material-UI",
+  "description": "Starter kit for isomorphic SPA using React/Relay, Material-UI, JWT authentication and samples",
   "author": "Aleksandar Chalakov and Code Foundries",
+  "license": "MIT",
   "homepage": "https://github.com/codefoundries/isomorphic-material-relay-starter-kit",
-
-  "version": "0.1.21",
-
-  "repository":
-  {
+  "version": "0.1.22",
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/codefoundries/isomorphic-material-relay-starter-kit.git"
   },
-  "license": "MIT",
-  "engines":
-  {
+  "keywords": [
+    "SPA",
+    "single page application",
+    "isomorphic",
+    "progressive enhancement",
+    "server rendering",
+    "authentication",
+    "JWT",
+    "Material Design",
+    "material-ui",
+    "react",
+    "relay",
+    "isomorphic-relay",
+    "isomorphic-relay-router",
+    "graphql",
+    "react-hot-loader",
+    "express",
+    "webpack",
+    "babel",
+    "babel 6"
+  ],
+  "engines": {
     "node": "4.2.4",
     "npm": "3.3.6"
   },
-  "scripts":
-  {
+  "scripts": {
     "postinstall": "npm run build-schema && npm run build-webpack",
     "setup-local": "cp ./doc/Example.env ./.env",
-
     "build-schema": "./node_modules/.bin/babel-node ./scripts/updateSchema.js",
     "build-webpack": "webpack -p",
     "build-mui-icon-list": "./node_modules/.bin/babel-node ./scripts/generate_MUIIconList.js",
-
     "start-webpack": "webpack-dev-server --hot --inline --progress --colors",
     "start-dev": "export NODE_ENV=development && nodemon --exec ./node_modules/.bin/babel-node -- ./server/server.js",
     "start": "export NODE_ENV=production && ./node_modules/.bin/babel-node ./server/server.js"
   },
-  "metadata":
-  {
+  "metadata": {
     "graphql": {
       "schema": "./graphql/schema.json"
     }
   },
-  "dependencies":
-  {
+  "dependencies": {
     "babel-cli": "^6.3.17",
     "babel-core": "^6.3.21",
     "babel-loader": "^6.2.0",
@@ -53,6 +65,7 @@
     "babel-runtime": "^6.3.19",
     "body-parser": "^1.14.1",
     "classnames": "^2.1.5",
+    "cookie-parser": "^1.4.0",
     "css-loader": "^0.19.0",
     "dotenv": "^1.2.0",
     "ejs": "^2.3.4",
@@ -80,8 +93,7 @@
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.12.0"
   },
-  "devDependencies":
-  {
+  "devDependencies": {
     "babel-plugin-transform-runtime": "^6.3.13",
     "recursive-readdir-sync": "^1.0.6"
   }

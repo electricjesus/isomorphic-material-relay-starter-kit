@@ -80,13 +80,12 @@ export default class AppBar_Auth extends React.Component
   _handleAuthSuccess( response )
   {
     console.log( '_handleAuthSuccess ' + response )
-    let token;
+
     try{
       let responseJSON = JSON.parse( response );
-      token = responseJSON.token;
+      if( responseJSON.success != true ) throw new Error( "Login failed" );
     } catch( err ) { _handleAuthFailure( 1 ); return; }
 
-    console.log( '_handleAuthSuccess ' + token );
   }
 
   _handleAuthFailure( response )

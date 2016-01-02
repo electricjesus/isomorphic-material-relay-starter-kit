@@ -93,8 +93,10 @@ var GraphQLUser = new GraphQLObjectType({
         },
         ...connectionArgs,
       },
-      resolve: (obj, {status, ...args}) =>
-        connectionFromArray(getTodos(status), args),
+      resolve: (obj, {status, ...args}, { rootValue: { user_id } }) => {
+        console.log( 'GrapQLUser: Resolving todos. user_id=' + user_id );
+        return connectionFromArray(getTodos(status), args);
+      },
     },
     totalCount: {
       type: GraphQLInt,
@@ -108,7 +110,7 @@ var GraphQLUser = new GraphQLObjectType({
   interfaces: [nodeInterface]
 });
 
-var Root = new GraphQLObjectType({
+var GraphQL_Root = new GraphQLObjectType({
   name: 'Root',
   fields: {
     viewer: {
@@ -264,6 +266,6 @@ var Mutation = new GraphQLObjectType({
 });
 
 export var schema = new GraphQLSchema({
-  query: Root,
+  query: GraphQL_Root,
   mutation: Mutation
 });

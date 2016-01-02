@@ -1,6 +1,8 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import graphQLHTTP from 'express-graphql';
 import compression from 'compression';
+import jwt from 'jwt-simple';
 import path from 'path';
 
 import auth from './auth'; // Authentication server
@@ -21,8 +23,30 @@ router.set( 'trust proxy', 'loopback' );
 router.set( 'x-powered-by', false );
 router.use( compression( ) );
 
+// TODO Technically the cookie parser is necessary only for GraphQL, and the routing server.
+// It is not necessary for serving static content. Consider separating those.
+router.use( cookieParser( ) );
+
 // Graphql server
-router.use( '/graphql', graphQLHTTP( { schema, pretty: true } ) );
+router.use( '/graphql', graphQLHTTP( request => {
+  let user_id = 0;
+  //console.log( 'GraphQL: request.cookies=' + JSON.stringify( request.cookies ) );
+  if( request.cookies.auth_token )
+    if( request.cookies.auth_token.length > 10 )
+    {
+      var decoded = jwt.decode( request.cookies.auth_token, "TBD: Make this a setting tokenSecret" );
+      console.log( 'GraphQL: decoded=' + JSON.stringify( decoded ) );
+      user_id = decoded.user_id;
+    }
+
+  console.log( 'GraphQL: user_id=' + user_id );
+
+  return( {
+    schema: schema,
+    rootValue: { user_id: user_id },
+    pretty: true
+  } )
+} ) );
 
 // Authentication server
 router.use( '/auth', auth );

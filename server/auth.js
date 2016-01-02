@@ -4,27 +4,12 @@ import jwt from 'jwt-simple';
 
 import User from '../data/User';
 
-// passport.use( new passportLocal.Strategy(
-//   function(username, password, done) {
-//     User.findOne({ username: username }, function(err, user) {
-//       if (err) { return done(err); }
-//       if (!user) {
-//         return done(null, false, { message: 'Incorrect username.' });
-//       }
-//       if (!user.validPassword(password)) {
-//         return done(null, false, { message: 'Incorrect password.' });
-//       }
-//       return done(null, user);
-//     });
-//   }
-// ));
-
 let auth = express( );
 auth.use( bodyParser.json( ) );
 
 auth.post('/', function(req, res, next) {
   console.log( "serving AUTH" );
-  console.log( JSON.stringify( req.body ) );      // your JSON
+  console.log( JSON.stringify( req.body ) );
   let username = req.body.username;
   let password = req.body.password;
   console.log( "username=" + username );
@@ -39,22 +24,12 @@ auth.post('/', function(req, res, next) {
     else
     {
       // User has authenticated correctly thus we create a JWT token
-      var token = jwt.encode( { username: 'somedata'}, "TBD: Make this a setting tokenSecret" );
-      res.json({ token : token });
+      var token = jwt.encode( { user_id: user.id }, "TBD: Make this a setting tokenSecret" );
+
+      res.cookie( 'auth_token', token, { httpOnly: true } );
+      res.json( { success : true } );
     }
   });
-
-  // passport.authenticate('local', function(err, user, info) {
-  //   if (err) { return next(err) }
-  //   if (!user) {
-  //     return res.status( 401 ).json( { error: 'message' });
-  //   }
-  //
-  //   //user has authenticated correctly thus we create a JWT token
-  //   var token = jwt.encode({ username: 'somedata'}, tokenSecret);
-  //   res.json({ token : token });
-  //
-  // })(req, res, next);
 });
 
 

@@ -17,36 +17,40 @@ const GRAPHQL_URL = `http://localhost:${process.env.PORT}/graphql`;
 Relay.injectNetworkLayer( new Relay.DefaultNetworkLayer( GRAPHQL_URL ) );
 RelayStoreData.getDefaultInstance( ).getChangeEmitter( ).injectBatchingStrategy(() => { } );
 
-export default ( req, res, next, assetsPath ) => {
-    match({routes, location: req.originalUrl}, (error, redirectLocation, renderProps) => {
-        if (error) {
-            next(error);
-        } else if (redirectLocation) {
-            res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-        } else if (renderProps) {
-            IsomorphicRouter.prepareData(renderProps).then(render, next);
-        } else {
-            res.status(404).send('Not Found');
-        }
+export default function renderOnServer( req, res, next, assetsPath )
+{
+  console.log( 'renderOnServer: auth_token=' + JSON.stringify( req.cookies ) );
+  match( { routes, location: req.originalUrl }, ( error, redirectLocation, renderProps ) =>
+    {  
+      console.log( 'renderOnServer: renderProps=' + JSON.stringify( renderProps, 2 ) );
+      if( error )
+          next(error);
+      else if( redirectLocation )
+          res.redirect( 302, redirectLocation.pathname + redirectLocation.search );
+      else if( renderProps )
+          IsomorphicRouter.prepareData( renderProps ).then( render, next );
+      else
+          res.status( 404 ).send( 'Not Found' );
 
-        function render(data)
-        {
-            // TODO HACK This is a total hack and shod be fixed somehow.
-            GLOBAL.navigator = { userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36"};
+      function render( data )
+      {
+        // TODO HACK This is a total hack and shod be fixed somehow.
+        GLOBAL.navigator = { userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36"};
 
-            // Load up isomorphic vars here, for server rendering
-            let isoVars = JSON.stringify( isomorphicVars( ) );
+        // Load up isomorphic vars here, for server rendering
+        let isoVars = JSON.stringify( isomorphicVars( ) );
 
-            const reactOutput = ReactDOMServer.renderToString(
-                <IsomorphicRouter.RoutingContext {...renderProps} />
-            );
+        const reactOutput = ReactDOMServer.renderToString(
+            <IsomorphicRouter.RoutingContext {...renderProps} />
+        );
 
-            res.render(path.resolve(__dirname, '..', 'webapp/views', 'index.ejs'), {
-                preloadedData: JSON.stringify(data),
-                assetsPath: assetsPath,
-                reactOutput,
-                isomorphicVars: isoVars
-            });
-        }
-    });
+        res.render( path.resolve( __dirname, '..', 'webapp/views', 'index.ejs' ), {
+            preloadedData: JSON.stringify(data),
+            assetsPath: assetsPath,
+            reactOutput,
+            isomorphicVars: isoVars
+        } );
+      }
+    }
+  );
 };
