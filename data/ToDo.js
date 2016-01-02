@@ -1,11 +1,4 @@
 export class Todo extends Object {}
-export class User extends Object {}
-
-var usersById = {
-  [ 0 ]: new User( ), // Anonymous
-  [ 1 ]: new User( ),
-  [ 2 ]: new User( ),
-};
 
 // Mock todo data
 var todosById = {};
@@ -59,12 +52,7 @@ export function DS_ToDo_list_getForUser( user_id, status = 'any' )
   return todos.filter( todo => todo.complete === statusCheck );
 }
 
-export function DS_User_get( id )
-{
-  return usersById[ id ];
-}
-
-export function DO_ToDo_list_updateMarkAllForUser( user_id, complete )
+export function DS_ToDo_list_updateMarkAllForUser( user_id, complete )
 {
   var changedTodos = [];
   DS_ToDo_list_getForUser( user_id ).forEach(todo => {

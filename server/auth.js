@@ -2,7 +2,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import jwt from 'jwt-simple';
 
-import User from '../data/User';
+import {DS_User_getByUserName} from '../data/User';
 
 let auth = express( );
 auth.use( bodyParser.json( ) );
@@ -14,9 +14,11 @@ auth.post('/', function(req, res, next) {
   let password = req.body.password;
   console.log( "username=" + username );
   console.log( "password=" + password);
-  User.findByUserName( username, function(err, user) {
-    if (err)
-      return res.status( 401 ).json( { error: 'Error while looking for user' } );
+
+  try
+  {
+    let user = DS_User_getByUserName( username );
+
     if ( ! user )
       return res.status( 401 ).json( { error: 'Incorrect user' } );
     else if( ! ( user.password == password ) )
@@ -29,7 +31,11 @@ auth.post('/', function(req, res, next) {
       res.cookie( 'auth_token', token, { httpOnly: true } );
       res.json( { success : true } );
     }
-  });
+  }
+  catch (e)
+  {
+    return res.status( 401 ).json( { error: 'Error while looking for user' } );
+  }
 });
 
 

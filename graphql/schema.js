@@ -22,34 +22,37 @@ import {
 } from 'graphql-relay';
 
 import {
-  Todo,
   User,
+  DS_User_get,
+} from '../data/User';
+
+import {
+  Todo,
   DS_ToDo_add,
   DS_ToDo_statusUpdate,
   DS_ToDo_get,
   DS_ToDo_list_getForUser,
-  DS_User_get,
-  DO_ToDo_list_updateMarkAllForUser,
+  DS_ToDo_list_updateMarkAllForUser,
   DS_ToDo_list_deleteCompletedForUser,
   DS_ToDo_deleteForUser,
   DS_ToDo_updateRename,
-} from './database';
+} from '../data/ToDo';
 
 var {nodeInterface, nodeField} = nodeDefinitions(
   ( globalId ) => {
     var { type, id } = fromGlobalId( globalId );
-    if( type === 'Todo' )
-      return DS_ToDo_get( id );
-    else if( type === 'User' )
+    if( type === 'User' )
       return DS_User_get( id );
+    else if( type === 'Todo' )
+      return DS_ToDo_get( id );
     else
       return null;
   },
   ( obj ) => {
-    if( obj instanceof Todo )
-      return GraphQLTodo;
-    else if( obj instanceof User )
+    if( obj instanceof User )
       return GraphQLUser;
+    else if( obj instanceof Todo )
+      return GraphQLTodo;
     else
       return null;
   }
@@ -185,7 +188,7 @@ var GraphQLMarkAllTodosMutation = mutationWithClientMutationId({
   },
   mutateAndGetPayload: ( {complete}, args, { rootValue: {user_id} } ) =>
   {
-    var changedTodoLocalIds = DO_ToDo_list_updateMarkAllForUser( user_id, complete );
+    var changedTodoLocalIds = DS_ToDo_list_updateMarkAllForUser( user_id, complete );
     return {changedTodoLocalIds};
   }
 });
