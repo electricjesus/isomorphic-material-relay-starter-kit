@@ -15,14 +15,12 @@ require( 'dotenv' ).load( );
 const GRAPHQL_URL = `http://localhost:${process.env.PORT}/graphql`;
 
 Relay.injectNetworkLayer( new Relay.DefaultNetworkLayer( GRAPHQL_URL ) );
-RelayStoreData.getDefaultInstance( ).getChangeEmitter( ).injectBatchingStrategy(() => { } );
+RelayStoreData.getDefaultInstance( ).getChangeEmitter( ).injectBatchingStrategy( ( ) => { } );
 
 export default function renderOnServer( req, res, next, assetsPath )
 {
-  console.log( 'renderOnServer: auth_token=' + JSON.stringify( req.cookies ) );
   match( { routes, location: req.originalUrl }, ( error, redirectLocation, renderProps ) =>
-    {  
-      console.log( 'renderOnServer: renderProps=' + JSON.stringify( renderProps, 2 ) );
+    {
       if( error )
           next(error);
       else if( redirectLocation )

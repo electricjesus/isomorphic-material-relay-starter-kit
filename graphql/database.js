@@ -16,9 +16,9 @@ var todoIdsByUser = {
 };
 
 var nextTodoId = 0;
-DS_ToDo_add( 0, 'Taste JavaScript', true );
-DS_ToDo_add( 1, 'Buy a unicorn', false );
-DS_ToDo_add( 2, 'Minify CSS', false );
+DS_ToDo_add( 0, 'Anonymous Taste JavaScript', true );
+DS_ToDo_add( 1, 'jack Buy a unicorn', false );
+DS_ToDo_add( 2, 'jill Minify CSS', false );
 
 export function DS_ToDo_add( user_id, text, complete )
 {

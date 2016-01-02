@@ -1,4 +1,5 @@
 import React from 'react';
+//import RelayStoreData from 'react-relay/lib/RelayStoreData';
 
 import Dialog from 'material-ui/lib/dialog';
 import IconMenu from 'material-ui/lib/menus/icon-menu';
@@ -86,6 +87,15 @@ export default class AppBar_Auth extends React.Component
       if( responseJSON.success != true ) throw new Error( "Login failed" );
     } catch( err ) { _handleAuthFailure( 1 ); return; }
 
+    this.setState( {
+      Dialog_LoginInProgress_IsOpen: false
+    } );
+
+    // I wish that would delete the cache, but alas it does not
+    //RelayStoreData.getDefaultInstance( ).clearCacheManager( );
+    document.location = '/';
+
+    // TODO Navigate to the same screen as currently on
   }
 
   _handleAuthFailure( response )
