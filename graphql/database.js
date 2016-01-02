@@ -1,67 +1,73 @@
 export class Todo extends Object {}
 export class User extends Object {}
 
-// Mock authenticated ID
-const VIEWER_ID = 'me';
-
-// Mock user data
-var viewer = new User();
-viewer.id = VIEWER_ID;
 var usersById = {
-  [VIEWER_ID]: viewer
+  [ 0 ]: new User( ), // Anonymous
+  [ 1 ]: new User( ),
+  [ 2 ]: new User( ),
 };
 
 // Mock todo data
 var todosById = {};
 var todoIdsByUser = {
-  [VIEWER_ID]: []
+  [0]: [ ],
+  [1]: [ ],
+  [2]: [ ],
 };
-var nextTodoId = 0;
-addTodo('Taste JavaScript', true);
-addTodo('Buy a unicorn', false);
-addTodo('Minify CSS', false);
 
-export function addTodo(text, complete) {
-  var todo = new Todo();
+var nextTodoId = 0;
+DS_ToDo_add( 0, 'Taste JavaScript', true );
+DS_ToDo_add( 1, 'Buy a unicorn', false );
+DS_ToDo_add( 2, 'Minify CSS', false );
+
+export function DS_ToDo_add( user_id, text, complete )
+{
+  var todo = new Todo( );
+
   todo.complete = !!complete;
   todo.id = `${nextTodoId++}`;
   todo.text = text;
-  todosById[todo.id] = todo;
-  todoIdsByUser[VIEWER_ID].push(todo.id);
+
+  todosById[ todo.id ] = todo;
+
+  todoIdsByUser[ user_id ].push( todo.id );
+
   return todo.id;
 }
 
-export function changeTodoStatus(id, complete) {
-  var todo = getTodo(id);
+export function DS_ToDo_statusUpdate( id, complete )
+{
+  var todo = DS_ToDo_get( id );
   todo.complete = complete;
 }
 
-export function getTodo(id)
+export function DS_ToDo_get( id )
 {
-  return todosById[id];
+  return todosById[ id ];
 }
 
-export function getTodos( status = 'any' )
+export function DS_ToDo_list_getForUser( user_id, status = 'any' )
 {
-  var todos = todoIdsByUser[VIEWER_ID].map(id => todosById[id]);
-  if (status === 'any') {
+  console.log( ' DS_ToDo_list_getForUser user_id=' + user_id );
+
+  var todos = todoIdsByUser[ user_id ].map( id => todosById[ id ] );
+
+  if( status === 'any' )
     return todos;
-  }
+
   let statusCheck = ( status === 'completed' );
-  return todos.filter(todo => todo.complete === statusCheck);
+  return todos.filter( todo => todo.complete === statusCheck );
 }
 
-export function getUser(id) {
-  return usersById[id];
+export function DS_User_get( id )
+{
+  return usersById[ id ];
 }
 
-export function getViewer() {
-  return getUser(VIEWER_ID);
-}
-
-export function markAllTodos(complete) {
+export function DO_ToDo_list_updateMarkAllForUser( user_id, complete )
+{
   var changedTodos = [];
-  getTodos().forEach(todo => {
+  DS_ToDo_list_getForUser( user_id ).forEach(todo => {
     if (todo.complete !== complete) {
       todo.complete = complete;
       changedTodos.push(todo);
@@ -70,21 +76,25 @@ export function markAllTodos(complete) {
   return changedTodos.map(todo => todo.id);
 }
 
-export function removeTodo(id) {
-  var todoIndex = todoIdsByUser[VIEWER_ID].indexOf(id);
-  if (todoIndex !== -1) {
-    todoIdsByUser[VIEWER_ID].splice(todoIndex, 1);
-  }
-  delete todosById[id];
+export function DS_ToDo_deleteForUser( user_id, id )
+{
+  var todoIndex = todoIdsByUser[ user_id ].indexOf( id );
+
+  if( todoIndex !== -1 )
+    todoIdsByUser[ user_id ].splice( todoIndex, 1 );
+
+  delete todosById[ id ];
 }
 
-export function removeCompletedTodos() {
-  var todosToRemove = getTodos().filter(todo => todo.complete);
-  todosToRemove.forEach(todo => removeTodo(todo.id));
-  return todosToRemove.map(todo => todo.id);
+export function DS_ToDo_list_deleteCompletedForUser( user_id )
+{
+  var todosToRemove = DS_ToDo_list_getForUser( user_id ).filter( todo => todo.complete );
+  todosToRemove.forEach( todo => DS_ToDo_deleteForUser( user_id, todo.id ) );
+  return todosToRemove.map( todo => todo.id );
 }
 
-export function renameTodo(id, text) {
-  var todo = getTodo(id);
+export function DS_ToDo_updateRename( id, text )
+{
+  var todo = DS_ToDo_get( id );
   todo.text = text;
 }

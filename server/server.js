@@ -30,16 +30,12 @@ router.use( cookieParser( ) );
 // Graphql server
 router.use( '/graphql', graphQLHTTP( request => {
   let user_id = 0;
-  //console.log( 'GraphQL: request.cookies=' + JSON.stringify( request.cookies ) );
   if( request.cookies.auth_token )
     if( request.cookies.auth_token.length > 10 )
     {
       var decoded = jwt.decode( request.cookies.auth_token, "TBD: Make this a setting tokenSecret" );
-      console.log( 'GraphQL: decoded=' + JSON.stringify( decoded ) );
       user_id = decoded.user_id;
     }
-
-  console.log( 'GraphQL: user_id=' + user_id );
 
   return( {
     schema: schema,
