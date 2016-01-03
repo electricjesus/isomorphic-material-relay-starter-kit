@@ -4,7 +4,13 @@
 
 Whenever you change the schema, regenerate in the following way:
 
-* Run: `npm run schema-update`.
+* Run: `npm run build-schema`.
+
+## Building list of icons
+
+In order to re-build the list with icons:
+
+* Run: `npm run build-mui-icon-list`.
 
 ## Running in development mode
 
