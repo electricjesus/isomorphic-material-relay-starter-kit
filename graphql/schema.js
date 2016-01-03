@@ -22,18 +22,21 @@ import {
 } from 'graphql-relay';
 
 import {
-  Todo,
   User,
+  DS_User_get,
+} from '../data/User';
+
+import {
+  Todo,
   DS_ToDo_add,
-  DS_ToDo_statusUpdate,
+  DS_ToDo_updateStatus,
   DS_ToDo_get,
   DS_ToDo_list_getForUser,
-  DS_User_get,
-  DO_ToDo_list_updateMarkAllForUser,
+  DS_ToDo_list_updateMarkAllForUser,
   DS_ToDo_list_deleteCompletedForUser,
   DS_ToDo_deleteForUser,
   DS_ToDo_updateRename,
-} from './database';
+} from '../data/ToDo';
 
 var {nodeInterface, nodeField} = nodeDefinitions(
   ( globalId ) => {
@@ -140,7 +143,7 @@ var GraphQLAddTodoMutation = mutationWithClientMutationId({
   },
   mutateAndGetPayload: ( {text}, { rootValue: {user_id} } ) =>
   {
-    var localTodoId = DS_ToDo_add( user_id, text );
+    var localTodoId = DS_ToDo_add( user_id, text, false );
     return {localTodoId};
   }
 });
@@ -185,7 +188,7 @@ var GraphQLMarkAllTodosMutation = mutationWithClientMutationId({
   },
   mutateAndGetPayload: ( {complete}, { rootValue: {user_id} } ) =>
   {
-    var changedTodoLocalIds = DO_ToDo_list_updateMarkAllForUser( user_id, complete );
+    var changedTodoLocalIds = DS_ToDo_list_updateMarkAllForUser( user_id, complete );
     return {changedTodoLocalIds};
   }
 });
