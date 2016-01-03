@@ -17,8 +17,11 @@ var todoIdsByUser = {
 
 var nextTodoId = 0;
 DS_ToDo_add( 0, 'Taste JavaScript', true );
-DS_ToDo_add( 1, 'Buy a unicorn', false );
-DS_ToDo_add( 2, 'Minify CSS', false );
+DS_ToDo_add( 1, 'Jack buy a unicorn', false );
+DS_ToDo_add( 1, 'Jack sell a pony', false );
+DS_ToDo_add( 1, 'Jack converse a brony', true );
+DS_ToDo_add( 2, 'Jill Minify CSS', false );
+DS_ToDo_add( 2, 'Jill Apply for an accelerator', true );
 
 export function DS_ToDo_add( user_id, text, complete )
 {

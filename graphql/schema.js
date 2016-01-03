@@ -183,7 +183,7 @@ var GraphQLMarkAllTodosMutation = mutationWithClientMutationId({
       resolve: ( parent, args, { rootValue: {user_id} } ) => DS_User_get( user_id )
     },
   },
-  mutateAndGetPayload: ( {complete}, args, { rootValue: {user_id} } ) =>
+  mutateAndGetPayload: ( {complete}, { rootValue: {user_id} } ) =>
   {
     var changedTodoLocalIds = DO_ToDo_list_updateMarkAllForUser( user_id, complete );
     return {changedTodoLocalIds};
