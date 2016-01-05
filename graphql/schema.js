@@ -38,25 +38,73 @@ import {
   DS_ToDo_updateRename,
 } from '../data/ToDo';
 
+import {
+  Compendium,
+  DS_Compendium_add,
+  DS_Compendium_update,
+  DS_Compendium_get,
+  DS_Compendium_list,
+} from '../data/Compendium';
+
 var {nodeInterface, nodeField} = nodeDefinitions(
-  ( globalId ) => {
+  ( globalId ) =>
+  {
     var { type, id } = fromGlobalId( globalId );
-    if( type === 'Todo' )
-      return DS_ToDo_get( id );
-    else if( type === 'User' )
-      return DS_User_get( id );
-    else
-      return null;
+    if( type === 'User' ) return DS_User_get( id );
+
+    // ->->->
+    else if( type === 'Compendium' ) return DS_Compendium_get( id );
+    else if( type === 'Todo' ) return DS_ToDo_get( id );
+    // <-<-<-
+
+    else return null;
   },
-  ( obj ) => {
-    if( obj instanceof Todo )
-      return GraphQLTodo;
-    else if( obj instanceof User )
-      return GraphQLUser;
-    else
-      return null;
+  ( obj ) =>
+  {
+    if( obj instanceof User ) return GraphQLUser;
+
+    // ->->->
+    else if( obj instanceof Compendium ) return GraphQLCompendium;
+    else if( obj instanceof Todo ) return GraphQLTodo;
+    // <-<-<-
+
+    else return null;
   }
 );
+
+// ->->-> Compendium
+
+var GraphQLCompendium = new GraphQLObjectType({
+  name: 'Compendium',
+  fields: {
+    id: globalIdField( 'Compendium' ),
+    CompText1: {
+      type: GraphQLString,
+      resolve: (obj) => obj.CompText1,
+    },
+    CompText2: {
+      type: GraphQLString,
+      resolve: (obj) => obj.CompText2,
+    },
+    CompText3: {
+      type: GraphQLString,
+      resolve: (obj) => obj.CompText3,
+    },
+  },
+  interfaces: [nodeInterface]
+});
+
+var {
+  connectionType: CompendiumsConnection,
+  edgeType: GraphQLCompendiumEdge,
+} = connectionDefinitions({
+  name: 'Compendium',
+  nodeType: GraphQLCompendium,
+});
+
+// <-<-<- Compendium
+
+// ->->-> Todo
 
 var GraphQLTodo = new GraphQLObjectType({
   name: 'Todo',
@@ -82,10 +130,25 @@ var {
   nodeType: GraphQLTodo,
 });
 
+// <-<-<- Todo
+
 var GraphQLUser = new GraphQLObjectType({
   name: 'User',
   fields: {
     id: globalIdField('User'),
+
+    // ->->-> Compendium
+
+    compendiums: {
+      type: CompendiumsConnection,
+      args: { ...connectionArgs },
+      resolve: ( obj, { ...args }, { rootValue: {user_id} } ) => connectionFromArray( DS_Compendium_list( user_id ), args )
+    },
+
+    // <-<-<- Compendium
+
+    // ->->-> Todo
+
     todos: {
       type: TodosConnection,
       args: {
@@ -105,6 +168,8 @@ var GraphQLUser = new GraphQLObjectType({
       type: GraphQLInt,
       resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => DS_ToDo_list_getForUser( user_id, 'completed' ).length
     },
+
+    // <-<-<- Todo
   },
   interfaces: [nodeInterface]
 });
@@ -119,6 +184,8 @@ var GraphQL_Root = new GraphQLObjectType({
     node: nodeField
   },
 });
+
+// ->->-> Todo
 
 var GraphQLAddTodoMutation = mutationWithClientMutationId({
   name: 'AddTodo',
@@ -254,15 +321,22 @@ var GraphQLRenameTodoMutation = mutationWithClientMutationId({
   },
 });
 
+// <-<-<- Todo
+
 var Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
+
+    // ->->-> Todo
+
     addTodo: GraphQLAddTodoMutation,
     changeTodoStatus: GraphQLChangeTodoStatusMutation,
     markAllTodos: GraphQLMarkAllTodosMutation,
     removeCompletedTodos: GraphQLRemoveCompletedTodosMutation,
     removeTodo: GraphQLRemoveTodoMutation,
     renameTodo: GraphQLRenameTodoMutation,
+
+    // <-<-<- Todo
   },
 });
 

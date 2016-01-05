@@ -54,20 +54,13 @@ export function DS_ToDo_get( id )
 
 export function DS_ToDo_list_getForUser( user_id, status = 'any' )
 {
-  console.log( ' DS_ToDo_list_getForUser user_id=' + user_id );
-
   var ToDo_list = ToDo_IDsByUser[ user_id ].map( id => ToDo_listById[ id ] );
 
   if( status === 'any' )
-  {
-    console.log( ' DS_ToDo_list_getForUser result=' + JSON.stringify( ToDo_list ) );
     return ToDo_list;
-  }
 
   let statusCheck = ( status === 'completed' );
   var result = ToDo_list.filter( a_ToDo => a_ToDo.complete === statusCheck );
-
-  console.log( ' DS_ToDo_list_getForUser result=' + JSON.stringify( result ) );
 
   return result;
 }
