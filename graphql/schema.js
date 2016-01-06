@@ -78,18 +78,21 @@ var GraphQLCompendium = new GraphQLObjectType({
   name: 'Compendium',
   fields: {
     id: globalIdField( 'Compendium' ),
-    CompText1: {
-      type: GraphQLString,
-      resolve: (obj) => obj.CompText1,
-    },
-    CompText2: {
-      type: GraphQLString,
-      resolve: (obj) => obj.CompText2,
-    },
-    CompText3: {
-      type: GraphQLString,
-      resolve: (obj) => obj.CompText3,
-    },
+    Compendium_FirstTextInput:          { type: GraphQLString,  resolve: (obj) => obj.Compendium_FirstTextInput, },
+    Compendium_RangedNumber:            { type: GraphQLInt,     resolve: (obj) => obj.Compendium_RangedNumber, },
+    Compendium_Excitement:              { type: GraphQLInt,     resolve: (obj) => obj.Compendium_Excitement, },
+    Compendium_FollowUpQuestion:        { type: GraphQLString,  resolve: (obj) => obj.Compendium_FollowUpQuestion, },
+    Compendium_FavoriteMammal:          { type: GraphQLInt,     resolve: (obj) => obj.Compendium_FavoriteMammal, },
+    Compendium_FavoriteMammalOtherText: { type: GraphQLString,  resolve: (obj) => obj.Compendium_FavoriteMammalOtherText, },
+    Compendium_LastText:                { type: GraphQLString,  resolve: (obj) => obj.Compendium_LastText, },
+    Compendium_LikedSunset_Ocean:       { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Ocean, },
+    Compendium_LikedSunset_Lake:        { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Lake, },
+    Compendium_LikedSunset_Mountains:   { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Mountains, },
+    Compendium_LikedSunset_Plains:      { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Plains, },
+    Compendium_LikedSunset_Purple:      { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Purple, },
+    Compendium_LikedSunset_Green:       { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Green, },
+    Compendium_LikedSunset_Other:       { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Other, },
+    Compendium_LikedSunset_OtherText:   { type: GraphQLString,  resolve: (obj) => obj.Compendium_LikedSunset_OtherText, },
   },
   interfaces: [nodeInterface]
 });
@@ -188,13 +191,43 @@ var GraphQL_Root = new GraphQLObjectType({
 
 // ->->-> Compendium mutation definitions
 
+/*
+Compendium_FirstTextInput:          { type: GraphQLString,  resolve: (obj) => obj.Compendium_FirstTextInput, },
+Compendium_RangedNumber:            { type: GraphQLInt,     resolve: (obj) => obj.Compendium_RangedNumber, },
+Compendium_Excitement:              { type: GraphQLInt,     resolve: (obj) => obj.Compendium_Excitement, },
+Compendium_FollowUpQuestion:        { type: GraphQLString,  resolve: (obj) => obj.Compendium_FollowUpQuestion, },
+Compendium_FavoriteMammal:          { type: GraphQLInt,     resolve: (obj) => obj.Compendium_FavoriteMammal, },
+Compendium_FavoriteMammalOtherText: { type: GraphQLString,  resolve: (obj) => obj.Compendium_FavoriteMammalOtherText, },
+Compendium_LastText:                { type: GraphQLString,  resolve: (obj) => obj.Compendium_LastText, },
+Compendium_LikedSunset_Ocean:       { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Ocean, },
+Compendium_LikedSunset_Lake:        { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Lake, },
+Compendium_LikedSunset_Mountains:   { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Mountains, },
+Compendium_LikedSunset_Plains:      { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Plains, },
+Compendium_LikedSunset_Purple:      { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Purple, },
+Compendium_LikedSunset_Green:       { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Green, },
+Compendium_LikedSunset_Other:       { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Other, },
+Compendium_LikedSunset_OtherText:   { type: GraphQLString,  resolve: (obj) => obj.Compendium_LikedSunset_OtherText, },
+*/
+
 var GQLM_Compendium_update = mutationWithClientMutationId({
   name: 'Compendium_update',
   inputFields: {
-    CompText1: { type: new GraphQLNonNull( GraphQLString ) },
-    CompText2: { type: new GraphQLNonNull( GraphQLString ) },
-    CompText3: { type: new GraphQLNonNull( GraphQLString ) },
-    id: { type: new GraphQLNonNull( GraphQLID ) },
+    id:                                 { type: new GraphQLNonNull( GraphQLID ) },
+    Compendium_FirstTextInput:          { type: new GraphQLNonNull( GraphQLString ) },
+    Compendium_RangedNumber:            { type: new GraphQLNonNull( GraphQLInt ) },
+    Compendium_Excitement:              { type: new GraphQLNonNull( GraphQLInt ) },
+    Compendium_FollowUpQuestion:        { type: new GraphQLNonNull( GraphQLString ) },
+    Compendium_FavoriteMammal:          { type: new GraphQLNonNull( GraphQLInt ) },
+    Compendium_FavoriteMammalOtherText: { type: new GraphQLNonNull( GraphQLString ) },
+    Compendium_LastText:                { type: new GraphQLNonNull( GraphQLString ) },
+    Compendium_LikedSunset_Ocean:       { type: new GraphQLNonNull( GraphQLBoolean ) },
+    Compendium_LikedSunset_Lake:        { type: new GraphQLNonNull( GraphQLBoolean ) },
+    Compendium_LikedSunset_Mountains:   { type: new GraphQLNonNull( GraphQLBoolean ) },
+    Compendium_LikedSunset_Plains:      { type: new GraphQLNonNull( GraphQLBoolean ) },
+    Compendium_LikedSunset_Purple:      { type: new GraphQLNonNull( GraphQLBoolean ) },
+    Compendium_LikedSunset_Green:       { type: new GraphQLNonNull( GraphQLBoolean ) },
+    Compendium_LikedSunset_Other:       { type: new GraphQLNonNull( GraphQLBoolean ) },
+    Compendium_LikedSunset_OtherText:   { type: new GraphQLNonNull( GraphQLString ) },
   },
   outputFields: {
     Compendium: {
@@ -202,10 +235,44 @@ var GQLM_Compendium_update = mutationWithClientMutationId({
       resolve: ( {localCompendiumId} ) => DS_Compendium_get( localCompendiumId ),
     },
   },
-  mutateAndGetPayload: ( { id, CompText1, CompText2, CompText3 } ) => {
-    var localTodoId = fromGlobalId( id ).id;
-    DS_Compendium_update( localTodoId, CompText1, CompText2, CompText3 );
-    return {localTodoId};
+  mutateAndGetPayload: ( {
+    id,
+    Compendium_FirstTextInput,
+    Compendium_RangedNumber,
+    Compendium_Excitement,
+    Compendium_FollowUpQuestion,
+    Compendium_FavoriteMammal,
+    Compendium_FavoriteMammalOtherText,
+    Compendium_LastText,
+    Compendium_LikedSunset_Ocean,
+    Compendium_LikedSunset_Lake,
+    Compendium_LikedSunset_Mountains,
+    Compendium_LikedSunset_Plains,
+    Compendium_LikedSunset_Purple,
+    Compendium_LikedSunset_Green,
+    Compendium_LikedSunset_Other,
+    Compendium_LikedSunset_OtherText,
+  } ) => {
+    var local_id = fromGlobalId( id ).id;
+    DS_Compendium_update(
+      local_id,
+      Compendium_FirstTextInput,
+      Compendium_RangedNumber,
+      Compendium_Excitement,
+      Compendium_FollowUpQuestion,
+      Compendium_FavoriteMammal,
+      Compendium_FavoriteMammalOtherText,
+      Compendium_LastText,
+      Compendium_LikedSunset_Ocean,
+      Compendium_LikedSunset_Lake,
+      Compendium_LikedSunset_Mountains,
+      Compendium_LikedSunset_Plains,
+      Compendium_LikedSunset_Purple,
+      Compendium_LikedSunset_Green,
+      Compendium_LikedSunset_Other,
+      Compendium_LikedSunset_OtherText,
+    );
+    return {local_id};
   },
 });
 
