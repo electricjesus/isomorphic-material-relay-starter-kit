@@ -1,4 +1,4 @@
-# Isomorphic Material Relay Starter Kit
+# Isomorphic Material Relay Starter Kit (IMRSK)
 
 The purpose of IMRSK is:
 
@@ -6,15 +6,11 @@ The purpose of IMRSK is:
 * To host examples of using those technologies.
 * To implement some common functionality like user authentication using react/relay.
 
-Live Demo:
-
-[http://isomorphic-material-relay.herokuapp.com/](http://isomorphic-material-relay.herokuapp.com/)
-
-Running locally:
-
-Perform the steps in **[Local Setup](./doc/Setup-Local.md)**.
-
-The project is already set up to be ran on [Heroku](https://www.heroku.com/nodejs).Follow the **[Heroku Setup](./doc/Setup-Heroku.md)** for directions.
+| How to try | **Link**|
+|----------------|----------------|
+| Live Demo | [http://isomorphic-material-relay.herokuapp.com/](http://isomorphic-material-relay.herokuapp.com/) |
+| Run locally | [Local Setup](./doc/Setup-Local.md) |
+| Run on [Heroku](https://www.heroku.com/nodejs) | [Heroku Setup](./doc/Setup-Heroku.md) |
 
 ## Underlying technologies
 
