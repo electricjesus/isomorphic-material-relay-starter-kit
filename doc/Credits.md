@@ -13,5 +13,6 @@ It contains a boilerplate with several simple code examples. It consists of modi
 * [Facebook Relay Starter Kit TODO example](https://github.com/facebook/relay/tree/master/examples/todo). Implementation of the TODO MVC using Relay.
 * [Isomorphic react-router-relay TODO example](https://github.com/denvned/isomorphic-relay-router/tree/master/examples/todo). The Facebook TODO example in this project has been modified to support isomorphism.
 * [Xpepermint's isomorphic-react-relay-boilerplate](https://github.com/xpepermint/isomorphic-react-relay-boilerplate). The project organization is largely borrowed from this project.
+* [React Slingshot](https://github.com/coryhouse/react-slingshot).
 
 Examples from other open source projects have also been incorporated.
