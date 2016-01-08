@@ -1,6 +1,6 @@
 import {GraphQLObjectType} from "graphql";
 
-import Compendium_Update from "../mutation/Compendium_Update";
+import Compendium_update from "../mutation/Compendium_update";
 
 import ToDo_add from "../mutation/ToDo_add";
 import ToDo_updateStatus from "../mutation/ToDo_updateStatus";
@@ -14,7 +14,7 @@ export default new GraphQLObjectType( {
   name: 'Mutation',
   fields: {
 
-    Compendium_update: Compendium_Update,
+    Compendium_update: Compendium_update,
 
     ToDo_add: ToDo_add,
     ToDo_updateStatus: ToDo_updateStatus,
