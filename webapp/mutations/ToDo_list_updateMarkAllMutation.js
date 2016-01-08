@@ -1,10 +1,10 @@
 import Relay from 'react-relay';
 
-export default class MarkAllTodosMutation extends Relay.Mutation {
+export default class ToDo_list_updateMarkAllMutation extends Relay.Mutation {
   static fragments = {
     // TODO: Mark edges and totalCount optional
     todos: () => Relay.QL`
-      fragment on TodoConnection {
+      fragment on ToDoConnection {
         edges {
           node {
             complete,
@@ -21,11 +21,11 @@ export default class MarkAllTodosMutation extends Relay.Mutation {
     `,
   };
   getMutation() {
-    return Relay.QL`mutation{markAllTodos}`;
+    return Relay.QL`mutation{ToDo_list_updateMarkAll}`;
   }
   getFatQuery() {
     return Relay.QL`
-      fragment on MarkAllTodosPayload {
+      fragment on ToDo_list_updateMarkAllPayload {
         viewer {
           completedCount,
           todos,

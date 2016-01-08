@@ -1,6 +1,6 @@
 import Relay from 'react-relay';
 
-export default class AddTodoMutation extends Relay.Mutation {
+export default class ToDo_addMutation extends Relay.Mutation {
   static fragments = {
     viewer: () => Relay.QL`
       fragment on User {
@@ -10,11 +10,11 @@ export default class AddTodoMutation extends Relay.Mutation {
     `,
   };
   getMutation() {
-    return Relay.QL`mutation{addTodo}`;
+    return Relay.QL`mutation{ToDo_add}`;
   }
   getFatQuery() {
     return Relay.QL`
-      fragment on AddTodoPayload {
+      fragment on ToDo_addPayload {
         todoEdge,
         viewer {
           todos,

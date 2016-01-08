@@ -6,7 +6,7 @@ import List from 'material-ui/lib/lists/list';
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 
-import MarkAllTodosMutation from '../mutations/MarkAllTodosMutation';
+import ToDo_list_updateMarkAllMutation from '../mutations/ToDo_list_updateMarkAllMutation';
 import ToDo_Item from './ToDo_Item.jsx';
 
 class ToDo_List extends React.Component
@@ -14,7 +14,7 @@ class ToDo_List extends React.Component
   _handleMarkAllOnCheck( event, checked )
   {
     Relay.Store.update(
-      new MarkAllTodosMutation( {
+      new ToDo_list_updateMarkAllMutation( {
         complete: checked,
         todos: this.props.viewer.todos,
         viewer: this.props.viewer,
@@ -22,7 +22,7 @@ class ToDo_List extends React.Component
     );
   }
 
-  renderTodos( )
+  renderToDos( )
   {
     return this.props.viewer.todos.edges.map(edge =>
       <ToDo_Item
@@ -51,18 +51,18 @@ class ToDo_List extends React.Component
 
   render( )
   {
-    var numTodos = this.props.viewer.totalCount;
-    var numCompletedTodos = this.props.viewer.completedCount;
+    var numToDos = this.props.viewer.totalCount;
+    var numCompletedToDos = this.props.viewer.completedCount;
     return (
       <div>
         { this.renderTabs( ) }
         <Checkbox
           label="Mark all as complete"
-          defaultChecked={ numTodos === numCompletedTodos }
+          defaultChecked={ numToDos === numCompletedToDos }
           onCheck={ this._handleMarkAllOnCheck.bind( this ) }
         />
         <List>
-          { this.renderTodos( ) }
+          { this.renderToDos( ) }
         </List>
       </div>
     );
@@ -106,10 +106,10 @@ export default Relay.createContainer( ToDo_List, {
               ${ToDo_Item.getFragment('todo')},
             },
           },
-          ${MarkAllTodosMutation.getFragment('todos')},
+          ${ToDo_list_updateMarkAllMutation.getFragment('todos')},
         },
         totalCount,
-        ${MarkAllTodosMutation.getFragment('viewer')},
+        ${ToDo_list_updateMarkAllMutation.getFragment('viewer')},
         ${ToDo_Item.getFragment('viewer')},
       }
     `,

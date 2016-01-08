@@ -1,19 +1,19 @@
 import Relay from 'react-relay';
 
-export default class RenameTodoMutation extends Relay.Mutation {
+export default class ToDo_updateRenameMutation extends Relay.Mutation {
   static fragments = {
     todo: () => Relay.QL`
-      fragment on Todo {
+      fragment on ToDo {
         id,
       }
     `,
   };
   getMutation() {
-    return Relay.QL`mutation{renameTodo}`;
+    return Relay.QL`mutation{ToDo_updateRename}`;
   }
   getFatQuery() {
     return Relay.QL`
-      fragment on RenameTodoPayload {
+      fragment on ToDo_updateRenamePayload {
         todo {
           text,
         }

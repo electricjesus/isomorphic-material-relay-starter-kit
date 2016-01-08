@@ -27,14 +27,14 @@ import {
 } from '../data/User';
 
 import {
-  Todo,
+  ToDo,
   DS_ToDo_add,
   DS_ToDo_updateStatus,
   DS_ToDo_get,
-  DS_ToDo_list_getForUser,
-  DS_ToDo_list_updateMarkAllForUser,
-  DS_ToDo_list_deleteCompletedForUser,
-  DS_ToDo_deleteForUser,
+  DS_ToDo_list_get,
+  DS_ToDo_list_updateMarkAll,
+  DS_ToDo_list_deleteCompleted,
+  DS_ToDo_delete,
   DS_ToDo_updateRename,
 } from '../data/ToDo';
 
@@ -54,18 +54,18 @@ var {nodeInterface, nodeField} = nodeDefinitions(
 
     // ->->->
     else if( type === 'Compendium' ) return DS_Compendium_get( id );
-    else if( type === 'Todo' ) return DS_ToDo_get( id );
+    else if( type === 'ToDo' ) return DS_ToDo_get( id );
     // <-<-<-
 
     else return null;
   },
   ( obj ) =>
   {
-    if( obj instanceof User ) return GraphQLUser;
+    if( obj instanceof User ) return GQLOT_User;
 
     // ->->->
     else if( obj instanceof Compendium ) return GraphQLCompendium;
-    else if( obj instanceof Todo ) return GraphQLTodo;
+    else if( obj instanceof ToDo ) return GQLOT_ToDo;
     // <-<-<-
 
     else return null;
@@ -74,7 +74,7 @@ var {nodeInterface, nodeField} = nodeDefinitions(
 
 // ->->-> Compendium object type, connection and edge
 
-var GraphQLCompendium = new GraphQLObjectType({
+var GraphQLCompendium = new GraphQLObjectType( {
   name: 'Compendium',
   fields: {
     id: globalIdField( 'Compendium' ),
@@ -95,24 +95,24 @@ var GraphQLCompendium = new GraphQLObjectType({
     Compendium_LikedSunset_OtherText:   { type: GraphQLString,  resolve: (obj) => obj.Compendium_LikedSunset_OtherText, },
   },
   interfaces: [nodeInterface]
-});
+} );
 
 var {
   connectionType: CompendiumsConnection,
   edgeType: GraphQLCompendiumEdge,
-} = connectionDefinitions({
+} = connectionDefinitions( {
   name: 'Compendium',
   nodeType: GraphQLCompendium,
-});
+} );
 
 // <-<-<- Compendium object type, connection and edge
 
-// ->->-> Todo object type, connection and edge
+// ->->-> ToDo object type, connection and edge
 
-var GraphQLTodo = new GraphQLObjectType({
-  name: 'Todo',
+var GQLOT_ToDo = new GraphQLObjectType( {
+  name: 'ToDo',
   fields: {
-    id: globalIdField('Todo'),
+    id: globalIdField('ToDo'),
     text: {
       type: GraphQLString,
       resolve: (obj) => obj.text,
@@ -123,19 +123,19 @@ var GraphQLTodo = new GraphQLObjectType({
     }
   },
   interfaces: [nodeInterface]
-});
+} );
 
 var {
-  connectionType: TodosConnection,
-  edgeType: GraphQLTodoEdge,
-} = connectionDefinitions({
-  name: 'Todo',
-  nodeType: GraphQLTodo,
-});
+  connectionType: ToDosConnection,
+  edgeType: GQLOT_ToDoEdge,
+} = connectionDefinitions( {
+  name: 'ToDo',
+  nodeType: GQLOT_ToDo,
+} );
 
-// <-<-<- Todo object type, connection and edge
+// <-<-<- ToDo object type, connection and edge
 
-var GraphQLUser = new GraphQLObjectType({
+var GQLOT_User = new GraphQLObjectType( {
   name: 'User',
   fields: {
     id: globalIdField('User'),
@@ -150,10 +150,10 @@ var GraphQLUser = new GraphQLObjectType({
 
     // <-<-<- Compendium access through user
 
-    // ->->-> Todo access through user
+    // ->->-> ToDo access through user
 
     todos: {
-      type: TodosConnection,
+      type: ToDosConnection,
       args: {
         status: {
           type: GraphQLString,
@@ -161,55 +161,37 @@ var GraphQLUser = new GraphQLObjectType({
         },
         ...connectionArgs,
       },
-      resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => connectionFromArray( DS_ToDo_list_getForUser( user_id, status ), args )
+      resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => connectionFromArray( DS_ToDo_list_get( user_id, status ), args )
     },
     totalCount: {
       type: GraphQLInt,
-      resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => DS_ToDo_list_getForUser( user_id ).length
+      resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => DS_ToDo_list_get( user_id ).length
     },
     completedCount: {
       type: GraphQLInt,
-      resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => DS_ToDo_list_getForUser( user_id, 'completed' ).length
+      resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => DS_ToDo_list_get( user_id, 'completed' ).length
     },
 
-    // <-<-<- Todo access through user
+    // <-<-<- ToDo access through user
   },
   interfaces: [nodeInterface]
-});
+} );
 
-var GraphQL_Root = new GraphQLObjectType({
+var GQLOT_Root = new GraphQLObjectType( {
   name: 'Root',
   fields: {
     viewer: {
-      type: GraphQLUser,
+      type: GQLOT_User,
       resolve: ( parent, args, { rootValue: {user_id} } ) => DS_User_get( user_id )
     },
     node: nodeField
   },
-});
+} );
 
 
 // ->->-> Compendium mutation definitions
 
-/*
-Compendium_FirstTextInput:          { type: GraphQLString,  resolve: (obj) => obj.Compendium_FirstTextInput, },
-Compendium_RangedNumber:            { type: GraphQLInt,     resolve: (obj) => obj.Compendium_RangedNumber, },
-Compendium_Excitement:              { type: GraphQLInt,     resolve: (obj) => obj.Compendium_Excitement, },
-Compendium_FollowUpQuestion:        { type: GraphQLString,  resolve: (obj) => obj.Compendium_FollowUpQuestion, },
-Compendium_FavoriteMammal:          { type: GraphQLInt,     resolve: (obj) => obj.Compendium_FavoriteMammal, },
-Compendium_FavoriteMammalOtherText: { type: GraphQLString,  resolve: (obj) => obj.Compendium_FavoriteMammalOtherText, },
-Compendium_LastText:                { type: GraphQLString,  resolve: (obj) => obj.Compendium_LastText, },
-Compendium_LikedSunset_Ocean:       { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Ocean, },
-Compendium_LikedSunset_Lake:        { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Lake, },
-Compendium_LikedSunset_Mountains:   { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Mountains, },
-Compendium_LikedSunset_Plains:      { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Plains, },
-Compendium_LikedSunset_Purple:      { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Purple, },
-Compendium_LikedSunset_Green:       { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Green, },
-Compendium_LikedSunset_Other:       { type: GraphQLBoolean, resolve: (obj) => obj.Compendium_LikedSunset_Other, },
-Compendium_LikedSunset_OtherText:   { type: GraphQLString,  resolve: (obj) => obj.Compendium_LikedSunset_OtherText, },
-*/
-
-var GQLM_Compendium_update = mutationWithClientMutationId({
+var GQLM_Compendium_update = mutationWithClientMutationId( {
   name: 'Compendium_update',
   inputFields: {
     id:                                 { type: new GraphQLNonNull( GraphQLID ) },
@@ -274,150 +256,150 @@ var GQLM_Compendium_update = mutationWithClientMutationId({
     );
     return {local_id};
   },
-});
+} );
 
 // <-<-<- Compendium mutation definitions
 
 
-// ->->-> Todo mutation definitions
+// ->->-> ToDo mutation definitions
 
-var GraphQLAddTodoMutation = mutationWithClientMutationId({
-  name: 'AddTodo',
+var GQLM_ToDo_add = mutationWithClientMutationId( {
+  name: 'ToDo_add',
   inputFields: {
-    text: { type: new GraphQLNonNull(GraphQLString) }
+    text: { type: new GraphQLNonNull( GraphQLString ) }
   },
   outputFields: {
     todoEdge: {
-      type: GraphQLTodoEdge,
-      resolve: ( {localTodoId}, args, { rootValue: {user_id} } ) => {
-        var todo = DS_ToDo_get(localTodoId);
+      type: GQLOT_ToDoEdge,
+      resolve: ( {localToDoId}, args, { rootValue: {user_id} } ) => {
+        var todo = DS_ToDo_get(localToDoId);
         return {
-          cursor: cursorForObjectInConnection( DS_ToDo_list_getForUser( user_id ), todo ),
+          cursor: cursorForObjectInConnection( DS_ToDo_list_get( user_id ), todo ),
           node: todo,
         };
       }
     },
     viewer: {
-      type: GraphQLUser,
+      type: GQLOT_User,
       resolve: ( parent, args, { rootValue: {user_id} } ) => DS_User_get( user_id )
     },
   },
   mutateAndGetPayload: ( {text}, { rootValue: {user_id} } ) =>
   {
-    var localTodoId = DS_ToDo_add( user_id, text, false );
-    return {localTodoId};
+    var localToDoId = DS_ToDo_add( user_id, text, false );
+    return {localToDoId};
   }
-});
+} );
 
-var GraphQLChangeTodoStatusMutation = mutationWithClientMutationId({
-  name: 'ChangeTodoStatus',
+var GQML_ToDo_updateStatus = mutationWithClientMutationId( {
+  name: 'ToDo_updateStatus',
   inputFields: {
     complete: { type: new GraphQLNonNull( GraphQLBoolean ) },
     id: { type: new GraphQLNonNull( GraphQLID ) },
   },
   outputFields: {
     todo: {
-      type: GraphQLTodo,
-      resolve: ( {localTodoId} ) => DS_ToDo_get( localTodoId ),
+      type: GQLOT_ToDo,
+      resolve: ( {localToDoId} ) => DS_ToDo_get( localToDoId ),
     },
     viewer: {
-      type: GraphQLUser,
+      type: GQLOT_User,
       resolve: ( parent, args, { rootValue: {user_id} } ) => DS_User_get( user_id )
     },
   },
   mutateAndGetPayload: ( { id, complete } ) => {
-    var localTodoId = fromGlobalId(id).id;
-    DS_ToDo_statusUpdate( localTodoId, complete );
-    return {localTodoId};
+    var localToDoId = fromGlobalId(id).id;
+    DS_ToDo_updateStatus( localToDoId, complete );
+    return {localToDoId};
   },
-});
+} );
 
-var GraphQLMarkAllTodosMutation = mutationWithClientMutationId({
-  name: 'MarkAllTodos',
+var GQLM_ToDo_list_updateMarkAll = mutationWithClientMutationId( {
+  name: 'ToDo_list_updateMarkAll',
   inputFields: {
     complete: { type: new GraphQLNonNull( GraphQLBoolean ) },
   },
   outputFields: {
-    changedTodos: {
-      type: new GraphQLList(GraphQLTodo),
-      resolve: ( {changedTodoLocalIds} ) => changedTodoLocalIds.map( DS_ToDo_get ),
+    changedToDos: {
+      type: new GraphQLList(GQLOT_ToDo),
+      resolve: ( {changedToDoLocalIds} ) => changedToDoLocalIds.map( DS_ToDo_get ),
     },
     viewer: {
-      type: GraphQLUser,
+      type: GQLOT_User,
       resolve: ( parent, args, { rootValue: {user_id} } ) => DS_User_get( user_id )
     },
   },
   mutateAndGetPayload: ( {complete}, { rootValue: {user_id} } ) =>
   {
-    var changedTodoLocalIds = DS_ToDo_list_updateMarkAllForUser( user_id, complete );
-    return {changedTodoLocalIds};
+    var changedToDoLocalIds = DS_ToDo_list_updateMarkAll( user_id, complete );
+    return {changedToDoLocalIds};
   }
-});
+} );
 
-var GraphQLRemoveCompletedTodosMutation = mutationWithClientMutationId({
-  name: 'RemoveCompletedTodos',
+var GQLM_ToDo_list_deleteCompleted = mutationWithClientMutationId( {
+  name: 'ToDo_list_deleteCompleted',
   outputFields: {
-    deletedTodoIds: {
-      type: new GraphQLList(GraphQLString),
-      resolve: ({deletedTodoIds}) => deletedTodoIds,
+    deletedToDoIds: {
+      type: new GraphQLList( GraphQLString ),
+      resolve: ( {deletedToDoIds} ) => deletedToDoIds,
     },
     viewer: {
-      type: GraphQLUser,
+      type: GQLOT_User,
       resolve: ( parent, args, { rootValue: {user_id} } ) => DS_User_get( user_id )
     },
   },
   mutateAndGetPayload: ( input, { rootValue: {user_id} } ) =>
   {
-    var deletedTodoLocalIds = DS_ToDo_list_deleteCompletedForUser( user_id );
-    var deletedTodoIds = deletedTodoLocalIds.map( toGlobalId.bind( null, 'Todo' ) );
-    return {deletedTodoIds};
+    var deletedToDoLocalIds = DS_ToDo_list_deleteCompleted( user_id );
+    var deletedToDoIds = deletedToDoLocalIds.map( toGlobalId.bind( null, 'ToDo' ) );
+    return {deletedToDoIds};
   }
-});
+} );
 
-var GraphQLRemoveTodoMutation = mutationWithClientMutationId( {
-  name: 'RemoveTodo',
+var GraphQLToDo_deleteMutation = mutationWithClientMutationId( {
+  name: 'ToDo_delete',
   inputFields: {
     id: { type: new GraphQLNonNull( GraphQLID ) },
   },
   outputFields: {
-    deletedTodoId: {
+    deletedToDoId: {
       type: GraphQLID,
-      resolve: ({id}) => id,
+      resolve: ( {id} ) => id,
     },
     viewer: {
-      type: GraphQLUser,
+      type: GQLOT_User,
       resolve: ( parent, args, { rootValue: {user_id} } ) => DS_User_get( user_id )
     },
   },
   mutateAndGetPayload: ( {id}, { rootValue: {user_id} } ) => {
-    var localTodoId = fromGlobalId(id).id;
-    DS_ToDo_deleteForUser( user_id, localTodoId );
+    var localToDoId = fromGlobalId(id).id;
+    DS_ToDo_delete( user_id, localToDoId );
     return {id};
   }
 } );
 
-var GraphQLRenameTodoMutation = mutationWithClientMutationId({
-  name: 'RenameTodo',
+var GQLM_ToDo_updateRename = mutationWithClientMutationId( {
+  name: 'ToDo_updateRename',
   inputFields: {
     id: { type: new GraphQLNonNull( GraphQLID ) },
-    text: { type: new GraphQLNonNull(GraphQLString) },
+    text: { type: new GraphQLNonNull( GraphQLString ) },
   },
   outputFields: {
     todo: {
-      type: GraphQLTodo,
-      resolve: ({localTodoId}) => DS_ToDo_get(localTodoId),
+      type: GQLOT_ToDo,
+      resolve: ( {localToDoId} ) => DS_ToDo_get(localToDoId),
     }
   },
-  mutateAndGetPayload: ({id, text}) => {
-    var localTodoId = fromGlobalId(id).id;
-    DS_ToDo_updateRename( localTodoId, text );
-    return {localTodoId};
+  mutateAndGetPayload: ( {id, text} ) => {
+    var localToDoId = fromGlobalId(id).id;
+    DS_ToDo_updateRename( localToDoId, text );
+    return {localToDoId};
   },
-});
+} );
 
-// <-<-<- Todo mutation definitions
+// <-<-<- ToDo mutation definitions
 
-var Mutation = new GraphQLObjectType({
+var GQLOT_Mutation = new GraphQLObjectType( {
   name: 'Mutation',
   fields: {
 
@@ -427,20 +409,20 @@ var Mutation = new GraphQLObjectType({
 
     // <-<-<- Compendium mutation declarations
 
-    // ->->-> Todo mutation declarations
+    // ->->-> ToDo mutation declarations
 
-    addTodo: GraphQLAddTodoMutation,
-    changeTodoStatus: GraphQLChangeTodoStatusMutation,
-    markAllTodos: GraphQLMarkAllTodosMutation,
-    removeCompletedTodos: GraphQLRemoveCompletedTodosMutation,
-    removeTodo: GraphQLRemoveTodoMutation,
-    renameTodo: GraphQLRenameTodoMutation,
+    ToDo_add: GQLM_ToDo_add,
+    ToDo_updateStatus: GQML_ToDo_updateStatus,
+    ToDo_list_updateMarkAll: GQLM_ToDo_list_updateMarkAll,
+    ToDo_list_deleteCompleted: GQLM_ToDo_list_deleteCompleted,
+    ToDo_delete: GraphQLToDo_deleteMutation,
+    ToDo_updateRename: GQLM_ToDo_updateRename,
 
-    // <-<-<- Todo mutation declarations
+    // <-<-<- ToDo mutation declarations
   },
-});
+} );
 
 export var schema = new GraphQLSchema( {
-  query: GraphQL_Root,
-  mutation: Mutation
+  query: GQLOT_Root,
+  mutation: GQLOT_Mutation
 } );

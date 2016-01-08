@@ -1,10 +1,10 @@
 import Relay from 'react-relay';
 
-export default class RemoveCompletedTodosMutation extends Relay.Mutation {
+export default class ToDo_list_deleteCompletedMutation extends Relay.Mutation {
   static fragments = {
     // TODO: Make completedCount, edges, and totalCount optional
     todos: () => Relay.QL`
-      fragment on TodoConnection {
+      fragment on ToDoConnection {
         edges {
           node {
             complete,
@@ -22,12 +22,12 @@ export default class RemoveCompletedTodosMutation extends Relay.Mutation {
     `,
   };
   getMutation() {
-    return Relay.QL`mutation{removeCompletedTodos}`;
+    return Relay.QL`mutation{ToDo_list_deleteCompleted}`;
   }
   getFatQuery() {
     return Relay.QL`
-      fragment on RemoveCompletedTodosPayload {
-        deletedTodoIds,
+      fragment on ToDo_list_deleteCompletedPayload {
+        deletedToDoIds,
         viewer {
           completedCount,
           totalCount,
@@ -41,17 +41,17 @@ export default class RemoveCompletedTodosMutation extends Relay.Mutation {
       parentName: 'viewer',
       parentID: this.props.viewer.id,
       connectionName: 'todos',
-      deletedIDFieldName: 'deletedTodoIds',
+      deletedIDFieldName: 'deletedToDoIds',
     }];
   }
   getVariables() {
     return {};
   }
   getOptimisticResponse() {
-    var deletedTodoIds;
+    var deletedToDoIds;
     var newTotalCount;
     if (this.props.todos && this.props.todos.edges) {
-      deletedTodoIds = this.props.todos.edges
+      deletedToDoIds = this.props.todos.edges
         .filter(edge => edge.node.complete)
         .map(edge => edge.node.id);
     }
@@ -60,7 +60,7 @@ export default class RemoveCompletedTodosMutation extends Relay.Mutation {
       newTotalCount = totalCount - completedCount;
     }
     return {
-      deletedTodoIds,
+      deletedToDoIds,
       viewer: {
         completedCount: 0,
         id: this.props.viewer.id,

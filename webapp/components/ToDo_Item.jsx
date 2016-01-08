@@ -8,9 +8,9 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import NavigationMoreVert from 'material-ui/lib/svg-icons/navigation/more-vert';
 
-import ChangeTodoStatusMutation from '../mutations/ChangeTodoStatusMutation';
-import RemoveTodoMutation from '../mutations/RemoveTodoMutation';
-import RenameTodoMutation from '../mutations/RenameTodoMutation';
+import ToDo_updateStatusMutation from '../mutations/ToDo_updateStatusMutation';
+import ToDo_deleteMutation from '../mutations/ToDo_deleteMutation';
+import ToDo_updateRenameMutation from '../mutations/ToDo_updateRenameMutation';
 
 class ToDo_Item extends React.Component
 {
@@ -22,7 +22,7 @@ class ToDo_Item extends React.Component
   _handleCompletedCheck( event, complete )
   {
     Relay.Store.update(
-      new ChangeTodoStatusMutation({
+      new ToDo_updateStatusMutation({
         complete,
         todo: this.props.todo,
         viewer: this.props.viewer,
@@ -33,14 +33,14 @@ class ToDo_Item extends React.Component
   _handleTextInputSave( text )
   {
     Relay.Store.update(
-      new RenameTodoMutation({todo: this.props.todo, text})
+      new ToDo_updateRenameMutation({todo: this.props.todo, text})
     );
   }
 
-  _removeTodo( )
+  _ToDo_delete( )
   {
     Relay.Store.update(
-      new RemoveTodoMutation({todo: this.props.todo, viewer: this.props.viewer})
+      new ToDo_deleteMutation({todo: this.props.todo, viewer: this.props.viewer})
     );
   }
 
@@ -50,11 +50,11 @@ class ToDo_Item extends React.Component
     {
       case 'edit':
         console.log( 'edit' );
-        //this.props.onCompleteTodo(this.props.todo.id);
+        //this.props.onCompleteToDo(this.props.todo.id);
         break;
       case 'delete':
         console.log( 'delete' );
-        this._removeTodo( );
+        this._ToDo_delete( );
         break;
       default:
         break;
@@ -91,19 +91,19 @@ class ToDo_Item extends React.Component
 export default Relay.createContainer( ToDo_Item, {
   fragments: {
     todo: () => Relay.QL`
-      fragment on Todo {
+      fragment on ToDo {
         complete,
         id,
         text,
-        ${ChangeTodoStatusMutation.getFragment('todo')},
-        ${RemoveTodoMutation.getFragment('todo')},
-        ${RenameTodoMutation.getFragment('todo')},
+        ${ToDo_updateStatusMutation.getFragment('todo')},
+        ${ToDo_deleteMutation.getFragment('todo')},
+        ${ToDo_updateRenameMutation.getFragment('todo')},
       }
     `,
     viewer: () => Relay.QL`
       fragment on User {
-        ${ChangeTodoStatusMutation.getFragment('viewer')},
-        ${RemoveTodoMutation.getFragment('viewer')},
+        ${ToDo_updateStatusMutation.getFragment('viewer')},
+        ${ToDo_deleteMutation.getFragment('viewer')},
       }
     `,
   },

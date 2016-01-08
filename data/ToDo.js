@@ -1,5 +1,5 @@
 // Class used by GraphQL Server
-export class Todo
+export class ToDo
 {
 
 }
@@ -28,7 +28,7 @@ DS_ToDo_add( 2, 'Jill Apply for an accelerator', true );
 
 export function DS_ToDo_add( user_id, text, complete )
 {
-  var a_ToDo = new Todo( );
+  var a_ToDo = new ToDo( );
 
   a_ToDo.complete = !!complete;
   a_ToDo.id = `${nextToDoId++}`;
@@ -52,7 +52,7 @@ export function DS_ToDo_get( id )
   return ToDo_listById[ id ];
 }
 
-export function DS_ToDo_list_getForUser( user_id, status = 'any' )
+export function DS_ToDo_list_get( user_id, status = 'any' )
 {
   var ToDo_list = ToDo_IDsByUser[ user_id ].map( id => ToDo_listById[ id ] );
 
@@ -65,10 +65,10 @@ export function DS_ToDo_list_getForUser( user_id, status = 'any' )
   return result;
 }
 
-export function DS_ToDo_list_updateMarkAllForUser( user_id, complete )
+export function DS_ToDo_list_updateMarkAll( user_id, complete )
 {
   var changedToDos = [];
-  DS_ToDo_list_getForUser( user_id ).forEach(a_ToDo => {
+  DS_ToDo_list_get( user_id ).forEach(a_ToDo => {
     if (a_ToDo.complete !== complete) {
       a_ToDo.complete = complete;
       changedToDos.push(a_ToDo);
@@ -77,7 +77,7 @@ export function DS_ToDo_list_updateMarkAllForUser( user_id, complete )
   return changedToDos.map(a_ToDo => a_ToDo.id);
 }
 
-export function DS_ToDo_deleteForUser( user_id, id )
+export function DS_ToDo_delete( user_id, id )
 {
   var ix_ToDo = ToDo_IDsByUser[ user_id ].indexOf( id );
 
@@ -87,10 +87,10 @@ export function DS_ToDo_deleteForUser( user_id, id )
   delete ToDo_listById[ id ];
 }
 
-export function DS_ToDo_list_deleteCompletedForUser( user_id )
+export function DS_ToDo_list_deleteCompleted( user_id )
 {
-  var ToDo_listToRemove = DS_ToDo_list_getForUser( user_id ).filter( a_ToDo => a_ToDo.complete );
-  ToDo_listToRemove.forEach( a_ToDo => DS_ToDo_deleteForUser( user_id, a_ToDo.id ) );
+  var ToDo_listToRemove = DS_ToDo_list_get( user_id ).filter( a_ToDo => a_ToDo.complete );
+  ToDo_listToRemove.forEach( a_ToDo => DS_ToDo_delete( user_id, a_ToDo.id ) );
   return ToDo_listToRemove.map( a_ToDo => a_ToDo.id );
 }
 

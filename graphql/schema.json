@@ -190,7 +190,7 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "TodoConnection",
+                "name": "ToDoConnection",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -265,7 +265,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "Todo",
+              "name": "ToDo",
               "ofType": null
             },
             {
@@ -530,7 +530,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "Todo",
+          "name": "ToDo",
           "description": null,
           "fields": [
             {
@@ -736,7 +736,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "TodoConnection",
+          "name": "ToDoConnection",
           "description": "A connection to a list of items.",
           "fields": [
             {
@@ -764,7 +764,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "TodoEdge",
+                  "name": "ToDoEdge",
                   "ofType": null
                 }
               },
@@ -779,7 +779,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "TodoEdge",
+          "name": "ToDoEdge",
           "description": "An edge in a connection.",
           "fields": [
             {
@@ -788,7 +788,7 @@
               "args": [],
               "type": {
                 "kind": "OBJECT",
-                "name": "Todo",
+                "name": "ToDo",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -849,7 +849,7 @@
               "deprecationReason": null
             },
             {
-              "name": "addTodo",
+              "name": "ToDo_add",
               "description": null,
               "args": [
                 {
@@ -860,7 +860,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "AddTodoInput",
+                      "name": "ToDo_addInput",
                       "ofType": null
                     }
                   },
@@ -869,14 +869,14 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "AddTodoPayload",
+                "name": "ToDo_addPayload",
                 "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "changeTodoStatus",
+              "name": "ToDo_updateStatus",
               "description": null,
               "args": [
                 {
@@ -887,7 +887,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "ChangeTodoStatusInput",
+                      "name": "ToDo_updateStatusInput",
                       "ofType": null
                     }
                   },
@@ -896,14 +896,14 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "ChangeTodoStatusPayload",
+                "name": "ToDo_updateStatusPayload",
                 "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "markAllTodos",
+              "name": "ToDo_list_updateMarkAll",
               "description": null,
               "args": [
                 {
@@ -914,7 +914,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "MarkAllTodosInput",
+                      "name": "ToDo_list_updateMarkAllInput",
                       "ofType": null
                     }
                   },
@@ -923,14 +923,14 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "MarkAllTodosPayload",
+                "name": "ToDo_list_updateMarkAllPayload",
                 "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "removeCompletedTodos",
+              "name": "ToDo_list_deleteCompleted",
               "description": null,
               "args": [
                 {
@@ -941,7 +941,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RemoveCompletedTodosInput",
+                      "name": "ToDo_list_deleteCompletedInput",
                       "ofType": null
                     }
                   },
@@ -950,14 +950,14 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "RemoveCompletedTodosPayload",
+                "name": "ToDo_list_deleteCompletedPayload",
                 "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "removeTodo",
+              "name": "ToDo_delete",
               "description": null,
               "args": [
                 {
@@ -968,7 +968,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RemoveTodoInput",
+                      "name": "ToDo_deleteInput",
                       "ofType": null
                     }
                   },
@@ -977,14 +977,14 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "RemoveTodoPayload",
+                "name": "ToDo_deletePayload",
                 "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "renameTodo",
+              "name": "ToDo_updateRename",
               "description": null,
               "args": [
                 {
@@ -995,7 +995,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RenameTodoInput",
+                      "name": "ToDo_updateRenameInput",
                       "ofType": null
                     }
                   },
@@ -1004,7 +1004,7 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "RenameTodoPayload",
+                "name": "ToDo_updateRenamePayload",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -1306,7 +1306,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "AddTodoInput",
+          "name": "ToDo_addInput",
           "description": null,
           "fields": null,
           "inputFields": [
@@ -1345,7 +1345,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "AddTodoPayload",
+          "name": "ToDo_addPayload",
           "description": null,
           "fields": [
             {
@@ -1354,7 +1354,7 @@
               "args": [],
               "type": {
                 "kind": "OBJECT",
-                "name": "TodoEdge",
+                "name": "ToDoEdge",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -1396,7 +1396,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "ChangeTodoStatusInput",
+          "name": "ToDo_updateStatusInput",
           "description": null,
           "fields": null,
           "inputFields": [
@@ -1449,7 +1449,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "ChangeTodoStatusPayload",
+          "name": "ToDo_updateStatusPayload",
           "description": null,
           "fields": [
             {
@@ -1458,7 +1458,7 @@
               "args": [],
               "type": {
                 "kind": "OBJECT",
-                "name": "Todo",
+                "name": "ToDo",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -1500,7 +1500,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "MarkAllTodosInput",
+          "name": "ToDo_list_updateMarkAllInput",
           "description": null,
           "fields": null,
           "inputFields": [
@@ -1539,11 +1539,11 @@
         },
         {
           "kind": "OBJECT",
-          "name": "MarkAllTodosPayload",
+          "name": "ToDo_list_updateMarkAllPayload",
           "description": null,
           "fields": [
             {
-              "name": "changedTodos",
+              "name": "changedToDos",
               "description": null,
               "args": [],
               "type": {
@@ -1551,7 +1551,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "Todo",
+                  "name": "ToDo",
                   "ofType": null
                 }
               },
@@ -1594,7 +1594,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RemoveCompletedTodosInput",
+          "name": "ToDo_list_deleteCompletedInput",
           "description": null,
           "fields": null,
           "inputFields": [
@@ -1619,11 +1619,11 @@
         },
         {
           "kind": "OBJECT",
-          "name": "RemoveCompletedTodosPayload",
+          "name": "ToDo_list_deleteCompletedPayload",
           "description": null,
           "fields": [
             {
-              "name": "deletedTodoIds",
+              "name": "deletedToDoIds",
               "description": null,
               "args": [],
               "type": {
@@ -1674,7 +1674,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RemoveTodoInput",
+          "name": "ToDo_deleteInput",
           "description": null,
           "fields": null,
           "inputFields": [
@@ -1713,11 +1713,11 @@
         },
         {
           "kind": "OBJECT",
-          "name": "RemoveTodoPayload",
+          "name": "ToDo_deletePayload",
           "description": null,
           "fields": [
             {
-              "name": "deletedTodoId",
+              "name": "deletedToDoId",
               "description": null,
               "args": [],
               "type": {
@@ -1764,7 +1764,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RenameTodoInput",
+          "name": "ToDo_updateRenameInput",
           "description": null,
           "fields": null,
           "inputFields": [
@@ -1817,7 +1817,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "RenameTodoPayload",
+          "name": "ToDo_updateRenamePayload",
           "description": null,
           "fields": [
             {
@@ -1826,7 +1826,7 @@
               "args": [],
               "type": {
                 "kind": "OBJECT",
-                "name": "Todo",
+                "name": "ToDo",
                 "ofType": null
               },
               "isDeprecated": false,
