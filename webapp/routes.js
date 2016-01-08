@@ -25,7 +25,7 @@ export default [
             },
           },
           {
-            path: 'todos',
+            path: 'ToDos',
             component: ToDo_Screen,
             queries: ViewerQueries,
             indexRoute: {

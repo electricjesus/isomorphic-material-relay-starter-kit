@@ -134,7 +134,7 @@
               "deprecationReason": null
             },
             {
-              "name": "todos",
+              "name": "ToDos",
               "description": null,
               "args": [
                 {

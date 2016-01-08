@@ -37,7 +37,7 @@ export default class ToDo_deleteMutation extends Relay.Mutation {
       type: 'NODE_DELETE',
       parentName: 'viewer',
       parentID: this.props.viewer.id,
-      connectionName: 'todos',
+      connectionName: 'ToDos',
       deletedIDFieldName: 'deletedToDoId',
     }];
   }

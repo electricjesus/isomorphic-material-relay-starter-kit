@@ -16,7 +16,7 @@ class ToDo_List extends React.Component
     Relay.Store.update(
       new ToDo_list_updateMarkAllMutation( {
         complete: checked,
-        todos: this.props.viewer.todos,
+        ToDos: this.props.viewer.ToDos,
         viewer: this.props.viewer,
       } )
     );
@@ -24,7 +24,7 @@ class ToDo_List extends React.Component
 
   renderToDos( )
   {
-    return this.props.viewer.todos.edges.map(edge =>
+    return this.props.viewer.ToDos.edges.map(edge =>
       <ToDo_Item
         key={edge.node.id}
         todo={edge.node}
@@ -35,7 +35,7 @@ class ToDo_List extends React.Component
 
   _handleTabsChange( value )
   {
-    this.context.history.pushState( null, '/todos/' + value );
+    this.context.history.pushState( null, '/ToDos/' + value );
   }
 
   renderTabs( )
@@ -85,7 +85,7 @@ export default Relay.createContainer( ToDo_List, {
     if (status === 'active' || status === 'completed')
       nextStatus = status;
     else
-      // This matches the Backbone example, which displays all todos on an
+      // This matches the Backbone example, which displays all ToDos on an
       // invalid route.
       nextStatus = 'any';
 
@@ -99,14 +99,14 @@ export default Relay.createContainer( ToDo_List, {
     viewer: () => Relay.QL`
       fragment on User {
         completedCount,
-        todos(status: $status, first: $limit) {
+        ToDos(status: $status, first: $limit) {
           edges {
             node {
               id,
               ${ToDo_Item.getFragment('todo')},
             },
           },
-          ${ToDo_list_updateMarkAllMutation.getFragment('todos')},
+          ${ToDo_list_updateMarkAllMutation.getFragment('ToDos')},
         },
         totalCount,
         ${ToDo_list_updateMarkAllMutation.getFragment('viewer')},

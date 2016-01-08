@@ -26,7 +26,7 @@ export default class ToDo_updateStatusMutation extends Relay.Mutation {
         },
         viewer {
           completedCount,
-          todos,
+          ToDos,
         },
       }
     `;

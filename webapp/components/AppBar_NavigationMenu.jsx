@@ -23,7 +23,7 @@ export default class AppBar_NavigationMenu extends React.Component
         }
       >
         <MenuItem key="/" primaryText="Home" />
-        <MenuItem key="/todos" primaryText="To Do" />
+        <MenuItem key="/ToDos" primaryText="To Do" />
         <MenuItem key="/compendiums" primaryText="Compendiums" />
         <MenuItem key="/mui" primaryText="MUI" />
         <MenuItem key="/mui/icons" primaryText="MUI Icons" />

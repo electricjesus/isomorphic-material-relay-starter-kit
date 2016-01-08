@@ -3,7 +3,7 @@ import Relay from 'react-relay';
 export default class ToDo_list_deleteCompletedMutation extends Relay.Mutation {
   static fragments = {
     // TODO: Make completedCount, edges, and totalCount optional
-    todos: () => Relay.QL`
+    ToDos: () => Relay.QL`
       fragment on ToDoConnection {
         edges {
           node {
@@ -40,7 +40,7 @@ export default class ToDo_list_deleteCompletedMutation extends Relay.Mutation {
       type: 'NODE_DELETE',
       parentName: 'viewer',
       parentID: this.props.viewer.id,
-      connectionName: 'todos',
+      connectionName: 'ToDos',
       deletedIDFieldName: 'deletedToDoIds',
     }];
   }
@@ -50,8 +50,8 @@ export default class ToDo_list_deleteCompletedMutation extends Relay.Mutation {
   getOptimisticResponse() {
     var deletedToDoIds;
     var newTotalCount;
-    if (this.props.todos && this.props.todos.edges) {
-      deletedToDoIds = this.props.todos.edges
+    if (this.props.ToDos && this.props.ToDos.edges) {
+      deletedToDoIds = this.props.ToDos.edges
         .filter(edge => edge.node.complete)
         .map(edge => edge.node.id);
     }

@@ -38,7 +38,7 @@ class Chrome extends React.Component
 
   _handleOnFocusIncomplete( )
   {
-    this.context.history.pushState( null, '/todos/active' );
+    this.context.history.pushState( null, '/ToDos/active' );
   }
 
   render( )

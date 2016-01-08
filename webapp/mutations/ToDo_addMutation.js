@@ -17,7 +17,7 @@ export default class ToDo_addMutation extends Relay.Mutation {
       fragment on ToDo_addPayload {
         todoEdge,
         viewer {
-          todos,
+          ToDos,
           totalCount,
         },
       }
@@ -28,7 +28,7 @@ export default class ToDo_addMutation extends Relay.Mutation {
       type: 'RANGE_ADD',
       parentName: 'viewer',
       parentID: this.props.viewer.id,
-      connectionName: 'todos',
+      connectionName: 'ToDos',
       edgeName: 'todoEdge',
       rangeBehaviors: {
         '': 'append',

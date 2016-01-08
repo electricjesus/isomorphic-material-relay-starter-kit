@@ -3,7 +3,7 @@ import Relay from 'react-relay';
 export default class ToDo_list_updateMarkAllMutation extends Relay.Mutation {
   static fragments = {
     // TODO: Mark edges and totalCount optional
-    todos: () => Relay.QL`
+    ToDos: () => Relay.QL`
       fragment on ToDoConnection {
         edges {
           node {
@@ -28,7 +28,7 @@ export default class ToDo_list_updateMarkAllMutation extends Relay.Mutation {
       fragment on ToDo_list_updateMarkAllPayload {
         viewer {
           completedCount,
-          todos,
+          ToDos,
         },
       }
     `;
@@ -48,9 +48,9 @@ export default class ToDo_list_updateMarkAllMutation extends Relay.Mutation {
   }
   getOptimisticResponse() {
     var viewerPayload = {id: this.props.viewer.id};
-    if (this.props.todos && this.props.todos.edges) {
-      viewerPayload.todos = {
-        edges: this.props.todos.edges
+    if (this.props.ToDos && this.props.ToDos.edges) {
+      viewerPayload.ToDos = {
+        edges: this.props.ToDos.edges
           .filter(edge => edge.node.complete !== this.props.complete)
           .map(edge => ({
             node: {

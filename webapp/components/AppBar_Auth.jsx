@@ -111,22 +111,6 @@ export default class AppBar_Auth extends React.Component
     } );
   }
 
-
-/* A menu will be displayed for a logged in user
-<IconMenu key="top-menu"
-  anchorOrigin={ { vertical: "bottom" } }
-  onItemTouchTap={ this._handleLeftMenuTouchTap.bind( this ) }
-  iconButtonElement={
-    <IconButton><NavigationMoreVert /></IconButton>
-  }
->
-  <MenuItem key="/" primaryText="Home" />
-  <MenuItem key="/todos" primaryText="To Do" />
-  <MenuItem key="/mui" primaryText="MUI" />
-  <MenuItem key="/mui/icons" primaryText="MUI Icons" />
-</IconMenu>
-*/
-
   Dialog_UserNameAndPassword( )
   {
     return(

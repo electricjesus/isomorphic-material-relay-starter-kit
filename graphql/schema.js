@@ -152,7 +152,7 @@ var GQLOT_User = new GraphQLObjectType( {
 
     // ->->-> ToDo access through user
 
-    todos: {
+    ToDos: {
       type: ToDosConnection,
       args: {
         status: {
