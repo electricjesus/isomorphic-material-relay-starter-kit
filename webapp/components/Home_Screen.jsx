@@ -43,8 +43,8 @@ class Home_Screen extends React.Component
 
 export default Relay.createContainer( Home_Screen, {
   fragments: {
-    viewer: () => Relay.QL`
-      fragment on User {
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
         totalCount,
       }
     `,

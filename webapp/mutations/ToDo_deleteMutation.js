@@ -10,8 +10,8 @@ export default class ToDo_deleteMutation extends Relay.Mutation {
       }
     `,
     // TODO: Mark completedCount and totalCount as optional
-    viewer: () => Relay.QL`
-      fragment on User {
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
         completedCount,
         id,
         totalCount,
@@ -25,7 +25,7 @@ export default class ToDo_deleteMutation extends Relay.Mutation {
     return Relay.QL`
       fragment on ToDo_deletePayload {
         deletedToDoId,
-        viewer {
+        Viewer {
           completedCount,
           totalCount,
         },
@@ -35,8 +35,8 @@ export default class ToDo_deleteMutation extends Relay.Mutation {
   getConfigs() {
     return [{
       type: 'NODE_DELETE',
-      parentName: 'viewer',
-      parentID: this.props.viewer.id,
+      parentName: 'Viewer',
+      parentID: this.props.Viewer.id,
       connectionName: 'ToDos',
       deletedIDFieldName: 'deletedToDoId',
     }];
@@ -47,18 +47,18 @@ export default class ToDo_deleteMutation extends Relay.Mutation {
     };
   }
   getOptimisticResponse() {
-    var viewerPayload = {id: this.props.viewer.id};
-    if (this.props.viewer.completedCount != null) {
-      viewerPayload.completedCount = this.props.todo.complete === true ?
-        this.props.viewer.completedCount - 1 :
-        this.props.viewer.completedCount;
+    var ViewerPayload = {id: this.props.Viewer.id};
+    if (this.props.Viewer.completedCount != null) {
+      ViewerPayload.completedCount = this.props.todo.complete === true ?
+        this.props.Viewer.completedCount - 1 :
+        this.props.Viewer.completedCount;
     }
-    if (this.props.viewer.totalCount != null) {
-      viewerPayload.totalCount = this.props.viewer.totalCount - 1;
+    if (this.props.Viewer.totalCount != null) {
+      ViewerPayload.totalCount = this.props.Viewer.totalCount - 1;
     }
     return {
       deletedToDoId: this.props.todo.id,
-      viewer: viewerPayload,
+      Viewer: ViewerPayload,
     };
   }
 }

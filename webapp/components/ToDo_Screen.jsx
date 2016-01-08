@@ -14,7 +14,7 @@ class ToDo_Screen extends React.Component
     Relay.Store.update(
       new ToDo_addMutation( {
         text: this.refs.addToDo.getValue( ),
-        viewer: this.props.viewer
+        Viewer: this.props.Viewer
       } )
     );
 
@@ -46,10 +46,10 @@ class ToDo_Screen extends React.Component
 
 export default Relay.createContainer( ToDo_Screen, {
   fragments: {
-    viewer: () => Relay.QL`
-      fragment on User {
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
         totalCount,
-        ${ToDo_addMutation.getFragment('viewer')},
+        ${ToDo_addMutation.getFragment('Viewer')},
       }
     `,
   },

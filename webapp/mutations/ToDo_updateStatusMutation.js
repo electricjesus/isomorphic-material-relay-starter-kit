@@ -8,8 +8,8 @@ export default class ToDo_updateStatusMutation extends Relay.Mutation {
       }
     `,
     // TODO: Mark completedCount optional
-    viewer: () => Relay.QL`
-      fragment on User {
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
         id,
         completedCount,
       }
@@ -24,7 +24,7 @@ export default class ToDo_updateStatusMutation extends Relay.Mutation {
         todo {
           complete,
         },
-        viewer {
+        Viewer {
           completedCount,
           ToDos,
         },
@@ -36,7 +36,7 @@ export default class ToDo_updateStatusMutation extends Relay.Mutation {
       type: 'FIELDS_CHANGE',
       fieldIDs: {
         todo: this.props.todo.id,
-        viewer: this.props.viewer.id,
+        Viewer: this.props.Viewer.id,
       },
     }];
   }
@@ -47,18 +47,18 @@ export default class ToDo_updateStatusMutation extends Relay.Mutation {
     };
   }
   getOptimisticResponse() {
-    var viewerPayload = {id: this.props.viewer.id};
-    if (this.props.viewer.completedCount != null) {
-      viewerPayload.completedCount = this.props.complete ?
-        this.props.viewer.completedCount + 1 :
-        this.props.viewer.completedCount - 1;
+    var ViewerPayload = {id: this.props.Viewer.id};
+    if (this.props.Viewer.completedCount != null) {
+      ViewerPayload.completedCount = this.props.complete ?
+        this.props.Viewer.completedCount + 1 :
+        this.props.Viewer.completedCount - 1;
     }
     return {
       todo: {
         complete: this.props.complete,
         id: this.props.todo.id,
       },
-      viewer: viewerPayload,
+      Viewer: ViewerPayload,
     };
   }
 }

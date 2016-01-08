@@ -177,8 +177,8 @@ class MUI_Icons extends React.Component
 
 export default Relay.createContainer(MUI_Icons, {
   fragments: {
-    viewer: () => Relay.QL`
-      fragment on User {
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
         totalCount,
       }
     `,

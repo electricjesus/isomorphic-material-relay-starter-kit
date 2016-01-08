@@ -16,19 +16,19 @@ class ToDo_List extends React.Component
     Relay.Store.update(
       new ToDo_list_updateMarkAllMutation( {
         complete: checked,
-        ToDos: this.props.viewer.ToDos,
-        viewer: this.props.viewer,
+        ToDos: this.props.Viewer.ToDos,
+        Viewer: this.props.Viewer,
       } )
     );
   }
 
   renderToDos( )
   {
-    return this.props.viewer.ToDos.edges.map(edge =>
+    return this.props.Viewer.ToDos.edges.map(edge =>
       <ToDo_Item
         key={edge.node.id}
         todo={edge.node}
-        viewer={this.props.viewer}
+        Viewer={this.props.Viewer}
       />
     );
   }
@@ -51,8 +51,8 @@ class ToDo_List extends React.Component
 
   render( )
   {
-    var numToDos = this.props.viewer.totalCount;
-    var numCompletedToDos = this.props.viewer.completedCount;
+    var numToDos = this.props.Viewer.totalCount;
+    var numCompletedToDos = this.props.Viewer.completedCount;
     return (
       <div>
         { this.renderTabs( ) }
@@ -96,8 +96,8 @@ export default Relay.createContainer( ToDo_List, {
   },
 
   fragments: {
-    viewer: () => Relay.QL`
-      fragment on User {
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
         completedCount,
         ToDos(status: $status, first: $limit) {
           edges {
@@ -109,8 +109,8 @@ export default Relay.createContainer( ToDo_List, {
           ${ToDo_list_updateMarkAllMutation.getFragment('ToDos')},
         },
         totalCount,
-        ${ToDo_list_updateMarkAllMutation.getFragment('viewer')},
-        ${ToDo_Item.getFragment('viewer')},
+        ${ToDo_list_updateMarkAllMutation.getFragment('Viewer')},
+        ${ToDo_Item.getFragment('Viewer')},
       }
     `,
   },

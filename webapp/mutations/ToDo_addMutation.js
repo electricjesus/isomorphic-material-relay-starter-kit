@@ -2,8 +2,8 @@ import Relay from 'react-relay';
 
 export default class ToDo_addMutation extends Relay.Mutation {
   static fragments = {
-    viewer: () => Relay.QL`
-      fragment on User {
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
         id,
         totalCount,
       }
@@ -15,8 +15,8 @@ export default class ToDo_addMutation extends Relay.Mutation {
   getFatQuery() {
     return Relay.QL`
       fragment on ToDo_addPayload {
-        todoEdge,
-        viewer {
+        ToDosEdge,
+        Viewer {
           ToDos,
           totalCount,
         },
@@ -26,10 +26,10 @@ export default class ToDo_addMutation extends Relay.Mutation {
   getConfigs() {
     return [{
       type: 'RANGE_ADD',
-      parentName: 'viewer',
-      parentID: this.props.viewer.id,
+      parentName: 'Viewer',
+      parentID: this.props.Viewer.id,
       connectionName: 'ToDos',
-      edgeName: 'todoEdge',
+      edgeName: 'ToDosEdge',
       rangeBehaviors: {
         '': 'append',
         'status(any)': 'append',
@@ -47,15 +47,15 @@ export default class ToDo_addMutation extends Relay.Mutation {
     return {
       // FIXME: totalCount gets updated optimistically, but this edge does not
       // get added until the server responds
-      todoEdge: {
+      ToDosEdge: {
         node: {
           complete: false,
           text: this.props.text,
         },
       },
-      viewer: {
-        id: this.props.viewer.id,
-        totalCount: this.props.viewer.totalCount + 1,
+      Viewer: {
+        id: this.props.Viewer.id,
+        totalCount: this.props.Viewer.totalCount + 1,
       },
     };
   }

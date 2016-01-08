@@ -18,7 +18,7 @@ class Compendium extends React.Component
   {
     super( props );
 
-    const node = this.props.viewer.compendiums.edges[ 0 ].node;
+    const node = this.props.Viewer.compendiums.edges[ 0 ].node;
 
     this.state = {
       Compendium_RangedNumber_error:    "",
@@ -148,7 +148,7 @@ class Compendium extends React.Component
     )
       formErrorText = "There are errors";
 
-    const edge = this.props.viewer.compendiums.edges[ 0 ];
+    const edge = this.props.Viewer.compendiums.edges[ 0 ];
 
     return (
       <Card key={ edge.node.id }>
@@ -273,8 +273,8 @@ class Compendium extends React.Component
 
 export default Relay.createContainer( Compendium, {
   fragments: {
-    viewer: ( ) => Relay.QL`
-      fragment on User {
+    Viewer: ( ) => Relay.QL`
+      fragment on Viewer {
         compendiums( first: 1 ){
           edges {
             node {

@@ -4,7 +4,7 @@ export default class ToDo_list_deleteCompletedMutation extends Relay.Mutation {
   static fragments = {
     // TODO: Make completedCount, edges, and totalCount optional
     ToDos: () => Relay.QL`
-      fragment on ToDoConnection {
+      fragment on ToDosConnection {
         edges {
           node {
             complete,
@@ -13,8 +13,8 @@ export default class ToDo_list_deleteCompletedMutation extends Relay.Mutation {
         },
       }
     `,
-    viewer: () => Relay.QL`
-      fragment on User {
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
         completedCount,
         id,
         totalCount,
@@ -28,7 +28,7 @@ export default class ToDo_list_deleteCompletedMutation extends Relay.Mutation {
     return Relay.QL`
       fragment on ToDo_list_deleteCompletedPayload {
         deletedToDoIds,
-        viewer {
+        Viewer {
           completedCount,
           totalCount,
         },
@@ -38,8 +38,8 @@ export default class ToDo_list_deleteCompletedMutation extends Relay.Mutation {
   getConfigs() {
     return [{
       type: 'NODE_DELETE',
-      parentName: 'viewer',
-      parentID: this.props.viewer.id,
+      parentName: 'Viewer',
+      parentID: this.props.Viewer.id,
       connectionName: 'ToDos',
       deletedIDFieldName: 'deletedToDoIds',
     }];
@@ -55,15 +55,15 @@ export default class ToDo_list_deleteCompletedMutation extends Relay.Mutation {
         .filter(edge => edge.node.complete)
         .map(edge => edge.node.id);
     }
-    var {completedCount, totalCount} = this.props.viewer;
+    var {completedCount, totalCount} = this.props.Viewer;
     if (completedCount != null && totalCount != null) {
       newTotalCount = totalCount - completedCount;
     }
     return {
       deletedToDoIds,
-      viewer: {
+      Viewer: {
         completedCount: 0,
-        id: this.props.viewer.id,
+        id: this.props.Viewer.id,
         totalCount: newTotalCount,
       },
     };

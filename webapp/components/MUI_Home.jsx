@@ -32,8 +32,8 @@ class MUI_Home extends React.Component
 
 export default Relay.createContainer( MUI_Home, {
   fragments: {
-    viewer: () => Relay.QL`
-      fragment on User {
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
         totalCount,
       }
     `,

@@ -89,8 +89,6 @@ export function DS_Compendium_update(
   a_Compendium.Compendium_LikedSunset_Green       = Compendium_LikedSunset_Green;
   a_Compendium.Compendium_LikedSunset_Other       = Compendium_LikedSunset_Other;
   a_Compendium.Compendium_LikedSunset_OtherText   = Compendium_LikedSunset_OtherText;
-
-  console.log( "DS_Compendium_update, " + JSON.stringify( a_Compendium ) );
 }
 
 export function DS_Compendium_get( id )

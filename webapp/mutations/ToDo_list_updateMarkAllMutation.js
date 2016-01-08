@@ -4,7 +4,7 @@ export default class ToDo_list_updateMarkAllMutation extends Relay.Mutation {
   static fragments = {
     // TODO: Mark edges and totalCount optional
     ToDos: () => Relay.QL`
-      fragment on ToDoConnection {
+      fragment on ToDosConnection {
         edges {
           node {
             complete,
@@ -13,8 +13,8 @@ export default class ToDo_list_updateMarkAllMutation extends Relay.Mutation {
         },
       }
     `,
-    viewer: () => Relay.QL`
-      fragment on User {
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
         id,
         totalCount,
       }
@@ -26,7 +26,7 @@ export default class ToDo_list_updateMarkAllMutation extends Relay.Mutation {
   getFatQuery() {
     return Relay.QL`
       fragment on ToDo_list_updateMarkAllPayload {
-        viewer {
+        Viewer {
           completedCount,
           ToDos,
         },
@@ -37,7 +37,7 @@ export default class ToDo_list_updateMarkAllMutation extends Relay.Mutation {
     return [{
       type: 'FIELDS_CHANGE',
       fieldIDs: {
-        viewer: this.props.viewer.id,
+        Viewer: this.props.Viewer.id,
       },
     }];
   }
@@ -47,9 +47,9 @@ export default class ToDo_list_updateMarkAllMutation extends Relay.Mutation {
     };
   }
   getOptimisticResponse() {
-    var viewerPayload = {id: this.props.viewer.id};
+    var ViewerPayload = {id: this.props.Viewer.id};
     if (this.props.ToDos && this.props.ToDos.edges) {
-      viewerPayload.ToDos = {
+      ViewerPayload.ToDos = {
         edges: this.props.ToDos.edges
           .filter(edge => edge.node.complete !== this.props.complete)
           .map(edge => ({
@@ -60,13 +60,13 @@ export default class ToDo_list_updateMarkAllMutation extends Relay.Mutation {
           }))
       };
     }
-    if (this.props.viewer.totalCount != null) {
-      viewerPayload.completedCount = this.props.complete ?
-        this.props.viewer.totalCount :
+    if (this.props.Viewer.totalCount != null) {
+      ViewerPayload.completedCount = this.props.complete ?
+        this.props.Viewer.totalCount :
         0;
     }
     return {
-      viewer: viewerPayload,
+      Viewer: ViewerPayload,
     };
   }
 }

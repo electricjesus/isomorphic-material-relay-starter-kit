@@ -7,7 +7,7 @@ import path from 'path';
 
 import auth from './auth'; // Authentication server
 import webapp from '../webapp/server'; // React server
-import { schema } from '../graphql/schema'; // Schema for GraphQL server
+import schema from '../graphql/schema'; // Schema for GraphQL server
 
 // Read environment
 require( 'dotenv' ).load( );

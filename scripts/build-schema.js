@@ -3,7 +3,7 @@ import path from 'path';
 import { graphql } from 'graphql';
 import { introspectionQuery, printSchema } from 'graphql/utilities';
 
-import { schema } from '../graphql/schema';
+import schema from '../graphql/schema';
 
 let file_schema_json = path.join(__dirname, '../graphql/schema.json');
 let file_schema_graphql = path.join(__dirname, '../graphql/schema.graphql');

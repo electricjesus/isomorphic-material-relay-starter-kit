@@ -25,7 +25,7 @@ class ToDo_Item extends React.Component
       new ToDo_updateStatusMutation({
         complete,
         todo: this.props.todo,
-        viewer: this.props.viewer,
+        Viewer: this.props.Viewer,
       })
     );
   }
@@ -40,7 +40,7 @@ class ToDo_Item extends React.Component
   _ToDo_delete( )
   {
     Relay.Store.update(
-      new ToDo_deleteMutation({todo: this.props.todo, viewer: this.props.viewer})
+      new ToDo_deleteMutation({todo: this.props.todo, Viewer: this.props.Viewer})
     );
   }
 
@@ -100,10 +100,10 @@ export default Relay.createContainer( ToDo_Item, {
         ${ToDo_updateRenameMutation.getFragment('todo')},
       }
     `,
-    viewer: () => Relay.QL`
-      fragment on User {
-        ${ToDo_updateStatusMutation.getFragment('viewer')},
-        ${ToDo_deleteMutation.getFragment('viewer')},
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
+        ${ToDo_updateStatusMutation.getFragment('Viewer')},
+        ${ToDo_deleteMutation.getFragment('Viewer')},
       }
     `,
   },
