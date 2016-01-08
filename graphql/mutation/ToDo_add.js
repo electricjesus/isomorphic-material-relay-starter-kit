@@ -1,8 +1,8 @@
-import { fromGlobalId, mutationWithClientMutationId } from "graphql-relay";
+import { fromGlobalId, mutationWithClientMutationId, cursorForObjectInConnection } from "graphql-relay";
 import { GraphQLString, GraphQLID, GraphQLNonNull } from "graphql";
 
 import { DS_User_get } from '../../data/User';
-import { DS_ToDo_add, DS_ToDo_get } from '../../data/ToDo';
+import { DS_ToDo_add, DS_ToDo_get, DS_ToDo_list_get } from '../../data/ToDo';
 
 import ToDosConnection from '../type/ToDosConnection';
 import ViewerType from '../type/ViewerType';
@@ -16,11 +16,12 @@ export default mutationWithClientMutationId( {
   outputFields: {
     ToDosEdge: {
       type: ToDosConnection.edgeType,
-      resolve: ( {localToDoId}, args, { rootValue: {user_id} } ) => {
-        var todo = DS_ToDo_get(localToDoId);
+      resolve: ( {localToDoId}, args, { rootValue: {user_id} } ) =>
+      {
+        let a_ToDo = DS_ToDo_get( localToDoId );
         return {
-          cursor: cursorForObjectInConnection( DS_ToDo_list_get( user_id ), todo ),
-          node: todo,
+          cursor: cursorForObjectInConnection( DS_ToDo_list_get( user_id ), a_ToDo ),
+          node: a_ToDo,
         };
       }
     },

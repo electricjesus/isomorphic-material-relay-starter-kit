@@ -7,7 +7,7 @@ export class ToDo
 
 // Mock data
 
-var ToDo_listById = {};
+var ToDo_listById = { };
 var ToDo_IDsByUser = {
   [0]: [ ],
   [1]: [ ],
