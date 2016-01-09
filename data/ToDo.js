@@ -28,9 +28,6 @@ DS_ToDo_add( 2, 'Jill Apply for an accelerator', true );
 
 export function DS_ToDo_add( user_id, text, complete )
 {
-  user_id = 0;
-  console.log( 'DS_ToDo_add, userid = ' + user_id );
-
   var a_ToDo = new ToDo( );
 
   a_ToDo.complete = !!complete;
@@ -40,8 +37,6 @@ export function DS_ToDo_add( user_id, text, complete )
   ToDo_listById[ a_ToDo.id ] = a_ToDo;
 
   ToDo_IDsByUser[ user_id ].push( a_ToDo.id );
-
-  console.log( 'DS_ToDo_add, new ID = ' + a_ToDo.id );
 
   return a_ToDo.id;
 }
@@ -59,9 +54,6 @@ export function DS_ToDo_get( id )
 
 export function DS_ToDo_list_get( user_id, status = 'any' )
 {
-  user_id = 0;
-  console.log( 'DS_ToDo_list_get, userid = ' + user_id );
-
   let ToDo_list = ToDo_IDsByUser[ user_id ].map( id => ToDo_listById[ id ] );
 
   if( status !== 'any' )
@@ -69,8 +61,6 @@ export function DS_ToDo_list_get( user_id, status = 'any' )
     let statusCheck = ( status === 'completed' );
     ToDo_list = ToDo_list.filter( a_ToDo => a_ToDo.complete === statusCheck );
   }
-
-  console.log( 'DS_ToDo_list_get, result = ' + JSON.stringify( ToDo_list ) );
 
   return ToDo_list;
 }
@@ -90,7 +80,6 @@ export function DS_ToDo_list_updateMarkAll( user_id, complete )
 
 export function DS_ToDo_delete( user_id, id )
 {
-  user_id = 0;
   var ix_ToDo = ToDo_IDsByUser[ user_id ].indexOf( id );
 
   if( ix_ToDo !== -1 )
@@ -101,7 +90,6 @@ export function DS_ToDo_delete( user_id, id )
 
 export function DS_ToDo_list_deleteCompleted( user_id )
 {
-  user_id = 0;
   var ToDo_listToRemove = DS_ToDo_list_get( user_id ).filter( a_ToDo => a_ToDo.complete );
   ToDo_listToRemove.forEach( a_ToDo => DS_ToDo_delete( user_id, a_ToDo.id ) );
   return ToDo_listToRemove.map( a_ToDo => a_ToDo.id );
