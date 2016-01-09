@@ -18,7 +18,9 @@ export default mutationWithClientMutationId( {
       type: ToDosConnection.edgeType,
       resolve: ( {localToDoId}, args, { rootValue: {user_id} } ) =>
       {
+        console.log( 'ToDo_add ToDosEdge, userid = ' + user_id );
         let a_ToDo = DS_ToDo_get( localToDoId );
+        console.log( 'ToDo_add ToDosEdge, a_ToDo = ' + JSON.stringify( a_ToDo ) );
         return {
           cursor: cursorForObjectInConnection( DS_ToDo_list_get( user_id ), a_ToDo ),
           node: a_ToDo,

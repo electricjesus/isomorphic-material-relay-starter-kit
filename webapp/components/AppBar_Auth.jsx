@@ -86,6 +86,7 @@ export default class AppBar_Auth extends React.Component
       if( responseJSON.success != true ) throw new Error( "Login failed" );
     } catch( err ) { _handleAuthFailure( 1 ); return; }
 
+    location.replace( "/" );
   }
 
   _handleAuthFailure( response )
