@@ -16,6 +16,7 @@ export default [
             component: Home_Screen,
             queries: ViewerQueries,
         },
+        /*
         childRoutes: [
           {
             path: 'Compendiums',
@@ -56,5 +57,6 @@ export default [
             ],
           },
         ],
+        */
     },
 ];

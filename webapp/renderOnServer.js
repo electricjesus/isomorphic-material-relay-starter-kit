@@ -22,25 +22,30 @@ export default function renderOnServer( req, res, next, assetsPath )
   match( { routes, location: req.originalUrl }, ( error, redirectLocation, renderProps ) =>
     {
       if( error )
-          next(error);
+        next(error);
       else if( redirectLocation )
-          res.redirect( 302, redirectLocation.pathname + redirectLocation.search );
+        res.redirect( 302, redirectLocation.pathname + redirectLocation.search );
       else if( renderProps )
-          IsomorphicRouter.prepareData( renderProps ).then( render, next );
+      {
+        console.log( "Before IsomorphicRouter.prepareData, renderProps=" + JSON.stringify( renderProps ) );
+        IsomorphicRouter.prepareData( renderProps ).then( render, next );
+      }
       else
           res.status( 404 ).send( 'Not Found' );
 
       function render( data )
       {
-        // TODO HACK This is a total hack and shod be fixed somehow.
+        // TODO HACK This is a total hack and shod be fixed somehow. Required by Material-UI
         GLOBAL.navigator = { userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36"};
 
         // Load up isomorphic vars here, for server rendering
         let isoVars = JSON.stringify( isomorphicVars( ) );
 
+        console.log( 'Before ReactDOMServer.renderToString, renderProps=' + JSON.stringify( renderProps ) );
         const reactOutput = ReactDOMServer.renderToString(
             <IsomorphicRouter.RoutingContext {...renderProps} />
         );
+        console.log( 'COMPLETE!' );
 
         res.render( path.resolve( __dirname, '..', 'webapp/views', 'index.ejs' ), {
             preloadedData: JSON.stringify(data),

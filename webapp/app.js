@@ -26,7 +26,7 @@ Relay.injectNetworkLayer( new Relay.DefaultNetworkLayer( '/graphql', {
   } )
 );
 
-const data = JSON.parse(document.getElementById('preloadedData').textContent);
+const data = JSON.parse( document.getElementById( 'preloadedData' ).textContent );
 IsomorphicRelay.injectPreparedData( data );
 
 const rootElement = document.getElementById('root');
