@@ -131,8 +131,7 @@ class Compendium extends React.Component
       Compendium_LikedSunset_Green: value
     } );
   }
-
-  _Compendium_LikedSunset_OtherChange( event, index, value )
+  _Compendium_LikedSunset_OtherChange( event, value )
   {
     this.setState( {
       Compendium_LikedSunset_Other: value
