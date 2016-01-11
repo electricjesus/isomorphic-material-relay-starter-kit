@@ -38,9 +38,9 @@
     "postinstall": "npm run build-schema && npm run build-webpack",
     "setup-local": "cp ./doc/Example.env ./.env",
     "build-schema": "./node_modules/.bin/babel-node ./scripts/build-schema.js",
-    "build-webpack": "webpack -p --output-filename app",
+    "build-webpack": "./node_modules/.bin/webpack -p --output-filename app.js",
     "build-mui-icon-list": "./node_modules/.bin/babel-node ./scripts/build-mui-icon-list.js",
-    "start-webpack": "webpack-dev-server --hot --inline --progress --colors",
+    "start-webpack": "./node_modules/.bin/webpack-dev-server --hot --inline --progress --colors",
     "start-dev": "export NODE_ENV=development && nodemon --exec ./node_modules/.bin/babel-node -- ./server/server.js",
     "start": "export NODE_ENV=production && ./node_modules/.bin/babel-node ./server/server.js"
   },
