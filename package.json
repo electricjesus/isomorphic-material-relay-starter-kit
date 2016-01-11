@@ -89,12 +89,12 @@
     "react-router": "^2.0.0-rc4",
     "react-tap-event-plugin": "^0.2.1",
     "seq-queue": "0.0.5",
-    "style-loader": "^0.12.4"
+    "style-loader": "^0.12.4",
+    "webpack": "^1.12.9"
   },
   "devDependencies": {
-    "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.0",
     "babel-plugin-transform-runtime": "^6.3.13",
-    "recursive-readdir-sync": "^1.0.6"
+    "recursive-readdir-sync": "^1.0.6",
+    "webpack-dev-server": "^1.14.0"
   }
 }
