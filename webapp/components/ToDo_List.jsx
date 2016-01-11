@@ -13,7 +13,7 @@ class ToDo_List extends React.Component
 {
   _handleMarkAllOnCheck( event, checked )
   {
-    Relay.Store.update(
+    Relay.Store.commitUpdate(
       new ToDo_list_updateMarkAllMutation( {
         complete: checked,
         ToDos: this.props.Viewer.ToDos,
@@ -35,7 +35,7 @@ class ToDo_List extends React.Component
 
   _handleTabsChange( value )
   {
-    this.context.history.pushState( null, '/ToDos/' + value );
+    this.context.router.push( '/ToDos/' + value );
   }
 
   renderTabs( )
@@ -70,7 +70,8 @@ class ToDo_List extends React.Component
 }
 
 ToDo_List.contextTypes = {
-  history: React.PropTypes.object,
+  //history: React.PropTypes.object,
+  router: React.PropTypes.object.isRequired,
 };
 
 export default Relay.createContainer( ToDo_List, {

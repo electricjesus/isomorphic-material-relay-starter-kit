@@ -38,7 +38,7 @@ class Chrome extends React.Component
 
   _handleOnFocusIncomplete( )
   {
-    this.context.history.pushState( null, '/ToDos/active' );
+    this.context.router.push( '/ToDos/active' );
   }
 
   render( )
@@ -84,17 +84,13 @@ class Chrome extends React.Component
       </AppCanvas>
     )
   }
-
-  zzrender( )
-  {
-    return( <AppCanvas/> );
-  }
 };
 
 //
 
 Chrome.contextTypes = {
-  history: React.PropTypes.object,
+//  history: React.PropTypes.object,
+  router: React.PropTypes.object.isRequired,
   muiTheme: React.PropTypes.object,
 };
 

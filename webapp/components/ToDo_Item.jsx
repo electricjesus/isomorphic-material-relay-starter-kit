@@ -21,7 +21,7 @@ class ToDo_Item extends React.Component
 
   _handleCompletedCheck( event, complete )
   {
-    Relay.Store.update(
+    Relay.Store.commitUpdate(
       new ToDo_updateStatusMutation({
         complete,
         todo: this.props.todo,
@@ -32,14 +32,14 @@ class ToDo_Item extends React.Component
 
   _handleTextInputSave( text )
   {
-    Relay.Store.update(
+    Relay.Store.commitUpdate(
       new ToDo_updateRenameMutation({todo: this.props.todo, text})
     );
   }
 
   _ToDo_delete( )
   {
-    Relay.Store.update(
+    Relay.Store.commitUpdate(
       new ToDo_deleteMutation({todo: this.props.todo, Viewer: this.props.Viewer})
     );
   }

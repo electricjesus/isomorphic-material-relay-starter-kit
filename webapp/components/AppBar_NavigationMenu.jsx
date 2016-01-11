@@ -9,7 +9,7 @@ export default class AppBar_NavigationMenu extends React.Component
 {
   _handleLeftMenuTouchTap( e, item )
   {
-    this.context.history.pushState( null, item.key );
+    this.context.router.push( item.key );
   }
 
   render( )
@@ -33,5 +33,6 @@ export default class AppBar_NavigationMenu extends React.Component
 }
 
 AppBar_NavigationMenu.contextTypes = {
-  history: React.PropTypes.object,
+  //history: React.PropTypes.object,
+  router: React.PropTypes.object.isRequired
 };

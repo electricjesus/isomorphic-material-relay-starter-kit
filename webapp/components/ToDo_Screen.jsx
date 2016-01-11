@@ -11,7 +11,7 @@ class ToDo_Screen extends React.Component
 {
   _handleAddToDo( )
   {
-    Relay.Store.update(
+    Relay.Store.commitUpdate(
       new ToDo_addMutation( {
         text: this.refs.addToDo.getValue( ),
         Viewer: this.props.Viewer

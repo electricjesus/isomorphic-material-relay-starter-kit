@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Relay from 'react-relay';
 import RelayStoreData from 'react-relay/lib/RelayStoreData';
-import {match, RoutingContext} from 'react-router';
+import {match} from 'react-router';
 
 import routes from './routes';
 import {isomorphicVars} from './scripts/isomorphicVars';
@@ -17,7 +17,7 @@ const GRAPHQL_URL = `http://localhost:${process.env.PORT}/graphql`;
 Relay.injectNetworkLayer( new Relay.DefaultNetworkLayer( GRAPHQL_URL ) );
 RelayStoreData.getDefaultInstance( ).getChangeEmitter( ).injectBatchingStrategy(() => { } );
 
-export default function renderOnServer( req, res, next, assetsPath )
+export default ( req, res, next, assetsPath ) =>
 {
   match( { routes, location: req.originalUrl }, ( error, redirectLocation, renderProps ) =>
     {
@@ -26,10 +26,7 @@ export default function renderOnServer( req, res, next, assetsPath )
       else if( redirectLocation )
         res.redirect( 302, redirectLocation.pathname + redirectLocation.search );
       else if( renderProps )
-      {
-        console.log( "Before IsomorphicRouter.prepareData, renderProps=" + JSON.stringify( renderProps ) );
         IsomorphicRouter.prepareData( renderProps ).then( render, next );
-      }
       else
           res.status( 404 ).send( 'Not Found' );
 
@@ -41,11 +38,9 @@ export default function renderOnServer( req, res, next, assetsPath )
         // Load up isomorphic vars here, for server rendering
         let isoVars = JSON.stringify( isomorphicVars( ) );
 
-        console.log( 'Before ReactDOMServer.renderToString, renderProps=' + JSON.stringify( renderProps ) );
         const reactOutput = ReactDOMServer.renderToString(
-            <IsomorphicRouter.RoutingContext {...renderProps} />
+            <IsomorphicRouter.RouterContext {...renderProps} />
         );
-        console.log( 'COMPLETE!' );
 
         res.render( path.resolve( __dirname, '..', 'webapp/views', 'index.ejs' ), {
             preloadedData: JSON.stringify(data),

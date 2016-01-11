@@ -42,7 +42,7 @@ class Compendium extends React.Component
 
   _handleUpdate( Compendium )
   {
-    Relay.Store.update(
+    Relay.Store.commitUpdate(
       new Compendium_updateMutation( {
         Compendium:                         Compendium,
         Compendium_FirstTextInput:          this.refs.Compendium_FirstTextInput.getValue( ),
