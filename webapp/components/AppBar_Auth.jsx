@@ -79,19 +79,16 @@ export default class AppBar_Auth extends React.Component
 
   _handleAuthSuccess( response )
   {
-    console.log( '_handleAuthSuccess ' + response )
-
     try{
       let responseJSON = JSON.parse( response );
       if( responseJSON.success != true ) throw new Error( "Login failed" );
     } catch( err ) { _handleAuthFailure( 1 ); return; }
 
-    location.replace( "/" );
+    location.replace( location.href );
   }
 
   _handleAuthFailure( response )
   {
-    console.log( '_handleAuthFailure ' + response )
     let message;
     try{
       let responseJSON = JSON.parse( response );
@@ -136,6 +133,7 @@ export default class AppBar_Auth extends React.Component
           fullWidth={ true }
           onEnterKeyDown={ this._handlePasswordEnterKeyDown.bind( this ) }
         />
+      Valid user name/combinations are: jack/secret jill/birthday
       </Dialog>
     );
   }
@@ -184,5 +182,5 @@ export default class AppBar_Auth extends React.Component
 }
 
 AppBar_Auth.contextTypes = {
-  history: React.PropTypes.object,
+  router: React.PropTypes.object.isRequired
 };
