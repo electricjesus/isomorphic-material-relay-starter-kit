@@ -20,5 +20,6 @@ In order to set up the project locally, perform the following steps:
 * **Clone from github.** `git clone https://github.com/codefoundries/isomorphic-material-relay-starter-kit`.
 * **Install node packages.** `npm install`.
 * **Perform initial setup.** `npm run setup-local`.
+* **Specify JWT_SECRET** by modifying the `.env` file. This step can be skipped if you do not care about the actual security and simply want to get the project running.
 * **Start the server.** `npm run start`.
 * **The application is available at:** `http://localhost:4444`.

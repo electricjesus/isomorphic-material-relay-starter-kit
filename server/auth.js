@@ -6,6 +6,10 @@ import {
   DS_User_getByUserName
 } from '../data/User';
 
+// Read environment
+require( 'dotenv' ).load( );
+
+
 let auth = express( );
 auth.use( bodyParser.json( ) );
 
@@ -31,7 +35,7 @@ auth.post('/', function(req, res, next)
     else
     {
       // User has authenticated correctly thus we create a JWT token
-      var token = jwt.encode( { user_id: user.id }, "TBD: Make this a setting tokenSecret" );
+      var token = jwt.encode( { user_id: user.id }, process.env.JWT_SECRET );
 
       res.cookie( 'auth_token', token, { httpOnly: true } );
       res.json( { success : true } );

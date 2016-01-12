@@ -33,7 +33,7 @@ router.use( '/graphql', graphQLHTTP( request => {
   if( request.cookies.auth_token )
     if( request.cookies.auth_token.length > 10 )
     {
-      var decoded = jwt.decode( request.cookies.auth_token, "TBD: Make this a setting tokenSecret" );
+      var decoded = jwt.decode( request.cookies.auth_token, process.env.JWT_SECRET );
       user_id = decoded.user_id;
     }
 

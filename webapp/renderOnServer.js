@@ -27,44 +27,47 @@ export default ( req, res, next, assetsPath ) =>
 
   match( { routes, location: req.originalUrl }, ( error, redirectLocation, renderProps ) =>
     {
-      queue.push( queueTask => {
+      queue.push(
+        queueTask => {
+          // Setting the STATIC network layer. No fear about it being static - we are in a queue!
+          Relay.injectNetworkLayer( new Relay.DefaultNetworkLayer( GRAPHQL_URL, { headers: headers } ) );
+          RelayStoreData.getDefaultInstance( ).getChangeEmitter( ).injectBatchingStrategy(() => { } );
 
-        // Setting the STATIC network layer. No fear about it being static - we are in a queue!
-        Relay.injectNetworkLayer( new Relay.DefaultNetworkLayer( GRAPHQL_URL, { headers: headers } ) );
-        RelayStoreData.getDefaultInstance( ).getChangeEmitter( ).injectBatchingStrategy(() => { } );
+          if( error )
+            next(error);
+          else if( redirectLocation )
+            res.redirect( 302, redirectLocation.pathname + redirectLocation.search );
+          else if( renderProps )
+            IsomorphicRouter.prepareData( renderProps ).then( render, next );
+          else
+              res.status( 404 ).send( 'Not Found' );
 
-        if( error )
-          next(error);
-        else if( redirectLocation )
-          res.redirect( 302, redirectLocation.pathname + redirectLocation.search );
-        else if( renderProps )
-          IsomorphicRouter.prepareData( renderProps ).then( render, next );
-        else
-            res.status( 404 ).send( 'Not Found' );
+          function render( data )
+          {
+            // Setting up static, global navigator object to pass user agent to material-ui. Again, not to
+            // fear, we are in a queue.
+            GLOBAL.navigator = { userAgent: req.headers[ 'user-agent' ] };
 
-        function render( data )
-        {
-          // Setting up static, global navigator object to pass user agent to material-ui. Again, not to
-          // fear, we are in a queue.
-          GLOBAL.navigator = { userAgent: req.headers[ 'user-agent' ] };
+            // Load up isomorphic vars here, for server rendering
+            let isoVars = JSON.stringify( isomorphicVars( ) );
 
-          // Load up isomorphic vars here, for server rendering
-          let isoVars = JSON.stringify( isomorphicVars( ) );
+            const reactOutput = ReactDOMServer.renderToString(
+                <IsomorphicRouter.RouterContext {...renderProps} />
+            );
 
-          const reactOutput = ReactDOMServer.renderToString(
-              <IsomorphicRouter.RouterContext {...renderProps} />
-          );
+            res.render( path.resolve( __dirname, '..', 'webapp/views', 'index.ejs' ), {
+                preloadedData: JSON.stringify(data),
+                assetsPath: assetsPath,
+                reactOutput,
+                isomorphicVars: isoVars
+            } );
 
-          res.render( path.resolve( __dirname, '..', 'webapp/views', 'index.ejs' ), {
-              preloadedData: JSON.stringify(data),
-              assetsPath: assetsPath,
-              reactOutput,
-              isomorphicVars: isoVars
-          } );
-
-          queueTask.done( );
-        }
-      }, 2000 ); // 2 second time out for rendering an isomorphic page
+            queueTask.done( );
+          }
+        },
+        ( ) => console.log( "Timeout for renderer" ),
+        2000
+      ); // 2 second time out for rendering an isomorphic page
     }
   );
 };
