@@ -1,8 +1,8 @@
 import { fromGlobalId, mutationWithClientMutationId } from "graphql-relay";
 import { GraphQLBoolean, GraphQLID, GraphQLList, GraphQLNonNull } from "graphql";
 
-import { DS_User_get } from '../../data/User';
-import { DS_ToDo_get, DS_ToDo_list_updateMarkAll } from '../../data/ToDo';
+import { DA_User_get } from '../../data/da/User';
+import { DA_ToDo_get, DA_ToDo_list_updateMarkAll } from '../../data/da/ToDo';
 
 import ToDoType from '../type/ToDoType';
 import ViewerType from '../type/ViewerType';
@@ -16,16 +16,16 @@ export default mutationWithClientMutationId( {
   outputFields: {
     changedToDos: {
       type: new GraphQLList(ToDoType),
-      resolve: ( {changedToDoLocalIds} ) => changedToDoLocalIds.map( DS_ToDo_get ),
+      resolve: ( {changedToDoLocalIds} ) => changedToDoLocalIds.map( DA_ToDo_get ),
     },
     Viewer: {
       type: ViewerType,
-      resolve: ( parent, args, { rootValue: {user_id} } ) => DS_User_get( user_id )
+      resolve: ( parent, args, { rootValue: {user_id} } ) => DA_User_get( user_id )
     },
   },
   mutateAndGetPayload: ( {complete}, { rootValue: {user_id} } ) =>
   {
-    var changedToDoLocalIds = DS_ToDo_list_updateMarkAll( user_id, complete );
+    var changedToDoLocalIds = DA_ToDo_list_updateMarkAll( user_id, complete );
     return {changedToDoLocalIds};
   }
 } );

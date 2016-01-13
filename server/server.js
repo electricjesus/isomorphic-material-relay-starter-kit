@@ -15,6 +15,7 @@ require( 'dotenv' ).load( );
 console.log( '--------------------------------------------------------------------------------' );
 console.log( process.env.npm_package_name + ' ' + process.env.npm_package_version + ' running as ' + process.env.NODE_ENV );
 console.log( 'Serving at ' + process.env.HOST + ':' + process.env.PORT );
+console.log( 'Cassandra keyspace ' + JSON.stringify( process.env.CASSANDRA_KEYSPACE ) + ', connection points ' + JSON.stringify( process.env.CASSANDRA_CONNECTION_POINTS.split( ',' ) ) );
 console.log( '--------------------------------------------------------------------------------' );
 
 let router = express( );

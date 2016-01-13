@@ -3,7 +3,8 @@ import { GraphQLString, GraphQLInt, GraphQLBoolean, GraphQLID, GraphQLNonNull, G
 
 import NodeInterface from "../interface/NodeInterface";
 
-import { Compendium, DS_Compendium_get, DS_Compendium_update } from '../../data/Compendium';
+import Compendium from '../../data/model/Compendium';
+import { DA_Compendium_get, DA_Compendium_update } from '../../data/da/Compendium';
 
 
 export default new GraphQLObjectType( {

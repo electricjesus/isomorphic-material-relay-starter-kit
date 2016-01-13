@@ -8,7 +8,7 @@ The purpose of IMRSK is:
 
 | How to try | **Link**|
 |----------------|----------------|
-| Live Demo | [http://isomorphic-material-relay.herokuapp.com/](http://isomorphic-material-relay.herokuapp.com/) |
+| Live Demo | [http://isomorphic-material-relay.herokuapp.com/](http://isomorphic-material-relay.herokuapp.com/) This is a free dyno, so give it some time to spin up. |
 | Run locally | [Local Setup](./doc/Setup-Local.md) |
 | Run on [Heroku](https://www.heroku.com/nodejs) | [Heroku Setup](./doc/Setup-Heroku.md) |
 
@@ -24,10 +24,11 @@ The purpose of IMRSK is:
 | [Isomorhic Relay](https://github.com/denvned/isomorphic-relay) | Adds server side rendering support to React Relay. IMRSK fully utilizes this library, while waiting for [https://github.com/facebook/relay/issues/589](https://github.com/facebook/relay/issues/589). The eventual goal is to have full isomorphism with authentication. |
 | [JWT](https://jwt.io/) | Java Web Tokens is and industry standard [RFC 7519](https://tools.ietf.org/html/rfc7519) method for representing claims securely between two parties. |
 | [React Helmet](https://github.com/nfl/react-helmet) | Reusable React component will manage all of your changes to the document head with support for document title, meta, link, script, and base tags. |
-|  [Babel](http://babeljs.io) | Compiles ES6/ES7 to ES5. Allows using features from ES6 and ES7 today. |
+| [Babel](http://babeljs.io) | Compiles ES6/ES7 to ES5. Allows using features from ES6 and ES7 today. |
 | [Webpack](http://webpack.github.io) | Bundles npm packages and the application Java Script into a single file. Includes hot reloading via [react-transform-hmr](https://www.npmjs.com/package/react-transform-hmr). Also, Webpack can bundle any required CSS. |
 | [Node.js](https://nodejs.org)| Event-driven, non-blocking I/O runtime based on JavaScript that is lightweight and efficient. |
 | [npm Scripts](https://docs.npmjs.com/misc/scripts)| Glues all this together in a handy automated build. |
+| [Apache Cassandra](http://cassandra.apache.org/) | The database you are looking for. |
 
 ## Features
 
@@ -42,14 +43,50 @@ The purpose of IMRSK is:
 | Material Design | Expanding upon the "card" motifs that debuted in Google Now, Material Design makes more liberal use of grid-based layouts, responsive animations and transitions, padding, and depth effects such as lighting and shadows. |
 | Responsive Design | Mainly through the features of the Material UI library, the examples in IMRSK work well on different form factors, ranging from desktop browsers to mobile phones |
 
+## Environment Variables
+
+The following environment variables can be used to control the server:
+
+| Variable Name                  | Description                                                    |
+| ------------------------------ | ---------------------------------------------------------------|
+| PORT                           | Port for serving the SPA web application and API               |
+| HOST                           | For for serving                                                |
+| JWT_SECRET                     | Secret used for JWT tokens.                                    |
+| CASSANDRA_CONNECTION_POINTS    | Cassandra connection point. `localhost` if on the same machine |
+| CASSANDRA_KEYSPACE             | Cassandra keyspace/database                                    |
+
+They can be set in the .env file in the root of the project. Example.env in
+the documents folder contains an example of such file.
+
 ## More details
 
-* [Credits and sources](./doc/Credits.md)
 * [Local Setup](./doc/Setup-Local.md)
 * [Heroku Setup](./doc/Setup-Heroku.md)
-* [Environment Variables](./doc/Environment.md)
 * [Building and Running](./doc/BuildRun.md)
 * [Important pieces of code](./doc/Code.md)
+
+## Credits and Sources
+
+This project serves as a starter kit for projects utilizing the following technologies:
+
+* [React JS](https://facebook.github.io/react/)
+* [Relay / GrpahQL](https://facebook.github.io/relay/)
+* [Isomorphic Relay](https://github.com/denvned/isomorphic-relay)
+* [Material-UI](http://www.material-ui.com/)
+* [Java Web Tokens](https://jwt.io/)
+* [Apache Cassandra](http://cassandra.apache.org/).
+
+It contains a boilerplate with several simple code examples. It consists of modified versions of the following projects:
+
+* [Facebook Relay Starter Kit TODO example](https://github.com/facebook/relay/tree/master/examples/todo). Implementation of the TODO MVC using Relay. In this kit the TODO example has been re-implemented with material UI.
+* [Isomorphic react-router-relay TODO example](https://github.com/denvned/isomorphic-relay-router/tree/master/examples/todo). The Facebook TODO example in this project has been modified to support isomorphism.
+* [Xpepermint's isomorphic-react-relay-boilerplate](https://github.com/xpepermint/isomorphic-react-relay-boilerplate). The project organization was initially borrowed from this project, although it has since diverged.
+* [coryhouse's react-slingshot](https://github.com/coryhouse/react-slingshot). Ideas about he documentation are borrowed from this project.
+* [ryancole's league](https://github.com/ryancole/league). The organization of the GraphQL schema is borrowed from this project.
+* [itayadler's cassandra-paginating-static-columns](https://github.com/itayadler/cassandra-paginating-static-columns/blob/master/index.js). The general approach to working with Cassandra is borrowed from this project, with some changes.
+
+Examples from other open source projects have also been incorporated.
+
 
 ## Final word of caution
 

@@ -1,8 +1,8 @@
 import { fromGlobalId, mutationWithClientMutationId } from "graphql-relay";
 import { GraphQLID, GraphQLNonNull } from "graphql";
 
-import { DS_User_get } from '../../data/User';
-import { DS_ToDo_delete } from '../../data/ToDo';
+import { DA_User_get } from '../../data/da/User';
+import { DA_ToDo_delete } from '../../data/da/ToDo';
 
 import ViewerType from '../type/ViewerType';
 
@@ -19,12 +19,12 @@ export default mutationWithClientMutationId( {
     },
     Viewer: {
       type: ViewerType,
-      resolve: ( parent, args, { rootValue: {user_id} } ) => DS_User_get( user_id )
+      resolve: ( parent, args, { rootValue: {user_id} } ) => DA_User_get( user_id )
     },
   },
   mutateAndGetPayload: ( {id}, { rootValue: {user_id} } ) => {
     var localToDoId = fromGlobalId(id).id;
-    DS_ToDo_delete( user_id, localToDoId );
+    DA_ToDo_delete( user_id, localToDoId );
     return {id};
   }
 } );

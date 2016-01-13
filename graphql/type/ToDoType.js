@@ -3,7 +3,7 @@ import { GraphQLBoolean, GraphQLString, GraphQLObjectType } from "graphql";
 
 import NodeInterface from "../interface/NodeInterface";
 
-import { ToDo } from '../../data/ToDo';
+import ToDo from '../../data/model/ToDo';
 
 export default new GraphQLObjectType( {
   name: 'ToDo',

@@ -1,8 +1,8 @@
 import { fromGlobalId, mutationWithClientMutationId } from "graphql-relay";
 import { GraphQLString, GraphQLID, GraphQLNonNull } from "graphql";
 
-import { DS_User_get } from '../../data/User';
-import { DS_ToDo_get, DS_ToDo_updateRename } from '../../data/ToDo';
+import { DA_User_get } from '../../data/da/User';
+import { DA_ToDo_get, DA_ToDo_update } from '../../data/da/ToDo';
 
 import ToDoType from '../type/ToDoType';
 
@@ -15,12 +15,12 @@ export default mutationWithClientMutationId( {
   outputFields: {
     todo: {
       type: ToDoType,
-      resolve: ( {localToDoId} ) => DS_ToDo_get(localToDoId),
+      resolve: ( {localToDoId} ) => DA_ToDo_get(localToDoId),
     }
   },
   mutateAndGetPayload: ( {id, text} ) => {
     var localToDoId = fromGlobalId(id).id;
-    DS_ToDo_updateRename( localToDoId, text );
+    DA_ToDo_update( localToDoId, { text: text } );
     return {localToDoId};
   },
 } );

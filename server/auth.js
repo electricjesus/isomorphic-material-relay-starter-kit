@@ -3,8 +3,8 @@ import express from 'express';
 import jwt from 'jwt-simple';
 
 import {
-  DS_User_getByUserName
-} from '../data/User';
+  DA_User_getByUserName
+} from '../data/da/User';
 
 // Read environment
 require( 'dotenv' ).load( );
@@ -20,7 +20,7 @@ auth.post('/', function(req, res, next)
 
   try
   {
-    let user = DS_User_getByUserName( username );
+    let user = DA_User_getByUserName( username );
 
     if ( ! user )
       return res.status( 401 ).json( { error: 'Incorrect user' } );

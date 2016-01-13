@@ -1,7 +1,7 @@
 import { fromGlobalId, mutationWithClientMutationId } from "graphql-relay";
 import { GraphQLString, GraphQLInt, GraphQLBoolean, GraphQLID, GraphQLNonNull } from "graphql";
 
-import { DS_Compendium_get, DS_Compendium_update } from '../../data/Compendium';
+import { DA_Compendium_get, DA_Compendium_update } from '../../data/da/Compendium';
 
 import CompendiumType from '../type/CompendiumType';
 
@@ -29,7 +29,7 @@ export default mutationWithClientMutationId( {
   outputFields: {
     Compendium: {
       type: CompendiumType,
-      resolve: ( {localCompendiumId} ) => DS_Compendium_get( localCompendiumId ),
+      resolve: ( {localCompendiumId} ) => DA_Compendium_get( localCompendiumId ),
     },
   },
   mutateAndGetPayload: ( {
@@ -51,23 +51,25 @@ export default mutationWithClientMutationId( {
     Compendium_LikedSunset_OtherText,
   } ) => {
     var local_id = fromGlobalId( id ).id;
-    DS_Compendium_update(
+    DA_Compendium_update(
       local_id,
-      Compendium_FirstTextInput,
-      Compendium_RangedNumber,
-      Compendium_Excitement,
-      Compendium_FollowUpQuestion,
-      Compendium_FavoriteMammal,
-      Compendium_FavoriteMammalOtherText,
-      Compendium_LastText,
-      Compendium_LikedSunset_Ocean,
-      Compendium_LikedSunset_Lake,
-      Compendium_LikedSunset_Mountains,
-      Compendium_LikedSunset_Plains,
-      Compendium_LikedSunset_Purple,
-      Compendium_LikedSunset_Green,
-      Compendium_LikedSunset_Other,
-      Compendium_LikedSunset_OtherText,
+      {
+        Compendium_FirstTextInput,
+        Compendium_RangedNumber,
+        Compendium_Excitement,
+        Compendium_FollowUpQuestion,
+        Compendium_FavoriteMammal,
+        Compendium_FavoriteMammalOtherText,
+        Compendium_LastText,
+        Compendium_LikedSunset_Ocean,
+        Compendium_LikedSunset_Lake,
+        Compendium_LikedSunset_Mountains,
+        Compendium_LikedSunset_Plains,
+        Compendium_LikedSunset_Purple,
+        Compendium_LikedSunset_Green,
+        Compendium_LikedSunset_Other,
+        Compendium_LikedSunset_OtherText,
+      }
     );
     return {local_id};
   },
