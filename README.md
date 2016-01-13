@@ -73,7 +73,7 @@ This project serves as a starter kit for projects utilizing the following techno
 * [Relay / GrpahQL](https://facebook.github.io/relay/)
 * [Isomorphic Relay](https://github.com/denvned/isomorphic-relay)
 * [Material-UI](http://www.material-ui.com/)
-* [Java Web Tokens](https://jwt.io/)
+* [JSON Web Tokens](https://jwt.io/)
 * [Apache Cassandra](http://cassandra.apache.org/).
 
 It contains a boilerplate with several simple code examples. It consists of modified versions of the following projects:
