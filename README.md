@@ -41,6 +41,12 @@ Apache Cassandra is not part of this project yet. We are hoping to be able to br
 | Material Design | Expanding upon the "card" motifs that debuted in Google Now, Material Design makes more liberal use of grid-based layouts, responsive animations and transitions, padding, and depth effects such as lighting and shadows. |
 | Responsive Design | Mainly through the features of the Material UI library, the examples in IMRSK work well on different form factors, ranging from desktop browsers to mobile phones |
 
+## Setup, building and running.
+
+* Quick [Local Setup](./doc/Setup-Local.md)
+* Quick [Heroku Setup](./doc/Setup-Heroku.md)
+* Detailed [Building and Running](./doc/BuildRun.md) instructions
+
 ## Environment Variables
 
 The following environment variables can be used to control the server:
@@ -55,13 +61,6 @@ The following environment variables can be used to control the server:
 
 They can be set in the .env file in the root of the project. Example.env in
 the documents folder contains an example of such file.
-
-## More details
-
-* [Local Setup](./doc/Setup-Local.md)
-* [Heroku Setup](./doc/Setup-Heroku.md)
-* [Building and Running](./doc/BuildRun.md)
-* [Important pieces of code](./doc/Code.md)
 
 ## Project Structure
 
