@@ -74,7 +74,7 @@ Naming conventions are used wherever possible. The following tags are used to co
 
 | Folder/File                                   | Description                                                    |  |
 | --------------------------------------------- | ---------------------------------------------------------------| --- |
-| `data/`                                       | Methods and data access functions | [*](./tree/master/data/)
+| `data/`                                       | Methods and data access functions | [*](./data/)
 | `data/da/`                                    | Data access functions |
 | `data/da/{Entity}.js`                         | Data access functions for {Entity}. Exported functions are named DA_{Entity}_* |
 | `data/model/`                                 | Models |
