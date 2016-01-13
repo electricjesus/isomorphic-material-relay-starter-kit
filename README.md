@@ -72,9 +72,9 @@ Naming conventions are used wherever possible. The following tags are used to co
 | `{Mutation}`                           | Indicates type of mutation applied to an entity, like add, delete, update, list_delete, etc. |
 
 
-| Folder/File                                   | Description                                                    |
-| --------------------------------------------- | ---------------------------------------------------------------|
-| `data/`                                       | Methods and data access functions |
+| Folder/File                                   | Description                                                    |  |
+| --------------------------------------------- | ---------------------------------------------------------------| --- |
+| `data/`                                       | Methods and data access functions | [*](./tree/master/data/)
 | `data/da/`                                    | Data access functions |
 | `data/da/{Entity}.js`                         | Data access functions for {Entity}. Exported functions are named DA_{Entity}_* |
 | `data/model/`                                 | Models |
