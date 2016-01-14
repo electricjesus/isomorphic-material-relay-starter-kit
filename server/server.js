@@ -22,10 +22,8 @@ let router = express( );
 
 router.set( 'trust proxy', 'loopback' );
 router.set( 'x-powered-by', false );
-router.use( compression( ) );
 
-// TODO Technically the cookie parser is necessary only for GraphQL, and the routing server.
-// It is not necessary for serving static content. Consider separating those.
+router.use( compression( ) );
 router.use( cookieParser( ) );
 
 // Graphql server
@@ -49,7 +47,8 @@ router.use( '/graphql', graphQLHTTP( request => {
 router.use( '/auth', auth );
 
 // Static assets server
-router.use( express.static( path.resolve( __dirname + '/../public/' ) ) );
+let oneYear = 365*86400000;
+router.use( express.static( path.resolve( __dirname + '/../public/' ), { maxAge: oneYear } ) );
 
 // Application with routes
 router.use( '/*', webapp );
