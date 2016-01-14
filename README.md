@@ -119,7 +119,7 @@ This project configured to use compression on all content, and caching on the st
 | Network Speed                  | Initial load (no cache) | Subsequent load (cached content) |
 | ------------------------------ | ----------------------- | -------------------------------- |
 | On Regular 2G (250 kb/s)       | 7.3 sec                 | 1.4 sec                          |
-| On Regular 3G (250 kb/s)       | 3.1 sec                 | 1.1 sec                          |
+| On Regular 3G (750 kb/s)       | 3.1 sec                 | 1.1 sec                          |
 
 In both cases the UI becomes visible in less than a second. The wait time is to get all the JavaScript loaded in order to continue working as an SPA.
 
