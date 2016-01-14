@@ -37,9 +37,10 @@ Apache Cassandra is not part of this project yet. We are hoping to be able to br
 | SEO | The combination of isomorphism with the use of the react helmet allows all the content in the application to be SEO ready. Samples will be added to the kit later. |
 | ES6, ES7 | The IMRSK uses features of ES6 and ES7 extensively. All rect components are implemented as ES6 classes. |
 | JWT Tokens | Currently JWT tokens are used for authentication, although there is an issue related to isomorphism. |
-| HTTP Only cookies | The HTTP only cookies are currently the safest way to handle authentication in a web application. The JWT tokens are stored in HTTP only cookies making it harder for attackers to access. |
+| HTTP Only cookies | The HTTP only cookies are currently the safest way to handle authentication in a web application. The JWT tokens are stored in HTTP only cookies making it harder for attackers to access. Why this is the best place is explained in [Where to Store Your JWTs - Cookies vs HTML5 Web Storage](https://stormpath.com/blog/where-to-store-your-jwts-cookies-vs-html5-web-storage/) |
 | Material Design | Expanding upon the "card" motifs that debuted in Google Now, Material Design makes more liberal use of grid-based layouts, responsive animations and transitions, padding, and depth effects such as lighting and shadows. |
 | Responsive Design | Mainly through the features of the Material UI library, the examples in IMRSK work well on different form factors, ranging from desktop browsers to mobile phones |
+| Hot Reaload | The webpack development server supports hot reload when components are changed. The IMRSK is configured with hot reload. |
 
 ## Setup, building and running
 
