@@ -41,6 +41,7 @@ Apache Cassandra is not part of this project yet. We are hoping to be able to br
 | Material Design | Expanding upon the "card" motifs that debuted in Google Now, Material Design makes more liberal use of grid-based layouts, responsive animations and transitions, padding, and depth effects such as lighting and shadows. |
 | Responsive Design | Mainly through the features of the Material UI library, the examples in IMRSK work well on different form factors, ranging from desktop browsers to mobile phones. |
 | Hot Reaload | The webpack development server supports hot reload when components are changed. The IMRSK is configured with hot reload. |
+| Built for speed | The starter kit is configured to use established practices for optimizing speed like caching and compression. This entails certain requirements about how it is used, read in the Speed and Building section below |
 
 ## Setup, building and running
 
@@ -110,6 +111,21 @@ Below is the list of the main files and folders for this project. Asterisk on th
 TODO: Describe these too:
 
 * `/webapp/styles/` - folder for any styles that will be processed by webpack.
+
+## Speed and Building
+
+This project configured to use compression on all content, and caching on the static content. This delivers spectacular results. The numbers below were obtained using Google Chrome, development tools throttling and cache disabling, on a 2011 series Macbook Pro. The test is performed on the main page. Instance [deployed on Heroku](http://isomorphic-material-relay.herokuapp.com/) was used.
+
+| Network Speed                  | Initial load (no cache) | Subsequent load (cached content) |
+| ------------------------------ | ----------------------- | -------------------------------- |
+| On Regular 2G (250 kb/s)       | 7.3 sec                 | 1.4 sec                          |
+| On Regular 3G (250 kb/s)       | 3.1 sec                 | 1.1 sec                          |
+
+In both cases the UI becomes visible in less than a second. The wait time is to get all the JavaScript loaded in order to continue working as an SPA.
+
+While this is a desirable level of performance, it is important not to forget that caching the static content means caching the SPA code too. The assets generated with webpack are placed into a sub-folder bearing the version of the package as name. Make sure to increase the version number in `package.json` every time you deploy changes to production.
+
+If you add other static content, you might want to revisit how caching of static content is implemented.
 
 ## Credits and Sources
 
