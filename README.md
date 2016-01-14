@@ -101,7 +101,7 @@ Naming conventions are used wherever possible. The following tags are used to co
 | `public/assets/{Version}/app.css`             | Not much to see |
 | `public/assets/{Version}/app.js`              | All the nice ES5-compliant JavaScript for the SPA |
 | `scripts/build-mui-icon-list.js`              | Rebuilds the list of Materual-UI icons. Modify this file to control how many icons are displayed | [*](./scripts/build-mui-icon-list.js) |
-| `scripts/build-schema.js`                     | Rebuilds the GraphQL scham files. Must be run when the schema is modified | [*](./scripts/schema.js) |
+| `scripts/build-schema.js`                     | Rebuilds the GraphQL scham files. Must be run when the schema is modified | [*](./scripts/build-schema.js) |
 | `server/`                                     | The Node.js server serving isomorphic content, GraphQL, public files and authentication requests | [*](./server/) |
 | `server/auth.js`                              | Authentication service, verifies user name and password and creates JWT tokens | [*](./server/auth.js) |
 | `server/server.js`                            | Main script | [*](./server/server.js) |
