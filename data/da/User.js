@@ -13,17 +13,24 @@ var usersById = [
 
 export function DA_User_getByUserName( username )
 {
-  for( let i = 0, len = usersById.length; i < len; i++ )
+  return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
-    let record = usersById[ i ];
-    if( record.username === username )
-      return record;
-  }
+    for( let i = 0, len = usersById.length; i < len; i++ )
+    {
+      let record = usersById[ i ];
+      if( record.username === username )
+        resolve( record );
+    }
 
-  return null;
+    resolve( null );
+  }, 100 ) );
 }
 
 export function DA_User_get( id )
 {
-  return usersById[ id ];
+  return new Promise( ( resolve, reject ) =>
+    setTimeout( ( ) => resolve( usersById[ id ] ), 100 )
+  );
+
+  //return usersById[ id ];
 }
