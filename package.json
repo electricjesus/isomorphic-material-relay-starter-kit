@@ -35,7 +35,7 @@
     "npm": "3.3.6"
   },
   "scripts": {
-    "postinstall": "npm run build-schema && npm run build-webpack && npm run config-da-memory",
+    "postinstall": "npm run config-da-memory && npm run build-schema && npm run build-webpack",
     "setup-local": "cp ./doc/Example.env ./.env",
     "build-schema": "./node_modules/.bin/babel-node ./scripts/build-schema.js",
     "build-webpack": "./node_modules/.bin/webpack -p --output-filename app.js",
