@@ -2,9 +2,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import jwt from 'jwt-simple';
 
-import {
-  DA_User_getByUserName
-} from '../data/da/User';
+import { DA_User_getByUserName } from '../data/da/User';
 
 // Read environment
 require( 'dotenv' ).load( );
@@ -19,10 +17,10 @@ auth.post('/', function(req, res, next)
   let password = req.body.password;
 
   DA_User_getByUserName( username )
-    .then( ( a_User ) => {
-      console.log( "User: " + JSON.stringify( a_User ) )
+    .then( ( a_User ) =>
+    {
       if ( ! a_User )
-        return res.status( 401 ).json( { error: 'Incorrect a_User' } );
+        return res.status( 401 ).json( { error: 'Incorrect user' } );
       // Quite naturally this is not how it should be done in production. Never store your passwords in
       // clear text. Use something like bcrypt. Resources:
       //   http://arstechnica.com/security/2012/08/passwords-under-assault/
@@ -39,10 +37,10 @@ auth.post('/', function(req, res, next)
         res.cookie( 'auth_token', token, { httpOnly: true } );
         res.json( { success : true } );
       }
-
     } )
     .catch( next )
   ;
+  // TODO provide response in case of exception
   //
   // try
   // {
