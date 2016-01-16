@@ -12,7 +12,7 @@ Apache Cassandra is not part of this project yet. We are hoping to be able to br
 
 # WARNING: We recently changed the user_id s so the auth_token cookies are invalid and will crash the server. Please delete them first.
 
-Naturally the server should be able to figure it out. Coming to a repositoy near you in near future.
+Naturally the server should be able to figure it out. Coming soon to a repository near you.
 
 ## Underlying technologies
 
