@@ -1,5 +1,6 @@
-import Compendium from '../model/Compendium'
+import generateUUID from './generateUUID'
 
+import Compendium from '../model/Compendium'
 
 // Mock data
 
@@ -10,11 +11,9 @@ var Compendium_IDsByUser = {
   [2]: [ ],
 };
 
-var nextCompendiumId = 0;
-
 for( let User_id = 0 ; User_id < 3; User_id++ )
   DA_Compendium_add( {
-    id: User_id, // There will be only one per user
+    id: generateUUID( ),
     User_id: User_id,
     Compendium_FirstTextInput: "I am first with five",
     Compendium_RangedNumber: 35,

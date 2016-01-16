@@ -1,3 +1,5 @@
+import generateUUID from './generateUUID'
+
 import ToDo from '../model/ToDo'
 
 
@@ -9,8 +11,6 @@ var ToDo_IDsByUser = {
   [1]: [ ],
   [2]: [ ],
 };
-
-var nextToDoId = 0;
 
 DA_ToDo_add( { User_id: 0, text: 'Taste JavaScript', complete: true } );
 DA_ToDo_add( { User_id: 1, text: 'Jack buy a unicorn', complete: false } );
@@ -26,7 +26,7 @@ export function DA_ToDo_add( fields )
 {
   var a_ToDo = new ToDo( fields );
 
-  a_ToDo.id = `${nextToDoId++}`;
+  a_ToDo.id = generateUUID( );
 
   ToDo_listById[ a_ToDo.id ] = a_ToDo;
   ToDo_IDsByUser[ a_ToDo.User_id ].push( a_ToDo.id );
