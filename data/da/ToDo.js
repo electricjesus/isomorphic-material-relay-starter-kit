@@ -1,4 +1,5 @@
 import generateUUID from './generateUUID'
+import { DA_User_GetUUIDByID } from './User';
 
 import ToDo from '../model/ToDo'
 
@@ -6,18 +7,18 @@ import ToDo from '../model/ToDo'
 // Mock data
 
 var ToDo_listById = { };
-var ToDo_IDsByUser = {
-  [0]: [ ],
-  [1]: [ ],
-  [2]: [ ],
-};
+var ToDo_IDsByUser = { };
+ToDo_IDsByUser[ DA_User_GetUUIDByID( 0 ) ] = [ ];
+ToDo_IDsByUser[ DA_User_GetUUIDByID( 1 ) ] = [ ];
+ToDo_IDsByUser[ DA_User_GetUUIDByID( 2 ) ] = [ ];
 
-DA_ToDo_add( { User_id: 0, text: 'Taste JavaScript', complete: true } );
-DA_ToDo_add( { User_id: 1, text: 'Jack buy a unicorn', complete: false } );
-DA_ToDo_add( { User_id: 1, text: 'Jack sell a pony', complete: false } );
-DA_ToDo_add( { User_id: 1, text: 'Jack converse a brony', complete: true } );
-DA_ToDo_add( { User_id: 2, text: 'Jill Minify CSS', complete: false } );
-DA_ToDo_add( { User_id: 2, text: 'Jill Apply for an accelerator', complete: true } );
+
+DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 0 ), text: 'Taste JavaScript', complete: true } );
+DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 1 ), text: 'Jack buy a unicorn', complete: false } );
+DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 1 ), text: 'Jack sell a pony', complete: false } );
+DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 1 ), text: 'Jack converse a brony', complete: true } );
+DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 2 ), text: 'Jill Minify CSS', complete: false } );
+DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 2 ), text: 'Jill Apply for an accelerator', complete: true } );
 
 
 // Data access functions

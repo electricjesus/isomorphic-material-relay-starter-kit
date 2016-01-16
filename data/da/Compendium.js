@@ -1,20 +1,19 @@
 import generateUUID from './generateUUID'
-
+import { DA_User_GetUUIDByID } from './User';
 import Compendium from '../model/Compendium'
 
 // Mock data
 
 var Compendium_listById = { };
-var Compendium_IDsByUser = {
-  [0]: [ ],
-  [1]: [ ],
-  [2]: [ ],
-};
+var Compendium_IDsByUser = { };
+Compendium_IDsByUser[ DA_User_GetUUIDByID( 0 ) ] = [ ];
+Compendium_IDsByUser[ DA_User_GetUUIDByID( 1 ) ] = [ ];
+Compendium_IDsByUser[ DA_User_GetUUIDByID( 2 ) ] = [ ];
 
 for( let User_id = 0 ; User_id < 3; User_id++ )
   DA_Compendium_add( {
     id: generateUUID( ),
-    User_id: User_id,
+    User_id: DA_User_GetUUIDByID( User_id ),
     Compendium_FirstTextInput: "I am first with five",
     Compendium_RangedNumber: 35,
     Compendium_Excitement: 3,
