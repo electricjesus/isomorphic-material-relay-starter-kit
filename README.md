@@ -40,7 +40,7 @@ Apache Cassandra is not part of this project yet. We are hoping to be able to br
 | HTTP Only cookies | The HTTP only cookies are currently the safest way to handle authentication in a web application. The JWT tokens are stored in HTTP only cookies making it harder for attackers to access. Why this is the best place is explained in [Where to Store Your JWTs - Cookies vs HTML5 Web Storage](https://stormpath.com/blog/where-to-store-your-jwts-cookies-vs-html5-web-storage/). |
 | Material Design | Expanding upon the "card" motifs that debuted in Google Now, Material Design makes more liberal use of grid-based layouts, responsive animations and transitions, padding, and depth effects such as lighting and shadows. |
 | Responsive Design | Mainly through the features of the Material UI library, the examples in IMRSK work well on different form factors, ranging from desktop browsers to mobile phones. |
-| Hot Reaload | The webpack development server supports hot reload when components are changed. The IMRSK is configured with hot reload. |
+| Hot Reload | The webpack development server supports hot reload when components are changed. The IMRSK is configured with hot reload. |
 | Built for speed | The starter kit is configured to use established practices for optimizing speed like caching and compression. This entails certain requirements about how it is used, read in the Speed and Building section below |
 
 ## Setup, building and running
