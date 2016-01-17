@@ -1,7 +1,7 @@
 import { sql, runQueryOneResult } from './_client.js';
 import User from '../model/User'
 
-const User_0 = new User( { id: 0, username: '', password: '', displayname: 'Anonymous', email: '' } );
+const User_0 = new User( { id: 0, username: '', password: '', displayName: 'Anonymous', email: '' } );
 
 export function DA_User_getByUserName( username )
 {
@@ -25,7 +25,7 @@ export function DA_User_get( id )
   else
   {
     const query = sql.select( )
-      .from( 'User' )
+      .from( '"User"' )
       .where( 'id=?', id )
       .toParam( )
     ;
