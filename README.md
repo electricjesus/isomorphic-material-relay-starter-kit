@@ -50,6 +50,7 @@ Naturally the server should be able to figure it out. Coming soon to a repositor
 | Responsive Design | Mainly through the features of the Material UI library, the examples in IMRSK work well on different form factors, ranging from desktop browsers to mobile phones. |
 | Hot Reload | The webpack development server supports hot reload when components are changed. The IMRSK is configured with hot reload. |
 | Built for speed | The starter kit is configured to use established practices for optimizing speed like caching and compression. This entails certain requirements about how it is used, read in the Speed and Building section below. |
+| Cassandra/In Memory | The starter kit is intended for use with Cassandra, but simple in-memory data structures are provided also for light testing and experimentation. |
 
 
 
@@ -67,26 +68,25 @@ In order to set up the project on heroku, perform the following steps:
 * **Specify JWT secret** using `heroku config:set JWT_SECRET=tMMoDN3WCZWoV13wpBjUVcgLQRrCP3c3veNMMV5JlxNelC23oAja8eTVSzgK94LR9TpmLrwqGfuiSzOQ` where you replace the secret value with a secret of your choosing. Verify that the value is set with `heroku config`.
 * **Deploy the app** `git push heroku master`.
 
-For more information refer to [Getting Started with Node.js on Heroku - Deploy the app](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app)
+For more information refer to excellent [Getting Started with Node.js on Heroku - Deploy the app](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app)
 
-### Initial Machine Setup
+### Initial Development Machine Setup
 
 * **Install [Node.js](https://nodejs.org)**.  
 * **Install [Git](https://git-scm.com/downloads)**.
+* **Install [Apache Cassandra](http://cassandra.apache.org/download/)**.
 
-I have only tested this running on MacOS. I am copying the instructions for other operating systems from the **[React Slingshot](https://github.com/coryhouse/react-slingshot)**. I have not had a chance to test them and would appreciate help with that. If you have done that please open an issue with the results whether successful or not, and feel free to PR to update this document and/or the setup.
+We have only tested this running on MacOS. I am copying the instructions for other operating systems from the **[React Slingshot](https://github.com/coryhouse/react-slingshot)**. We have not had a chance to test them and would appreciate help with that. If you have done that please open an issue with the results whether successful or not, and feel free to PR to update this document.
 
-#### **On Linux:**  
+#### **On Linux**  
 Run this to [increase the limit](http://stackoverflow.com/questions/16748737/grunt-watch-error-waiting-fatal-error-watch-enospc) on the number of files Linux will watch. [Here's why](https://github.com/coryhouse/react-slingshot/issues/6).    
 `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
 
-#### **On Windows:**  
+#### **On Windows**  
 1. **Install [Python 2.7](https://www.python.org/downloads/)**. Browser-sync (and various other Node modules) rely on node-gyp, which requires Python on Windows.  
 2. **Install C++ Compiler**. [Visual Studio Express](https://www.visualstudio.com/en-US/products/visual-studio-express-vs) comes bundled with a free C++ compiler. Or, if you already have Visual Studio installed: Open Visual Studio and go to File -> New -> Project -> Visual C++ -> Install Visual C++ Tools for Windows Desktop. The C++ compiler is used to compile browser-sync (and perhaps other Node modules).
 
-I have not tested the Windows setup.
-
-### Project setup
+### Initial Project setup
 
 In order to set up the project locally, perform the following steps:
 
@@ -103,29 +103,29 @@ In order to set up the project locally, perform the following steps:
 
 ### Setup
 
-| **Task**          | **Details**|
-|-------------------|------------|
-| `postinstall` | Called by NPM after `npm install`. Configures to use memory data access, re-builds the GraphQL schema and performs a webpack build. |
-| `setup-local`     | Sets up the IMRSK for use on local dev machine. |
+| **Task**               | **Details**|
+|------------------------|------------|
+| `postinstall`          | Called by NPM after `npm install`. Configures to use memory data access, re-builds the GraphQL schema and performs a webpack build. |
+| `setup-local`          | Sets up the IMRSK for use on local dev machine. |
 | `setup-cassandra-init` | Drops (if it exists), creates and initializes with sample data a local Cassandra database called `imrsk`. |
-| `config-da-memory` | Configure IMRSK for using in-memory data structures. |
-| `config-da-cassandra` | Configure IMRSK for using Cassandra for persistence. |
+| `config-da-memory`     | Configure IMRSK for using in-memory data structures. |
+| `config-da-cassandra`  | Configure IMRSK for using Cassandra for persistence. |
 
 ### Build
 
-| **Task**          | **Details**|
-|-------------------|------------|
-| `build-schema` | Rebuilds GraphQL schema from the JavaScript definition. |
-| `build-mui-icon-list` | Re-builds list of icons based on the ones available in Material-UI. If `if( key > 50 ) return;` is uncommented, all icons will be generated. It becomes quite the page and webpack voices objections, but it works. |
-| `build-webpack` | Runs a webpack build in order to run in production mode. Created and populates `public/assets/{Version}``. |
+| **Task**               | **Details**|
+|------------------------|------------|
+| `build-schema`         | Rebuilds GraphQL schema from the JavaScript definition. |
+| `build-mui-icon-list`  | Re-builds list of icons based on the ones available in Material-UI. If `if( key > 50 ) return;` is uncommented, all icons will be generated. It becomes quite the page and webpack voices objections, but it works. |
+| `build-webpack`        | Runs a webpack build in order to run in production mode. Created and populates `public/assets/{Version}``. |
 
 ### Run
 
-| **Task**          | **Details**|
-|-------------------|------------|
-| `start-webpack` | Starts the webpack development server, responsible for asset compilation and hot reload. |
-| `start-dev` | Starts the application server in development mode. |
-| `start` | Run in production mode. |
+| **Task**               | **Details**|
+|------------------------|------------|
+| `start-webpack`        | Starts the webpack development server, responsible for asset compilation and hot reload. |
+| `start-dev`            | Starts the application server in development mode. |
+| `start`                | Run in production mode. |
 
 ### Running in development mode
 
@@ -144,13 +144,13 @@ If you are running this on Mac, you would use two separate terminal windows and 
 
 The following environment variables can be used to control the server:
 
-| Variable Name                  | Description                                                    |
-| ------------------------------ | ---------------------------------------------------------------|
-| PORT                           | Port for serving the SPA web application and API               |
-| HOST                           | For for serving                                                |
-| JWT_SECRET                     | Secret used for JWT tokens.                                    |
-| CASSANDRA_CONNECTION_POINTS    | Cassandra connection point. `localhost` if on the same machine |
-| CASSANDRA_KEYSPACE             | Cassandra keyspace/database                                    |
+| Variable Name                  | Description                                                     |
+| ------------------------------ | ----------------------------------------------------------------|
+| PORT                           | Port for serving the SPA web application and API.               |
+| HOST                           | For for serving .                                               |
+| JWT_SECRET                     | Secret used for JWT tokens.                                     |
+| CASSANDRA_CONNECTION_POINTS    | Cassandra connection point. `localhost` if on the same machine. |
+| CASSANDRA_KEYSPACE             | Cassandra keyspace/database.                                    |
 
 They can be set in the `.env` file in the root of the project. `Example.env` in
 the documents folder contains an example of such file. It is copied to `.env` in `postinstall`.
@@ -172,38 +172,49 @@ Below is the list of the main files and folders for this project. Asterisk on th
 | Folder/File                                   | Description                                                    |  |
 | --------------------------------------------- | ---------------------------------------------------------------| --- |
 | `data/`                                       | Methods and data access functions | [*](./data/) |
-| `data/da/`                                    | Data access functions | [*](./data/da/) |
-| `data/da/{Entity}.js`                         | Data access functions for {Entity}. Exported functions are named DA_{Entity}_* |
+| `data/da/`                                    | Data access functions. | [*](./data/da/) |
+| `data/da/{Entity}.js`                         | Data access functions for {Entity}. Exported functions are named DA_{Entity}_*. Simply points either into memory, or Cassandra. |
+| `data/da_cassandra/_client.js`                | Promisified Cassandra client. | [*](./data/da_cassandra/_client.js) |
+| `data/da_cassandra/{Entity}.js`               | Data access functions for {Entity} implemented for Cassandra. |
+| `data/da_memory/generateUUID.js`              | Simple function for generating UUIDs. | [*](./data/da_memory/generateUUID.js) |
+| `data/da_memory/{Entity}.js`                  | Data access functions for {Entity} implemented as in-memory transient storage. |
 | `data/model/`                                 | Models | [*](./data/model/) |
-| `data/model/{Entity}.js`                      | Model for {Entity}. Default class for that entity is exported |
-| `doc/`                                        | Misc. documentation | [*](./doc/) |
-| `doc/example.env`                             | Example of a `.env` file. Also copied into `\.env` in `setup-local` script | [*](./doc/example.env) |
+| `data/model/{Entity}.js`                      | Model for {Entity}. Default class for that entity is exported. |
+| `doc/`                                        | Misc. documentation. | [*](./doc/) |
+| `doc/example.env`                             | Example of a `.env` file. Also copied into `\.env` in `setup-local` script. | [*](./doc/example.env) |
 | `graphql/`                                    | Holds the elements of the GraphQL schema. | [*](./graphql/) |
-| `graphql/interface/NodeInterface.js`          | The main node interface | [*](./graphql/interface/NodeInterface.js) |
-| `graphql/mutations/`                          | All the mutations | [*](./graphql/mutations/) |
-| `graphql/mutations/{Entity}_{Mutation}.js`    | One mutation |
+| `graphql/interface/NodeInterface.js`          | The main node interface. | [*](./graphql/interface/NodeInterface.js) |
+| `graphql/mutations/`                          | All the mutations. | [*](./graphql/mutations/) |
+| `graphql/mutations/{Entity}_{Mutation}.js`    | One mutation. |
 | `graphql/type/`                               | All types, including system types, entity types, connections, etc. | [*](./graphql/type/) |
-| `graphql/type/MutationType.js`                | Type that includes all the mutations | [*](./graphql/type/MutationType.js) |
-| `graphql/type/QueryType.js`                   | Query type that resolves nodes to entities | [*](./graphql/type/QueryType.js) |
-| `graphql/type/ViewerType.js`                  | Current user and entry point for any information retrieved | [*](./graphql/type/ViewerType.js) |
-| `graphql/type/{Entity}Type.js`                | Type for an entity |
-| `graphql/types/*Connection.js`                | Connection between two types |
-| `graphql/schema.graphql`                      | Human readable representation of the schema. Not checked into git. Generated by `build-schema` |
+| `graphql/type/MutationType.js`                | Type that includes all the mutations. | [*](./graphql/type/MutationType.js) |
+| `graphql/type/QueryType.js`                   | Query type that resolves nodes to entities. | [*](./graphql/type/QueryType.js) |
+| `graphql/type/ViewerType.js`                  | Current user and entry point for any information retrieved. | [*](./graphql/type/ViewerType.js) |
+| `graphql/type/{Entity}Type.js`                | Type for an entity. |
+| `graphql/types/*Connection.js`                | Connection between two types. |
+| `graphql/schema.graphql`                      | Human readable representation of the schema. Not checked into git. Generated by `build-schema`. |
 | `graphql/schema.js`                           | Entry point for the schema, points at the query type and the mutation type. | [*](./graphql/schema.js) |
 | `graphql/schema.json`                         | Schema in JSON format. Must exist for `build-schema` to run, but is re-generated by it. | [*](./graphql/schema.json) |
 | `public/`                                     | This folder is served as root of the website. | [*](./public/) |
-| `public/assets/`                              | Assets generated by webpack |
-| `public/assets/{Version}/app.css`             | Not much to see |
-| `public/assets/{Version}/app.js`              | All the nice ES5-compliant JavaScript for the SPA |
-| `scripts/build-mui-icon-list.js`              | Rebuilds the list of Materual-UI icons. Modify this file to control how many icons are displayed | [*](./scripts/build-mui-icon-list.js) |
-| `scripts/build-schema.js`                     | Rebuilds the GraphQL schema files. Must be run when the schema is modified | [*](./scripts/build-schema.js) |
-| `server/`                                     | The Node.js server serving isomorphic content, GraphQL, public files and authentication requests | [*](./server/) |
-| `server/auth.js`                              | Authentication service, verifies user name and password and creates JWT tokens | [*](./server/auth.js) |
-| `server/server.js`                            | Main script | [*](./server/server.js) |
-
-TODO: Describe these too:
-
-* `/webapp/styles/` - folder for any styles that will be processed by webpack.
+| `public/assets/`                              | Assets generated by webpack. |
+| `public/assets/{Version}/app.css`             | CSS assets compiled by WebPack. Not much to see. |
+| `public/assets/{Version}/app.js`              | All the nice ES5-compliant JavaScript for the SPA. |
+| `scripts/build-mui-icon-list.js`              | Rebuilds the list of Materual-UI icons. Modify this file to control how many icons are displayed. | [*](./scripts/build-mui-icon-list.js) |
+| `scripts/build-schema.js`                     | Rebuilds the GraphQL schema files. Must be run when the schema is modified. | [*](./scripts/build-schema.js) |
+| `scripts/cassandra-init.cql`                  | CQL Script for creating and seeding the Cassandra database. | [*](./scripts/cassandra-init.cql) |
+| `server/`                                     | The Node.js server serving isomorphic content, GraphQL, public files and authentication requests. | [*](./server/) |
+| `server/auth.js`                              | Authentication service, verifies user name and password and creates JWT tokens. | [*](./server/auth.js) |
+| `server/server.js`                            | Main script. | [*](./server/server.js) |
+| `webapp/`                                     | Root for the entire web application. | [*](./webapp/) |
+| `webapp/components/`                          | All the JSX components used by the web app. | [*](./webapp/components/) |
+| `webapp/mutations/`                           | Client side GraphQL mutations. | [*](./webapp/mutations/) |
+| `webapp/queries/`                             | Common GraphQL queries. | [*](./webapp/queries/) |
+| `webapp/queries/ViewerQueries.js`             | Query used for all the Relay containers. | [*](./webapp/queries/ViewerQueries.js) |
+| `webapp/scripts/`                             | Scripts used by the client. | [*](./webapp/scripts/) |
+| `webapp/styles/`                              | Styles used by the client. | [*](./webapp/styles/) |
+| `webapp/styles/main.css`                      | Example style included in the app. Currently not used. | [*](./webapp/styles/main.css) |
+| `webapp/views/`                               | Views served by the express web app. | [*](./webapp/views/) |
+| `webapp/views/index.ejs`                      | Template for the HTML served by the isomorphic server rendered. | [*](./webapp/views/index.ejs) |
 
 
 
