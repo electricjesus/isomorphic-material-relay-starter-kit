@@ -6,7 +6,7 @@ const User_0 = new User( { id: 0, username: '', password: '', displayName: 'Anon
 export function DA_User_getByUserName( username )
 {
   const query = sql.select( )
-    .from( 'User' )
+    .from( '"User"' )
     .where( 'username=?', username )
     .toParam( )
   ;
