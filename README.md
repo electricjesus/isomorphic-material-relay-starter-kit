@@ -10,7 +10,7 @@ IMRSK started as an off-shoot of multiple projects and boilerplates we use at [C
 
 Apache Cassandra is not part of this project yet. We are hoping to be able to bring it in soon.
 
-# WARNING: Since version 0.6.4 we changed the user_id s so the auth_token cookies are invalid and will crash the server. Please delete them first.
+# WARNING: Since version 0.6.4 we changed the user_id s so the auth_token cookies are invalid and will crash the client. Please delete the cookies first.
 
 Naturally the server should be able to figure it out. Coming soon to a repository near you.
 
