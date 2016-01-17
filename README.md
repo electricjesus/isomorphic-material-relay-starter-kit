@@ -2,7 +2,7 @@
 
 IMRSK started as an off-shoot of multiple projects and boilerplates we use at [Code Foundries](http://codefoundries.com). It is an attempt to provide and organize a well thought out starting point for future projects. It also contains samples of techniques that tie all the underlying technologies together. Baseline functionality like user log in, authentication, etc. is included.
 
-| How to try | **Link**|
+| How to try     | **Link**|
 |----------------|----------------|
 | Live Demo | [http://isomorphic-material-relay.herokuapp.com/](http://isomorphic-material-relay.herokuapp.com/) This is a free dyno, so give it some time to spin up. |
 | Run locally | [Local Setup](./doc/Setup-Local.md) |
@@ -10,9 +10,11 @@ IMRSK started as an off-shoot of multiple projects and boilerplates we use at [C
 
 Apache Cassandra is not part of this project yet. We are hoping to be able to bring it in soon.
 
-# WARNING: We recently changed the user_id s so the auth_token cookies are invalid and will crash the server. Please delete them first.
+# WARNING: Since version 0.6.4 we changed the user_id s so the auth_token cookies are invalid and will crash the server. Please delete them first.
 
 Naturally the server should be able to figure it out. Coming soon to a repository near you.
+
+
 
 ## Underlying technologies
 
@@ -30,7 +32,9 @@ Naturally the server should be able to figure it out. Coming soon to a repositor
 | [Webpack](http://webpack.github.io) | Bundles npm packages and the application Java Script into a single file. Includes hot reloading via [react-transform-hmr](https://www.npmjs.com/package/react-transform-hmr). Also, Webpack can bundle any required CSS. |
 | [Node.js](https://nodejs.org)| Event-driven, non-blocking I/O runtime based on JavaScript that is lightweight and efficient. |
 | [npm Scripts](https://docs.npmjs.com/misc/scripts)| Glues all this together in a handy automated build. |
-| [Apache Cassandra](http://cassandra.apache.org/) | The database you are looking for. Not part of the project just yet. |
+| [Apache Cassandra](http://cassandra.apache.org/) | The database you are looking for. Work in progress. |
+
+
 
 ## Features
 
@@ -45,13 +49,96 @@ Naturally the server should be able to figure it out. Coming soon to a repositor
 | Material Design | Expanding upon the "card" motifs that debuted in Google Now, Material Design makes more liberal use of grid-based layouts, responsive animations and transitions, padding, and depth effects such as lighting and shadows. |
 | Responsive Design | Mainly through the features of the Material UI library, the examples in IMRSK work well on different form factors, ranging from desktop browsers to mobile phones. |
 | Hot Reload | The webpack development server supports hot reload when components are changed. The IMRSK is configured with hot reload. |
-| Built for speed | The starter kit is configured to use established practices for optimizing speed like caching and compression. This entails certain requirements about how it is used, read in the Speed and Building section below |
+| Built for speed | The starter kit is configured to use established practices for optimizing speed like caching and compression. This entails certain requirements about how it is used, read in the Speed and Building section below. |
 
-## Setup, building and running
+
+
+## Setup
 
 * Quick [Local Setup](./doc/Setup-Local.md)
-* Quick [Heroku Setup](./doc/Setup-Heroku.md)
-* Detailed [Building and Running](./doc/BuildRun.md) instructions
+
+### Heroku setup
+
+In order to set up the project on heroku, perform the following steps:
+
+* **Install [Heroku Toolbelt](https://toolbelt.heroku.com/)**.
+* **Clone from github** `git clone https://github.com/codefoundries/isomorphic-material-relay-starter-kit`.
+* **Create an app** `heroku create`.
+* **Specify JWT secret** using `heroku config:set JWT_SECRET=tMMoDN3WCZWoV13wpBjUVcgLQRrCP3c3veNMMV5JlxNelC23oAja8eTVSzgK94LR9TpmLrwqGfuiSzOQ` where you replace the secret value with a secret of your choosing. Verify that the value is set with `heroku config`.
+* **Deploy the app** `git push heroku master`.
+
+For more information refer to [Getting Started with Node.js on Heroku - Deploy the app](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app)
+
+### Initial Machine Setup
+
+* **Install [Node.js](https://nodejs.org)**.  
+* **Install [Git](https://git-scm.com/downloads)**.
+
+I have only tested this running on MacOS. I am copying the instructions for other operating systems from the **[React Slingshot](https://github.com/coryhouse/react-slingshot)**. I have not had a chance to test them and would appreciate help with that. If you have done that please open an issue with the results whether successful or not, and feel free to PR to update this document and/or the setup.
+
+## **On Linux:**  
+Run this to [increase the limit](http://stackoverflow.com/questions/16748737/grunt-watch-error-waiting-fatal-error-watch-enospc) on the number of files Linux will watch. [Here's why](https://github.com/coryhouse/react-slingshot/issues/6).    
+`echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
+
+## **On Windows:**  
+1. **Install [Python 2.7](https://www.python.org/downloads/)**. Browser-sync (and various other Node modules) rely on node-gyp, which requires Python on Windows.  
+2. **Install C++ Compiler**. [Visual Studio Express](https://www.visualstudio.com/en-US/products/visual-studio-express-vs) comes bundled with a free C++ compiler. Or, if you already have Visual Studio installed: Open Visual Studio and go to File -> New -> Project -> Visual C++ -> Install Visual C++ Tools for Windows Desktop. The C++ compiler is used to compile browser-sync (and perhaps other Node modules).
+
+I have not tested the Windows setup.
+
+### Project setup
+
+In order to set up the project locally, perform the following steps:
+
+* **Clone from github.** `git clone https://github.com/codefoundries/isomorphic-material-relay-starter-kit`.
+* **Install node packages.** `npm install`.
+* **Perform initial setup.** `npm run setup-local`.
+* **Specify JWT_SECRET** by modifying the `.env` file. This step can be skipped if you do not care about the actual security and simply want to get the project running.
+* **Start the server.** `npm run start`.
+* **The application is available at:** `http://localhost:4444`.
+
+
+
+## NPM tasks
+
+### Setup
+
+| ** Task**         | **Details**|
+|-------------------|------------|
+| `postinstall` | Called by NPM after `npm install`. Configures to use memory data access, re-builds the GraphQL schema and performs a webpack build. |
+| `setup-local`     | Sets up the IMRSK for use on local dev machine. |
+| `setup-cassandra-init` | Drops (if it exists), creates and initializes with sample data a local Cassandra database called `imrsk`. |
+| `config-da-memory` | Configure IMRSK for using in-memory data structures. |
+| `config-da-cassandra` | Configure IMRSK for using Cassandra for persistence. |
+
+### Build
+
+| ** Task**         | **Details**|
+|-------------------|------------|
+| `build-schema` | Rebuilds GraphQL schema from the JavaScript definition. |
+| `build-mui-icon-list` | Re-builds list of icons based on the ones available in Material-UI. If `if( key > 50 ) return;` is uncommented, all icons will be generated. It becomes quite the page and webpack voices objections, but it works. |
+| `build-webpack` | Runs a webpack build in order to run in production mode. Created and populates `public/assets/{Version}``. |
+
+### Run
+
+| ** Task**         | **Details**|
+|-------------------|------------|
+| `start-webpack` | Starts the webpack development server, responsible for asset compilation and hot reload. |
+| `start-dev` | Starts the application server in development mode. |
+| `start` | Run in production mode. |
+
+### Running in development mode
+
+Two separate servers need to be started. The first one is the actual application in development mode. The second server is the webpack server which is to be run at all times for hot replace
+
+* Start application HTTP server: `npm run start-dev`.
+* Start application Webpack server: `npm run start-webpack`.
+
+If you are running this on Mac, you would use two separate terminal windows and leave both servers running. To open the app:
+
+* Navigate to `http://localhost:4444`, unless you specified a different port.
+
+
 
 ## Environment Variables
 
@@ -67,6 +154,8 @@ The following environment variables can be used to control the server:
 
 They can be set in the .env file in the root of the project. Example.env in
 the documents folder contains an example of such file.
+
+
 
 ## Project Structure
 
@@ -116,7 +205,9 @@ TODO: Describe these too:
 
 * `/webapp/styles/` - folder for any styles that will be processed by webpack.
 
-## Speed and Building
+
+
+## Speed and asset version control
 
 This project configured to use compression on all content, and caching on the static content. This delivers spectacular results. The numbers below were obtained using Google Chrome, development tools throttling and cache disabling, on a 2011 series Macbook Pro. The test is performed on the main page. Instance [deployed on Heroku](http://isomorphic-material-relay.herokuapp.com/) was used.
 
@@ -130,6 +221,8 @@ In both cases the UI becomes visible in less than a second. The wait time is to 
 While this is a desirable level of performance, it is important not to forget that caching the static content means caching the SPA code too. The assets generated with webpack are placed into a sub-folder bearing the version of the package as name. Make sure to increase the version number in `package.json` every time you deploy changes to production.
 
 If you add other static content, you might want to revisit how caching of static content is implemented.
+
+
 
 ## Credits and Sources
 
@@ -152,6 +245,8 @@ It contains a boilerplate with several simple code examples. It consists of modi
 * [itayadler's cassandra-paginating-static-columns](https://github.com/itayadler/cassandra-paginating-static-columns/blob/master/index.js). The general approach to working with Cassandra is borrowed from this project, with some changes.
 
 Examples from other open source projects have also been incorporated.
+
+
 
 ## Final word of caution
 
