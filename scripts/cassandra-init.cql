@@ -41,3 +41,6 @@ CREATE TABLE "Compendium"(
   "LikedSunset_Other" boolean,
   "LikedSunset_OtherText" varchar,
 );
+
+CREATE INDEX User_User_id_ix
+ON "Compendium"( User_id );
