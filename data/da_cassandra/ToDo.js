@@ -1,7 +1,18 @@
 import generateUUID from './generateUUID'
-import { DA_User_GetUUIDByID } from './User';
 
 import ToDo from '../model/ToDo'
+
+// Helper function to make sure we get our proper FK ID values
+// The are constant so that we can use our cookies between server restarts
+export function DA_User_GetUUIDByID( id )
+{
+  if( id === 0 )
+    return 0; // Anonymous user is just the number 0
+  if( id === 1 )
+    return 'd362e1df-1fa8-466b-b311-af90b2a71e8e';
+  if( id === 2 )
+    return '33171548-39d3-45d8-ab5c-5eedefe01dfc';
+}
 
 
 // Mock data
