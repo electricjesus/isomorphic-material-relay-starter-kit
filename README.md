@@ -103,7 +103,7 @@ In order to set up the project locally, perform the following steps:
 
 ### Setup
 
-| ** Task**         | **Details**|
+| **Task**          | **Details**|
 |-------------------|------------|
 | `postinstall` | Called by NPM after `npm install`. Configures to use memory data access, re-builds the GraphQL schema and performs a webpack build. |
 | `setup-local`     | Sets up the IMRSK for use on local dev machine. |
@@ -113,7 +113,7 @@ In order to set up the project locally, perform the following steps:
 
 ### Build
 
-| ** Task**         | **Details**|
+| **Task**          | **Details**|
 |-------------------|------------|
 | `build-schema` | Rebuilds GraphQL schema from the JavaScript definition. |
 | `build-mui-icon-list` | Re-builds list of icons based on the ones available in Material-UI. If `if( key > 50 ) return;` is uncommented, all icons will be generated. It becomes quite the page and webpack voices objections, but it works. |
@@ -121,7 +121,7 @@ In order to set up the project locally, perform the following steps:
 
 ### Run
 
-| ** Task**         | **Details**|
+| **Task**          | **Details**|
 |-------------------|------------|
 | `start-webpack` | Starts the webpack development server, responsible for asset compilation and hot reload. |
 | `start-dev` | Starts the application server in development mode. |
