@@ -4,7 +4,7 @@
   "author": "Aleksandar Chalakov and Code Foundries",
   "license": "MIT",
   "homepage": "https://github.com/codefoundries/isomorphic-material-relay-starter-kit",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codefoundries/isomorphic-material-relay-starter-kit.git"
@@ -35,11 +35,14 @@
     "npm": "3.3.6"
   },
   "scripts": {
-    "postinstall": "npm run build-schema && npm run build-webpack",
+    "postinstall": "npm run config-da-memory && npm run build-schema && npm run build-webpack",
     "setup-local": "cp ./doc/Example.env ./.env",
+    "setup-cassandra-init": "cqlsh -f ./scripts/cassandra-init.cql",
     "build-schema": "./node_modules/.bin/babel-node ./scripts/build-schema.js",
     "build-webpack": "./node_modules/.bin/webpack -p --output-filename app.js",
     "build-mui-icon-list": "./node_modules/.bin/babel-node ./scripts/build-mui-icon-list.js",
+    "config-da-memory": "./node_modules/.bin/replace da_cassandra da_memory ./data/da/*",
+    "config-da-cassandra": "./node_modules/.bin/replace da_memory da_cassandra ./data/da/*",
     "start-webpack": "./node_modules/.bin/webpack-dev-server --hot --inline --progress --colors",
     "start-dev": "export NODE_ENV=development && nodemon --exec ./node_modules/.bin/babel-node -- ./server/server.js",
     "start": "export NODE_ENV=production && ./node_modules/.bin/babel-node ./server/server.js"
@@ -63,9 +66,9 @@
     "babel-relay-plugin": "^0.6.3",
     "babel-relay-plugin-loader": "^0.6.3",
     "babel-runtime": "^6.3.19",
-    "bluebird": "^3.1.1",
     "body-parser": "^1.14.1",
     "cassandra-driver": "^3.0.0",
+    "chalk": "^1.1.1",
     "classnames": "^2.2.0",
     "compression": "^1.6.0",
     "cookie-parser": "^1.4.0",
@@ -91,6 +94,7 @@
     "react-relay": "^0.6.1",
     "react-router": "^2.0.0-rc4",
     "react-tap-event-plugin": "^0.2.1",
+    "replace": "^0.3.0",
     "seq-queue": "0.0.5",
     "squel": "^4.2.2",
     "style-loader": "^0.12.4",
