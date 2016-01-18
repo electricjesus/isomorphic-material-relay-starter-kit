@@ -214,7 +214,7 @@ class Compendium extends React.Component
             fullWidth={ true }
           />
           <div>
-            What kidn of sunsets do you like?
+            What kind of sunsets do you like?
           </div>
           <Checkbox
             label="Over the ocean"

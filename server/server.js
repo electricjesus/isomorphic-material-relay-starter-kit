@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import graphQLHTTP from 'express-graphql';
@@ -12,11 +13,11 @@ import schema from '../graphql/schema'; // Schema for GraphQL server
 // Read environment
 require( 'dotenv' ).load( );
 
-console.log( '--------------------------------------------------------------------------------' );
-console.log( process.env.npm_package_name + ' ' + process.env.npm_package_version + ' running as ' + process.env.NODE_ENV );
-console.log( 'Serving at ' + process.env.HOST + ':' + process.env.PORT );
-console.log( 'Cassandra keyspace ' + JSON.stringify( process.env.CASSANDRA_KEYSPACE ) + ', connection points ' + JSON.stringify( process.env.CASSANDRA_CONNECTION_POINTS.split( ',' ) ) );
-console.log( '--------------------------------------------------------------------------------' );
+console.log( chalk.blue( '----------------------------------------------------------------------------------------------------' ) );
+console.log( 'Application ' + chalk.bold.magenta( process.env.npm_package_name ) + ' version ' + chalk.bold.magenta( process.env.npm_package_version ) + ' running in ' + chalk.bold.magenta( process.env.NODE_ENV ) );
+console.log( 'Serving at ' + chalk.bold.magenta( process.env.HOST ) + ':' + chalk.bold.magenta( process.env.PORT ) );
+console.log( 'Cassandra keyspace ' + chalk.bold.magenta( process.env.CASSANDRA_KEYSPACE ) + ', connection points ' + chalk.bold.magenta( JSON.stringify( process.env.CASSANDRA_CONNECTION_POINTS.split( ',' ) ) ) );
+console.log( chalk.blue( '----------------------------------------------------------------------------------------------------' ) );
 
 let router = express( );
 
@@ -28,13 +29,22 @@ router.use( cookieParser( ) );
 
 // Graphql server
 router.use( '/graphql', graphQLHTTP( request => {
-  let user_id = 0;
-  if( request.cookies.auth_token )
-    if( request.cookies.auth_token.length > 10 )
-    {
-      var decoded = jwt.decode( request.cookies.auth_token, process.env.JWT_SECRET );
-      user_id = decoded.user_id;
-    }
+  let user_id = '00000000-0000-0000-0000-000000000000'; // Anonymous
+  try
+  {
+    if( request.cookies.auth_token )
+      if( request.cookies.auth_token.length > 10 )
+      {
+        var decoded = jwt.decode( request.cookies.auth_token, process.env.JWT_SECRET );
+        user_id = decoded.user_id;
+      }
+  }
+  catch( err )
+  {
+    console.log( chalk.bold.red( "Failure while decoding JWT token, using anonymous instead." ) );
+    console.log( chalk.red( err.message ) );
+    console.log( chalk.blue( '.' ) );
+  }
 
   return( {
     schema: schema,

@@ -1,89 +1,107 @@
-import generateUUID from './generateUUID'
+import { runQuery, runQueryOneResult, runQueryNoResult, Uuid } from './_client.js';
+
 import Compendium from '../model/Compendium'
-
-// Helper function to make sure we get our proper FK ID values
-// The are constant so that we can use our cookies between server restarts
-export function DA_User_GetUUIDByID( id )
-{
-  if( id === 0 )
-    return 0; // Anonymous user is just the number 0
-  if( id === 1 )
-    return 'd362e1df-1fa8-466b-b311-af90b2a71e8e';
-  if( id === 2 )
-    return '33171548-39d3-45d8-ab5c-5eedefe01dfc';
-}
-
-// Mock data
-
-var Compendium_listById = { };
-var Compendium_IDsByUser = { };
-Compendium_IDsByUser[ DA_User_GetUUIDByID( 0 ) ] = [ ];
-Compendium_IDsByUser[ DA_User_GetUUIDByID( 1 ) ] = [ ];
-Compendium_IDsByUser[ DA_User_GetUUIDByID( 2 ) ] = [ ];
-
-for( let User_id = 0 ; User_id < 3; User_id++ )
-  DA_Compendium_add( {
-    id: generateUUID( ),
-    User_id: DA_User_GetUUIDByID( User_id ),
-    Compendium_FirstTextInput: "I am first with five",
-    Compendium_RangedNumber: 35,
-    Compendium_Excitement: 3,
-    Compendium_FollowUpQuestion: "Then seven in the middle",
-    Compendium_FavoriteMammal: 3,
-    Compendium_FavoriteMammalOtherText: "",
-    Compendium_LastText: "Five again to end",
-    Compendium_LikedSunset_Ocean: false,
-    Compendium_LikedSunset_Lake: false,
-    Compendium_LikedSunset_Mountains: false,
-    Compendium_LikedSunset_Plains: false,
-    Compendium_LikedSunset_Purple: false,
-    Compendium_LikedSunset_Green: false,
-    Compendium_LikedSunset_Other: false,
-    Compendium_LikedSunset_OtherText: "",
-  } );
-
 
 // Data access functions
 
 export function DA_Compendium_add( fields )
 {
-  var a_Compendium = new Compendium( fields );
-
-  Compendium_listById[ a_Compendium.id ] = a_Compendium;
-  Compendium_IDsByUser[ a_Compendium.User_id ].push( a_Compendium.id );
-
-  return a_Compendium.id;
+  let cqlText = 'INSERT INTO "Compendium" (id, "Compendium_User_id", "Compendium_FirstTextInput", "Compendium_RangedNumber", "Compendium_Excitement", "Compendium_FollowUpQuestion", "Compendium_FavoriteMammal", "Compendium_FavoriteMammalOtherText", "Compendium_LastText", "Compendium_LikedSunset_Ocean", "Compendium_LikedSunset_Lake", "Compendium_LikedSunset_Mountains", "Compendium_LikedSunset_Plains", "Compendium_LikedSunset_Purple", "Compendium_LikedSunset_Green", "Compendium_LikedSunset_Other", "Compendium_LikedSunset_OtherText") VALUES (uuid(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+  let cqlParams = [
+    fields.Compendium_User_id,
+    fields.Compendium_FirstTextInput,
+    fields.Compendium_RangedNumber,
+    fields.Compendium_Excitement,
+    fields.Compendium_FollowUpQuestion,
+    fields.Compendium_FavoriteMammal,
+    fields.Compendium_FavoriteMammalOtherText,
+    fields.Compendium_LastText,
+    fields.Compendium_LikedSunset_Ocean,
+    fields.Compendium_LikedSunset_Lake,
+    fields.Compendium_LikedSunset_Mountains,
+    fields.Compendium_LikedSunset_Plains,
+    fields.Compendium_LikedSunset_Purple,
+    fields.Compendium_LikedSunset_Green,
+    fields.Compendium_LikedSunset_Other,
+    fields.Compendium_LikedSunset_OtherText,
+  ];
+  return runQueryNoResult( cqlText, cqlParams );
 }
 
 export function DA_Compendium_update( id, fields )
 {
-  var a_Compendium = DA_Compendium_get( id );
-
-  a_Compendium.Compendium_FirstTextInput          = fields.Compendium_FirstTextInput;
-  a_Compendium.Compendium_RangedNumber            = fields.Compendium_RangedNumber;
-  a_Compendium.Compendium_Excitement              = fields.Compendium_Excitement;
-  a_Compendium.Compendium_FollowUpQuestion        = fields.Compendium_FollowUpQuestion;
-  a_Compendium.Compendium_FavoriteMammal          = fields.Compendium_FavoriteMammal;
-  a_Compendium.Compendium_FavoriteMammalOtherText = fields.Compendium_FavoriteMammalOtherText;
-  a_Compendium.Compendium_LastText                = fields.Compendium_LastText;
-  a_Compendium.Compendium_LikedSunset_Ocean       = fields.Compendium_LikedSunset_Ocean;
-  a_Compendium.Compendium_LikedSunset_Lake        = fields.Compendium_LikedSunset_Lake;
-  a_Compendium.Compendium_LikedSunset_Mountains   = fields.Compendium_LikedSunset_Mountains;
-  a_Compendium.Compendium_LikedSunset_Plains      = fields.Compendium_LikedSunset_Plains;
-  a_Compendium.Compendium_LikedSunset_Purple      = fields.Compendium_LikedSunset_Purple;
-  a_Compendium.Compendium_LikedSunset_Green       = fields.Compendium_LikedSunset_Green;
-  a_Compendium.Compendium_LikedSunset_Other       = fields.Compendium_LikedSunset_Other;
-  a_Compendium.Compendium_LikedSunset_OtherText   = fields.Compendium_LikedSunset_OtherText;
+  // We will not update Compendium_User_id since it makes no sense to update it
+  let cqlText = 'UPDATE "Compendium" SET "Compendium_FirstTextInput" = ?, "Compendium_RangedNumber" = ?, "Compendium_Excitement" = ?, "Compendium_FollowUpQuestion" = ?, "Compendium_FavoriteMammal" = ?, "Compendium_FavoriteMammalOtherText" = ?, "Compendium_LastText" = ?, "Compendium_LikedSunset_Ocean" = ?, "Compendium_LikedSunset_Lake" = ?, "Compendium_LikedSunset_Mountains" = ?, "Compendium_LikedSunset_Plains" = ?, "Compendium_LikedSunset_Purple" = ?, "Compendium_LikedSunset_Green" = ?, "Compendium_LikedSunset_Other" = ?, "Compendium_LikedSunset_OtherText" = ? WHERE id = ?;';
+  let cqlParams = [
+    fields.Compendium_FirstTextInput,
+    fields.Compendium_RangedNumber,
+    fields.Compendium_Excitement,
+    fields.Compendium_FollowUpQuestion,
+    fields.Compendium_FavoriteMammal,
+    fields.Compendium_FavoriteMammalOtherText,
+    fields.Compendium_LastText,
+    fields.Compendium_LikedSunset_Ocean,
+    fields.Compendium_LikedSunset_Lake,
+    fields.Compendium_LikedSunset_Mountains,
+    fields.Compendium_LikedSunset_Plains,
+    fields.Compendium_LikedSunset_Purple,
+    fields.Compendium_LikedSunset_Green,
+    fields.Compendium_LikedSunset_Other,
+    fields.Compendium_LikedSunset_OtherText,
+    id,
+  ];
+  return runQueryNoResult( cqlText, cqlParams );
 }
 
 export function DA_Compendium_get( id )
 {
-  return Compendium_listById[ id ];
+  const cqlText = 'SELECT * FROM "Compendium" WHERE id = ?;';
+  const cqlParams = [ id ];
+
+  return runQueryOneResult( Compendium, cqlText, cqlParams );
 }
 
-export function DA_Compendium_list( user_id )
+export function DA_Compendium_list( Compendium_User_id, notMyFirstRodeo )
 {
-  return Compendium_IDsByUser[ user_id ].map( id => Compendium_listById[ id ] );
+  const cqlText = 'SELECT * FROM "Compendium" WHERE "Compendium_User_id" = ?;';
+  const cqlParams = [ Compendium_User_id ];
 
-  return result;
+  return runQuery( Compendium, cqlText, cqlParams )
+  .then( ( list_Compendium ) => {
+
+    if( list_Compendium.length == 0 && ( ! notMyFirstRodeo ) )
+      return DA_Compendium_add( {
+        Compendium_User_id: Compendium_User_id,
+        Compendium_FirstTextInput: "",
+        Compendium_RangedNumber: 0,
+        Compendium_Excitement: 0,
+        Compendium_FollowUpQuestion: "",
+        Compendium_FavoriteMammal: 0,
+        Compendium_FavoriteMammalOtherText: "",
+        Compendium_LastText: "",
+        Compendium_LikedSunset_Ocean: false,
+        Compendium_LikedSunset_Lake: false,
+        Compendium_LikedSunset_Mountains: false,
+        Compendium_LikedSunset_Plains: false,
+        Compendium_LikedSunset_Purple: false,
+        Compendium_LikedSunset_Green: false,
+        Compendium_LikedSunset_Other: false,
+        Compendium_LikedSunset_OtherText: "",
+      } )
+      .then( ( ) => {
+        // TODO Calling it recursively, knowing that the entry is written this time and it won't be a loop.
+        // Depending how Cassandra is configured, that may possibly not be true. Just in case of something
+        // going wrong in order to prevent and endless recusrion, let the function know it's not the first time
+        // it is running. That said, the screen will fail because the edge will have no nodes.
+
+        // A better approach will be to create the record and give it UUID generated on the client, this way
+        // a list can be returned containing this record, without having a query back to the database be able
+        // to retrieve it.
+        return DA_Compendium_list( Compendium_User_id, true );
+      } )
+      ;
+    else
+      return list_Compendium;
+  } )
+  ;
 }

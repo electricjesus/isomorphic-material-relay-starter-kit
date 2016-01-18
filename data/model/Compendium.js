@@ -4,7 +4,7 @@ export default class Compendium
   constructor( fields )
   {
     this.id = fields.id;
-    this.User_id = fields.User_id;
+    this.Compendium_User_id = fields.Compendium_User_id;
     this.Compendium_FirstTextInput = fields.Compendium_FirstTextInput;
     this.Compendium_RangedNumber = fields.Compendium_RangedNumber;
     this.Compendium_Excitement = fields.Compendium_Excitement;

@@ -1,21 +1,41 @@
+import chalk from 'chalk';
 import squel from 'squel';
 import cassandraDriver from 'cassandra-driver';
 
 // Read environment
 require( 'dotenv' ).load( );
 
-squel.registerValueHandler( cassandraDriver.types.Uuid, function( uuid ){ return uuid; } );
+//
+export var Uuid = cassandraDriver.types.Uuid;
+
+squel.registerValueHandler( Uuid, function( uuid ){ return uuid; } );
 export const sql = squel;
 
-export const client = new cassandraDriver.Client( { contactPoints: process.env.CASSANDRA_CONNECTION_POINTS.split( ',' ), keyspace: process.env.CASSANDRA_KEYSPACE } );
+export const client = new cassandraDriver.Client( {
+  contactPoints: process.env.CASSANDRA_CONNECTION_POINTS.split( ',' ),
+  keyspace: process.env.CASSANDRA_KEYSPACE
+} );
 
-export function runQuery( objectPrototype, queryText, queryValues )
+function ensureNoErrorOrReport( qText, qVar, err, reject )
 {
+  if( err )
+  {
+    console.log( chalk.bold.red( err ) );
+    console.log( chalk.gray( "Query: " ) + chalk.red( qText ) );
+    console.log( chalk.gray( "Parameters: " ) + chalk.red( JSON.stringify( qVar ) ) );
+    console.log( chalk.blue( "." ) );
+  }
+  else
+    return true;
+}
+
+export function runQuery( objectPrototype, qText, qVar )
+{
+  //console.log( "runQuery [" + qText + "] params=" + JSON.stringify( qVar ) );
   return new Promise( ( resolve, reject ) =>
   {
-    client.execute( queryText, queryValues, ( err, result ) =>
+    client.execute( qText, qVar, {prepare: true}, ( err, result ) => { if( ensureNoErrorOrReport( qText, qVar, err, reject ) )
     {
-      // TODO process errors: assert.ifError(err);
       const resultAsObjects = [ ];
       const rowCount = result.rows.length;
       for( let ixRow = 0 ; ixRow < rowCount ; ixRow++ )
@@ -23,21 +43,20 @@ export function runQuery( objectPrototype, queryText, queryValues )
         let row = result.rows[ ixRow ];
         resultAsObjects.push( new objectPrototype( row ) );
       }
-      console.log( "runQuery: " + JSON.stringify( resultAsObjects ) );
+      //console.log( "runQuery: " + JSON.stringify( resultAsObjects ) );
       resolve( resultAsObjects );
-    } );
+    } } );
   } );
 }
 
-export function runQueryOneResult( objectPrototype, queryText, queryValues )
+export function runQueryOneResult( objectPrototype, qText, qVar )
 {
-  console.log( "runQueryOneResult [" + queryText + "] params=" + JSON.stringify( queryValues ) );
+  //console.log( "runQueryOneResult [" + qText + "] params=" + JSON.stringify( qVar ) );
   return new Promise( ( resolve, reject ) =>
   {
-    client.execute( queryText, queryValues, ( err, result ) =>
+    client.execute( qText, qVar, {prepare: true}, ( err, result ) => { if( ensureNoErrorOrReport( qText, qVar, err, reject ) )
     {
-      // TODO process errors: assert.ifError(err);
-      console.log( "runQueryOneResult [" + queryText + "] params=" + JSON.stringify( queryValues ) + " err=" + JSON.stringify( err ) + " result=" + JSON.stringify( result ) );
+      //console.log( "runQueryOneResult [" + qText + "] params=" + JSON.stringify( qVar ) + " err=" + JSON.stringify( err ) + " result=" + JSON.stringify( result ) );
       if( result.rows.length > 0 )
       {
         const retObj = new objectPrototype( result.rows[ 0 ] );
@@ -45,6 +64,18 @@ export function runQueryOneResult( objectPrototype, queryText, queryValues )
       }
       else
         resolve( null );
-    } );
+    } } );
+  } );
+}
+
+export function runQueryNoResult( qText, qVar )
+{
+  //console.log( "runQueryNoResult [" + qText + "] params=" + JSON.stringify( qVar ) );
+  return new Promise( ( resolve, reject ) =>
+  {
+    client.execute( qText, qVar, {prepare: true}, ( err ) => { if( ensureNoErrorOrReport( qText, qVar, err, reject ) )
+    {
+      resolve( );
+    } } );
   } );
 }

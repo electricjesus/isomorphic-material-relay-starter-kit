@@ -13,7 +13,7 @@ CREATE TABLE "User"(
   "email" varchar,
 );
 
-CREATE INDEX User_username_ix
+CREATE INDEX "User_username_ix"
 ON "User"( username );
 
 insert into "User"( id, "username", "password", "displayName", "email" )
@@ -23,24 +23,24 @@ insert into "User"( id, "username", "password", "displayName", "email" )
 values( 33171548-39d3-45d8-ab5c-5eedefe01dfc, 'jill', 'birthday', 'Jill Daccount', 'jill@example.com' );
 
 CREATE TABLE "Compendium"(
-  id uuid PRIMARY KEY,
-  "User_id" varchar,
-  "FirstTextInput" varchar,
-  "RangedNumber" int,
-  "Excitement" int,
-  "FollowUpQuestion" varchar,
-  "FavoriteMammal" int,
-  "FavoriteMammalOtherText" varchar,
-  "LastText" varchar,
-  "LikedSunset_Ocean" boolean,
-  "LikedSunset_Lake" boolean,
-  "LikedSunset_Mountains" boolean,
-  "LikedSunset_Plains" boolean,
-  "LikedSunset_Purple" boolean,
-  "LikedSunset_Green" boolean,
-  "LikedSunset_Other" boolean,
-  "LikedSunset_OtherText" varchar,
+  "id" uuid PRIMARY KEY,
+  "Compendium_User_id" uuid,
+  "Compendium_FirstTextInput" varchar,
+  "Compendium_RangedNumber" int,
+  "Compendium_Excitement" int,
+  "Compendium_FollowUpQuestion" varchar,
+  "Compendium_FavoriteMammal" int,
+  "Compendium_FavoriteMammalOtherText" varchar,
+  "Compendium_LastText" varchar,
+  "Compendium_LikedSunset_Ocean" boolean,
+  "Compendium_LikedSunset_Lake" boolean,
+  "Compendium_LikedSunset_Mountains" boolean,
+  "Compendium_LikedSunset_Plains" boolean,
+  "Compendium_LikedSunset_Purple" boolean,
+  "Compendium_LikedSunset_Green" boolean,
+  "Compendium_LikedSunset_Other" boolean,
+  "Compendium_LikedSunset_OtherText" varchar,
 );
 
-CREATE INDEX User_User_id_ix
-ON "Compendium"( User_id );
+CREATE INDEX "Compendium_Compendium_User_id_ix"
+ON "Compendium"( "Compendium_User_id" );

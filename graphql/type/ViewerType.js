@@ -23,7 +23,7 @@ export default new GraphQLObjectType( {
     compendiums: {
       type: CompendiumsConnection.connectionType,
       args: { ...connectionArgs },
-      resolve: ( obj, { ...args }, { rootValue: {user_id} } ) => connectionFromArray( DA_Compendium_list( user_id ), args )
+      resolve: ( obj, { ...args }, { rootValue: {user_id} } ) => DA_Compendium_list( user_id ).then( ( list ) => connectionFromArray( list, args ) )
     },
 
     // <-<-<- Compendium access through user

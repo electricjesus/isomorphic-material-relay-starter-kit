@@ -7,7 +7,7 @@ import ToDo from '../model/ToDo'
 export function DA_User_GetUUIDByID( id )
 {
   if( id === 0 )
-    return 0; // Anonymous user is just the number 0
+  return '00000000-0000-0000-0000-000000000000'; // Anonymous user uses UUID also
   if( id === 1 )
     return 'd362e1df-1fa8-466b-b311-af90b2a71e8e';
   if( id === 2 )

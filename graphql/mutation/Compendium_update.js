@@ -29,7 +29,7 @@ export default mutationWithClientMutationId( {
   outputFields: {
     Compendium: {
       type: CompendiumType,
-      resolve: ( {localCompendiumId} ) => DA_Compendium_get( localCompendiumId ),
+      resolve: ( {localId} ) => DA_Compendium_get( localId ),
     },
   },
   mutateAndGetPayload: ( {
@@ -50,9 +50,9 @@ export default mutationWithClientMutationId( {
     Compendium_LikedSunset_Other,
     Compendium_LikedSunset_OtherText,
   } ) => {
-    var local_id = fromGlobalId( id ).id;
-    DA_Compendium_update(
-      local_id,
+    var localId = fromGlobalId( id ).id;
+    return DA_Compendium_update(
+      localId,
       {
         Compendium_FirstTextInput,
         Compendium_RangedNumber,
@@ -70,7 +70,10 @@ export default mutationWithClientMutationId( {
         Compendium_LikedSunset_Other,
         Compendium_LikedSunset_OtherText,
       }
-    );
-    return {local_id};
+    )
+    .then( ( ) => {
+      return {localId};
+    } )
+    ;
   },
 } );

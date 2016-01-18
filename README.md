@@ -54,10 +54,6 @@ Naturally the server should be able to figure it out. Coming soon to a repositor
 
 
 
-## Setup
-
-* Quick [Local Setup](./doc/Setup-Local.md)
-
 ### Heroku setup
 
 In order to set up the project on heroku, perform the following steps:
@@ -68,7 +64,7 @@ In order to set up the project on heroku, perform the following steps:
 * **Specify JWT secret** using `heroku config:set JWT_SECRET=tMMoDN3WCZWoV13wpBjUVcgLQRrCP3c3veNMMV5JlxNelC23oAja8eTVSzgK94LR9TpmLrwqGfuiSzOQ` where you replace the secret value with a secret of your choosing. Verify that the value is set with `heroku config`.
 * **Deploy the app** `git push heroku master`.
 
-For more information refer to excellent [Getting Started with Node.js on Heroku - Deploy the app](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app)
+For more information refer to excellent [Getting Started with Node.js on Heroku - Deploy the app](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app). I do not have an available free Cassandra dyno on Heroku so I can not test how to configure Cassandra.
 
 ### Initial Development Machine Setup
 
@@ -86,7 +82,7 @@ Run this to [increase the limit](http://stackoverflow.com/questions/16748737/gru
 1. **Install [Python 2.7](https://www.python.org/downloads/)**. Browser-sync (and various other Node modules) rely on node-gyp, which requires Python on Windows.  
 2. **Install C++ Compiler**. [Visual Studio Express](https://www.visualstudio.com/en-US/products/visual-studio-express-vs) comes bundled with a free C++ compiler. Or, if you already have Visual Studio installed: Open Visual Studio and go to File -> New -> Project -> Visual C++ -> Install Visual C++ Tools for Windows Desktop. The C++ compiler is used to compile browser-sync (and perhaps other Node modules).
 
-### Initial Project setup
+### Initial Project setup on local machine
 
 In order to set up the project locally, perform the following steps:
 
