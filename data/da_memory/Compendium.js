@@ -81,7 +81,7 @@ export function DA_Compendium_get( id )
   }, 100 ) );
 }
 
-export function DA_Compendium_list( Compendium_User_id )
+export function DA_Compendium_list_get( Compendium_User_id )
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {

@@ -5,7 +5,7 @@ import { connectionArgs, connectionFromArray } from "graphql-relay";
 import NodeInterface from "../interface/NodeInterface";
 
 import User from '../../data/model/User';
-import { DA_Compendium_list } from '../../data/da/Compendium';
+import { DA_Compendium_list_get } from '../../data/da/Compendium';
 import { DA_ToDo_list_get } from '../../data/da/ToDo';
 
 import CompendiumsConnection from "./CompendiumsConnection";
@@ -23,7 +23,7 @@ export default new GraphQLObjectType( {
     compendiums: {
       type: CompendiumsConnection.connectionType,
       args: { ...connectionArgs },
-      resolve: ( obj, { ...args }, { rootValue: {user_id} } ) => DA_Compendium_list( user_id ).then( ( list ) => connectionFromArray( list, args ) )
+      resolve: ( obj, { ...args }, { rootValue: {user_id} } ) => DA_Compendium_list_get( user_id ).then( ( list ) => connectionFromArray( list, args ) )
     },
 
     // <-<-<- Compendium access through user

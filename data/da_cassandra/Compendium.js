@@ -61,7 +61,7 @@ export function DA_Compendium_get( id )
   return runQueryOneResult( Compendium, cqlText, cqlParams );
 }
 
-export function DA_Compendium_list( Compendium_User_id, notMyFirstRodeo )
+export function DA_Compendium_list_get( Compendium_User_id, notMyFirstRodeo )
 {
   const cqlText = 'SELECT * FROM "Compendium" WHERE "Compendium_User_id" = ?;';
   const cqlParams = [ Compendium_User_id ];
@@ -97,7 +97,7 @@ export function DA_Compendium_list( Compendium_User_id, notMyFirstRodeo )
         // A better approach will be to create the record and give it UUID generated on the client, this way
         // a list can be returned containing this record, without having a query back to the database be able
         // to retrieve it.
-        return DA_Compendium_list( Compendium_User_id, true );
+        return DA_Compendium_list_get( Compendium_User_id, true );
       } )
       ;
     else
