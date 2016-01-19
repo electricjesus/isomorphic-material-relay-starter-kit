@@ -44,3 +44,13 @@ CREATE TABLE "Compendium"(
 
 CREATE INDEX "Compendium_Compendium_User_id_ix"
 ON "Compendium"( "Compendium_User_id" );
+
+CREATE TABLE "ToDo"(
+  "id" uuid PRIMARY KEY,
+  "ToDo_User_id" uuid,
+  "ToDo_Text" varchar,
+  "ToDo_Complete" boolean,
+);
+
+CREATE INDEX "ToDo_ToDo_User_id_ix"
+ON "ToDo"( "ToDo_User_id" );
