@@ -5,7 +5,7 @@ export default class ToDo
   {
     this.id = fields.id;
     this.User_id = fields.User_id;
-    this.text = fields.text;
-    this.complete = fields.complete;
+    this.ToDo_Text = fields.ToDo_Text;
+    this.ToDo_Complete = fields.ToDo_Complete;
   }
 }

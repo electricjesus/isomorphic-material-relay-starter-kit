@@ -41,11 +41,11 @@ export default new GraphQLObjectType( {
       },
       resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => connectionFromArray( DA_ToDo_list_get( user_id, status ), args )
     },
-    totalCount: {
+    ToDo_TotalCount: {
       type: GraphQLInt,
       resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => DA_ToDo_list_get( user_id ).length
     },
-    completedCount: {
+    ToDo_CompletedCount: {
       type: GraphQLInt,
       resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => DA_ToDo_list_get( user_id, 'completed' ).length
     },

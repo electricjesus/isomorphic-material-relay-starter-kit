@@ -28,7 +28,10 @@
     "express",
     "webpack",
     "babel",
-    "babel 6"
+    "babel 6",
+    "Cassandra",
+    "Cassandra DB",
+    "cassandra-driver"
   ],
   "engines": {
     "node": "4.2.4",

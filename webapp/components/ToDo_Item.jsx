@@ -19,28 +19,28 @@ class ToDo_Item extends React.Component
     isEditing: false,
   };
 
-  _handleCompletedCheck( event, complete )
+  _handleCompletedCheck( event, ToDo_Complete )
   {
     Relay.Store.commitUpdate(
       new ToDo_updateStatusMutation({
-        complete,
-        todo: this.props.todo,
+        ToDo_Complete,
+        ToDo: this.props.ToDo,
         Viewer: this.props.Viewer,
       })
     );
   }
 
-  _handleTextInputSave( text )
+  _handleTextInputSave( ToDo_Text )
   {
     Relay.Store.commitUpdate(
-      new ToDo_updateRenameMutation({todo: this.props.todo, text})
+      new ToDo_updateRenameMutation({ToDo: this.props.ToDo, ToDo_Text})
     );
   }
 
   _ToDo_delete( )
   {
     Relay.Store.commitUpdate(
-      new ToDo_deleteMutation({todo: this.props.todo, Viewer: this.props.Viewer})
+      new ToDo_deleteMutation({ToDo: this.props.ToDo, Viewer: this.props.Viewer})
     );
   }
 
@@ -50,7 +50,7 @@ class ToDo_Item extends React.Component
     {
       case 'edit':
         console.log( 'edit' );
-        //this.props.onCompleteToDo(this.props.todo.id);
+        //this.props.onCompleteToDo(this.props.ToDo.id);
         break;
       case 'delete':
         console.log( 'delete' );
@@ -75,10 +75,10 @@ class ToDo_Item extends React.Component
 
     return (
       <ListItem
-        primaryText={ this.props.todo.text }
+        primaryText={ this.props.ToDo.ToDo_Text }
         leftCheckbox={
           <Checkbox
-            defaultChecked={ this.props.todo.complete }
+            defaultChecked={ this.props.ToDo.ToDo_Complete }
             onCheck={ this._handleCompletedCheck.bind( this ) }
           />
         }
@@ -90,14 +90,14 @@ class ToDo_Item extends React.Component
 
 export default Relay.createContainer( ToDo_Item, {
   fragments: {
-    todo: () => Relay.QL`
+    ToDo: () => Relay.QL`
       fragment on ToDo {
-        complete,
+        ToDo_Complete,
         id,
-        text,
-        ${ToDo_updateStatusMutation.getFragment('todo')},
-        ${ToDo_deleteMutation.getFragment('todo')},
-        ${ToDo_updateRenameMutation.getFragment('todo')},
+        ToDo_Text,
+        ${ToDo_updateStatusMutation.getFragment('ToDo')},
+        ${ToDo_deleteMutation.getFragment('ToDo')},
+        ${ToDo_updateRenameMutation.getFragment('ToDo')},
       }
     `,
     Viewer: () => Relay.QL`

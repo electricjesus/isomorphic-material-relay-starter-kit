@@ -5,7 +5,7 @@ export default class ToDo_addMutation extends Relay.Mutation {
     Viewer: () => Relay.QL`
       fragment on Viewer {
         id,
-        totalCount,
+        ToDo_TotalCount,
       }
     `,
   };
@@ -18,7 +18,7 @@ export default class ToDo_addMutation extends Relay.Mutation {
         ToDosEdge,
         Viewer {
           ToDos,
-          totalCount,
+          ToDo_TotalCount,
         },
       }
     `;
@@ -40,22 +40,22 @@ export default class ToDo_addMutation extends Relay.Mutation {
   }
   getVariables() {
     return {
-      text: this.props.text,
+      ToDo_Text: this.props.ToDo_Text,
     };
   }
   getOptimisticResponse() {
     return {
-      // FIXME: totalCount gets updated optimistically, but this edge does not
+      // FIXME: ToDo_TotalCount gets updated optimistically, but this edge does not
       // get added until the server responds
       ToDosEdge: {
         node: {
-          complete: false,
-          text: this.props.text,
+          ToDo_Complete: false,
+          ToDo_Text: this.props.ToDo_Text,
         },
       },
       Viewer: {
         id: this.props.Viewer.id,
-        totalCount: this.props.Viewer.totalCount + 1,
+        ToDo_TotalCount: this.props.Viewer.ToDo_TotalCount + 1,
       },
     };
   }

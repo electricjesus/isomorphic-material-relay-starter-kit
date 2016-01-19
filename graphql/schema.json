@@ -377,7 +377,7 @@
               "deprecationReason": null
             },
             {
-              "name": "text",
+              "name": "ToDo_Text",
               "description": null,
               "args": [],
               "type": {
@@ -389,7 +389,7 @@
               "deprecationReason": null
             },
             {
-              "name": "complete",
+              "name": "ToDo_Complete",
               "description": null,
               "args": [],
               "type": {
@@ -550,7 +550,7 @@
               "deprecationReason": null
             },
             {
-              "name": "totalCount",
+              "name": "ToDo_TotalCount",
               "description": null,
               "args": [],
               "type": {
@@ -562,7 +562,7 @@
               "deprecationReason": null
             },
             {
-              "name": "completedCount",
+              "name": "ToDo_CompletedCount",
               "description": null,
               "args": [],
               "type": {
@@ -1401,7 +1401,7 @@
           "fields": null,
           "inputFields": [
             {
-              "name": "complete",
+              "name": "ToDo_Complete",
               "description": null,
               "type": {
                 "kind": "NON_NULL",
@@ -1453,7 +1453,7 @@
           "description": null,
           "fields": [
             {
-              "name": "todo",
+              "name": "ToDo",
               "description": null,
               "args": [],
               "type": {
@@ -1505,7 +1505,7 @@
           "fields": null,
           "inputFields": [
             {
-              "name": "complete",
+              "name": "ToDo_Complete",
               "description": null,
               "type": {
                 "kind": "NON_NULL",
@@ -1821,7 +1821,7 @@
           "description": null,
           "fields": [
             {
-              "name": "todo",
+              "name": "ToDo",
               "description": null,
               "args": [],
               "type": {

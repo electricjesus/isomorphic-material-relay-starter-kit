@@ -43,7 +43,7 @@ class Chrome extends React.Component
 
   render( )
   {
-    let incompleteCount = this.props.Viewer.totalCount - this.props.Viewer.completedCount;
+    let incompleteCount = this.props.Viewer.ToDo_TotalCount - this.props.Viewer.ToDo_CompletedCount;
 
     let incompleteNotification = [ ];
 
@@ -89,7 +89,6 @@ class Chrome extends React.Component
 //
 
 Chrome.contextTypes = {
-//  history: React.PropTypes.object,
   router: React.PropTypes.object.isRequired,
   muiTheme: React.PropTypes.object,
 };
@@ -98,8 +97,8 @@ export default Relay.createContainer( Chrome, {
   fragments: {
     Viewer: () => Relay.QL`
       fragment on Viewer {
-        totalCount,
-        completedCount,
+        ToDo_TotalCount,
+        ToDo_CompletedCount,
       }
     `,
   },

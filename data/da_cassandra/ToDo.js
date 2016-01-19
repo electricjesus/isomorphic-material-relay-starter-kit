@@ -24,12 +24,12 @@ ToDo_IDsByUser[ DA_User_GetUUIDByID( 1 ) ] = [ ];
 ToDo_IDsByUser[ DA_User_GetUUIDByID( 2 ) ] = [ ];
 
 
-DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 0 ), text: 'Taste JavaScript', complete: true } );
-DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 1 ), text: 'Jack buy a unicorn', complete: false } );
-DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 1 ), text: 'Jack sell a pony', complete: false } );
-DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 1 ), text: 'Jack converse a brony', complete: true } );
-DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 2 ), text: 'Jill Minify CSS', complete: false } );
-DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 2 ), text: 'Jill Apply for an accelerator', complete: true } );
+DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 0 ), ToDo_Text: 'Taste JavaScript', ToDo_Complete: true } );
+DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack buy a unicorn', ToDo_Complete: false } );
+DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack sell a pony', ToDo_Complete: false } );
+DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack converse a brony', ToDo_Complete: true } );
+DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 2 ), ToDo_Text: 'Jill Minify CSS', ToDo_Complete: false } );
+DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 2 ), ToDo_Text: 'Jill Apply for an accelerator', ToDo_Complete: true } );
 
 
 // Data access functions
@@ -50,8 +50,8 @@ export function DA_ToDo_update( id, fields )
 {
   var a_ToDo = DA_ToDo_get( id );
 
-  if( 'complete' in fields ) a_ToDo.complete = fields.complete;
-  if( 'text' in fields ) a_ToDo.text = fields.text;
+  if( 'ToDo_Complete' in fields ) a_ToDo.ToDo_Complete = fields.ToDo_Complete;
+  if( 'ToDo_Text' in fields ) a_ToDo.ToDo_Text = fields.ToDo_Text;
 }
 
 export function DA_ToDo_get( id )
@@ -66,19 +66,19 @@ export function DA_ToDo_list_get( user_id, status = 'any' )
   if( status !== 'any' )
   {
     let statusCheck = ( status === 'completed' );
-    ToDo_list = ToDo_list.filter( a_ToDo => a_ToDo.complete === statusCheck );
+    ToDo_list = ToDo_list.filter( a_ToDo => a_ToDo.ToDo_Complete === statusCheck );
   }
 
   return ToDo_list;
 }
 
-export function DA_ToDo_list_updateMarkAll( user_id, complete )
+export function DA_ToDo_list_updateMarkAll( user_id, ToDo_Complete )
 {
   user_id = 0;
   var changedToDos = [];
   DA_ToDo_list_get( user_id ).forEach(a_ToDo => {
-    if (a_ToDo.complete !== complete) {
-      a_ToDo.complete = complete;
+    if (a_ToDo.ToDo_Complete !== ToDo_Complete) {
+      a_ToDo.ToDo_Complete = ToDo_Complete;
       changedToDos.push(a_ToDo);
     }
   });
@@ -95,9 +95,9 @@ export function DA_ToDo_delete( user_id, id )
   delete ToDo_listById[ id ];
 }
 
-export function DA_ToDo_list_deleteCompleted( user_id )
+export function DA_ToDo_list_deleteToDo_Completed( user_id )
 {
-  var ToDo_listToRemove = DA_ToDo_list_get( user_id ).filter( a_ToDo => a_ToDo.complete );
+  var ToDo_listToRemove = DA_ToDo_list_get( user_id ).filter( a_ToDo => a_ToDo.ToDo_Complete );
   ToDo_listToRemove.forEach( a_ToDo => DA_ToDo_delete( user_id, a_ToDo.id ) );
   return ToDo_listToRemove.map( a_ToDo => a_ToDo.id );
 }

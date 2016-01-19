@@ -13,7 +13,7 @@ export default mutationWithClientMutationId( {
     text: { type: new GraphQLNonNull( GraphQLString ) },
   },
   outputFields: {
-    todo: {
+    ToDo: {
       type: ToDoType,
       resolve: ( {localToDoId} ) => DA_ToDo_get(localToDoId),
     }

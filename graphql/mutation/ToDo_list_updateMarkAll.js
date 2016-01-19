@@ -11,7 +11,7 @@ import ViewerType from '../type/ViewerType';
 export default mutationWithClientMutationId( {
   name: 'ToDo_list_updateMarkAll',
   inputFields: {
-    complete: { type: new GraphQLNonNull( GraphQLBoolean ) },
+    ToDo_Complete: { type: new GraphQLNonNull( GraphQLBoolean ) },
   },
   outputFields: {
     changedToDos: {
@@ -23,9 +23,9 @@ export default mutationWithClientMutationId( {
       resolve: ( parent, args, { rootValue: {user_id} } ) => DA_User_get( user_id )
     },
   },
-  mutateAndGetPayload: ( {complete}, { rootValue: {user_id} } ) =>
+  mutateAndGetPayload: ( {ToDo_Complete}, { rootValue: {user_id} } ) =>
   {
-    var changedToDoLocalIds = DA_ToDo_list_updateMarkAll( user_id, complete );
+    var changedToDoLocalIds = DA_ToDo_list_updateMarkAll( user_id, ToDo_Complete );
     return {changedToDoLocalIds};
   }
 } );

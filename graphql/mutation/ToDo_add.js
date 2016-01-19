@@ -11,7 +11,7 @@ import ViewerType from '../type/ViewerType';
 export default mutationWithClientMutationId( {
   name: 'ToDo_add',
   inputFields: {
-    text: { type: new GraphQLNonNull( GraphQLString ) }
+    ToDo_Text: { type: new GraphQLNonNull( GraphQLString ) }
   },
   outputFields: {
     ToDosEdge: {
@@ -30,9 +30,9 @@ export default mutationWithClientMutationId( {
       resolve: ( parent, args, { rootValue: {user_id} } ) => DA_User_get( user_id )
     },
   },
-  mutateAndGetPayload: ( {text}, { rootValue: {user_id} } ) =>
+  mutateAndGetPayload: ( {ToDo_Text}, { rootValue: {user_id} } ) =>
   {
-    var localToDoId = DA_ToDo_add( { User_id: user_id, text: text, complete: false } );
+    var localToDoId = DA_ToDo_add( { User_id: user_id, ToDo_Text: ToDo_Text, ToDo_Complete: false } );
     return {localToDoId};
   }
 } );

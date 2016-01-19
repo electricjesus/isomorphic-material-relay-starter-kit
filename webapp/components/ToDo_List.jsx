@@ -15,7 +15,7 @@ class ToDo_List extends React.Component
   {
     Relay.Store.commitUpdate(
       new ToDo_list_updateMarkAllMutation( {
-        complete: checked,
+        ToDo_Complete: checked,
         ToDos: this.props.Viewer.ToDos,
         Viewer: this.props.Viewer,
       } )
@@ -27,7 +27,7 @@ class ToDo_List extends React.Component
     return this.props.Viewer.ToDos.edges.map(edge =>
       <ToDo_Item
         key={edge.node.id}
-        todo={edge.node}
+        ToDo={edge.node}
         Viewer={this.props.Viewer}
       />
     );
@@ -44,15 +44,15 @@ class ToDo_List extends React.Component
       <Tabs valueLink={ { value: this.props.relay.variables.status, requestChange: this._handleTabsChange.bind( this ) } }>
         <Tab label="All" value="any" />
         <Tab label="Active" value="active" />
-        <Tab label="Completed" value="completed" />
+        <Tab label="Completed" value="ToDo_Completed" />
       </Tabs>
     );
   }
 
   render( )
   {
-    var numToDos = this.props.Viewer.totalCount;
-    var numCompletedToDos = this.props.Viewer.completedCount;
+    var numToDos = this.props.Viewer.ToDo_TotalCount;
+    var numCompletedToDos = this.props.Viewer.ToDo_CompletedCount;
     return (
       <div>
         { this.renderTabs( ) }
@@ -70,7 +70,6 @@ class ToDo_List extends React.Component
 }
 
 ToDo_List.contextTypes = {
-  //history: React.PropTypes.object,
   router: React.PropTypes.object.isRequired,
 };
 
@@ -99,17 +98,17 @@ export default Relay.createContainer( ToDo_List, {
   fragments: {
     Viewer: () => Relay.QL`
       fragment on Viewer {
-        completedCount,
+        ToDo_CompletedCount,
         ToDos(status: $status, first: $limit) {
           edges {
             node {
               id,
-              ${ToDo_Item.getFragment('todo')},
+              ${ToDo_Item.getFragment('ToDo')},
             },
           },
           ${ToDo_list_updateMarkAllMutation.getFragment('ToDos')},
         },
-        totalCount,
+        ToDo_TotalCount,
         ${ToDo_list_updateMarkAllMutation.getFragment('Viewer')},
         ${ToDo_Item.getFragment('Viewer')},
       }
