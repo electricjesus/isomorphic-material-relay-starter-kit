@@ -44,7 +44,7 @@ class ToDo_List extends React.Component
       <Tabs valueLink={ { value: this.props.relay.variables.status, requestChange: this._handleTabsChange.bind( this ) } }>
         <Tab label="All" value="any" />
         <Tab label="Active" value="active" />
-        <Tab label="Completed" value="ToDo_Completed" />
+        <Tab label="Completed" value="completed" />
       </Tabs>
     );
   }
