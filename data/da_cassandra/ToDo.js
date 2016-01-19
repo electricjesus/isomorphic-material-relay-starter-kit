@@ -95,7 +95,7 @@ export function DA_ToDo_delete( user_id, id )
   delete ToDo_listById[ id ];
 }
 
-export function DA_ToDo_list_deleteToDo_Completed( user_id )
+export function DA_ToDo_list_deleteCompleted( user_id )
 {
   var ToDo_listToRemove = DA_ToDo_list_get( user_id ).filter( a_ToDo => a_ToDo.ToDo_Complete );
   ToDo_listToRemove.forEach( a_ToDo => DA_ToDo_delete( user_id, a_ToDo.id ) );
