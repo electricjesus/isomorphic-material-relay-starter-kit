@@ -1,4 +1,4 @@
-import { runQuery, runQueryOneResult, runQueryNoResult, Uuid } from './_client.js';
+import { runQuery, runQueryOneResult, runQueryNoResult } from './_client.js';
 
 import Compendium from '../model/Compendium'
 
