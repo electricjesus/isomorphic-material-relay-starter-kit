@@ -7,18 +7,18 @@ import ToDo from '../model/ToDo'
 // Mock data
 
 var ToDo_listById = { };
-var ToDo_IDsByUser = { };
-ToDo_IDsByUser[ DA_User_GetUUIDByID( 0 ) ] = [ ];
-ToDo_IDsByUser[ DA_User_GetUUIDByID( 1 ) ] = [ ];
-ToDo_IDsByUser[ DA_User_GetUUIDByID( 2 ) ] = [ ];
+var ToDo_id_by_User_id = { };
+ToDo_id_by_User_id[ DA_User_GetUUIDByID( 0 ) ] = [ ];
+ToDo_id_by_User_id[ DA_User_GetUUIDByID( 1 ) ] = [ ];
+ToDo_id_by_User_id[ DA_User_GetUUIDByID( 2 ) ] = [ ];
 
 
-DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 0 ), ToDo_Text: 'Taste JavaScript', ToDo_Complete: true } );
-DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack buy a unicorn', ToDo_Complete: false } );
-DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack sell a pony', ToDo_Complete: false } );
-DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack converse a brony', ToDo_Complete: true } );
-DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 2 ), ToDo_Text: 'Jill Minify CSS', ToDo_Complete: false } );
-DA_ToDo_add( { User_id: DA_User_GetUUIDByID( 2 ), ToDo_Text: 'Jill Apply for an accelerator', ToDo_Complete: true } );
+DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 0 ), ToDo_Text: 'Taste JavaScript', ToDo_Complete: true } );
+DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack buy a unicorn', ToDo_Complete: false } );
+DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack sell a pony', ToDo_Complete: false } );
+DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack converse a brony', ToDo_Complete: true } );
+DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 2 ), ToDo_Text: 'Jill Minify CSS', ToDo_Complete: false } );
+DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 2 ), ToDo_Text: 'Jill Apply for an accelerator', ToDo_Complete: true } );
 
 
 // Data access functions
@@ -30,7 +30,7 @@ export function DA_ToDo_add( fields )
   a_ToDo.id = generateUUID( );
 
   ToDo_listById[ a_ToDo.id ] = a_ToDo;
-  ToDo_IDsByUser[ a_ToDo.User_id ].push( a_ToDo.id );
+  ToDo_id_by_User_id[ a_ToDo.ToDo_User_id ].push( a_ToDo.id );
 
   return a_ToDo.id;
 }
@@ -48,9 +48,19 @@ export function DA_ToDo_get( id )
   return ToDo_listById[ id ];
 }
 
-export function DA_ToDo_list_get( user_id, status = 'any' )
+export function DA_ToDo_delete( User_id, id )
 {
-  let ToDo_list = ToDo_IDsByUser[ user_id ].map( id => ToDo_listById[ id ] );
+  var ix_ToDo = ToDo_id_by_User_id[ User_id ].indexOf( id );
+
+  if( ix_ToDo !== -1 )
+    ToDo_id_by_User_id[ User_id ].splice( ix_ToDo, 1 );
+
+  delete ToDo_listById[ id ];
+}
+
+export function DA_ToDo_list_get( User_id, status = 'any' )
+{
+  let ToDo_list = ToDo_id_by_User_id[ User_id ].map( id => ToDo_listById[ id ] );
 
   if( status !== 'any' )
   {
@@ -61,11 +71,11 @@ export function DA_ToDo_list_get( user_id, status = 'any' )
   return ToDo_list;
 }
 
-export function DA_ToDo_list_updateMarkAll( user_id, ToDo_Complete )
+export function DA_ToDo_list_updateMarkAll( User_id, ToDo_Complete )
 {
-  user_id = 0;
+  User_id = 0;
   var changedToDos = [];
-  DA_ToDo_list_get( user_id ).forEach(a_ToDo => {
+  DA_ToDo_list_get( User_id ).forEach(a_ToDo => {
     if (a_ToDo.ToDo_Complete !== ToDo_Complete) {
       a_ToDo.ToDo_Complete = ToDo_Complete;
       changedToDos.push(a_ToDo);
@@ -74,19 +84,9 @@ export function DA_ToDo_list_updateMarkAll( user_id, ToDo_Complete )
   return changedToDos.map(a_ToDo => a_ToDo.id);
 }
 
-export function DA_ToDo_delete( user_id, id )
+export function DA_ToDo_list_deleteCompleted( User_id )
 {
-  var ix_ToDo = ToDo_IDsByUser[ user_id ].indexOf( id );
-
-  if( ix_ToDo !== -1 )
-    ToDo_IDsByUser[ user_id ].splice( ix_ToDo, 1 );
-
-  delete ToDo_listById[ id ];
-}
-
-export function DA_ToDo_list_deleteCompleted( user_id )
-{
-  var ToDo_listToRemove = DA_ToDo_list_get( user_id ).filter( a_ToDo => a_ToDo.ToDo_Complete );
-  ToDo_listToRemove.forEach( a_ToDo => DA_ToDo_delete( user_id, a_ToDo.id ) );
+  var ToDo_listToRemove = DA_ToDo_list_get( User_id ).filter( a_ToDo => a_ToDo.ToDo_Complete );
+  ToDo_listToRemove.forEach( a_ToDo => DA_ToDo_delete( User_id, a_ToDo.id ) );
   return ToDo_listToRemove.map( a_ToDo => a_ToDo.id );
 }

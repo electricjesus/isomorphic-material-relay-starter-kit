@@ -14,14 +14,23 @@ export default new GraphQLObjectType( {
   name: 'Mutation',
   fields: {
 
+    // ->->-> Compendium mutations
+
     Compendium_update: Compendium_update,
+
+    // <-<-<- Compendium mutations
+
+
+    // ->->-> ToDo mutations
 
     ToDo_add: ToDo_add,
     ToDo_updateStatus: ToDo_updateStatus,
-    ToDo_list_updateMarkAll: ToDo_list_updateMarkAll,
-    ToDo_list_deleteCompleted: ToDo_list_deleteCompleted,
     ToDo_delete: ToDo_delete,
     ToDo_updateRename: ToDo_updateRename,
+    ToDo_list_updateMarkAll: ToDo_list_updateMarkAll,
+    ToDo_list_deleteCompleted: ToDo_list_deleteCompleted,
+
+    // <-<-<- ToDo mutations
 
   },
 } );
