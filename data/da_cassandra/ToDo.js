@@ -1,7 +1,12 @@
-import generateUUID from './generateUUID'
+import { runQuery, runQueryOneResult, runQueryNoResult } from './_client.js';
 
 import ToDo from '../model/ToDo'
 
+
+
+// ->->-> To be removed later
+
+import generateUUID from './generateUUID'
 // Helper function to make sure we get our proper FK ID values
 // The are constant so that we can use our cookies between server restarts
 export function DA_User_GetUUIDByID( id )
@@ -23,67 +28,88 @@ ToDo_id_by_User_id[ DA_User_GetUUIDByID( 0 ) ] = [ ];
 ToDo_id_by_User_id[ DA_User_GetUUIDByID( 1 ) ] = [ ];
 ToDo_id_by_User_id[ DA_User_GetUUIDByID( 2 ) ] = [ ];
 
-
-DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 0 ), ToDo_Text: 'Taste JavaScript', ToDo_Complete: true } );
-DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack buy a unicorn', ToDo_Complete: false } );
-DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack sell a pony', ToDo_Complete: false } );
-DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack converse a brony', ToDo_Complete: true } );
-DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 2 ), ToDo_Text: 'Jill Minify CSS', ToDo_Complete: false } );
-DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 2 ), ToDo_Text: 'Jill Apply for an accelerator', ToDo_Complete: true } );
+// <-<-<- To be removed later
 
 
 // Data access functions
 
 export function DA_ToDo_add( fields )
 {
-  var a_ToDo = new ToDo( fields );
-
-  a_ToDo.id = generateUUID( );
-
-  ToDo_listById[ a_ToDo.id ] = a_ToDo;
-  ToDo_id_by_User_id[ a_ToDo.ToDo_User_id ].push( a_ToDo.id );
-
-  return a_ToDo.id;
+  const id = generateUUID( );
+  let cqlText = 'INSERT INTO "ToDo" (id, "ToDo_User_id", "ToDo_Text", "ToDo_Complete" ) VALUES (?, ?, ?, false);';
+  let cqlParams = [
+    generateUUID( ),
+    fields.ToDo_User_id,
+    fields.ToDo_Text,
+  ];
+  return runQueryNoResult( cqlText, cqlParams ).then( ( ) => id );
 }
 
 export function DA_ToDo_update( id, fields )
 {
-  var a_ToDo = DA_ToDo_get( id );
+  // We will not update ToDo_User_id since it makes no sense to update it
+  let cqlText = 'UPDATE "ToDo" SET ';
 
-  if( 'ToDo_Complete' in fields ) a_ToDo.ToDo_Complete = fields.ToDo_Complete;
-  if( 'ToDo_Text' in fields ) a_ToDo.ToDo_Text = fields.ToDo_Text;
+  let followingItem = false;
+
+  if( 'ToDo_Text' in fields )
+  {
+    cqlText += '"ToDo_Text" = ?';
+    cqlParams.push( fields.ToDo_Text );
+    followingItem = true;
+  }
+  if( followingItem ) cqlText += ', ';
+  if( 'ToDo_Complete' in fields )
+  {
+    cqlText += '"ToDo_Complete" = ?';
+    cqlParams.push( fields.ToDo_Complete );
+    followingItem = true;
+  }
+
+  cqlText += ' WHERE id = ?;';
+  cqlParams.push( id );
+
+  return runQueryNoResult( cqlText, cqlParams );
 }
 
 export function DA_ToDo_get( id )
 {
-  return ToDo_listById[ id ];
+  const cqlText = 'SELECT * FROM "ToDo" WHERE id = ?;';
+  const cqlParams = [ id ];
+
+  return runQueryOneResult( ToDo, cqlText, cqlParams );
 }
 
 export function DA_ToDo_delete( User_id, id )
 {
-  var ix_ToDo = ToDo_id_by_User_id[ User_id ].indexOf( id );
+  const cqlText = 'DELETE FROM "ToDo" WHERE id = ?;';
+  const cqlParams = [ id ];
 
-  if( ix_ToDo !== -1 )
-    ToDo_id_by_User_id[ User_id ].splice( ix_ToDo, 1 );
-
-  delete ToDo_listById[ id ];
+  return runQueryOneResult( ToDo, cqlText, cqlParams );
 }
 
-export function DA_ToDo_list_get( User_id, status = 'any' )
+export function DA_ToDo_list_get( User_id, status )
 {
-  let ToDo_list = ToDo_id_by_User_id[ User_id ].map( id => ToDo_listById[ id ] );
+  let cqlText = 'SELECT * FROM "ToDo" WHERE "ToDo_User_id" = ?';
+  let cqlParams = [ User_id ];
 
-  if( status !== 'any' )
+  if( status != 'any' )
   {
-    let statusCheck = ( status === 'completed' );
-    ToDo_list = ToDo_list.filter( a_ToDo => a_ToDo.ToDo_Complete === statusCheck );
+    // Allow filtering is OK since there won't be that many ToDos per user anyway.
+    cqlText += ' AND "ToDo_Complete" = ? ALLOW FILTERING';
+    cqlParams.push( status === 'completed' );
   }
 
-  return ToDo_list;
+  cqlText += ';';
+
+  return runQuery( ToDo, cqlText, cqlParams );
 }
+
+// ->->-> To be modified later
 
 export function DA_ToDo_list_updateMarkAll( User_id, ToDo_Complete )
 {
+  // TODO this needs to be done in CQL
   User_id = 0;
   var changedToDos = [];
   DA_ToDo_list_get( User_id ).forEach(a_ToDo => {
@@ -97,7 +123,10 @@ export function DA_ToDo_list_updateMarkAll( User_id, ToDo_Complete )
 
 export function DA_ToDo_list_deleteCompleted( User_id )
 {
+  // TODO this needs to be done in CQL
   var ToDo_listToRemove = DA_ToDo_list_get( User_id ).filter( a_ToDo => a_ToDo.ToDo_Complete );
   ToDo_listToRemove.forEach( a_ToDo => DA_ToDo_delete( User_id, a_ToDo.id ) );
   return ToDo_listToRemove.map( a_ToDo => a_ToDo.id );
 }
+
+// <-<-<- To be modified later

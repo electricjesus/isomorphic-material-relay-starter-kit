@@ -39,15 +39,15 @@ export default new GraphQLObjectType( {
         },
         ...connectionArgs,
       },
-      resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => connectionFromArray( DA_ToDo_list_get( user_id, status ), args )
+      resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => DA_ToDo_list_get( user_id, status ).then( ( arr_ToDo ) => connectionFromArray( arr_ToDo, args ) )
     },
     ToDo_TotalCount: {
       type: GraphQLInt,
-      resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => DA_ToDo_list_get( user_id ).length
+      resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => DA_ToDo_list_get( user_id ).then( ( arr_ToDo ) => arr_ToDo.length )
     },
     ToDo_CompletedCount: {
       type: GraphQLInt,
-      resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => DA_ToDo_list_get( user_id, 'completed' ).length
+      resolve: ( obj, { status, ...args }, { rootValue: {user_id} } ) => DA_ToDo_list_get( user_id, 'completed' ).then( ( arr_ToDo ) => arr_ToDo.length )
     },
 
     // <-<-<- ToDo access through user
