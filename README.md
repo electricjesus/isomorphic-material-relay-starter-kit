@@ -121,16 +121,16 @@ In order to set up the project locally, perform the following steps:
 |------------------------|------------|
 | `start-webpack`        | Starts the webpack development server, responsible for asset compilation and hot reload. |
 | `start-dev`            | Starts the application server in development mode. |
+| `dev`                  | Starts the task at the same time: `start-webpack` and` start-dev` |
 | `start`                | Run in production mode. |
 
 ### Running in development mode
 
 Two separate servers need to be started. The first one is the actual application in development mode. The second server is the webpack server which is to be run at all times for hot replace
 
-* Start application HTTP server: `npm run start-dev`.
-* Start application Webpack server: `npm run start-webpack`.
+* Start application HTTP and Webpack server: `npm run dev`.
 
-If you are running this on Mac, you would use two separate terminal windows and leave both servers running. To open the app:
+To open the app:
 
 * Navigate to `http://localhost:4444`, unless you specified a different port.
 
