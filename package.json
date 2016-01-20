@@ -1,7 +1,7 @@
 {
   "name": "isomorphic-material-relay-starter-kit",
   "description": "Starter kit for isomorphic SPA using React/Relay, Material-UI, JWT authentication and samples",
-  "author": "Aleksandar Chalakov and Code Foundries",
+  "author": "Aleksandar Chalakov, Code Foundries and contributors",
   "license": "MIT",
   "homepage": "https://github.com/codefoundries/isomorphic-material-relay-starter-kit",
   "version": "0.6.6",
