@@ -32,7 +32,7 @@ class Home_Screen extends React.Component
             <li><a href="https://facebook.github.io/relay/">Relay / GrpahQL</a></li>
             <li><a href="https://github.com/denvned/isomorphic-relay">Isomorphic Relay</a></li>
             <li><a href="http://www.material-ui.com/">Material-UI</a></li>
-            <li><a href="https://jwt.io/">Java Web Tokens</a></li>
+            <li><a href="https://jwt.io/">JSON Web Tokens</a></li>
           </ul>
           The project source is <a href="https://github.com/codefoundries/isomorphic-material-relay-starter-kit">available on GitHub</a>.
         </CardText>
