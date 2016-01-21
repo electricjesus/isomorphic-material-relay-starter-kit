@@ -26,12 +26,7 @@ export default mutationWithClientMutationId( {
   {
     var localToDoId = fromGlobalId(id).id;
     return DA_ToDo_delete( user_id, localToDoId )
-    .then( ( ) => {localToDoId} )
+    .then( ( ) => ( {id} ) )
     ;
   }
-  // {
-  //   var localToDoId = fromGlobalId(id).id;
-  //   DA_ToDo_delete( user_id, localToDoId );
-  //   return {id};
-  // }
 } );

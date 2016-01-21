@@ -42,7 +42,7 @@ export function DA_ToDo_update( id, fields )
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
-    var a_ToDo = DA_ToDo_get( id );
+    var a_ToDo = ToDo_listById[ id ];
 
     if( 'ToDo_Complete' in fields ) a_ToDo.ToDo_Complete = fields.ToDo_Complete;
     if( 'ToDo_Text' in fields ) a_ToDo.ToDo_Text = fields.ToDo_Text;
@@ -78,15 +78,15 @@ export function DA_ToDo_list_get( User_id, status = 'any' )
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
-    let ToDo_list = ToDo_id_by_User_id[ User_id ].map( id => ToDo_listById[ id ] );
+    let arr_ToDo = ToDo_id_by_User_id[ User_id ].map( id => ToDo_listById[ id ] );
 
     if( status !== 'any' )
     {
       let statusCheck = ( status === 'completed' );
-      ToDo_list = ToDo_list.filter( a_ToDo => a_ToDo.ToDo_Complete === statusCheck );
+      arr_ToDo = arr_ToDo.filter( a_ToDo => a_ToDo.ToDo_Complete === statusCheck );
     }
 
-    resolve( ToDo_list );
+    resolve( arr_ToDo );
   }, 100 ) );
 }
 

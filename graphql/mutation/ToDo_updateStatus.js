@@ -26,7 +26,8 @@ export default mutationWithClientMutationId( {
   },
   mutateAndGetPayload: ( { id, ToDo_Complete } ) => {
     var localToDoId = fromGlobalId(id).id;
-    DA_ToDo_update( localToDoId, { ToDo_Complete: ToDo_Complete } );
-    return {localToDoId};
+    return DA_ToDo_update( localToDoId, { ToDo_Complete: ToDo_Complete } )
+    .then( ( ) => ( {localToDoId} ) )
+    ;
   },
 } );

@@ -18,15 +18,12 @@ export default mutationWithClientMutationId( {
       type: ToDosConnection.edgeType,
       resolve: ( {localToDoId}, args, { rootValue: {user_id} } ) =>
       {
-
-        // TODO This is plainly broken
         let a_ToDo;
-        let arr_ToDo;
         return DA_ToDo_get( localToDoId )
-          .then( ( returned_ToDo ) =>
-            a_ToDo = returned_ToDo
-          )
-          .then( ( ) => DA_ToDo_list_get( user_id ).then( (x) => { arr_ToDo = x } ) )
+          .then( ( retrieved_ToDo ) => {
+            a_ToDo = retrieved_ToDo;
+          } )
+          .then( ( ) => DA_ToDo_list_get( user_id ) )
           .then( ( arr_ToDo ) => ( {
             cursor: cursorForObjectInConnection( arr_ToDo, a_ToDo ),
             node: a_ToDo,
@@ -39,9 +36,7 @@ export default mutationWithClientMutationId( {
       resolve: ( parent, args, { rootValue: {user_id} } ) => DA_User_get( user_id )
     },
   },
-  mutateAndGetPayload: ( {ToDo_Text}, { rootValue: {user_id} } ) => DA_ToDo_add( { ToDo_User_id: user_id, ToDo_Text: ToDo_Text, ToDo_Complete: false } ).then( ( localToDoId) => {localToDoId} )
-  // {
-  //   var localToDoId = DA_ToDo_add( { ToDo_User_id: user_id, ToDo_Text: ToDo_Text, ToDo_Complete: false } );
-  //   return {localToDoId};
-  // }
+  mutateAndGetPayload: ( {ToDo_Text}, { rootValue: {user_id} } ) =>
+    DA_ToDo_add( { ToDo_User_id: user_id, ToDo_Text: ToDo_Text, ToDo_Complete: false } )
+    .then( ( localToDoId ) => ( {localToDoId} ) )
 } );
