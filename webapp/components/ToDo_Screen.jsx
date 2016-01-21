@@ -5,16 +5,16 @@ import Card from 'material-ui/lib/card/card';
 import CardHeader from 'material-ui/lib/card/card-header';
 import TextField from 'material-ui/lib/text-field';
 
-import AddTodoMutation from '../mutations/AddTodoMutation';
+import ToDo_addMutation from '../mutations/ToDo_addMutation';
 
 class ToDo_Screen extends React.Component
 {
   _handleAddToDo( )
   {
-    Relay.Store.update(
-      new AddTodoMutation( {
-        text: this.refs.addToDo.getValue( ),
-        viewer: this.props.viewer
+    Relay.Store.commitUpdate(
+      new ToDo_addMutation( {
+        ToDo_Text: this.refs.addToDo.getValue( ),
+        Viewer: this.props.Viewer
       } )
     );
 
@@ -46,10 +46,10 @@ class ToDo_Screen extends React.Component
 
 export default Relay.createContainer( ToDo_Screen, {
   fragments: {
-    viewer: () => Relay.QL`
-      fragment on User {
-        totalCount,
-        ${AddTodoMutation.getFragment('viewer')},
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
+        ToDo_TotalCount,
+        ${ToDo_addMutation.getFragment('Viewer')},
       }
     `,
   },

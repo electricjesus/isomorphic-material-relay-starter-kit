@@ -8,9 +8,9 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import NavigationMoreVert from 'material-ui/lib/svg-icons/navigation/more-vert';
 
-import ChangeTodoStatusMutation from '../mutations/ChangeTodoStatusMutation';
-import RemoveTodoMutation from '../mutations/RemoveTodoMutation';
-import RenameTodoMutation from '../mutations/RenameTodoMutation';
+import ToDo_updateStatusMutation from '../mutations/ToDo_updateStatusMutation';
+import ToDo_deleteMutation from '../mutations/ToDo_deleteMutation';
+import ToDo_updateRenameMutation from '../mutations/ToDo_updateRenameMutation';
 
 class ToDo_Item extends React.Component
 {
@@ -19,28 +19,28 @@ class ToDo_Item extends React.Component
     isEditing: false,
   };
 
-  _handleCompletedCheck( event, complete )
+  _handleCompletedCheck( event, ToDo_Complete )
   {
-    Relay.Store.update(
-      new ChangeTodoStatusMutation({
-        complete,
-        todo: this.props.todo,
-        viewer: this.props.viewer,
+    Relay.Store.commitUpdate(
+      new ToDo_updateStatusMutation({
+        ToDo_Complete,
+        ToDo: this.props.ToDo,
+        Viewer: this.props.Viewer,
       })
     );
   }
 
-  _handleTextInputSave( text )
+  _handleTextInputSave( ToDo_Text )
   {
-    Relay.Store.update(
-      new RenameTodoMutation({todo: this.props.todo, text})
+    Relay.Store.commitUpdate(
+      new ToDo_updateRenameMutation({ToDo: this.props.ToDo, ToDo_Text})
     );
   }
 
-  _removeTodo( )
+  _ToDo_delete( )
   {
-    Relay.Store.update(
-      new RemoveTodoMutation({todo: this.props.todo, viewer: this.props.viewer})
+    Relay.Store.commitUpdate(
+      new ToDo_deleteMutation({ToDo: this.props.ToDo, Viewer: this.props.Viewer})
     );
   }
 
@@ -50,11 +50,11 @@ class ToDo_Item extends React.Component
     {
       case 'edit':
         console.log( 'edit' );
-        //this.props.onCompleteTodo(this.props.todo.id);
+        //this.props.onCompleteToDo(this.props.ToDo.id);
         break;
       case 'delete':
         console.log( 'delete' );
-        this._removeTodo( );
+        this._ToDo_delete( );
         break;
       default:
         break;
@@ -75,10 +75,10 @@ class ToDo_Item extends React.Component
 
     return (
       <ListItem
-        primaryText={ this.props.todo.text }
+        primaryText={ this.props.ToDo.ToDo_Text }
         leftCheckbox={
           <Checkbox
-            defaultChecked={ this.props.todo.complete }
+            defaultChecked={ this.props.ToDo.ToDo_Complete }
             onCheck={ this._handleCompletedCheck.bind( this ) }
           />
         }
@@ -90,20 +90,20 @@ class ToDo_Item extends React.Component
 
 export default Relay.createContainer( ToDo_Item, {
   fragments: {
-    todo: () => Relay.QL`
-      fragment on Todo {
-        complete,
+    ToDo: () => Relay.QL`
+      fragment on ToDo {
+        ToDo_Complete,
         id,
-        text,
-        ${ChangeTodoStatusMutation.getFragment('todo')},
-        ${RemoveTodoMutation.getFragment('todo')},
-        ${RenameTodoMutation.getFragment('todo')},
+        ToDo_Text,
+        ${ToDo_updateStatusMutation.getFragment('ToDo')},
+        ${ToDo_deleteMutation.getFragment('ToDo')},
+        ${ToDo_updateRenameMutation.getFragment('ToDo')},
       }
     `,
-    viewer: () => Relay.QL`
-      fragment on User {
-        ${ChangeTodoStatusMutation.getFragment('viewer')},
-        ${RemoveTodoMutation.getFragment('viewer')},
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
+        ${ToDo_updateStatusMutation.getFragment('Viewer')},
+        ${ToDo_deleteMutation.getFragment('Viewer')},
       }
     `,
   },

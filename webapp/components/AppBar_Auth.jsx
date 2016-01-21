@@ -79,19 +79,16 @@ export default class AppBar_Auth extends React.Component
 
   _handleAuthSuccess( response )
   {
-    console.log( '_handleAuthSuccess ' + response )
-    let token;
     try{
       let responseJSON = JSON.parse( response );
-      token = responseJSON.token;
+      if( responseJSON.success != true ) throw new Error( "Login failed" );
     } catch( err ) { _handleAuthFailure( 1 ); return; }
 
-    console.log( '_handleAuthSuccess ' + token );
+    location.replace( location.href );
   }
 
   _handleAuthFailure( response )
   {
-    console.log( '_handleAuthFailure ' + response )
     let message;
     try{
       let responseJSON = JSON.parse( response );
@@ -111,22 +108,6 @@ export default class AppBar_Auth extends React.Component
       Dialog_LoginFaulure_IsOpen: false
     } );
   }
-
-
-/* A menu will be displayed for a logged in user
-<IconMenu key="top-menu"
-  anchorOrigin={ { vertical: "bottom" } }
-  onItemTouchTap={ this._handleLeftMenuTouchTap.bind( this ) }
-  iconButtonElement={
-    <IconButton><NavigationMoreVert /></IconButton>
-  }
->
-  <MenuItem key="/" primaryText="Home" />
-  <MenuItem key="/todos" primaryText="To Do" />
-  <MenuItem key="/mui" primaryText="MUI" />
-  <MenuItem key="/mui/icons" primaryText="MUI Icons" />
-</IconMenu>
-*/
 
   Dialog_UserNameAndPassword( )
   {
@@ -152,6 +133,7 @@ export default class AppBar_Auth extends React.Component
           fullWidth={ true }
           onEnterKeyDown={ this._handlePasswordEnterKeyDown.bind( this ) }
         />
+      Valid user name/combinations are: jack/secret jill/birthday
       </Dialog>
     );
   }
@@ -200,5 +182,5 @@ export default class AppBar_Auth extends React.Component
 }
 
 AppBar_Auth.contextTypes = {
-  history: React.PropTypes.object,
+  router: React.PropTypes.object.isRequired
 };

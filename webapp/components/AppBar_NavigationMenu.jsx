@@ -9,8 +9,7 @@ export default class AppBar_NavigationMenu extends React.Component
 {
   _handleLeftMenuTouchTap( e, item )
   {
-    console.log( 'Menu jump to: ' + item.key );
-    this.context.history.pushState( null, item.key );
+    this.context.router.push( item.key );
   }
 
   render( )
@@ -24,7 +23,8 @@ export default class AppBar_NavigationMenu extends React.Component
         }
       >
         <MenuItem key="/" primaryText="Home" />
-        <MenuItem key="/todos" primaryText="To Do" />
+        <MenuItem key="/ToDos" primaryText="To Do" />
+        <MenuItem key="/compendiums" primaryText="Compendiums" />
         <MenuItem key="/mui" primaryText="MUI" />
         <MenuItem key="/mui/icons" primaryText="MUI Icons" />
       </IconMenu>
@@ -33,5 +33,5 @@ export default class AppBar_NavigationMenu extends React.Component
 }
 
 AppBar_NavigationMenu.contextTypes = {
-  history: React.PropTypes.object,
+  router: React.PropTypes.object.isRequired
 };

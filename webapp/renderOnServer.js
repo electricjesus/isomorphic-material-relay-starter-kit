@@ -4,7 +4,8 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Relay from 'react-relay';
 import RelayStoreData from 'react-relay/lib/RelayStoreData';
-import {match, RoutingContext} from 'react-router';
+import {match} from 'react-router';
+import seqqueue from 'seq-queue';
 
 import routes from './routes';
 import {isomorphicVars} from './scripts/isomorphicVars';
@@ -12,43 +13,61 @@ import {isomorphicVars} from './scripts/isomorphicVars';
 // Read environment
 require( 'dotenv' ).load( );
 
-let port = require( '../package.json' )
+// Create a queue for isomorphic loading of pasges, because the GrapQL network layer
+// is a static
+let queue = seqqueue.createQueue( 2000 );
+
 const GRAPHQL_URL = `http://localhost:${process.env.PORT}/graphql`;
 
-Relay.injectNetworkLayer( new Relay.DefaultNetworkLayer( GRAPHQL_URL ) );
-RelayStoreData.getDefaultInstance( ).getChangeEmitter( ).injectBatchingStrategy(() => { } );
+export default ( req, res, next, assetsPath ) =>
+{
+  const headers = { };
+  if( req.cookies.auth_token )
+    headers.Cookie = 'auth_token=' + req.cookies.auth_token;
 
-export default ( req, res, next, assetsPath ) => {
-    match({routes, location: req.originalUrl}, (error, redirectLocation, renderProps) => {
-        if (error) {
+  match( { routes, location: req.originalUrl }, ( error, redirectLocation, renderProps ) =>
+    {
+      queue.push(
+        queueTask => {
+          // Setting the STATIC network layer. No fear about it being static - we are in a queue!
+          Relay.injectNetworkLayer( new Relay.DefaultNetworkLayer( GRAPHQL_URL, { headers: headers } ) );
+          RelayStoreData.getDefaultInstance( ).getChangeEmitter( ).injectBatchingStrategy(() => { } );
+
+          if( error )
             next(error);
-        } else if (redirectLocation) {
-            res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-        } else if (renderProps) {
-            IsomorphicRouter.prepareData(renderProps).then(render, next);
-        } else {
-            res.status(404).send('Not Found');
-        }
+          else if( redirectLocation )
+            res.redirect( 302, redirectLocation.pathname + redirectLocation.search );
+          else if( renderProps )
+            IsomorphicRouter.prepareData( renderProps ).then( render, next );
+          else
+              res.status( 404 ).send( 'Not Found' );
 
-        function render(data)
-        {
-            // TODO HACK This is a total hack and shod be fixed somehow.
-            GLOBAL.navigator = { userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36"};
+          function render( data )
+          {
+            // Setting up static, global navigator object to pass user agent to material-ui. Again, not to
+            // fear, we are in a queue.
+            GLOBAL.navigator = { userAgent: req.headers[ 'user-agent' ] };
 
-            console.log( 'server render, before iso vars' );
+            // Load up isomorphic vars here, for server rendering
             let isoVars = JSON.stringify( isomorphicVars( ) );
-            console.log( 'server render, iso vars = ' + isoVars );
 
             const reactOutput = ReactDOMServer.renderToString(
-                <IsomorphicRouter.RoutingContext {...renderProps} />
+                <IsomorphicRouter.RouterContext {...renderProps} />
             );
 
-            res.render(path.resolve(__dirname, '..', 'webapp/views', 'index.ejs'), {
+            res.render( path.resolve( __dirname, '..', 'webapp/views', 'index.ejs' ), {
                 preloadedData: JSON.stringify(data),
                 assetsPath: assetsPath,
                 reactOutput,
                 isomorphicVars: isoVars
-            });
-        }
-    });
+            } );
+
+            queueTask.done( );
+          }
+        },
+        ( ) => console.log( "Timeout for renderer" ),
+        2000
+      ); // 2 second time out for rendering an isomorphic page
+    }
+  );
 };

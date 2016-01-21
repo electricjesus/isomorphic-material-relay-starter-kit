@@ -1,4 +1,5 @@
 import Chrome from './components/Chrome.jsx';
+import Compendium from './components/Compendium.jsx';
 import Home_Screen from './components/Home_Screen.jsx';
 import MUI_Icons from './components/MUI_Icons.jsx';
 import MUI_Home from './components/MUI_Home.jsx';
@@ -17,7 +18,14 @@ export default [
         },
         childRoutes: [
           {
-            path: 'todos',
+            path: 'Compendiums',
+            indexRoute: {
+                component: Compendium,
+                queries: ViewerQueries,
+            },
+          },
+          {
+            path: 'ToDos',
             component: ToDo_Screen,
             queries: ViewerQueries,
             indexRoute: {
@@ -36,7 +44,6 @@ export default [
           {
             path: 'mui',
             indexRoute: {
-                component: ToDo_List,
                 component: MUI_Home,
                 queries: ViewerQueries,
             },

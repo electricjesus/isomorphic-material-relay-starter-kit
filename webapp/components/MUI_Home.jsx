@@ -20,9 +20,9 @@ class MUI_Home extends React.Component
           <pre>
             if( key > 50 ) return;
           </pre>
-          in scripts/generate_MUIIconList.js and run
+          in scripts/build-mui-icon-list.js and run
           <pre>
-            npm run generate-mui-icon-list
+            npm run build-mui-icon-list
           </pre>
         </CardText>
       </Card>
@@ -32,9 +32,9 @@ class MUI_Home extends React.Component
 
 export default Relay.createContainer( MUI_Home, {
   fragments: {
-    viewer: () => Relay.QL`
-      fragment on User {
-        totalCount,
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
+        ToDo_TotalCount,
       }
     `,
   },

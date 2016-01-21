@@ -1,6 +1,5 @@
 export function isomorphicVars( )
 {
-  console.log( 'CALLED: isomorphicVars' );
   if( typeof( window ) == 'undefined' )
   {
     // Running on server.

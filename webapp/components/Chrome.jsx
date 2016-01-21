@@ -1,7 +1,6 @@
 import React from 'react';
 import Relay from 'react-relay';
 
-//import AppBar from 'material-ui/lib/app-bar';
 import AppCanvas from 'material-ui/lib/app-canvas';
 import Colors from 'material-ui/lib/styles/colors';
 import Badge from 'material-ui/lib/badge';
@@ -39,12 +38,12 @@ class Chrome extends React.Component
 
   _handleOnFocusIncomplete( )
   {
-    this.context.history.pushState( null, '/todos/active' );
+    this.context.router.push( '/ToDos/active' );
   }
 
   render( )
   {
-    let incompleteCount = this.props.viewer.totalCount - this.props.viewer.completedCount;
+    let incompleteCount = this.props.Viewer.ToDo_TotalCount - this.props.Viewer.ToDo_CompletedCount;
 
     let incompleteNotification = [ ];
 
@@ -69,7 +68,7 @@ class Chrome extends React.Component
             <AppBar_NavigationMenu />
           </ToolbarGroup>
           <ToolbarGroup float="left">
-            <ToolbarTitle text="Demo!!!" />
+            <ToolbarTitle text="IMRSK" />
           </ToolbarGroup>
           <ToolbarGroup float="right">
             { incompleteNotification }
@@ -90,16 +89,16 @@ class Chrome extends React.Component
 //
 
 Chrome.contextTypes = {
-  history: React.PropTypes.object,
+  router: React.PropTypes.object.isRequired,
   muiTheme: React.PropTypes.object,
 };
 
 export default Relay.createContainer( Chrome, {
   fragments: {
-    viewer: () => Relay.QL`
-      fragment on User {
-        totalCount,
-        completedCount,
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
+        ToDo_TotalCount,
+        ToDo_CompletedCount,
       }
     `,
   },

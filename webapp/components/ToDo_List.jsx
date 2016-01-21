@@ -6,36 +6,36 @@ import List from 'material-ui/lib/lists/list';
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 
-import MarkAllTodosMutation from '../mutations/MarkAllTodosMutation';
+import ToDo_list_updateMarkAllMutation from '../mutations/ToDo_list_updateMarkAllMutation';
 import ToDo_Item from './ToDo_Item.jsx';
 
 class ToDo_List extends React.Component
 {
   _handleMarkAllOnCheck( event, checked )
   {
-    Relay.Store.update(
-      new MarkAllTodosMutation( {
-        complete: checked,
-        todos: this.props.viewer.todos,
-        viewer: this.props.viewer,
+    Relay.Store.commitUpdate(
+      new ToDo_list_updateMarkAllMutation( {
+        ToDo_Complete: checked,
+        ToDos: this.props.Viewer.ToDos,
+        Viewer: this.props.Viewer,
       } )
     );
   }
 
-  renderTodos( )
+  renderToDos( )
   {
-    return this.props.viewer.todos.edges.map(edge =>
+    return this.props.Viewer.ToDos.edges.map(edge =>
       <ToDo_Item
         key={edge.node.id}
-        todo={edge.node}
-        viewer={this.props.viewer}
+        ToDo={edge.node}
+        Viewer={this.props.Viewer}
       />
     );
   }
 
   _handleTabsChange( value )
   {
-    this.context.history.pushState( null, '/todos/' + value );
+    this.context.router.push( '/ToDos/' + value );
   }
 
   renderTabs( )
@@ -51,18 +51,18 @@ class ToDo_List extends React.Component
 
   render( )
   {
-    var numTodos = this.props.viewer.totalCount;
-    var numCompletedTodos = this.props.viewer.completedCount;
+    var numToDos = this.props.Viewer.ToDo_TotalCount;
+    var numCompletedToDos = this.props.Viewer.ToDo_CompletedCount;
     return (
       <div>
         { this.renderTabs( ) }
         <Checkbox
           label="Mark all as complete"
-          defaultChecked={ numTodos === numCompletedTodos }
+          defaultChecked={ numToDos === numCompletedToDos }
           onCheck={ this._handleMarkAllOnCheck.bind( this ) }
         />
         <List>
-          { this.renderTodos( ) }
+          { this.renderToDos( ) }
         </List>
       </div>
     );
@@ -70,7 +70,7 @@ class ToDo_List extends React.Component
 }
 
 ToDo_List.contextTypes = {
-  history: React.PropTypes.object,
+  router: React.PropTypes.object.isRequired,
 };
 
 export default Relay.createContainer( ToDo_List, {
@@ -85,7 +85,7 @@ export default Relay.createContainer( ToDo_List, {
     if (status === 'active' || status === 'completed')
       nextStatus = status;
     else
-      // This matches the Backbone example, which displays all todos on an
+      // This matches the Backbone example, which displays all ToDos on an
       // invalid route.
       nextStatus = 'any';
 
@@ -96,21 +96,21 @@ export default Relay.createContainer( ToDo_List, {
   },
 
   fragments: {
-    viewer: () => Relay.QL`
-      fragment on User {
-        completedCount,
-        todos(status: $status, first: $limit) {
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
+        ToDo_CompletedCount,
+        ToDos(status: $status, first: $limit) {
           edges {
             node {
               id,
-              ${ToDo_Item.getFragment('todo')},
+              ${ToDo_Item.getFragment('ToDo')},
             },
           },
-          ${MarkAllTodosMutation.getFragment('todos')},
+          ${ToDo_list_updateMarkAllMutation.getFragment('ToDos')},
         },
-        totalCount,
-        ${MarkAllTodosMutation.getFragment('viewer')},
-        ${ToDo_Item.getFragment('viewer')},
+        ToDo_TotalCount,
+        ${ToDo_list_updateMarkAllMutation.getFragment('Viewer')},
+        ${ToDo_Item.getFragment('Viewer')},
       }
     `,
   },

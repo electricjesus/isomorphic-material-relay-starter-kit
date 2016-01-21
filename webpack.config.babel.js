@@ -23,8 +23,17 @@ let config = {
   plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.EnvironmentPlugin(Object.keys(process.env)),
-    new ExtractTextPlugin('[name].css')
-  ]
+    new ExtractTextPlugin('[name].css'),
+    // Implementing fix https://github.com/callemall/material-ui/issues/2336 by https://github.com/chadrien
+    new webpack.DefinePlugin({
+        process: {
+            env: {
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+            }
+        }
+    }),
+  ],
+  devtool: 'source-map'
 };
 
 export default config;
