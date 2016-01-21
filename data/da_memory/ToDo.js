@@ -92,24 +92,24 @@ export function DA_ToDo_list_get( User_id, status = 'any' )
 
 export function DA_ToDo_list_updateMarkAll( User_id, ToDo_Complete )
 {
-  return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
-  {
-    User_id = 0;
-    var changedToDos = [];
-    DA_ToDo_list_get( User_id ).forEach(a_ToDo =>
+  return DA_ToDo_list_get( User_id )
+  .then( ( arr_ToDo ) => {
+    arr_ToDo.forEach(a_ToDo =>
     {
+      var changedToDos = [ ];
       if( a_ToDo.ToDo_Complete !== ToDo_Complete )
       {
         a_ToDo.ToDo_Complete = ToDo_Complete;
         changedToDos.push( a_ToDo );
       }
     } );
-    resolve( changedToDos.map( a_ToDo => a_ToDo.id ) );
-  }, 100 ) );
+    return( changedToDos.map( a_ToDo => a_ToDo.id ) );
+  } );
 }
 
 export function DA_ToDo_list_deleteCompleted( User_id )
 {
+  throw new Error( "The code below should be re-written with promises" );
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
     var ToDo_listToRemove = DA_ToDo_list_get( User_id ).filter( a_ToDo => a_ToDo.ToDo_Complete );
