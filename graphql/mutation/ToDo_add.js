@@ -47,21 +47,13 @@ export default mutationWithClientMutationId( {
         let a_ToDo;
         return DA_ToDo_get( localToDoId )
           .then( ( retrieved_ToDo ) => {
-            console.log( "ToDo_add, retrieved_ToDo=" + JSON.stringify( retrieved_ToDo ) );
             a_ToDo = retrieved_ToDo;
           } )
           .then( ( ) => DA_ToDo_list_get( user_id ) )
-          .then( ( arr_ToDo ) =>
-{
-
-            //a_ToDo = arr_ToDo[ 0 ];
-let xxxyyy = cursorForObjectInConnectionWithUuidComparison( arr_ToDo, a_ToDo );
-          return( {
-            cursor: xxxyyy,
+          .then( ( arr_ToDo ) => ( {
+            cursor: cursorForObjectInConnectionWithUuidComparison( arr_ToDo, a_ToDo ),
             node: a_ToDo,
           } )
-}
-)
         ;
       }
     },
