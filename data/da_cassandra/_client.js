@@ -61,7 +61,6 @@ export function runQueryOneResult( objectPrototype, qText, qVar )
       {
         let row = result.rows[ 0 ];
         const retObj = new objectPrototype( row );
-        console.log( "retObj=" + JSON.stringify( retObj ) );
         resolve( retObj );
       }
       else
