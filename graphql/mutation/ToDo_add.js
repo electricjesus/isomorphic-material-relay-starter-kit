@@ -7,6 +7,32 @@ import { DA_ToDo_add, DA_ToDo_get, DA_ToDo_list_get } from '../../data/da/ToDo';
 import ToDosConnection from '../type/ToDosConnection';
 import ViewerType from '../type/ViewerType';
 
+import chalk from 'chalk';
+
+function cursorForObjectInConnectionWithUuidComparison( arr, obj )
+{
+  // Make sure that the object and its instance can be compared with ===
+  // assumed that the object has id field which is unique
+  for( let ix = 0; ix < arr.length; ix++ )
+  {
+    if( arr[ ix ].id.equals( obj.id ) )
+    {
+      arr[ ix ] = obj;
+      break;
+    }
+  }
+
+  let cursor = cursorForObjectInConnection( arr, obj );
+  if( cursor == null )
+  {
+    console.log( chalk.bold.red( "Could not create cursor for object in connection" ) );
+    console.log( chalk.gray( "Object: " ) + chalk.red( JSON.stringify( obj ) ) );
+    console.log( chalk.gray( "Array: " ) + chalk.red( JSON.stringify( arr ) ) );
+    console.log( chalk.blue( "." ) );
+  }
+
+  return cursor;
+}
 
 export default mutationWithClientMutationId( {
   name: 'ToDo_add',
@@ -21,13 +47,21 @@ export default mutationWithClientMutationId( {
         let a_ToDo;
         return DA_ToDo_get( localToDoId )
           .then( ( retrieved_ToDo ) => {
+            console.log( "ToDo_add, retrieved_ToDo=" + JSON.stringify( retrieved_ToDo ) );
             a_ToDo = retrieved_ToDo;
           } )
           .then( ( ) => DA_ToDo_list_get( user_id ) )
-          .then( ( arr_ToDo ) => ( {
-            cursor: cursorForObjectInConnection( arr_ToDo, a_ToDo ),
+          .then( ( arr_ToDo ) =>
+{
+
+            //a_ToDo = arr_ToDo[ 0 ];
+let xxxyyy = cursorForObjectInConnectionWithUuidComparison( arr_ToDo, a_ToDo );
+          return( {
+            cursor: xxxyyy,
             node: a_ToDo,
-          } ) )
+          } )
+}
+)
         ;
       }
     },

@@ -1,4 +1,5 @@
-import generateUUID from './generateUUID'
+import { Uuid } from '../da_cassandra/_client.js';
+
 
 import User from '../model/User'
 
@@ -17,9 +18,9 @@ export function DA_User_GetUUIDByID( id )
 // Mock data
 
 var usersById = { };
-usersById[ DA_User_GetUUIDByID( 0 ) ] = new User( { id: DA_User_GetUUIDByID( 0 ), username: '', password: '', displayName: 'Anonymous', email: '' } );
-usersById[ DA_User_GetUUIDByID( 1 ) ] = new User( { id: DA_User_GetUUIDByID( 1 ), username: 'jack', password: 'secret', displayName: 'Jack Myuser', email: 'jack@example.com' } );
-usersById[ DA_User_GetUUIDByID( 2 ) ] = new User( { id: DA_User_GetUUIDByID( 2 ), username: 'jill', password: 'birthday', displayName: 'Jill Daccount', email: 'jill@example.com' } );
+usersById[ DA_User_GetUUIDByID( 0 ) ] = new User( { id: Uuid.fromString( DA_User_GetUUIDByID( 0 ) ), username: '', password: '', displayName: 'Anonymous', email: '' } );
+usersById[ DA_User_GetUUIDByID( 1 ) ] = new User( { id: Uuid.fromString( DA_User_GetUUIDByID( 1 ) ), username: 'jack', password: 'secret', displayName: 'Jack Myuser', email: 'jack@example.com' } );
+usersById[ DA_User_GetUUIDByID( 2 ) ] = new User( { id: Uuid.fromString( DA_User_GetUUIDByID( 2 ) ), username: 'jill', password: 'birthday', displayName: 'Jill Daccount', email: 'jill@example.com' } );
 
 
 // Data access functions
@@ -42,6 +43,6 @@ export function DA_User_getByUserName( username )
 export function DA_User_get( id )
 {
   return new Promise( ( resolve, reject ) =>
-    setTimeout( ( ) => resolve( usersById[ id ] ), 100 )
+    setTimeout( ( ) => resolve( usersById[ id.toString( ) ] ), 100 )
   );
 }

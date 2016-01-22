@@ -1,4 +1,5 @@
-import generateUUID from './generateUUID'
+import { Uuid } from '../da_cassandra/_client.js';
+
 import { DA_User_GetUUIDByID } from './User';
 
 import ToDo from '../model/ToDo'
@@ -29,7 +30,7 @@ export function DA_ToDo_add( fields )
   {
     var a_ToDo = new ToDo( fields );
 
-    a_ToDo.id = generateUUID( );
+    a_ToDo.id = Uuid.random( );
 
     ToDo_listById[ a_ToDo.id ] = a_ToDo;
     ToDo_id_by_User_id[ a_ToDo.ToDo_User_id ].push( a_ToDo.id );
@@ -42,7 +43,7 @@ export function DA_ToDo_update( id, fields )
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
-    var a_ToDo = ToDo_listById[ id ];
+    var a_ToDo = ToDo_listById[ id.toString( ) ];
 
     if( 'ToDo_Complete' in fields ) a_ToDo.ToDo_Complete = fields.ToDo_Complete;
     if( 'ToDo_Text' in fields ) a_ToDo.ToDo_Text = fields.ToDo_Text;
@@ -55,7 +56,7 @@ export function DA_ToDo_get( id )
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
-    resolve( ToDo_listById[ id ] );
+    resolve( ToDo_listById[ id.toString( ) ] );
   }, 100 ) );
 }
 
@@ -63,12 +64,12 @@ export function DA_ToDo_delete( User_id, id )
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
-    var ix_ToDo = ToDo_id_by_User_id[ User_id ].indexOf( id );
+    var ix_ToDo = ToDo_id_by_User_id[ User_id ].indexOf( id.toString( ) );
 
     if( ix_ToDo !== -1 )
       ToDo_id_by_User_id[ User_id ].splice( ix_ToDo, 1 );
 
-    delete ToDo_listById[ id ];
+    delete ToDo_listById[ id.toString( ) ];
 
     resolve( );
   }, 100 ) );
@@ -83,7 +84,7 @@ export function DA_ToDo_list_get( User_id, status = 'any' )
     if( status !== 'any' )
     {
       let statusCheck = ( status === 'completed' );
-      arr_ToDo = arr_ToDo.filter( a_ToDo => a_ToDo.ToDo_Complete === statusCheck );
+      arr_ToDo = arr_ToDo.filter( a_ToDo => a_ToDo && a_ToDo.ToDo_Complete === statusCheck );
     }
 
     resolve( arr_ToDo );
@@ -94,7 +95,7 @@ export function DA_ToDo_list_updateMarkAll( User_id, ToDo_Complete )
 {
   return DA_ToDo_list_get( User_id )
   .then( ( arr_ToDo ) => {
-    arr_ToDo.forEach(a_ToDo =>
+    arr_ToDo.forEach( a_ToDo =>
     {
       var changedToDos = [ ];
       if( a_ToDo.ToDo_Complete !== ToDo_Complete )

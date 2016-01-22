@@ -6,7 +6,7 @@ import cassandraDriver from 'cassandra-driver';
 require( 'dotenv' ).load( );
 
 //
-export var Uuid = cassandraDriver.types.Uuid;
+export const Uuid = cassandraDriver.types.Uuid;
 
 squel.registerValueHandler( Uuid, function( uuid ){ return uuid; } );
 export const sql = squel;
@@ -37,7 +37,7 @@ export function runQuery( objectPrototype, qText, qVar )
     client.execute( qText, qVar, {prepare: true}, ( err, result ) => { if( ensureNoErrorOrReport( qText, qVar, err, reject ) )
     {
       const resultAsObjects = [ ];
-      const rowCount = result.rows.length;
+      const rowCount = result.rowLength;
       for( let ixRow = 0 ; ixRow < rowCount ; ixRow++ )
       {
         let row = result.rows[ ixRow ];
@@ -57,9 +57,11 @@ export function runQueryOneResult( objectPrototype, qText, qVar )
     client.execute( qText, qVar, {prepare: true}, ( err, result ) => { if( ensureNoErrorOrReport( qText, qVar, err, reject ) )
     {
       //console.log( "runQueryOneResult [" + qText + "] params=" + JSON.stringify( qVar ) + " err=" + JSON.stringify( err ) + " result=" + JSON.stringify( result ) );
-      if( result.rows.length > 0 )
+      if( result.rowLength > 0 )
       {
-        const retObj = new objectPrototype( result.rows[ 0 ] );
+        let row = result.rows[ 0 ];
+        const retObj = new objectPrototype( row );
+        console.log( "retObj=" + JSON.stringify( retObj ) );
         resolve( retObj );
       }
       else
@@ -75,6 +77,7 @@ export function runQueryNoResult( qText, qVar )
   {
     client.execute( qText, qVar, {prepare: true}, ( err ) => { if( ensureNoErrorOrReport( qText, qVar, err, reject ) )
     {
+      //console.log( "runQueryNoResult [" + qText + "] params=" + JSON.stringify( qVar ) + " err=" + JSON.stringify( err ) );
       resolve( );
     } } );
   } );

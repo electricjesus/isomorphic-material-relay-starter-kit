@@ -1,4 +1,5 @@
-import generateUUID from './generateUUID'
+import { Uuid } from '../da_cassandra/_client.js';
+
 import { DA_User_GetUUIDByID } from './User';
 import Compendium from '../model/Compendium'
 
@@ -12,7 +13,7 @@ Compendium_IDsByUser[ DA_User_GetUUIDByID( 2 ) ] = [ ];
 
 for( let User_id = 0 ; User_id < 3; User_id++ )
   DA_Compendium_add( {
-    id: generateUUID( ),
+    id: Uuid.random( ),
     Compendium_User_id: DA_User_GetUUIDByID( User_id ),
     Compendium_FirstTextInput: "I am first with five",
     Compendium_RangedNumber: 35,

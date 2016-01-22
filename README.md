@@ -172,7 +172,7 @@ Below is the list of the main files and folders for this project. Asterisk on th
 | `data/da/{Entity}.js`                         | Data access functions for {Entity}. Exported functions are named DA_{Entity}_*. Simply points either into memory, or Cassandra. |
 | `data/da_cassandra/_client.js`                | Promisified Cassandra client. | [*](./data/da_cassandra/_client.js) |
 | `data/da_cassandra/{Entity}.js`               | Data access functions for {Entity} implemented for Cassandra. |
-| `data/da_memory/generateUUID.js`              | Simple function for generating UUIDs. | [*](./data/da_memory/generateUUID.js) |
+| `data/da_memory/generateUUID.js`              | This file has been removed. It was used for UUID generation. UUID generation for the -in memory implementation is achieved through Cassandra types: `Uuid.random( )`. | |
 | `data/da_memory/{Entity}.js`                  | Data access functions for {Entity} implemented as in-memory transient storage. |
 | `data/model/`                                 | Models | [*](./data/model/) |
 | `data/model/{Entity}.js`                      | Model for {Entity}. Default class for that entity is exported. |
