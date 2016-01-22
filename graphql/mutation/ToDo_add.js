@@ -53,7 +53,7 @@ export default mutationWithClientMutationId( {
           .then( ( arr_ToDo ) => ( {
             cursor: cursorForObjectInConnectionWithUuidComparison( arr_ToDo, a_ToDo ),
             node: a_ToDo,
-          } )
+          } ) )
         ;
       }
     },
