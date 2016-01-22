@@ -19,6 +19,7 @@ class ToDo_Item extends React.Component
     isEditing: false,
   };
 
+  // TODO Add edit dialog, possibly in another component
   _handleCompletedCheck( event, ToDo_Complete )
   {
     Relay.Store.commitUpdate(
