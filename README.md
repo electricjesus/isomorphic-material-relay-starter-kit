@@ -16,8 +16,8 @@ Naturally the server should be able to figure it out. Coming soon to a repositor
 
 The following articles explain in detail certain aspects of this repository:
 
-* (Cassandra, meet Relay. Relay, meet Cassandra)[http://codefoundries.com/developer/cassandra/cassandra-meet-relay.html].
-* (Isomorphic Server Variables)[http://codefoundries.com/developer/single-page-application/isomorphic-server-variables.html].
+* [Cassandra, meet Relay. Relay, meet Cassandra](http://codefoundries.com/developer/cassandra/cassandra-meet-relay.html).
+* [Isomorphic Server Variables](http://codefoundries.com/developer/single-page-application/isomorphic-server-variables.html).
 
 
 ## Underlying technologies
