@@ -8,12 +8,16 @@ IMRSK started as an off-shoot of multiple projects and boilerplates we use at [C
 | Run locally | [Local Setup](./doc/Setup-Local.md) |
 | Run on [Heroku](https://www.heroku.com/nodejs) | [Heroku Setup](./doc/Setup-Heroku.md) |
 
-Apache Cassandra is not part of this project yet. We are hoping to be able to bring it in soon.
-
 # WARNING: Since version 0.6.4 we changed the user_id s so the auth_token cookies are invalid and will crash the client. Please delete the cookies first.
 
 Naturally the server should be able to figure it out. Coming soon to a repository near you.
 
+## Articles
+
+The following articles explain in detail certain aspects of this repository:
+
+* [Cassandra, meet Relay. Relay, meet Cassandra](http://codefoundries.com/developer/cassandra/cassandra-meet-relay.html).
+* [Isomorphic Server Variables](http://codefoundries.com/developer/single-page-application/isomorphic-server-variables.html).
 
 
 ## Underlying technologies
