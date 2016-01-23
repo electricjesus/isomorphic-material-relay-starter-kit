@@ -5,11 +5,11 @@ import cassandraDriver from 'cassandra-driver';
 // Read environment
 require( 'dotenv' ).load( );
 
-//
-export const Uuid = cassandraDriver.types.Uuid;
 
-squel.registerValueHandler( Uuid, function( uuid ){ return uuid; } );
+squel.registerValueHandler( cassandraDriver.types.Uuid, function( uuid ){ return uuid; } );
+
 export const sql = squel;
+export const Uuid = cassandraDriver.types.Uuid;
 
 export const client = new cassandraDriver.Client( {
   contactPoints: process.env.CASSANDRA_CONNECTION_POINTS.split( ',' ),

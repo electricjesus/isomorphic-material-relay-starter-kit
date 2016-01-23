@@ -1,7 +1,5 @@
 import { Uuid } from '../da_cassandra/_client.js';
 
-import { DA_User_GetUUIDByID } from './User';
-
 import ToDo from '../model/ToDo'
 
 
@@ -9,17 +7,6 @@ import ToDo from '../model/ToDo'
 
 var ToDo_listById = { };
 var ToDo_id_by_User_id = { };
-ToDo_id_by_User_id[ DA_User_GetUUIDByID( 0 ) ] = [ ];
-ToDo_id_by_User_id[ DA_User_GetUUIDByID( 1 ) ] = [ ];
-ToDo_id_by_User_id[ DA_User_GetUUIDByID( 2 ) ] = [ ];
-
-
-DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 0 ), ToDo_Text: 'Taste JavaScript', ToDo_Complete: true } );
-DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack buy a unicorn', ToDo_Complete: false } );
-DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack sell a pony', ToDo_Complete: false } );
-DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 1 ), ToDo_Text: 'Jack converse a brony', ToDo_Complete: true } );
-DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 2 ), ToDo_Text: 'Jill Minify CSS', ToDo_Complete: false } );
-DA_ToDo_add( { ToDo_User_id: DA_User_GetUUIDByID( 2 ), ToDo_Text: 'Jill Apply for an accelerator', ToDo_Complete: true } );
 
 
 // Data access functions
@@ -33,7 +20,12 @@ export function DA_ToDo_add( fields )
     a_ToDo.id = Uuid.random( );
 
     ToDo_listById[ a_ToDo.id ] = a_ToDo;
-    ToDo_id_by_User_id[ a_ToDo.ToDo_User_id ].push( a_ToDo.id );
+
+    let a_ToDo_id_by_User_id = ToDo_id_by_User_id[ a_ToDo.ToDo_User_id ];
+    if( a_ToDo_id_by_User_id == null )
+      a_ToDo_id_by_User_id = ToDo_id_by_User_id[ a_ToDo.ToDo_User_id ] = [ ];
+
+    a_ToDo_id_by_User_id.push( a_ToDo.id );
 
     resolve( a_ToDo.id );
   }, 100 ) );
@@ -79,7 +71,12 @@ export function DA_ToDo_list_get( User_id, status = 'any' )
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
-    let arr_ToDo = ToDo_id_by_User_id[ User_id ].map( id => ToDo_listById[ id ] );
+    let arr_ToDo;
+    let a_ToDo_id_by_User_id = ToDo_id_by_User_id[ User_id ];
+    if( a_ToDo_id_by_User_id == null )
+      arr_ToDo = [ ];
+    else
+      arr_ToDo = a_ToDo_id_by_User_id.map( id => ToDo_listById[ id ] );
 
     if( status !== 'any' )
     {
