@@ -144,13 +144,14 @@ To open the app:
 
 The following environment variables can be used to control the server:
 
-| Variable Name                  | Description                                                     |
-| ------------------------------ | ----------------------------------------------------------------|
-| PORT                           | Port for serving the SPA web application and API.               |
-| HOST                           | For for serving .                                               |
-| JWT_SECRET                     | Secret used for JWT tokens.                                     |
-| CASSANDRA_CONNECTION_POINTS    | Cassandra connection point. `localhost` if on the same machine. |
-| CASSANDRA_KEYSPACE             | Cassandra keyspace/database.                                    |
+| Variable Name                  | Description                                                                                             |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------|
+| PORT                           | Port for serving the SPA web application and API.                                                       |
+| HOST                           | For for serving .                                                                                       |
+| PUBLIC_URL                     | URL through which browsers and other clients can access the server - isomorphic pages, public, GraphQL. |
+| JWT_SECRET                     | Secret used for JWT tokens.                                                                             |
+| CASSANDRA_CONNECTION_POINTS    | Cassandra connection point. `localhost` if on the same machine.                                         |
+| CASSANDRA_KEYSPACE             | Cassandra keyspace/database.                                                                            |
 
 They can be set in the `.env` file in the root of the project. `Example.env` in
 the documents folder contains an example of such file. It is copied to `.env` in `postinstall`.
