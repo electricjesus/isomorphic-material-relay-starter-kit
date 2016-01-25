@@ -47,7 +47,7 @@ export default Relay.createContainer( Home_Screen, {
   fragments: {
     Viewer: () => Relay.QL`
       fragment on Viewer {
-        ToDo_TotalCount,
+        User_IsAnonymous,
       }
     `,
   },
