@@ -13,7 +13,7 @@ class Home_Screen extends React.Component
   {
     var isoVars = isomorphicVars( );
 
-    return (
+    return ( <div>
       <Card>
         <CardHeader
           title="Isomorphic Material-UI Relay starter kit"
@@ -37,9 +37,21 @@ class Home_Screen extends React.Component
             <li><a href="http://cassandra.apache.org/">Apache Cassandra</a></li>
           </ul>
           The project source is <a href="https://github.com/codefoundries/isomorphic-material-relay-starter-kit">available on GitHub</a>.
+          <br/>
         </CardText>
       </Card>
-    )
+      <br/>
+      <Card>
+        <CardHeader
+          title="Isomorphic Variables"
+          subtitle="Available both for client and server rendering"
+        />
+        <CardText>
+          public_url: { isoVars.public_url }<br/>
+          version: { isoVars.version }
+        </CardText>
+      </Card>
+    </div> );
   }
 };
 
