@@ -7,9 +7,11 @@ import NodeInterface from "../interface/NodeInterface";
 import User from '../../data/model/User';
 import { DA_Compendium_list_get } from '../../data/da/Compendium';
 import { DA_ToDo_list_get } from '../../data/da/ToDo';
+import { DA_Translaticiarum_list_get } from '../../data/da/ToDo';
 
 import CompendiumsConnection from "./CompendiumsConnection";
 import ToDosConnection from "./ToDosConnection";
+import TranslaticiarumsConnection from "./ToDosConnection";
 
 export default new GraphQLObjectType( {
   name: 'Viewer',
@@ -51,5 +53,15 @@ export default new GraphQLObjectType( {
     },
 
     // <-<-<- ToDo access through user
+
+    // ->->-> Translaticiarum access through user
+
+    Translaticiarums: {
+      type: TranslaticiarumsConnection.connectionType,
+      args: { ...connectionArgs },
+      resolve: ( obj, { ...args }, { rootValue: {user_id} } ) => DA_Translaticiarum_list_get( user_id ).then( ( arr_Translaticiarum ) => connectionFromArray( arr_Translaticiarum, args ) )
+    },
+
+    // <-<-<- Translaticiarum access through user
   },
 } );
