@@ -23,10 +23,11 @@ export default new GraphQLObjectType( {
 
     // ->->-> User properties
 
-    User_IsAnonymous:  { type: GraphQLBoolean, resolve: (obj) => obj.id.equals( Uuid_0 ), },
-    User_DisplayName:  { type: GraphQLString,  resolve: (obj) => obj.User_DisplayName, },
-    User_ProfilePhoto: { type: GraphQLString,  resolve: (obj) => obj.User_ProfilePhoto, },
-    User_Email:        { type: GraphQLString,  resolve: (obj) => obj.User_Email, },
+    User_IsAnonymous:  { type: GraphQLBoolean, resolve: (obj) => obj.id.equals( Uuid_0 ) },
+    User_DisplayName:  { type: GraphQLString,  resolve: (obj) => obj.User_DisplayName },
+    User_ProfilePhoto: { type: GraphQLString,  resolve: (obj) => obj.User_ProfilePhoto },
+    User_Email:        { type: GraphQLString,  resolve: (obj) => obj.User_Email },
+    User_Locale:       { type: GraphQLString,  resolve: (obj) => obj.User_Locale },
 
     // <-<-<- User properties
 

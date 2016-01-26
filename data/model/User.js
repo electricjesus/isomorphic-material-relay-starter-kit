@@ -9,5 +9,6 @@ export default class User
     this.User_DisplayName = fields.User_DisplayName;
     this.User_ProfilePhoto = fields.User_ProfilePhoto;
     this.User_Email = fields.User_Email;
+    this.User_Locale = fields.User_Locale;
   }
 }
