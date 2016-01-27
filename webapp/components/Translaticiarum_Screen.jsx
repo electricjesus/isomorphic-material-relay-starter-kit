@@ -9,17 +9,28 @@ import Translaticiarum_addMutation from '../mutations/Translaticiarum_addMutatio
 
 class Translaticiarum_Screen extends React.Component
 {
+  /*
   _handleAddTranslaticiarum( )
   {
     Relay.Store.commitUpdate(
       new Translaticiarum_addMutation( {
-        Translaticiarum_Text: this.refs.addTranslaticiarum.getValue( ),
+        Translaticiarum_Time: this.refs.addTranslaticiarum.getValue( ),
+        Translaticiarum_Type: this.refs.addTranslaticiarum.getValue( ),
         Viewer: this.props.Viewer
       } )
     );
 
     this.refs.addTranslaticiarum.setValue( '' );
   }
+  <div style={ { marginLeft: 4, marginRight: 4, } }>
+    <TextField
+      ref="addTranslaticiarum"
+      floatingLabelText="What needs to be done?"
+      fullWidth={ true }
+      onEnterKeyDown={ this._handleAddTranslaticiarum.bind( this ) }
+    />
+  </div>
+  */
 
   render( )
   {
@@ -29,15 +40,6 @@ class Translaticiarum_Screen extends React.Component
         <CardHeader title="Translaticiarum" subtitle="This means routine in Latin" />
 
         { this.props.children }
-
-        <div style={ { marginLeft: 4, marginRight: 4, } }>
-          <TextField
-            ref="addTranslaticiarum"
-            floatingLabelText="What needs to be done?"
-            fullWidth={ true }
-            onEnterKeyDown={ this._handleAddTranslaticiarum.bind( this ) }
-          />
-        </div>
 
       </Card>
     );

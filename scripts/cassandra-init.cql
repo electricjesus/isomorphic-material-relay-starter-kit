@@ -56,3 +56,24 @@ CREATE TABLE "ToDo"(
 
 CREATE INDEX "ToDo_ToDo_User_id_ix"
 ON "ToDo"( "ToDo_User_id" );
+
+
+CREATE TABLE "Translaticiarum"(
+  id uuid PRIMARY KEY,
+  "Translaticiarum_User_id" uuid,
+  "Translaticiarum_Date" timestamp,
+  "Translaticiarum_Time" timestamp,
+  "Translaticiarum_Type" int,
+);
+
+CREATE INDEX "Translaticiarum_Translaticiarum_User_id_ix"
+ON "Translaticiarum"( "Translaticiarum_User_id" );
+
+insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-01-31 00:00:00+0000', '1970-01-31 10:15:00+0000', 1 );
+
+insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-01-31 00:00:00+0000', '1970-01-31 13:10:00+0000', 2 );
+
+insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-02-01 00:00:00+0000', '1970-01-31 15:30:00+0000', 3 );
