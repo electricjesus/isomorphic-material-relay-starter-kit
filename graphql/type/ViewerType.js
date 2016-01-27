@@ -6,7 +6,7 @@ import { connectionArgs, connectionFromArray } from "graphql-relay";
 import CompendiumsConnection from "./CompendiumsConnection";
 import { DA_Compendium_list_get } from '../../data/da/Compendium';
 import { DA_ToDo_list_get } from '../../data/da/ToDo';
-import { DA_Translaticiarum_list_get } from '../../data/da/ToDo';
+import { DA_Translaticiarum_list_get } from '../../data/da/Translaticiarum';
 import NodeInterface from "../interface/NodeInterface";
 import ToDosConnection from "./ToDosConnection";
 import TranslaticiarumsConnection from "./TranslaticiarumsConnection";

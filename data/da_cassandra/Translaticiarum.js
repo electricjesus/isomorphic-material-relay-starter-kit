@@ -73,19 +73,10 @@ export function DA_Translaticiarum_delete( User_id, id )
   return runQueryOneResult( Translaticiarum, cqlText, cqlParams );
 }
 
-export function DA_Translaticiarum_list_get( User_id, status )
+export function DA_Translaticiarum_list_get( User_id )
 {
-  let cqlText = 'SELECT * FROM "Translaticiarum" WHERE "Translaticiarum_User_id" = ?';
+  let cqlText = 'SELECT * FROM "Translaticiarum" WHERE "Translaticiarum_User_id" = ?;';
   let cqlParams = [ User_id ];
-
-  if( status != 'any' )
-  {
-    // Allow filtering is OK since there won't be that many Translaticiarums per user anyway.
-    cqlText += ' AND "Translaticiarum_Complete" = ? ALLOW FILTERING';
-    cqlParams.push( status === 'completed' );
-  }
-
-  cqlText += ';';
 
   return runQuery( Translaticiarum, cqlText, cqlParams );
 }
