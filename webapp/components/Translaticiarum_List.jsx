@@ -37,11 +37,6 @@ class Translaticiarum_List extends React.Component
       </Tabs>
     );
   }
-  <Checkbox
-    label="Mark all as complete"
-    defaultChecked={ numTranslaticiarums === numCompletedTranslaticiarums }
-    onCheck={ this._handleMarkAllOnCheck.bind( this ) }
-  />
   { this.renderTabs( ) }
   */
 
