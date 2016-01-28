@@ -3,8 +3,6 @@ export default class Translaticiarum
 {
   constructor( fields )
   {
-    console.log( "Creating Translaticiarum " + JSON.stringify( fields ) );
-
     this.id = fields.id;
     this.Translaticiarum_User_id = fields.Translaticiarum_User_id;
     this.Translaticiarum_Date = fields.Translaticiarum_Date;
