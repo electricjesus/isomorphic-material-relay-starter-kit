@@ -23,6 +23,7 @@ class ToDo_Screen extends React.Component
 
   render( )
   {
+    // TODO: Add button for clearing completed items
     return (
       <Card>
 
