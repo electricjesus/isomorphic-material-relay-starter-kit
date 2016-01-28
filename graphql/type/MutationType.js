@@ -21,6 +21,7 @@ import ToDo_updateRename from "../mutation/ToDo_updateRename";
 
 // ->->-> Translaticiarum mutations imports
 
+import Translaticiarum_add from "../mutation/Translaticiarum_add";
 import Translaticiarum_delete from "../mutation/Translaticiarum_delete";
 import Translaticiarum_update from "../mutation/Translaticiarum_update";
 
@@ -52,6 +53,7 @@ export default new GraphQLObjectType( {
 
     // ->->-> Translaticiarum mutations
 
+    Translaticiarum_add: Translaticiarum_add,
     Translaticiarum_delete: Translaticiarum_delete,
     Translaticiarum_update: Translaticiarum_update,
 
