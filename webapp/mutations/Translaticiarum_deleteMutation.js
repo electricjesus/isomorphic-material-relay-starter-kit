@@ -7,6 +7,11 @@ export default class Translaticiarum_deleteMutation extends Relay.Mutation {
         id,
       }
     `,
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
+        id,
+      }
+    `,
   };
   getMutation() {
     return Relay.QL`mutation{Translaticiarum_delete}`;
@@ -15,6 +20,9 @@ export default class Translaticiarum_deleteMutation extends Relay.Mutation {
     return Relay.QL`
       fragment on Translaticiarum_deletePayload {
         deletedTranslaticiarumId,
+        Viewer {
+          id
+        },
       }
     `;
   }

@@ -62,12 +62,6 @@ class Translaticiarum_Item extends React.Component
     const theTime = new Date( this.props.Translaticiarum.Translaticiarum_Time );
     const theDateTime = new Date( theDate.getTime( ) + theTime.getTime( ) );
 
-/*
-import  from 'material-ui/lib/svg-icons/action/trending-up';
-import  from 'material-ui/lib/svg-icons/content/create';
-import  from 'material-ui/lib/svg-icons/hardware/headset';
-import  from 'material-ui/lib/svg-icons/image/landscape';
-*/
     const theType = this.props.Translaticiarum.Translaticiarum_Type;
     let itemIcon;
     if( theType == 1 ) itemIcon = <ActionAccountBalance />; // Speak in senate
@@ -109,6 +103,11 @@ export default Relay.createContainer( Translaticiarum_Item, {
         Translaticiarum_Type,
         ${Translaticiarum_deleteMutation.getFragment('Translaticiarum')},
         ${Translaticiarum_updateMutation.getFragment('Translaticiarum')},
+      }
+    `,
+    Viewer: () => Relay.QL`
+      fragment on Viewer {
+        ${Translaticiarum_deleteMutation.getFragment('Viewer')},
       }
     `,
   },

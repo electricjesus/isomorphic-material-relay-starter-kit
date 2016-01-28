@@ -75,6 +75,7 @@ export default Relay.createContainer( Translaticiarum_List, {
             },
           },
         },
+        ${Translaticiarum_Item.getFragment('Viewer')},
       }
     `,
   },
