@@ -84,11 +84,13 @@ class Translaticiarum_Item extends React.Component
     );
 
     return (
-      <ListItem
-        leftIcon={ itemIcon }
-        primaryText={ theDateTime.toString( ) }
-        rightIconButton={ rightIconMenu }
-      />
+      <div>
+        <ListItem
+          leftIcon={ itemIcon }
+          primaryText={ theDateTime.toString( ) }
+          rightIconButton={ rightIconMenu }
+        />
+      </div>
     );
   }
 }
