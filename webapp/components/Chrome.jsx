@@ -73,7 +73,7 @@ class Chrome extends React.Component
           <ToolbarGroup float="right">
             { incompleteNotification }
             <ToolbarSeparator />
-            <AppBar_Auth />
+            <AppBar_Auth Viewer={this.props.Viewer} />
           </ToolbarGroup>
         </ToolBar>
 
@@ -99,6 +99,7 @@ export default Relay.createContainer( Chrome, {
       fragment on Viewer {
         ToDo_TotalCount,
         ToDo_CompletedCount,
+        ${AppBar_Auth.getFragment('Viewer')},
       }
     `,
   },
