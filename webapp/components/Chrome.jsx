@@ -14,7 +14,9 @@ import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
 import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 
 import AppBar_Auth from './AppBar_Auth.jsx'
+import AppBar_Language from './AppBar_Language.jsx'
 import AppBar_NavigationMenu from './AppBar_NavigationMenu.jsx'
+
 
 class Chrome extends React.Component
 {
@@ -74,6 +76,7 @@ class Chrome extends React.Component
             { incompleteNotification }
             <ToolbarSeparator />
             <AppBar_Auth Viewer={this.props.Viewer} />
+            <AppBar_Language Viewer={this.props.Viewer} />
           </ToolbarGroup>
         </ToolBar>
 
