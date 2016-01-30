@@ -16,8 +16,8 @@ function DA_User_GetUUIDByID( id )
 
 var usersById = { };
 usersById[ DA_User_GetUUIDByID( 0 ) ] = new User( { id: Uuid.fromString( DA_User_GetUUIDByID( 0 ) ), username: '', password: '', User_DisplayName: 'Anonymous', User_ProfilePhoto: '', User_Email: '', User_Locale: '' } );
-usersById[ DA_User_GetUUIDByID( 1 ) ] = new User( { id: Uuid.fromString( DA_User_GetUUIDByID( 1 ) ), username: 'jack', password: 'secret', User_DisplayName: 'Jack Myuser', User_ProfilePhoto: '/profile_photos/jack.jpg', User_Email: 'jack@example.com', User_Locale: '' } );
-usersById[ DA_User_GetUUIDByID( 2 ) ] = new User( { id: Uuid.fromString( DA_User_GetUUIDByID( 2 ) ), username: 'jill', password: 'birthday', User_DisplayName: 'Jill Daccount', User_ProfilePhoto: '/profile_photos/jill.jpg', User_Email: 'jill@example.com', User_Locale: '' } );
+usersById[ DA_User_GetUUIDByID( 1 ) ] = new User( { id: Uuid.fromString( DA_User_GetUUIDByID( 1 ) ), username: 'jack', password: 'secret', User_DisplayName: 'Jack Van Der Cub', User_ProfilePhoto: '/profile_photos/jack.jpg', User_Email: 'jack@example.com', User_Locale: '' } );
+usersById[ DA_User_GetUUIDByID( 2 ) ] = new User( { id: Uuid.fromString( DA_User_GetUUIDByID( 2 ) ), username: 'jill', password: 'birthday', User_DisplayName: 'Jill McBear', User_ProfilePhoto: '/profile_photos/jill.jpg', User_Email: 'jill@example.com', User_Locale: '' } );
 
 
 // Data access functions
