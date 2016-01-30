@@ -27,10 +27,10 @@ export default class AppBar_Language extends React.Component
           <IconButton><Icon_Flag_BG /></IconButton>
         }
       >
-        <MenuItem key="BG" checked={ true } primaryText="Bulgarian" />
-        <MenuItem key="DE" leftIcon={ <Icon_Flag_DE /> } primaryText="Deutch" />
-        <MenuItem key="FR" leftIcon={ <Icon_Flag_FR /> } primaryText="French" />
-        <MenuItem key="IN" leftIcon={ <Icon_Flag_IN /> } primaryText="Indian" />
+        <MenuItem key="BG" checked={ true } primaryText="Български" />
+        <MenuItem key="DE" leftIcon={ <Icon_Flag_DE /> } primaryText="Deutsch" />
+        <MenuItem key="FR" leftIcon={ <Icon_Flag_FR /> } primaryText="Français" />
+        <MenuItem key="IN" leftIcon={ <Icon_Flag_IN /> } primaryText="मानक हिन्दी" />
         <MenuItem key="US" leftIcon={ <Icon_Flag_US /> } primaryText="English" />
       </IconMenu>
     );
