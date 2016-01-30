@@ -13,8 +13,12 @@ export default class Translaticiarum_Properties extends React.Component
   {
     super( props );
 
+    console.log( "props.Translaticiarum_Time=" + props.Translaticiarum_Time );
+
     this.state = {
       Dialog_IsOpen: false,
+      Translaticiarum_Date: new Date( props.Translaticiarum_Date ),
+      Translaticiarum_Time: new Date( props.Translaticiarum_Time ),
     };
   }
 
@@ -22,6 +26,20 @@ export default class Translaticiarum_Properties extends React.Component
   {
     this.setState( {
       Dialog_IsOpen: true
+    } );
+  }
+
+  _handleChange_Translaticiarum_Date( event, value )
+  {
+    this.setState( {
+      Translaticiarum_Date: value
+    } );
+  }
+
+  _handleChange_Translaticiarum_Time( event, value )
+  {
+    this.setState( {
+      Translaticiarum_Time: value
     } );
   }
 
@@ -34,6 +52,12 @@ export default class Translaticiarum_Properties extends React.Component
 
   _handleOK( )
   {
+    this.props.updateHandler( {
+      Translaticiarum_Type: this.refs.Translaticiarum_Type.getValue( ),
+      Translaticiarum_Date: this.state.Translaticiarum_Date.toJSON( ),
+      Translaticiarum_Time: this.state.Translaticiarum_Time.toJSON( ),
+    } );
+
     this.setState( {
       Dialog_IsOpen: false
     } );
@@ -59,14 +83,19 @@ export default class Translaticiarum_Properties extends React.Component
           />
           <DatePicker
             hintText="Date"
-            defaultValue={ new Date( this.props.Translaticiarum_Date ).toLocaleDateString( 'en-US' ) }
+            value={ this.state.Translaticiarum_Date }
+            onChange={ this._handleChange_Translaticiarum_Date.bind( this ) }
           />
           <TimePicker
             hintText="Time"
-            defaultValue={ new Date( this.props.Translaticiarum_Time ).toLocaleTimeString( 'en-US' ) }
+            value={ this.state.Translaticiarum_Time }
+            onChange={ this._handleChange_Translaticiarum_Time.bind( this ) }
           />
         </Dialog>
       </div>
     );
   }
 }
+
+// .toLocaleDateString( 'en-US' )
+// .toLocaleTimeString( 'en-US' )

@@ -15,8 +15,9 @@ export default class Translaticiarum_updateMutation extends Relay.Mutation {
     return Relay.QL`
       fragment on Translaticiarum_updatePayload {
         Translaticiarum {
-          Translaticiarum_Time,
           Translaticiarum_Type,
+          Translaticiarum_Date,
+          Translaticiarum_Time,
         }
       }
     `;
@@ -32,16 +33,18 @@ export default class Translaticiarum_updateMutation extends Relay.Mutation {
   getVariables() {
     return {
       id: this.props.Translaticiarum.id,
-      Translaticiarum_Time: this.props.Translaticiarum_Time,
       Translaticiarum_Type: this.props.Translaticiarum_Type,
+      Translaticiarum_Date: this.props.Translaticiarum_Date,
+      Translaticiarum_Time: this.props.Translaticiarum_Time,
     };
   }
   getOptimisticResponse() {
     return {
       Translaticiarum: {
         id: this.props.Translaticiarum.id,
-        Translaticiarum_Time: this.props.Translaticiarum_Time,
         Translaticiarum_Type: this.props.Translaticiarum_Type,
+        Translaticiarum_Date: this.props.Translaticiarum_Date,
+        Translaticiarum_Time: this.props.Translaticiarum_Time,
       },
     };
   }

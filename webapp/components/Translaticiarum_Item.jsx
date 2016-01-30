@@ -25,19 +25,18 @@ import Translaticiarum_Properties from './Translaticiarum_Properties.jsx';
 
 class Translaticiarum_Item extends React.Component
 {
-  /*
-  _handleTextInputSave( Translaticiarum_Time, Translaticiarum_Type )
+  _Translaticiarum_update( Translaticiarum_properties )
   {
+    console.log( "_Translaticiarum_update, Translaticiarum_properties=" + JSON.stringify( Translaticiarum_properties ) );
     Relay.Store.commitUpdate(
-      new Translaticiarum_updateMutation({Translaticiarum: this.props.Translaticiarum, Translaticiarum_Time, Translaticiarum_Type })
+      new Translaticiarum_updateMutation( { Translaticiarum: this.props.Translaticiarum, ...Translaticiarum_properties } )
     );
   }
-  */
 
   _Translaticiarum_delete( )
   {
     Relay.Store.commitUpdate(
-      new Translaticiarum_deleteMutation({Translaticiarum: this.props.Translaticiarum, Viewer: this.props.Viewer})
+      new Translaticiarum_deleteMutation( { Translaticiarum: this.props.Translaticiarum, Viewer: this.props.Viewer } )
     );
   }
 
@@ -98,6 +97,7 @@ class Translaticiarum_Item extends React.Component
           Translaticiarum_Type={ this.props.Translaticiarum.Translaticiarum_Type }
           Translaticiarum_Date={ this.props.Translaticiarum.Translaticiarum_Date }
           Translaticiarum_Time={ this.props.Translaticiarum.Translaticiarum_Time }
+          updateHandler={ this._Translaticiarum_update.bind( this ) }
         />
       </div>
     );

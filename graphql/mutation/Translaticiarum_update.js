@@ -12,8 +12,9 @@ export default mutationWithClientMutationId( {
   name: 'Translaticiarum_update',
   inputFields: {
     id: { type: new GraphQLNonNull( GraphQLID ) },
-    Translaticiarum_Time: { type: new GraphQLNonNull( GraphQLDateTime ) },
     Translaticiarum_Type: { type: new GraphQLNonNull( GraphQLInt ) },
+    Translaticiarum_Date: { type: new GraphQLNonNull( GraphQLDateTime ) },
+    Translaticiarum_Time: { type: new GraphQLNonNull( GraphQLDateTime ) },
   },
   outputFields: {
     Translaticiarum: {
@@ -24,8 +25,9 @@ export default mutationWithClientMutationId( {
   mutateAndGetPayload: ( {id, text} ) => {
     var localTranslaticiarumId = fromGlobalId(id).id;
     return DA_Translaticiarum_update( localTranslaticiarumId, {
+      Translaticiarum_Type: Translaticiarum_Type,
+      Translaticiarum_Date: Translaticiarum_Date,
       Translaticiarum_Time: Translaticiarum_Time,
-      Translaticiarum_Type: Translaticiarum_Type
     } )
     .then( ( ) => ( {localTranslaticiarumId} ) )
     ;
