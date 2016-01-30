@@ -5,8 +5,8 @@ IMRSK started as an off-shoot of multiple projects and boilerplates we use at [C
 | How to try     | **Link**|
 |----------------|----------------|
 | Live Demo | [http://isomorphic-material-relay.herokuapp.com/](http://isomorphic-material-relay.herokuapp.com/) This is a free dyno, so give it some time to spin up. |
-| Run locally | [Local Setup](./doc/Setup-Local.md) |
-| Run on [Heroku](https://www.heroku.com/nodejs) | [Heroku Setup](./doc/Setup-Heroku.md) |
+| Run locally | [Local Setup](local-setup) |
+| Run on [Heroku](https://www.heroku.com/nodejs) | [Heroku Setup](#heroku-setup) |
 
 # WARNING: Since version 0.6.4 we changed the user_id s so the auth_token cookies are invalid and will crash the client. Please delete the cookies first.
 
@@ -58,7 +58,7 @@ The following articles explain in detail certain aspects of this repository:
 
 
 
-### Heroku setup
+### <a name="heroku-setup"></a> Heroku setup
 
 In order to set up the project on heroku, perform the following steps:
 
@@ -70,7 +70,37 @@ In order to set up the project on heroku, perform the following steps:
 
 For more information refer to excellent [Getting Started with Node.js on Heroku - Deploy the app](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app). I do not have an available free Cassandra dyno on Heroku so I can not test how to configure Cassandra.
 
-### Initial Development Machine Setup
+#### Running bash on Heroku
+
+`heroku run bash` is your friend in need who is a friend indeed.
+
+#### Troubleshooting unmet peer dependencies on Heroku
+
+Whenever, when updating Heroku, an 'UNMET DEPENDENCY' message similar to the one below is displayed:
+
+```
+remote:        isomorphic-material-relay-starter-kit@0.7.2 /tmp/build_xxxxxxxxxxxx
+remote:        ├─┬ material-ui@0.14.3
+remote:        │ ├── inline-style-prefixer@0.6.7
+remote:        │ └── UNMET PEER DEPENDENCY react@^0.14.3
+remote:        ├── UNMET DEPENDENCY react@^0.14.6
+remote:        ├── react-dom@0.14.7
+remote:        └─┬ react-helmet@2.3.1
+remote:        └── core-js@2.0.3
+```
+
+Try the following troubleshooting step from the Heroku troubleshooting manual: Each time you run `npm install`, npm leaves packages that meet your semver requirements untouched. That’s why an `npm install` today may lead to a different tree than the `npm install` you ran yesterday, even if your `package.json` didn’t change.
+Therefore, it’s a good practice to periodically clear `node_modules` and reinstall from scratch to ensure that your` package.json` dependencies are still valid:
+
+```
+$ rm -rf node_modules
+$ npm install --quiet --production
+$ npm start
+```
+
+In fact, those are essentially the commands that Heroku runs when we build and launch your project. If they work locally, you’re likely to be cloud-ready.
+
+### <a name="local-setup"></a> Initial Development Machine Setup
 
 * **Install [Node.js](https://nodejs.org)**.  
 * **Install [Git](https://git-scm.com/downloads)**.
