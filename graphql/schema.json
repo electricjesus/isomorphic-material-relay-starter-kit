@@ -2443,7 +2443,21 @@
               "defaultValue": null
             },
             {
-              "name": "Translaticiarum_Time",
+              "name": "Translaticiarum_Type",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "Translaticiarum_Date",
               "description": null,
               "type": {
                 "kind": "NON_NULL",
@@ -2457,14 +2471,14 @@
               "defaultValue": null
             },
             {
-              "name": "Translaticiarum_Type",
+              "name": "Translaticiarum_Time",
               "description": null,
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "Int",
+                  "name": "DateTime",
                   "ofType": null
                 }
               },

@@ -5,10 +5,12 @@ import { Kind } from 'graphql/language'
 // The code in this file is largely borrowed from:
 // https://github.com/soundtrackyourbrand/graphql-custom-datetype/blob/master/datetype.js
 
-function coerceDate (value) {
+function coerceDate (value)
+{
+  value = new Date( value );
   if (!(value instanceof Date)) {
     // Is this how you raise a 'field error'?
-    throw new Error('Field error: value is not an instance of Date')
+    throw new Error('Field error: value is not an instance of Date, value =' + JSON.stringify( value ) )
   }
   if (isNaN(value.getTime())) {
     throw new Error('Field error: value is an invalid Date')
