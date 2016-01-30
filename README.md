@@ -100,6 +100,14 @@ $ npm start
 
 In fact, those are essentially the commands that Heroku runs when we build and launch your project. If they work locally, you’re likely to be cloud-ready.
 
+If this does not work, running
+
+```
+npm shrinkwrap
+```
+
+will generate the `npm-shrinkwrap.json` file, which seems to resolve the above problem in most cases.
+
 ### <a name="local-setup"></a> Initial Development Machine Setup
 
 * **Install [Node.js](https://nodejs.org)**.  
