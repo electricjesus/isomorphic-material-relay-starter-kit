@@ -35,9 +35,9 @@ export default class Translaticiarum_addMutation extends Relay.Mutation {
   }
   getVariables() {
     return {
+      Translaticiarum_Type: this.props.Translaticiarum_Type,
       Translaticiarum_Date: this.props.Translaticiarum_Date,
       Translaticiarum_Time: this.props.Translaticiarum_Time,
-      Translaticiarum_Type: this.props.Translaticiarum_Type,
     };
   }
   getOptimisticResponse() {
@@ -46,9 +46,9 @@ export default class Translaticiarum_addMutation extends Relay.Mutation {
       // get added until the server responds
       TranslaticiarumsEdge: {
         node: {
+          Translaticiarum_Type: this.props.Translaticiarum_Type,
           Translaticiarum_Date: this.props.Translaticiarum_Date,
           Translaticiarum_Time: this.props.Translaticiarum_Time,
-          Translaticiarum_Type: this.props.Translaticiarum_Type,
         },
       },
       Viewer: {

@@ -27,7 +27,6 @@ class Translaticiarum_Item extends React.Component
 {
   _Translaticiarum_update( Translaticiarum_properties )
   {
-    console.log( "_Translaticiarum_update, Translaticiarum_properties=" + JSON.stringify( Translaticiarum_properties ) );
     Relay.Store.commitUpdate(
       new Translaticiarum_updateMutation( { Translaticiarum: this.props.Translaticiarum, ...Translaticiarum_properties } )
     );
