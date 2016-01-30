@@ -1,11 +1,13 @@
 import React from 'react';
 
-
 import DatePicker from 'material-ui/lib/date-picker/date-picker';
 import Dialog from 'material-ui/lib/dialog';
 import RaisedButton from 'material-ui/lib/raised-button';
 import TextField from 'material-ui/lib/text-field';
 import TimePicker from 'material-ui/lib/time-picker/time-picker';
+
+import dateFromUTCString from '../scripts/dateFromUTCString'
+
 
 export default class Translaticiarum_Properties extends React.Component
 {
@@ -13,12 +15,12 @@ export default class Translaticiarum_Properties extends React.Component
   {
     super( props );
 
-    console.log( "props.Translaticiarum_Time=" + props.Translaticiarum_Time );
+    console.log( "dateFromUTCString( props.Translaticiarum_Time )" + dateFromUTCString( props.Translaticiarum_Time ) );
 
     this.state = {
       Dialog_IsOpen: false,
-      Translaticiarum_Date: new Date( props.Translaticiarum_Date ),
-      Translaticiarum_Time: new Date( props.Translaticiarum_Time ),
+      Translaticiarum_Date: dateFromUTCString( props.Translaticiarum_Date ),
+      Translaticiarum_Time: dateFromUTCString( props.Translaticiarum_Time ),
     };
   }
 

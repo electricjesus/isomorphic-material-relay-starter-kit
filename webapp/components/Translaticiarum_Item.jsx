@@ -16,6 +16,7 @@ import ContentCreate from 'material-ui/lib/svg-icons/content/create'; // Write p
 import HardwareHeadset from 'material-ui/lib/svg-icons/hardware/headset'; // Listen to music
 import ImageLandscape from 'material-ui/lib/svg-icons/image/landscape'; // Hike
 
+import dateFromUTCString from '../scripts/dateFromUTCString'
 
 import Translaticiarum_deleteMutation from '../mutations/Translaticiarum_deleteMutation';
 import Translaticiarum_updateMutation from '../mutations/Translaticiarum_updateMutation';
@@ -46,7 +47,6 @@ class Translaticiarum_Item extends React.Component
       case 'edit':
         console.log( 'edit' );
         this.refs.Translaticiarum_Properties._handle_Open( );
-        //this.props.onCompleteTranslaticiarum(this.props.Translaticiarum.id);
         break;
       case 'delete':
         console.log( 'delete' );
@@ -59,8 +59,8 @@ class Translaticiarum_Item extends React.Component
 
   render( )
   {
-    const theDate = new Date( this.props.Translaticiarum.Translaticiarum_Date );
-    const theTime = new Date( this.props.Translaticiarum.Translaticiarum_Time );
+    const theDate = dateFromUTCString( this.props.Translaticiarum.Translaticiarum_Date );
+    const theTime = dateFromUTCString( this.props.Translaticiarum.Translaticiarum_Time );
     const theDateTime = new Date( theDate.getTime( ) + theTime.getTime( ) );
 
     const theType = this.props.Translaticiarum.Translaticiarum_Type;
@@ -88,7 +88,7 @@ class Translaticiarum_Item extends React.Component
       <div>
         <ListItem
           leftIcon={ itemIcon }
-          primaryText={ theDateTime.toString( ) }
+          primaryText={ theDateTime.toUTCString( ) }
           rightIconButton={ rightIconMenu }
         />
         <Translaticiarum_Properties

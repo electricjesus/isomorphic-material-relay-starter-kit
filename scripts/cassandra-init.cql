@@ -70,10 +70,19 @@ CREATE INDEX "Translaticiarum_Translaticiarum_User_id_ix"
 ON "Translaticiarum"( "Translaticiarum_User_id" );
 
 insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
-values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-01-31 00:00:00+0000', '1970-01-31 10:15:00+0000', 1 );
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-01-11 00:00:00+0000', '1970-01-01 10:15:00+0000', 1 );
 
 insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
-values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-01-31 00:00:00+0000', '1970-01-31 13:10:00+0000', 2 );
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-01-22 00:00:00+0000', '1970-01-01 11:15:00+0000', 2 );
 
 insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
-values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-02-01 00:00:00+0000', '1970-01-31 15:30:00+0000', 3 );
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-01-31 00:00:00+0000', '1970-01-01 12:10:00+0000', 3 );
+
+insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-02-02 00:00:00+0000', '1970-01-01 13:30:00+0000', 4 );
+
+insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-02-07 00:00:00+0000', '1970-01-01 14:30:00+0000', 5 );
+
+insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-02-15 00:00:00+0000', '1970-01-01 15:30:00+0000', 6 );
