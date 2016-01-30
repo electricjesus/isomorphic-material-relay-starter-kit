@@ -29,31 +29,31 @@ class Home_Screen extends React.Component
           Here is some of the functionality currently available in the project:
           <ul>
             <li>
-              <b>User authentication</b>: on the top right in the navigation bar, if the user is not logged in (i.e. is being anonymous) an
+              <b>User authentication</b> : On the top right in the navigation bar, if the user is not logged in (i.e. is being anonymous) an
               outline of a human bust is displayed.
               Clicking on it opens the log in dialog. The pre-defined user names and passwords are listed in the dialog.
               If the user is already authenticated, a small pop over with information about the current user and user-related functions is displayed.
             </li>
             <li>
-              <b>Active tasks indicator</b>: if there are any un-completed To Do items, an indicator is displayed in the navigation bar with the
+              <b>Active tasks indicator</b> : If there are any un-completed To Do items, an indicator is displayed in the navigation bar with the
               number of active tasks. Clicking on it takes the user to the active tasks.
             </li>
             <li>
-              <b>Navigation menu</b>: clicking on the three vertical dots on the left of the navigation bar allows jumping to the different screens.
+              <b>Navigation menu</b> : Clicking on the three vertical dots on the left of the navigation bar allows jumping to the different screens.
             </li>
             <li>
-              <b>Compendiums</b>: An example of a form for an one-per user record, for instance for per-user settings. The example features
+              <b>Compendiums</b> : An example of a form for an one-per user record, for instance for per-user settings. The example features
               multiple types of inputs and validation.
             </li>
             <li>
-              <b>MUI</b>: Examples focusing on Material-UI elements.
+              <b>MUI</b> : Examples focusing on Material-UI elements.
             </li>
             <li>
-              <b>To Do</b>: Interpretation of the ToDo example from React Relay, implemented with Material UI controls, and per-user
+              <b>To Do</b> : Interpretation of the ToDo example from React Relay, implemented with Material UI controls, and per-user
               To Do items.
             </li>
             <li>
-              <b>Translaticiarums</b>: Simple per-user list of timed events. Allows for list view and daily agenda-like view.
+              <b>Translaticiarums</b> : Simple per-user list of timed events. Allows for list view and daily agenda-like view.
             </li>
           </ul>
           Links to some of the major technologies used:
