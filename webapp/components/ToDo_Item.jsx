@@ -12,6 +12,8 @@ import ToDo_updateStatusMutation from '../mutations/ToDo_updateStatusMutation';
 import ToDo_deleteMutation from '../mutations/ToDo_deleteMutation';
 import ToDo_updateRenameMutation from '../mutations/ToDo_updateRenameMutation';
 
+import ToDo_Properties from './ToDo_Properties.jsx';
+
 class ToDo_Item extends React.Component
 {
   state =
@@ -19,7 +21,13 @@ class ToDo_Item extends React.Component
     isEditing: false,
   };
 
-  // TODO Add edit dialog, possibly in another component
+  _ToDo_update( ToDo_properties )
+  {
+    Relay.Store.commitUpdate(
+      new ToDo_updateRenameMutation( { ToDo: this.props.ToDo, ...ToDo_properties } )
+    );
+  }
+
   _handleCompletedCheck( event, ToDo_Complete )
   {
     Relay.Store.commitUpdate(
@@ -51,7 +59,7 @@ class ToDo_Item extends React.Component
     {
       case 'edit':
         console.log( 'edit' );
-        //this.props.onCompleteToDo(this.props.ToDo.id);
+        this.refs.ToDo_Properties._handle_Open( );
         break;
       case 'delete':
         console.log( 'delete' );
@@ -75,16 +83,23 @@ class ToDo_Item extends React.Component
    );
 
     return (
-      <ListItem
-        primaryText={ this.props.ToDo.ToDo_Text }
-        leftCheckbox={
-          <Checkbox
-            defaultChecked={ this.props.ToDo.ToDo_Complete }
-            onCheck={ this._handleCompletedCheck.bind( this ) }
-          />
-        }
-        rightIconButton={ rightIconMenu }
-      />
+      <div>
+        <ListItem
+          primaryText={ this.props.ToDo.ToDo_Text }
+          leftCheckbox={
+            <Checkbox
+              defaultChecked={ this.props.ToDo.ToDo_Complete }
+              onCheck={ this._handleCompletedCheck.bind( this ) }
+            />
+          }
+          rightIconButton={ rightIconMenu }
+        />
+        <ToDo_Properties
+          ref="ToDo_Properties"
+          ToDo_Text={ this.props.ToDo.ToDo_Text }
+          updateHandler={ this._ToDo_update.bind( this ) }
+        />
+      </div>
     );
   }
 }
