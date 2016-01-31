@@ -21,6 +21,7 @@ export default class AppBar_Language extends React.Component
   {
     return(
       <IconMenu key="top-language"
+        style={ { bacgrkoundColor: '#d0d0d0' } }
         anchorOrigin={ { vertical: "bottom", horizontal: "right" } }
         onItemTouchTap={ this._handleLeftMenuTouchTap.bind( this ) }
         iconButtonElement={
