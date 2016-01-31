@@ -14,7 +14,9 @@ import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
 import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 
 import AppBar_Auth from './AppBar_Auth.jsx'
+import AppBar_Language from './AppBar_Language.jsx'
 import AppBar_NavigationMenu from './AppBar_NavigationMenu.jsx'
+
 
 class Chrome extends React.Component
 {
@@ -73,7 +75,8 @@ class Chrome extends React.Component
           <ToolbarGroup float="right">
             { incompleteNotification }
             <ToolbarSeparator />
-            <AppBar_Auth />
+            <AppBar_Auth Viewer={this.props.Viewer} />
+            <AppBar_Language Viewer={this.props.Viewer} />
           </ToolbarGroup>
         </ToolBar>
 
@@ -99,6 +102,7 @@ export default Relay.createContainer( Chrome, {
       fragment on Viewer {
         ToDo_TotalCount,
         ToDo_CompletedCount,
+        ${AppBar_Auth.getFragment('Viewer')},
       }
     `,
   },

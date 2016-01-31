@@ -16,11 +16,6 @@ import ToDo_Properties from './ToDo_Properties.jsx';
 
 class ToDo_Item extends React.Component
 {
-  state =
-  {
-    isEditing: false,
-  };
-
   _ToDo_update( ToDo_properties )
   {
     Relay.Store.commitUpdate(

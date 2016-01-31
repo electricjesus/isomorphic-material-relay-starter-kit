@@ -17,7 +17,7 @@ let options =
   keyspace: process.env.CASSANDRA_KEYSPACE
 };
 
-if (process.env.CASSANDRA_USER) 
+if (process.env.CASSANDRA_USER)
 {
   options.authProvider =
     new cassandraDriver.auth.PlainTextAuthProvider(
@@ -36,6 +36,8 @@ function ensureNoErrorOrReport( qText, qVar, err, reject )
     console.log( chalk.gray( "Query: " ) + chalk.red( qText ) );
     console.log( chalk.gray( "Parameters: " ) + chalk.red( JSON.stringify( qVar ) ) );
     console.log( chalk.blue( "." ) );
+
+    reject( err ); // Because terrisgit said so
   }
   else
     return true;
