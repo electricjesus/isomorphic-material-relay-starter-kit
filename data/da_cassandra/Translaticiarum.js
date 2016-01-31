@@ -33,20 +33,21 @@ export function DA_Translaticiarum_update( id, fields )
 
   if( 'Translaticiarum_Date' in fields )
   {
+    if( followingItem ) cqlText += ', ';
     cqlText += '"Translaticiarum_Date" = ?';
     cqlParams.push( fields.Translaticiarum_Date );
     followingItem = true;
   }
-  if( followingItem ) cqlText += ', ';
   if( 'Translaticiarum_Time' in fields )
   {
+    if( followingItem ) cqlText += ', ';
     cqlText += '"Translaticiarum_Time" = ?';
     cqlParams.push( fields.Translaticiarum_Time );
     followingItem = true;
   }
-  if( followingItem ) cqlText += ', ';
   if( 'Translaticiarum_Type' in fields )
   {
+    if( followingItem ) cqlText += ', ';
     cqlText += '"Translaticiarum_Type" = ?';
     cqlParams.push( fields.Translaticiarum_Type );
     followingItem = true;

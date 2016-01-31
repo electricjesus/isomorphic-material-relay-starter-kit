@@ -31,13 +31,14 @@ export function DA_ToDo_update( id, fields )
 
   if( 'ToDo_Text' in fields )
   {
+    if( followingItem ) cqlText += ', ';
     cqlText += '"ToDo_Text" = ?';
     cqlParams.push( fields.ToDo_Text );
     followingItem = true;
   }
-  if( followingItem ) cqlText += ', ';
   if( 'ToDo_Complete' in fields )
   {
+    if( followingItem ) cqlText += ', ';
     cqlText += '"ToDo_Complete" = ?';
     cqlParams.push( fields.ToDo_Complete );
     followingItem = true;

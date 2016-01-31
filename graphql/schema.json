@@ -1969,7 +1969,7 @@
               "defaultValue": null
             },
             {
-              "name": "text",
+              "name": "ToDo_Text",
               "description": null,
               "type": {
                 "kind": "NON_NULL",
@@ -2221,6 +2221,20 @@
           "fields": null,
           "inputFields": [
             {
+              "name": "Translaticiarum_Type",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
               "name": "Translaticiarum_Date",
               "description": null,
               "type": {
@@ -2243,20 +2257,6 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "DateTime",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "Translaticiarum_Type",
-              "description": null,
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
                   "ofType": null
                 }
               },
