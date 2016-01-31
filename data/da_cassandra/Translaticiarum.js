@@ -8,9 +8,10 @@ import Translaticiarum from '../model/Translaticiarum'
 export function DA_Translaticiarum_add( fields )
 {
   const id = Uuid.random( );
-  let cqlText = 'INSERT INTO "Translaticiarum" (id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" ) VALUES (?, ?, ?, ?, false);';
+  let cqlText = 'INSERT INTO "Translaticiarum" (id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" ) VALUES (?, ?, ?, ?, ?);';
   let cqlParams = [
     id,
+    fields.Translaticiarum_User_id,
     fields.Translaticiarum_Date,
     fields.Translaticiarum_Time,
     fields.Translaticiarum_Type,

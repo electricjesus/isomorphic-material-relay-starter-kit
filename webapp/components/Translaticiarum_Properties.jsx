@@ -15,8 +15,6 @@ export default class Translaticiarum_Properties extends React.Component
   {
     super( props );
 
-    console.log( "dateFromUTCString( props.Translaticiarum_Time )" + dateFromUTCString( props.Translaticiarum_Time ) );
-
     this.state = {
       Dialog_IsOpen: false,
       Translaticiarum_Date: dateFromUTCString( props.Translaticiarum_Date ),

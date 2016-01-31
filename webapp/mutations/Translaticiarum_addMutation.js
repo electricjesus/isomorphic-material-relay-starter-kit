@@ -42,8 +42,6 @@ export default class Translaticiarum_addMutation extends Relay.Mutation {
   }
   getOptimisticResponse() {
     return {
-      // FIXME: Translaticiarum_TotalCount gets updated optimistically, but this edge does not
-      // get added until the server responds
       TranslaticiarumsEdge: {
         node: {
           Translaticiarum_Type: this.props.Translaticiarum_Type,

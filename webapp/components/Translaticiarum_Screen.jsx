@@ -10,31 +10,23 @@ import TextField from 'material-ui/lib/text-field';
 
 import Translaticiarum_addMutation from '../mutations/Translaticiarum_addMutation';
 
+import Translaticiarum_Properties from './Translaticiarum_Properties.jsx';
+
 
 class Translaticiarum_Screen extends React.Component
 {
-  /*
-  _handleAddTranslaticiarum( )
+  _Translaticiarum_add( Translaticiarum_properties )
   {
+    console.log( "_Translaticiarum_add : " + JSON.stringify( Translaticiarum_properties ) )
     Relay.Store.commitUpdate(
-      new Translaticiarum_addMutation( {
-        Translaticiarum_Time: this.refs.addTranslaticiarum.getValue( ),
-        Translaticiarum_Type: this.refs.addTranslaticiarum.getValue( ),
-        Viewer: this.props.Viewer
-      } )
+      new Translaticiarum_addMutation( { ...Translaticiarum_properties, Viewer: this.props.Viewer } )
     );
-
-    this.refs.addTranslaticiarum.setValue( '' );
   }
-  <div style={ { marginLeft: 4, marginRight: 4, } }>
-    <TextField
-      ref="addTranslaticiarum"
-      floatingLabelText="What needs to be done?"
-      fullWidth={ true }
-      onEnterKeyDown={ this._handleAddTranslaticiarum.bind( this ) }
-    />
-  </div>
-  */
+
+  _handleAddTouchTap( )
+  {
+    this.refs.Translaticiarum_Properties._handle_Open( );
+  }
 
   render( )
   {
@@ -50,12 +42,21 @@ class Translaticiarum_Screen extends React.Component
 						secondary={true}
 						linkButton={true}
 						mini={true}
-						style={ {float: 'right', marginBottom: 15, marginRight: 25 } }
+						style={ {float: 'right', marginBottom: 15, marginRight: 15 } }
             actAsExpander={true}
+            onTouchTap={ this._handleAddTouchTap.bind( this ) }
           >
             <ContentAdd />
           </FloatingActionButton>
         </CardActions>
+
+        <Translaticiarum_Properties
+          ref="Translaticiarum_Properties"
+          Translaticiarum_Type={ 1 }
+          Translaticiarum_Date={ new Date( ).toJSON( ) }
+          Translaticiarum_Time={ new Date( ).toJSON( ) }
+          updateHandler={ this._Translaticiarum_add.bind( this ) }
+        />
 
       </Card>
     );
