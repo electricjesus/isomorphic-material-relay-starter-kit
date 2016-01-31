@@ -21,18 +21,17 @@ export default class AppBar_Language extends React.Component
   {
     return(
       <IconMenu key="top-language"
-        style={ { bacgrkoundColor: '#d0d0d0' } }
         anchorOrigin={ { vertical: "bottom", horizontal: "right" } }
         onItemTouchTap={ this._handleLeftMenuTouchTap.bind( this ) }
         iconButtonElement={
           <IconButton><Icon_Flag_BG /></IconButton>
         }
       >
-        <MenuItem key="BG" checked={ true } primaryText="Български" />
-        <MenuItem key="DE" leftIcon={ <Icon_Flag_DE /> } primaryText="Deutsch" />
-        <MenuItem key="FR" leftIcon={ <Icon_Flag_FR /> } primaryText="Français" />
-        <MenuItem key="IN" leftIcon={ <Icon_Flag_IN /> } primaryText="मानक हिन्दी" />
-        <MenuItem key="US" leftIcon={ <Icon_Flag_US /> } primaryText="English" />
+        <MenuItem style={ { backgroundColor: '#f5f5f5' } } key="BG" checked={ true } primaryText="Български" />
+        <MenuItem style={ { backgroundColor: '#f5f5f5' } } key="DE" leftIcon={ <Icon_Flag_DE /> } primaryText="Deutsch" />
+        <MenuItem style={ { backgroundColor: '#f5f5f5' } } key="FR" leftIcon={ <Icon_Flag_FR /> } primaryText="Français" />
+        <MenuItem style={ { backgroundColor: '#f5f5f5' } } key="IN" leftIcon={ <Icon_Flag_IN /> } primaryText="मानक हिन्दी" />
+        <MenuItem style={ { backgroundColor: '#f5f5f5' } } key="US" leftIcon={ <Icon_Flag_US /> } primaryText="English" />
       </IconMenu>
     );
   }
