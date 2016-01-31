@@ -3,9 +3,13 @@ import Relay from 'react-relay';
 
 import Card from 'material-ui/lib/card/card';
 import CardHeader from 'material-ui/lib/card/card-header';
+import CardActions from 'material-ui/lib/card/card-actions';
+import ContentAdd from 'material-ui/lib/svg-icons/content/add';
+import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import TextField from 'material-ui/lib/text-field';
 
 import Translaticiarum_addMutation from '../mutations/Translaticiarum_addMutation';
+
 
 class Translaticiarum_Screen extends React.Component
 {
@@ -35,17 +39,28 @@ class Translaticiarum_Screen extends React.Component
   render( )
   {
     return (
-      <Card>
+      <Card initiallyExpanded={true}>
 
-        <CardHeader title="Translaticiarum" subtitle="This means routine in Latin" />
+        <CardHeader initiallyExpanded={true} title="Translaticiarum" subtitle="This means routine in Latin" />
 
         { this.props.children }
+
+        <CardActions initiallyExpanded={true}>
+          <FloatingActionButton
+						secondary={true}
+						linkButton={true}
+						mini={true}
+						style={ {float: 'right', marginBottom: 15, marginRight: 25 } }
+            actAsExpander={true}
+          >
+            <ContentAdd />
+          </FloatingActionButton>
+        </CardActions>
 
       </Card>
     );
   }
 }
-
 
 export default Relay.createContainer( Translaticiarum_Screen, {
   fragments: {
