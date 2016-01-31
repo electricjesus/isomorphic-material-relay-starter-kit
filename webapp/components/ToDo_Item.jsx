@@ -14,11 +14,6 @@ import ToDo_updateRenameMutation from '../mutations/ToDo_updateRenameMutation';
 
 class ToDo_Item extends React.Component
 {
-  state =
-  {
-    isEditing: false,
-  };
-
   _handleCompletedCheck( event, ToDo_Complete )
   {
     Relay.Store.commitUpdate(
