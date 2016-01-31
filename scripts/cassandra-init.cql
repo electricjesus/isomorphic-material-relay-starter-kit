@@ -9,18 +9,20 @@ CREATE TABLE "User"(
   id uuid PRIMARY KEY,
   "username" varchar,
   "password" varchar,
-  "displayName" varchar,
-  "email" varchar,
+  "User_DisplayName" varchar,
+  "User_ProfilePhoto" varchar,
+  "User_Email" varchar,
+  "User_Locale" varchar
 );
 
 CREATE INDEX "User_username_ix"
 ON "User"( username );
 
-insert into "User"( id, "username", "password", "displayName", "email" )
-values( d362e1df-1fa8-466b-b311-af90b2a71e8e, 'jack', 'secret', 'Jack Myuser', 'jack@example.com' );
+insert into "User"( id, "username", "password", "User_DisplayName", "User_ProfilePhoto", "User_Email", "User_Locale" )
+values( d362e1df-1fa8-466b-b311-af90b2a71e8e, 'jack', 'secret', 'Jack Van Der Cub', '/profile_photos/jack.jpg', 'jack@example.com', '' );
 
-insert into "User"( id, "username", "password", "displayName", "email" )
-values( 33171548-39d3-45d8-ab5c-5eedefe01dfc, 'jill', 'birthday', 'Jill Daccount', 'jill@example.com' );
+insert into "User"( id, "username", "password", "User_DisplayName", "User_ProfilePhoto", "User_Email", "User_Locale" )
+values( 33171548-39d3-45d8-ab5c-5eedefe01dfc, 'jill', 'birthday', 'Jill McBear', '/profile_photos/jill.jpg', 'jill@example.com', '' );
 
 CREATE TABLE "Compendium"(
   "id" uuid PRIMARY KEY,
@@ -54,3 +56,24 @@ CREATE TABLE "ToDo"(
 
 CREATE INDEX "ToDo_ToDo_User_id_ix"
 ON "ToDo"( "ToDo_User_id" );
+
+
+CREATE TABLE "Translaticiarum"(
+  id uuid PRIMARY KEY,
+  "Translaticiarum_User_id" uuid,
+  "Translaticiarum_Date" timestamp,
+  "Translaticiarum_Time" timestamp,
+  "Translaticiarum_Type" int,
+);
+
+CREATE INDEX "Translaticiarum_Translaticiarum_User_id_ix"
+ON "Translaticiarum"( "Translaticiarum_User_id" );
+
+insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-01-31 00:00:00+0000', '1970-01-31 10:15:00+0000', 1 );
+
+insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-01-31 00:00:00+0000', '1970-01-31 13:10:00+0000', 2 );
+
+insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-02-01 00:00:00+0000', '1970-01-31 15:30:00+0000', 3 );

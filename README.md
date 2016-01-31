@@ -5,15 +5,19 @@ IMRSK started as an off-shoot of multiple projects and boilerplates we use at [C
 | How to try     | **Link**|
 |----------------|----------------|
 | Live Demo | [http://isomorphic-material-relay.herokuapp.com/](http://isomorphic-material-relay.herokuapp.com/) This is a free dyno, so give it some time to spin up. |
-| Run locally | [Local Setup](./doc/Setup-Local.md) |
-| Run on [Heroku](https://www.heroku.com/nodejs) | [Heroku Setup](./doc/Setup-Heroku.md) |
-
-Apache Cassandra is not part of this project yet. We are hoping to be able to bring it in soon.
+| Run locally | [Local Setup](#local-setup) |
+| Run on [Heroku](https://www.heroku.com/nodejs) | [Heroku Setup](#heroku-setup) |
 
 # WARNING: Since version 0.6.4 we changed the user_id s so the auth_token cookies are invalid and will crash the client. Please delete the cookies first.
 
 Naturally the server should be able to figure it out. Coming soon to a repository near you.
 
+## Articles
+
+The following articles explain in detail certain aspects of this repository:
+
+* [Cassandra, meet Relay. Relay, meet Cassandra](http://codefoundries.com/developer/cassandra/cassandra-meet-relay.html).
+* [Isomorphic Server Variables](http://codefoundries.com/developer/single-page-application/isomorphic-server-variables.html).
 
 
 ## Underlying technologies
@@ -54,7 +58,7 @@ Naturally the server should be able to figure it out. Coming soon to a repositor
 
 
 
-### Heroku setup
+### <a name="heroku-setup"></a> Heroku setup
 
 In order to set up the project on heroku, perform the following steps:
 
@@ -66,7 +70,45 @@ In order to set up the project on heroku, perform the following steps:
 
 For more information refer to excellent [Getting Started with Node.js on Heroku - Deploy the app](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app). I do not have an available free Cassandra dyno on Heroku so I can not test how to configure Cassandra.
 
-### Initial Development Machine Setup
+#### Running bash on Heroku
+
+`heroku run bash` is your friend in need who is a friend indeed.
+
+#### Troubleshooting unmet peer dependencies on Heroku
+
+Whenever, when updating Heroku, an 'UNMET DEPENDENCY' message similar to the one below is displayed:
+
+```
+remote:        isomorphic-material-relay-starter-kit@0.7.2 /tmp/build_xxxxxxxxxxxx
+remote:        ├─┬ material-ui@0.14.3
+remote:        │ ├── inline-style-prefixer@0.6.7
+remote:        │ └── UNMET PEER DEPENDENCY react@^0.14.3
+remote:        ├── UNMET DEPENDENCY react@^0.14.6
+remote:        ├── react-dom@0.14.7
+remote:        └─┬ react-helmet@2.3.1
+remote:        └── core-js@2.0.3
+```
+
+Try the following troubleshooting step from the Heroku troubleshooting manual: Each time you run `npm install`, npm leaves packages that meet your semver requirements untouched. That’s why an `npm install` today may lead to a different tree than the `npm install` you ran yesterday, even if your `package.json` didn’t change.
+Therefore, it’s a good practice to periodically clear `node_modules` and reinstall from scratch to ensure that your` package.json` dependencies are still valid:
+
+```
+$ rm -rf node_modules
+$ npm install --quiet --production
+$ npm start
+```
+
+In fact, those are essentially the commands that Heroku runs when we build and launch your project. If they work locally, you’re likely to be cloud-ready.
+
+If this does not work, running
+
+```
+npm shrinkwrap
+```
+
+will generate the `npm-shrinkwrap.json` file, which seems to resolve the above problem in most cases.
+
+### <a name="local-setup"></a> Initial Development Machine Setup
 
 * **Install [Node.js](https://nodejs.org)**.  
 * **Install [Git](https://git-scm.com/downloads)**.
@@ -121,7 +163,7 @@ In order to set up the project locally, perform the following steps:
 |------------------------|------------|
 | `start-webpack`        | Starts the webpack development server, responsible for asset compilation and hot reload. |
 | `start-dev`            | Starts the application server in development mode. |
-| `dev`                  | Starts the task at the same time: `start-webpack` and` start-dev` |
+| `dev`                  | Starts the task at the same time: `start-webpack` and` start-dev`. The color coding achieved with chalk will not be available with this task. |
 | `start`                | Run in production mode. |
 
 ### Running in development mode
@@ -140,13 +182,16 @@ To open the app:
 
 The following environment variables can be used to control the server:
 
-| Variable Name                  | Description                                                     |
-| ------------------------------ | ----------------------------------------------------------------|
-| PORT                           | Port for serving the SPA web application and API.               |
-| HOST                           | For for serving .                                               |
-| JWT_SECRET                     | Secret used for JWT tokens.                                     |
-| CASSANDRA_CONNECTION_POINTS    | Cassandra connection point. `localhost` if on the same machine. |
-| CASSANDRA_KEYSPACE             | Cassandra keyspace/database.                                    |
+| Variable Name                  | Description                                                                                             |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------|
+| PORT                           | Port for serving the SPA web application and API.                                                       |
+| HOST                           | Host for for serving, for instance `127.0.0.1`.                                                         |
+| PUBLIC_URL                     | URL through which browsers and other clients can access the server - isomorphic pages, public, GraphQL. Optional. Should not be empty. Example: `https://example.com` |
+| JWT_SECRET                     | Secret used for JWT tokens.                                                                             |
+| CASSANDRA_CONNECTION_POINTS    | Cassandra connection point comma separated list. `localhost` if on the same machine.                    |
+| CASSANDRA_KEYSPACE             | Cassandra keyspace/database.                                                                            |
+| CASSANDRA_USER                 | Optional Cassandra username.                                                                            |
+| CASSANDRA_PASSWORD             | Optional Cassandra password.                                                                            |
 
 They can be set in the `.env` file in the root of the project. `Example.env` in
 the documents folder contains an example of such file. It is copied to `.env` in `postinstall`.
@@ -172,7 +217,7 @@ Below is the list of the main files and folders for this project. Asterisk on th
 | `data/da/{Entity}.js`                         | Data access functions for {Entity}. Exported functions are named DA_{Entity}_*. Simply points either into memory, or Cassandra. |
 | `data/da_cassandra/_client.js`                | Promisified Cassandra client. | [*](./data/da_cassandra/_client.js) |
 | `data/da_cassandra/{Entity}.js`               | Data access functions for {Entity} implemented for Cassandra. |
-| `data/da_memory/generateUUID.js`              | Simple function for generating UUIDs. | [*](./data/da_memory/generateUUID.js) |
+| `data/da_memory/generateUUID.js`              | This file has been removed. It was used for UUID generation. UUID generation for the -in memory implementation is achieved through Cassandra types: `Uuid.random( )`. | |
 | `data/da_memory/{Entity}.js`                  | Data access functions for {Entity} implemented as in-memory transient storage. |
 | `data/model/`                                 | Models | [*](./data/model/) |
 | `data/model/{Entity}.js`                      | Model for {Entity}. Default class for that entity is exported. |
@@ -211,6 +256,10 @@ Below is the list of the main files and folders for this project. Asterisk on th
 | `webapp/styles/main.css`                      | Example style included in the app. Currently not used. | [*](./webapp/styles/main.css) |
 | `webapp/views/`                               | Views served by the express web app. | [*](./webapp/views/) |
 | `webapp/views/index.ejs`                      | Template for the HTML served by the isomorphic server rendered. | [*](./webapp/views/index.ejs) |
+| `webapp/app.js`                               | Starts the client-side SPA using data generated during server rendering. | [*](./webapp/app.js) |
+| `webapp/renderOnServer.js`                    | Performs server-side rendering. | [*](./webapp/renderOnServer.js) |
+| `webapp/routes.js`                            | Routes in a data structure consumed both by express router and react router. | [*](./webapp/routes.js) |
+| `webapp/server.js`                            | Server for the web app. | [*](./webapp/server.js) |
 
 
 
