@@ -5,9 +5,11 @@ import { connectionArgs, connectionFromArray } from "graphql-relay";
 
 import CompendiumsConnection from "./CompendiumsConnection";
 import { DA_Compendium_list_get } from '../../data/da/Compendium';
+import { DA_Ensayo_list_get } from '../../data/da/Ensayo';
 import { DA_ToDo_list_get } from '../../data/da/ToDo';
 import { DA_Translaticiarum_list_get } from '../../data/da/Translaticiarum';
 import NodeInterface from "../interface/NodeInterface";
+import EnsayosConnection from "./EnsayosConnection";
 import ToDosConnection from "./ToDosConnection";
 import TranslaticiarumsConnection from "./TranslaticiarumsConnection";
 import User from '../../data/model/User';
@@ -41,6 +43,16 @@ export default new GraphQLObjectType( {
     },
 
     // <-<-<- Compendium access through user
+
+    // ->->-> Ensayo access through user
+
+    Ensayos: {
+      type: EnsayosConnection.connectionType,
+      args: { ...connectionArgs },
+      resolve: ( obj, { ...args }, { rootValue: {user_id} } ) => DA_Ensayo_list_get( user_id ).then( ( arr_Ensayo ) => connectionFromArray( arr_Ensayo, args ) )
+    },
+
+    // <-<-<- Ensayo access through user
 
     // ->->-> ToDo access through user
 
