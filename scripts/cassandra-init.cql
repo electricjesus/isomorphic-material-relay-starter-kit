@@ -24,6 +24,8 @@ values( d362e1df-1fa8-466b-b311-af90b2a71e8e, 'jack', 'secret', 'Jack Van Der Cu
 insert into "User"( id, "username", "password", "User_DisplayName", "User_ProfilePhoto", "User_Email", "User_Locale" )
 values( 33171548-39d3-45d8-ab5c-5eedefe01dfc, 'jill', 'birthday', 'Jill McBear', '/profile_photos/jill.jpg', 'jill@example.com', '' );
 
+
+
 CREATE TABLE "Compendium"(
   "id" uuid PRIMARY KEY,
   "Compendium_User_id" uuid,
@@ -47,6 +49,24 @@ CREATE TABLE "Compendium"(
 CREATE INDEX "Compendium_Compendium_User_id_ix"
 ON "Compendium"( "Compendium_User_id" );
 
+
+
+CREATE TABLE "Ensayo"(
+  id uuid PRIMARY KEY,
+  "Ensayo_User_id" uuid,
+  "Ensayo_Title" varchar,
+  "Ensayo_Keywords" varchar,
+  "Ensayo_Content" varchar,
+);
+
+CREATE INDEX "Ensayo_Ensayo_User_id_ix"
+ON "Ensayo"( "Ensayo_User_id" );
+
+insert into "Ensayo"( id, "Ensayo_User_id", "Ensayo_Title", "Ensayo_Keywords", "Ensayo_Content" )
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, 'Awesome sauce', 'awesome, sauce, secret, secret sauce', 'A long article about the secret sauce' );
+
+
+
 CREATE TABLE "ToDo"(
   "id" uuid PRIMARY KEY,
   "ToDo_User_id" uuid,
@@ -56,6 +76,7 @@ CREATE TABLE "ToDo"(
 
 CREATE INDEX "ToDo_ToDo_User_id_ix"
 ON "ToDo"( "ToDo_User_id" );
+
 
 
 CREATE TABLE "Translaticiarum"(

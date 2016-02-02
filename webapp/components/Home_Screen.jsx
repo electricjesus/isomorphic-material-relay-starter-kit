@@ -46,6 +46,9 @@ class Home_Screen extends React.Component
               multiple types of inputs and validation.
             </li>
             <li>
+              <b>Ensayo</b> : Simple example of list of essays, with Helpmet for SEO.
+            </li>
+          <li>
               <b>MUI</b> : Examples focusing on Material-UI elements.
             </li>
             <li>

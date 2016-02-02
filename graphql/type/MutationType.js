@@ -7,6 +7,15 @@ import Compendium_update from "../mutation/Compendium_update";
 // <-<-<- Compendium mutations imports
 
 
+// ->->-> Ensayo mutations imports
+
+import Ensayo_add from "../mutation/Ensayo_add";
+import Ensayo_delete from "../mutation/Ensayo_delete";
+import Ensayo_update from "../mutation/Ensayo_update";
+
+// <-<-<- Ensayo mutations imports
+
+
 // ->->-> ToDo mutations imports
 
 import ToDo_add from "../mutation/ToDo_add";
@@ -37,6 +46,15 @@ export default new GraphQLObjectType( {
     Compendium_update: Compendium_update,
 
     // <-<-<- Compendium mutations
+
+
+    // ->->-> Ensayo mutations
+
+    Ensayo_add: Ensayo_add,
+    Ensayo_delete: Ensayo_delete,
+    Ensayo_update: Ensayo_update,
+
+    // <-<-<- Ensayo mutations
 
 
     // ->->-> ToDo mutations

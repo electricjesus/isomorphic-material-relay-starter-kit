@@ -1,5 +1,7 @@
 import Chrome from './components/Chrome.jsx';
 import Compendium from './components/Compendium.jsx';
+import Ensayo_List from './components/Ensayo_List.jsx';
+import Ensayo_Screen from './components/Ensayo_Screen.jsx';
 import Home_Screen from './components/Home_Screen.jsx';
 import MUI_Icons from './components/MUI_Icons.jsx';
 import MUI_Home from './components/MUI_Home.jsx';
@@ -23,6 +25,15 @@ export default [
             path: 'Compendiums',
             indexRoute: {
                 component: Compendium,
+                queries: ViewerQueries,
+            },
+          },
+          {
+            path: 'Ensayos',
+            component: Ensayo_Screen,
+            queries: ViewerQueries,
+            indexRoute: {
+                component: Ensayo_List,
                 queries: ViewerQueries,
             },
           },
