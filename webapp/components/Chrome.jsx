@@ -38,10 +38,10 @@ class Chrome extends React.Component
     this.setState({muiTheme: newMuiTheme});
   }
 
-  _handleOnFocusIncomplete( )
+  _handle_onFocus_IncompleteTODOs = ( ) =>
   {
     this.context.router.push( '/ToDos/active' );
-  }
+  };
 
   render( )
   {
@@ -52,7 +52,7 @@ class Chrome extends React.Component
     if( incompleteCount > 0 )
       incompleteNotification.push(
         <Badge key="top-incomplete" style={ { marginTop: -11, marginBottom: -17 } } badgeContent={ incompleteCount } primary={ true } badgeStyle={{top:20, right:16}}>
-          <IconButton tooltip="Incomplete TODOs" onFocus={ this._handleOnFocusIncomplete.bind( this ) }>
+          <IconButton tooltip="Incomplete TODOs" onFocus={ this._handle_onFocus_IncompleteTODOs }>
             <IconNotificationsEventAvailable />
           </IconButton>
         </Badge>

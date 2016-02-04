@@ -26,12 +26,12 @@ import Translaticiarum_Properties from './Translaticiarum_Properties.jsx';
 
 class Translaticiarum_Item extends React.Component
 {
-  _Translaticiarum_update( Translaticiarum_properties )
+  _handle_updateHandler_Translaticiarum_Properties = ( Translaticiarum_properties ) =>
   {
     Relay.Store.commitUpdate(
       new Translaticiarum_updateMutation( { Translaticiarum: this.props.Translaticiarum, ...Translaticiarum_properties } )
     );
-  }
+  };
 
   _Translaticiarum_delete( )
   {
@@ -40,7 +40,7 @@ class Translaticiarum_Item extends React.Component
     );
   }
 
-  _handle_onItemTouchTap( e, item )
+  _handle_onItemTouchTap = ( e, item ) =>
   {
     switch( item.ref )
     {
@@ -55,7 +55,7 @@ class Translaticiarum_Item extends React.Component
       default:
         break;
     }
-  }
+  };
 
   render( )
   {
@@ -77,7 +77,7 @@ class Translaticiarum_Item extends React.Component
     const rightIconMenu = (
       <IconMenu
         iconButtonElement={<IconButton><NavigationMoreVert /></IconButton>}
-        onItemTouchTap={ this._handle_onItemTouchTap.bind( this ) }
+        onItemTouchTap={ this._handle_onItemTouchTap }
       >
         <MenuItem ref="edit" index={0}>Edit</MenuItem>
         <MenuItem ref="delete" index={1}>Delete</MenuItem>
@@ -96,7 +96,7 @@ class Translaticiarum_Item extends React.Component
           Translaticiarum_Type={ this.props.Translaticiarum.Translaticiarum_Type }
           Translaticiarum_Date={ this.props.Translaticiarum.Translaticiarum_Date }
           Translaticiarum_Time={ this.props.Translaticiarum.Translaticiarum_Time }
-          updateHandler={ this._Translaticiarum_update.bind( this ) }
+          updateHandler={ this._handle_updateHandler_Translaticiarum_Properties }
         />
       </div>
     );

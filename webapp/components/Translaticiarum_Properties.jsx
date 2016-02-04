@@ -29,28 +29,28 @@ export default class Translaticiarum_Properties extends React.Component
     } );
   }
 
-  _handleChange_Translaticiarum_Date( event, value )
+  _handle_onChange_Translaticiarum_Date = ( event, value ) =>
   {
     this.setState( {
       Translaticiarum_Date: value
     } );
-  }
+  };
 
-  _handleChange_Translaticiarum_Time( event, value )
+  _handle_onChange_Translaticiarum_Time = ( event, value ) =>
   {
     this.setState( {
       Translaticiarum_Time: value
     } );
-  }
+  };
 
-  _handleClose( )
+  _handle_onTouchTap_Close = ( ) =>
   {
     this.setState( {
       Dialog_IsOpen: false
     } );
-  }
+  };
 
-  _handleOK( )
+  _handle_onTouchTap_OK = ( ) =>
   {
     this.props.updateHandler( {
       Translaticiarum_Type: this.refs.Translaticiarum_Type.getValue( ),
@@ -61,7 +61,7 @@ export default class Translaticiarum_Properties extends React.Component
     this.setState( {
       Dialog_IsOpen: false
     } );
-  }
+  };
 
   render( )
   {
@@ -71,8 +71,8 @@ export default class Translaticiarum_Properties extends React.Component
           open={ this.state.Dialog_IsOpen }
           title="Translaticiarum"
           actions={ [
-            <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handleClose.bind( this ) } />,
-            <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handleOK.bind( this ) } />,
+            <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handle_onTouchTap_Close } />,
+            <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handle_onTouchTap_OK } />,
           ] }
         >
           <TextField
@@ -84,12 +84,12 @@ export default class Translaticiarum_Properties extends React.Component
           <DatePicker
             hintText="Date"
             value={ this.state.Translaticiarum_Date }
-            onChange={ this._handleChange_Translaticiarum_Date.bind( this ) }
+            onChange={ this._handle_onChange_Translaticiarum_Date }
           />
           <TimePicker
             hintText="Time"
             value={ this.state.Translaticiarum_Time }
-            onChange={ this._handleChange_Translaticiarum_Time.bind( this ) }
+            onChange={ this._handle_onChange_Translaticiarum_Time }
           />
         </Dialog>
       </div>

@@ -15,18 +15,17 @@ import Translaticiarum_Properties from './Translaticiarum_Properties.jsx';
 
 class Translaticiarum_Screen extends React.Component
 {
-  _Translaticiarum_add( Translaticiarum_properties )
+  _handle_updateHandler_Translaticiarum_Add = ( Translaticiarum_properties ) =>
   {
-    console.log( "_Translaticiarum_add : " + JSON.stringify( Translaticiarum_properties ) )
     Relay.Store.commitUpdate(
       new Translaticiarum_addMutation( { ...Translaticiarum_properties, Viewer: this.props.Viewer } )
     );
-  }
+  };
 
-  _handleAddTouchTap( )
+  _handle_onTouchTap_Add = ( ) =>
   {
     this.refs.Translaticiarum_Properties._handle_Open( );
-  }
+  };
 
   render( )
   {
@@ -44,7 +43,7 @@ class Translaticiarum_Screen extends React.Component
 						mini={true}
 						style={ {float: 'right', marginBottom: 15, marginRight: 15 } }
             actAsExpander={true}
-            onTouchTap={ this._handleAddTouchTap.bind( this ) }
+            onTouchTap={ this._handle_onTouchTap_Add }
           >
             <ContentAdd />
           </FloatingActionButton>
@@ -55,7 +54,7 @@ class Translaticiarum_Screen extends React.Component
           Translaticiarum_Type={ 1 }
           Translaticiarum_Date={ new Date( ).toJSON( ) }
           Translaticiarum_Time={ new Date( ).toJSON( ) }
-          updateHandler={ this._Translaticiarum_add.bind( this ) }
+          updateHandler={ this._handle_updateHandler_Translaticiarum_Add }
         />
 
       </Card>
