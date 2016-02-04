@@ -4,11 +4,13 @@ import IconMenu from 'material-ui/lib/menus/icon-menu';
 import IconButton from 'material-ui/lib/icon-button';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 
-import Icon_Flag_BG from '../icons/Icon_Flag_BG.jsx'
-import Icon_Flag_DE from '../icons/Icon_Flag_DE.jsx'
-import Icon_Flag_FR from '../icons/Icon_Flag_FR.jsx'
-import Icon_Flag_IN from '../icons/Icon_Flag_IN.jsx'
-import Icon_Flag_US from '../icons/Icon_Flag_US.jsx'
+import {
+  Icon_Flag_BG,
+  Icon_Flag_DE,
+  Icon_Flag_FR,
+  Icon_Flag_IN,
+  Icon_Flag_US
+} from 'material-ui-country-flags';
 
 export default class AppBar_Language extends React.Component
 {
