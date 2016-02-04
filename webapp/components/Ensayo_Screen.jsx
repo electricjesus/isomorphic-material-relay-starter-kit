@@ -15,18 +15,17 @@ import Ensayo_Properties from './Ensayo_Properties.jsx';
 
 class Ensayo_Screen extends React.Component
 {
-  _Ensayo_add( Ensayo_properties )
+  _handle_updateHandler_Ensayo = ( Ensayo_properties ) =>
   {
-    console.log( "_Ensayo_add : " + JSON.stringify( Ensayo_properties ) )
     Relay.Store.commitUpdate(
       new Ensayo_addMutation( { ...Ensayo_properties, Viewer: this.props.Viewer } )
     );
-  }
+  };
 
-  _handleAddTouchTap( )
+  _handle_onTouchTap_Add = ( ) =>
   {
     this.refs.Ensayo_Properties._handle_Open( );
-  }
+  };
 
   render( )
   {
@@ -44,7 +43,7 @@ class Ensayo_Screen extends React.Component
 						mini={true}
 						style={ {float: 'right', marginBottom: 15, marginRight: 15 } }
             actAsExpander={true}
-            onTouchTap={ this._handleAddTouchTap.bind( this ) }
+            onTouchTap={ this._handle_onTouchTap_Add }
           >
             <ContentAdd />
           </FloatingActionButton>
@@ -55,7 +54,7 @@ class Ensayo_Screen extends React.Component
           Ensayo_Content={ "" }
           Ensayo_Title={ "" }
           Ensayo_Keywords={ "" }
-          updateHandler={ this._Ensayo_add.bind( this ) }
+          updateHandler={ this._handle_updateHandler_Ensayo }
         />
 
       </Card>

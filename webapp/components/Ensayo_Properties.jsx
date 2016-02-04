@@ -25,14 +25,14 @@ export default class Ensayo_Properties extends React.Component
     } );
   }
 
-  _handleClose( )
+  _handle_onTouchTap_Cancel = ( ) =>
   {
     this.setState( {
       Dialog_IsOpen: false
     } );
-  }
+  };
 
-  _handleOK( )
+  _handle_onTouchTap_OK = ( ) =>
   {
     this.props.updateHandler( {
       Ensayo_Content: this.refs.Ensayo_Content.getValue( ),
@@ -43,7 +43,7 @@ export default class Ensayo_Properties extends React.Component
     this.setState( {
       Dialog_IsOpen: false
     } );
-  }
+  };
 
   render( )
   {
@@ -53,8 +53,8 @@ export default class Ensayo_Properties extends React.Component
           open={ this.state.Dialog_IsOpen }
           title="Ensayo"
           actions={ [
-            <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handleClose.bind( this ) } />,
-            <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handleOK.bind( this ) } />,
+            <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handle_onTouchTap_Cancel } />,
+            <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handle_onTouchTap_OK } />,
           ] }
         >
           <TextField

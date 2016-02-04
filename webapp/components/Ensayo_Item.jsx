@@ -26,12 +26,12 @@ import Ensayo_Properties from './Ensayo_Properties.jsx';
 
 class Ensayo_Item extends React.Component
 {
-  _Ensayo_update( Ensayo_properties )
+  _handle_updateHandler_Ensayo = ( Ensayo_properties ) =>
   {
     Relay.Store.commitUpdate(
       new Ensayo_updateMutation( { Ensayo: this.props.Ensayo, ...Ensayo_properties } )
     );
-  }
+  };
 
   _Ensayo_delete( )
   {
@@ -40,7 +40,7 @@ class Ensayo_Item extends React.Component
     );
   }
 
-  _handle_onItemTouchTap( e, item )
+  _handle_onItemTouchTap = ( e, item ) =>
   {
     switch( item.ref )
     {
@@ -55,7 +55,7 @@ class Ensayo_Item extends React.Component
       default:
         break;
     }
-  }
+  };
 
   render( )
   {
@@ -66,7 +66,7 @@ class Ensayo_Item extends React.Component
     const rightIconMenu = (
       <IconMenu
         iconButtonElement={<IconButton><NavigationMoreVert /></IconButton>}
-        onItemTouchTap={ this._handle_onItemTouchTap.bind( this ) }
+        onItemTouchTap={ this._handle_onItemTouchTap }
       >
         <MenuItem ref="edit" index={0}>Edit</MenuItem>
         <MenuItem ref="delete" index={1}>Delete</MenuItem>
@@ -84,7 +84,7 @@ class Ensayo_Item extends React.Component
           Ensayo_Content={ this.props.Ensayo.Ensayo_Content }
           Ensayo_Title={ this.props.Ensayo.Ensayo_Title }
           Ensayo_Keywords={ this.props.Ensayo.Ensayo_Keywords }
-          updateHandler={ this._Ensayo_update.bind( this ) }
+          updateHandler={ this._handle_updateHandler_Ensayo }
         />
       </div>
     );
