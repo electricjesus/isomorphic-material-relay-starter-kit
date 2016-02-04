@@ -12,12 +12,6 @@ import {
   Icon_Flag_US
 } from 'material-ui-country-flags';
 
-// import Icon_Flag_BG from '../icons/Icon_Flag_BG.jsx'
-// import Icon_Flag_DE from '../icons/Icon_Flag_DE.jsx'
-// import Icon_Flag_FR from '../icons/Icon_Flag_FR.jsx'
-// import Icon_Flag_IN from '../icons/Icon_Flag_IN.jsx'
-// import Icon_Flag_US from '../icons/Icon_Flag_US.jsx'
-
 export default class AppBar_Language extends React.Component
 {
   _handleLeftMenuTouchTap( e, item )
