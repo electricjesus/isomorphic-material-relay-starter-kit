@@ -9,7 +9,7 @@ import ToDo_addMutation from '../mutations/ToDo_addMutation';
 
 class ToDo_Screen extends React.Component
 {
-  _handleAddToDo( )
+  _handle_onEnterKeyDown_AddToDo = ( ) =>
   {
     Relay.Store.commitUpdate(
       new ToDo_addMutation( {
@@ -19,7 +19,7 @@ class ToDo_Screen extends React.Component
     );
 
     this.refs.addToDo.setValue( '' );
-  }
+  };
 
   render( )
   {
@@ -36,7 +36,7 @@ class ToDo_Screen extends React.Component
             ref="addToDo"
             floatingLabelText="What needs to be done?"
             fullWidth={ true }
-            onEnterKeyDown={ this._handleAddToDo.bind( this ) }
+            onEnterKeyDown={ this._handle_onEnterKeyDown_AddToDo }
           />
         </div>
 

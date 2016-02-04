@@ -21,25 +21,6 @@ class Translaticiarum_List extends React.Component
     );
   }
 
-/*
-  _handleTabsChange( value )
-  {
-    this.context.router.push( '/Translaticiarums/' + value );
-  }
-
-  renderTabs( )
-  {
-    return(
-      <Tabs valueLink={ { value: this.props.relay.variables.status, requestChange: this._handleTabsChange.bind( this ) } }>
-        <Tab label="All" value="any" />
-        <Tab label="Active" value="active" />
-        <Tab label="Completed" value="completed" />
-      </Tabs>
-    );
-  }
-  { this.renderTabs( ) }
-  */
-
   render( )
   {
     return (
@@ -51,12 +32,6 @@ class Translaticiarum_List extends React.Component
     );
   }
 }
-
-/*
-Translaticiarum_List.contextTypes = {
-  router: React.PropTypes.object.isRequired,
-};
-*/
 
 export default Relay.createContainer( Translaticiarum_List, {
   fragments: {

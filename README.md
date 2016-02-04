@@ -113,6 +113,7 @@ will generate the `npm-shrinkwrap.json` file, which seems to resolve the above p
 * **Install [Node.js](https://nodejs.org)**.  
 * **Install [Git](https://git-scm.com/downloads)**.
 * **Install [Apache Cassandra](http://cassandra.apache.org/download/)**.
+* **Make sure** that Node.js is at least version 5.0 and NPM is at least version 3.
 
 We have only tested this running on MacOS. I am copying the instructions for other operating systems from the **[React Slingshot](https://github.com/coryhouse/react-slingshot)**. We have not had a chance to test them and would appreciate help with that. If you have done that please open an issue with the results whether successful or not, and feel free to PR to update this document.
 

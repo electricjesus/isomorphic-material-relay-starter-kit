@@ -10,7 +10,7 @@ export default mutationWithClientMutationId( {
   name: 'ToDo_updateRename',
   inputFields: {
     id: { type: new GraphQLNonNull( GraphQLID ) },
-    text: { type: new GraphQLNonNull( GraphQLString ) },
+    ToDo_Text: { type: new GraphQLNonNull( GraphQLString ) },
   },
   outputFields: {
     ToDo: {
@@ -18,9 +18,9 @@ export default mutationWithClientMutationId( {
       resolve: ( {localToDoId} ) => DA_ToDo_get(localToDoId),
     }
   },
-  mutateAndGetPayload: ( {id, text} ) => {
+  mutateAndGetPayload: ( {id, ToDo_Text} ) => {
     var localToDoId = fromGlobalId(id).id;
-    return DA_ToDo_update( localToDoId, { text: text } )
+    return DA_ToDo_update( localToDoId, { ToDo_Text: ToDo_Text } )
     .then( ( ) => ( {localToDoId} ) )
     ;
   },

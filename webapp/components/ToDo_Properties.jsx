@@ -23,14 +23,14 @@ export default class ToDo_Properties extends React.Component
     } );
   }
 
-  _handleClose( )
+  _handle_onTouchTap_Close = ( ) =>
   {
     this.setState( {
       Dialog_IsOpen: false
     } );
-  }
+  };
 
-  _handleOK( )
+  _handle_onTouchTap_OK = ( ) =>
   {
     this.props.updateHandler( {
       ToDo_Text: this.refs.ToDo_Text.getValue( ),
@@ -39,7 +39,7 @@ export default class ToDo_Properties extends React.Component
     this.setState( {
       Dialog_IsOpen: false
     } );
-  }
+  };
 
   render( )
   {
@@ -49,8 +49,8 @@ export default class ToDo_Properties extends React.Component
           open={ this.state.Dialog_IsOpen }
           title="ToDo"
           actions={ [
-            <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handleClose.bind( this ) } />,
-            <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handleOK.bind( this ) } />,
+            <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handle_onTouchTap_Close } />,
+            <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handle_onTouchTap_OK } />,
           ] }
         >
           <TextField

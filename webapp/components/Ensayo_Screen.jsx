@@ -8,23 +8,23 @@ import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import TextField from 'material-ui/lib/text-field';
 
-import Translaticiarum_addMutation from '../mutations/Translaticiarum_addMutation';
+import Ensayo_addMutation from '../mutations/Ensayo_addMutation';
 
-import Translaticiarum_Properties from './Translaticiarum_Properties.jsx';
+import Ensayo_Properties from './Ensayo_Properties.jsx';
 
 
-class Translaticiarum_Screen extends React.Component
+class Ensayo_Screen extends React.Component
 {
-  _handle_updateHandler_Translaticiarum_Add = ( Translaticiarum_properties ) =>
+  _handle_updateHandler_Ensayo = ( Ensayo_properties ) =>
   {
     Relay.Store.commitUpdate(
-      new Translaticiarum_addMutation( { ...Translaticiarum_properties, Viewer: this.props.Viewer } )
+      new Ensayo_addMutation( { ...Ensayo_properties, Viewer: this.props.Viewer } )
     );
   };
 
   _handle_onTouchTap_Add = ( ) =>
   {
-    this.refs.Translaticiarum_Properties._handle_Open( );
+    this.refs.Ensayo_Properties._handle_Open( );
   };
 
   render( )
@@ -32,7 +32,7 @@ class Translaticiarum_Screen extends React.Component
     return (
       <Card initiallyExpanded={true}>
 
-        <CardHeader initiallyExpanded={true} title="Translaticiarum" subtitle="This means routine in Latin" />
+        <CardHeader initiallyExpanded={true} title="Ensayo" subtitle="This means Essay in Spanish" />
 
         { this.props.children }
 
@@ -49,12 +49,12 @@ class Translaticiarum_Screen extends React.Component
           </FloatingActionButton>
         </CardActions>
 
-        <Translaticiarum_Properties
-          ref="Translaticiarum_Properties"
-          Translaticiarum_Type={ 1 }
-          Translaticiarum_Date={ new Date( ).toJSON( ) }
-          Translaticiarum_Time={ new Date( ).toJSON( ) }
-          updateHandler={ this._handle_updateHandler_Translaticiarum_Add }
+        <Ensayo_Properties
+          ref="Ensayo_Properties"
+          Ensayo_Content={ "" }
+          Ensayo_Title={ "" }
+          Ensayo_Keywords={ "" }
+          updateHandler={ this._handle_updateHandler_Ensayo }
         />
 
       </Card>
@@ -62,11 +62,11 @@ class Translaticiarum_Screen extends React.Component
   }
 }
 
-export default Relay.createContainer( Translaticiarum_Screen, {
+export default Relay.createContainer( Ensayo_Screen, {
   fragments: {
     Viewer: () => Relay.QL`
       fragment on Viewer {
-        ${Translaticiarum_addMutation.getFragment('Viewer')},
+        ${Ensayo_addMutation.getFragment('Viewer')},
       }
     `,
   },

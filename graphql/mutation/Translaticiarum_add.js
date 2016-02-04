@@ -16,9 +16,9 @@ import ViewerType from '../type/ViewerType';
 export default mutationWithClientMutationId( {
   name: 'Translaticiarum_add',
   inputFields: {
+    Translaticiarum_Type: { type: new GraphQLNonNull( GraphQLInt ) },
     Translaticiarum_Date: { type: new GraphQLNonNull( GraphQLDateTime ) },
     Translaticiarum_Time: { type: new GraphQLNonNull( GraphQLDateTime ) },
-    Translaticiarum_Type: { type: new GraphQLNonNull( GraphQLInt ) },
   },
   outputFields: {
     TranslaticiarumsEdge: {
@@ -43,12 +43,12 @@ export default mutationWithClientMutationId( {
       resolve: ( parent, args, { rootValue: {user_id} } ) => DA_User_get( user_id )
     },
   },
-  mutateAndGetPayload: ( {Translaticiarum_Text}, { rootValue: {user_id} } ) =>
+  mutateAndGetPayload: ( { Translaticiarum_Type, Translaticiarum_Date, Translaticiarum_Time }, { rootValue: {user_id} } ) =>
     DA_Translaticiarum_add( {
       Translaticiarum_User_id: user_id,
+      Translaticiarum_Type: Translaticiarum_Type,
       Translaticiarum_Date: Translaticiarum_Date,
       Translaticiarum_Time: Translaticiarum_Time,
-      Translaticiarum_Type: Translaticiarum_Type
     } )
     .then( ( localTranslaticiarumId ) => ( {localTranslaticiarumId} ) )
 } );

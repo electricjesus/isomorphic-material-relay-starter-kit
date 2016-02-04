@@ -22,7 +22,7 @@ export default mutationWithClientMutationId( {
       resolve: ( {localTranslaticiarumId} ) => DA_Translaticiarum_get( localTranslaticiarumId ),
     }
   },
-  mutateAndGetPayload: ( {id, text} ) => {
+  mutateAndGetPayload: ( {id, Translaticiarum_Type, Translaticiarum_Date, Translaticiarum_Time } ) => {
     var localTranslaticiarumId = fromGlobalId(id).id;
     return DA_Translaticiarum_update( localTranslaticiarumId, {
       Translaticiarum_Type: Translaticiarum_Type,

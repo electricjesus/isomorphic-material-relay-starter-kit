@@ -16,6 +16,7 @@ import ContentCreate from 'material-ui/lib/svg-icons/content/create'; // Write p
 import HardwareHeadset from 'material-ui/lib/svg-icons/hardware/headset'; // Listen to music
 import ImageLandscape from 'material-ui/lib/svg-icons/image/landscape'; // Hike
 
+import dateFromUTCString from '../scripts/dateFromUTCString'
 
 import Translaticiarum_deleteMutation from '../mutations/Translaticiarum_deleteMutation';
 import Translaticiarum_updateMutation from '../mutations/Translaticiarum_updateMutation';
@@ -25,13 +26,12 @@ import Translaticiarum_Properties from './Translaticiarum_Properties.jsx';
 
 class Translaticiarum_Item extends React.Component
 {
-  _Translaticiarum_update( Translaticiarum_properties )
+  _handle_updateHandler_Translaticiarum_Properties = ( Translaticiarum_properties ) =>
   {
-    console.log( "_Translaticiarum_update, Translaticiarum_properties=" + JSON.stringify( Translaticiarum_properties ) );
     Relay.Store.commitUpdate(
       new Translaticiarum_updateMutation( { Translaticiarum: this.props.Translaticiarum, ...Translaticiarum_properties } )
     );
-  }
+  };
 
   _Translaticiarum_delete( )
   {
@@ -40,14 +40,13 @@ class Translaticiarum_Item extends React.Component
     );
   }
 
-  _handleTouchTap( e, item )
+  _handle_onItemTouchTap = ( e, item ) =>
   {
     switch( item.ref )
     {
       case 'edit':
         console.log( 'edit' );
         this.refs.Translaticiarum_Properties._handle_Open( );
-        //this.props.onCompleteTranslaticiarum(this.props.Translaticiarum.id);
         break;
       case 'delete':
         console.log( 'delete' );
@@ -56,12 +55,12 @@ class Translaticiarum_Item extends React.Component
       default:
         break;
     }
-  }
+  };
 
   render( )
   {
-    const theDate = new Date( this.props.Translaticiarum.Translaticiarum_Date );
-    const theTime = new Date( this.props.Translaticiarum.Translaticiarum_Time );
+    const theDate = dateFromUTCString( this.props.Translaticiarum.Translaticiarum_Date );
+    const theTime = dateFromUTCString( this.props.Translaticiarum.Translaticiarum_Time );
     const theDateTime = new Date( theDate.getTime( ) + theTime.getTime( ) );
 
     const theType = this.props.Translaticiarum.Translaticiarum_Type;
@@ -78,7 +77,7 @@ class Translaticiarum_Item extends React.Component
     const rightIconMenu = (
       <IconMenu
         iconButtonElement={<IconButton><NavigationMoreVert /></IconButton>}
-        onItemTouchTap={ this._handleTouchTap.bind( this ) }
+        onItemTouchTap={ this._handle_onItemTouchTap }
       >
         <MenuItem ref="edit" index={0}>Edit</MenuItem>
         <MenuItem ref="delete" index={1}>Delete</MenuItem>
@@ -89,7 +88,7 @@ class Translaticiarum_Item extends React.Component
       <div>
         <ListItem
           leftIcon={ itemIcon }
-          primaryText={ theDateTime.toString( ) }
+          primaryText={ theDateTime.toUTCString( ) }
           rightIconButton={ rightIconMenu }
         />
         <Translaticiarum_Properties
@@ -97,7 +96,7 @@ class Translaticiarum_Item extends React.Component
           Translaticiarum_Type={ this.props.Translaticiarum.Translaticiarum_Type }
           Translaticiarum_Date={ this.props.Translaticiarum.Translaticiarum_Date }
           Translaticiarum_Time={ this.props.Translaticiarum.Translaticiarum_Time }
-          updateHandler={ this._Translaticiarum_update.bind( this ) }
+          updateHandler={ this._handle_updateHandler_Translaticiarum_Properties }
         />
       </div>
     );

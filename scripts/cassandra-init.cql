@@ -24,6 +24,8 @@ values( d362e1df-1fa8-466b-b311-af90b2a71e8e, 'jack', 'secret', 'Jack Van Der Cu
 insert into "User"( id, "username", "password", "User_DisplayName", "User_ProfilePhoto", "User_Email", "User_Locale" )
 values( 33171548-39d3-45d8-ab5c-5eedefe01dfc, 'jill', 'birthday', 'Jill McBear', '/profile_photos/jill.jpg', 'jill@example.com', '' );
 
+
+
 CREATE TABLE "Compendium"(
   "id" uuid PRIMARY KEY,
   "Compendium_User_id" uuid,
@@ -47,6 +49,24 @@ CREATE TABLE "Compendium"(
 CREATE INDEX "Compendium_Compendium_User_id_ix"
 ON "Compendium"( "Compendium_User_id" );
 
+
+
+CREATE TABLE "Ensayo"(
+  id uuid PRIMARY KEY,
+  "Ensayo_User_id" uuid,
+  "Ensayo_Title" varchar,
+  "Ensayo_Keywords" varchar,
+  "Ensayo_Content" varchar,
+);
+
+CREATE INDEX "Ensayo_Ensayo_User_id_ix"
+ON "Ensayo"( "Ensayo_User_id" );
+
+insert into "Ensayo"( id, "Ensayo_User_id", "Ensayo_Title", "Ensayo_Keywords", "Ensayo_Content" )
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, 'Awesome sauce', 'awesome, sauce, secret, secret sauce', 'A long article about the secret sauce' );
+
+
+
 CREATE TABLE "ToDo"(
   "id" uuid PRIMARY KEY,
   "ToDo_User_id" uuid,
@@ -56,6 +76,7 @@ CREATE TABLE "ToDo"(
 
 CREATE INDEX "ToDo_ToDo_User_id_ix"
 ON "ToDo"( "ToDo_User_id" );
+
 
 
 CREATE TABLE "Translaticiarum"(
@@ -70,10 +91,19 @@ CREATE INDEX "Translaticiarum_Translaticiarum_User_id_ix"
 ON "Translaticiarum"( "Translaticiarum_User_id" );
 
 insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
-values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-01-31 00:00:00+0000', '1970-01-31 10:15:00+0000', 1 );
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-01-11 00:00:00+0000', '1970-01-01 10:15:00+0000', 1 );
 
 insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
-values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-01-31 00:00:00+0000', '1970-01-31 13:10:00+0000', 2 );
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-01-22 00:00:00+0000', '1970-01-01 11:15:00+0000', 2 );
 
 insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
-values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-02-01 00:00:00+0000', '1970-01-31 15:30:00+0000', 3 );
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-01-31 00:00:00+0000', '1970-01-01 12:10:00+0000', 3 );
+
+insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-02-02 00:00:00+0000', '1970-01-01 13:30:00+0000', 4 );
+
+insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-02-07 00:00:00+0000', '1970-01-01 14:30:00+0000', 5 );
+
+insert into "Translaticiarum"( id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" )
+values ( uuid( ), d362e1df-1fa8-466b-b311-af90b2a71e8e, '2016-02-15 00:00:00+0000', '1970-01-01 15:30:00+0000', 6 );

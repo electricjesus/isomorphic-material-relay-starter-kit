@@ -1,11 +1,13 @@
 import React from 'react';
 
-
 import DatePicker from 'material-ui/lib/date-picker/date-picker';
 import Dialog from 'material-ui/lib/dialog';
 import RaisedButton from 'material-ui/lib/raised-button';
 import TextField from 'material-ui/lib/text-field';
 import TimePicker from 'material-ui/lib/time-picker/time-picker';
+
+import dateFromUTCString from '../scripts/dateFromUTCString'
+
 
 export default class Translaticiarum_Properties extends React.Component
 {
@@ -13,12 +15,10 @@ export default class Translaticiarum_Properties extends React.Component
   {
     super( props );
 
-    console.log( "props.Translaticiarum_Time=" + props.Translaticiarum_Time );
-
     this.state = {
       Dialog_IsOpen: false,
-      Translaticiarum_Date: new Date( props.Translaticiarum_Date ),
-      Translaticiarum_Time: new Date( props.Translaticiarum_Time ),
+      Translaticiarum_Date: dateFromUTCString( props.Translaticiarum_Date ),
+      Translaticiarum_Time: dateFromUTCString( props.Translaticiarum_Time ),
     };
   }
 
@@ -29,28 +29,28 @@ export default class Translaticiarum_Properties extends React.Component
     } );
   }
 
-  _handleChange_Translaticiarum_Date( event, value )
+  _handle_onChange_Translaticiarum_Date = ( event, value ) =>
   {
     this.setState( {
       Translaticiarum_Date: value
     } );
-  }
+  };
 
-  _handleChange_Translaticiarum_Time( event, value )
+  _handle_onChange_Translaticiarum_Time = ( event, value ) =>
   {
     this.setState( {
       Translaticiarum_Time: value
     } );
-  }
+  };
 
-  _handleClose( )
+  _handle_onTouchTap_Close = ( ) =>
   {
     this.setState( {
       Dialog_IsOpen: false
     } );
-  }
+  };
 
-  _handleOK( )
+  _handle_onTouchTap_OK = ( ) =>
   {
     this.props.updateHandler( {
       Translaticiarum_Type: this.refs.Translaticiarum_Type.getValue( ),
@@ -61,7 +61,7 @@ export default class Translaticiarum_Properties extends React.Component
     this.setState( {
       Dialog_IsOpen: false
     } );
-  }
+  };
 
   render( )
   {
@@ -71,8 +71,8 @@ export default class Translaticiarum_Properties extends React.Component
           open={ this.state.Dialog_IsOpen }
           title="Translaticiarum"
           actions={ [
-            <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handleClose.bind( this ) } />,
-            <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handleOK.bind( this ) } />,
+            <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handle_onTouchTap_Close } />,
+            <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handle_onTouchTap_OK } />,
           ] }
         >
           <TextField
@@ -84,12 +84,12 @@ export default class Translaticiarum_Properties extends React.Component
           <DatePicker
             hintText="Date"
             value={ this.state.Translaticiarum_Date }
-            onChange={ this._handleChange_Translaticiarum_Date.bind( this ) }
+            onChange={ this._handle_onChange_Translaticiarum_Date }
           />
           <TimePicker
             hintText="Time"
             value={ this.state.Translaticiarum_Time }
-            onChange={ this._handleChange_Translaticiarum_Time.bind( this ) }
+            onChange={ this._handle_onChange_Translaticiarum_Time }
           />
         </Dialog>
       </div>
