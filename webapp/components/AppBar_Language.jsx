@@ -14,17 +14,17 @@ import {
 
 export default class AppBar_Language extends React.Component
 {
-  _handleLeftMenuTouchTap( e, item )
+  _handle_onItemTouchTap_Language = ( e, item ) =>
   {
     console.log( 'Choose language: ' + item.key );
-  }
+  };
 
   render( )
   {
     return(
       <IconMenu key="top-language"
         anchorOrigin={ { vertical: "bottom", horizontal: "right" } }
-        onItemTouchTap={ this._handleLeftMenuTouchTap.bind( this ) }
+        onItemTouchTap={ this._handle_onItemTouchTap_Language }
         iconButtonElement={
           <IconButton><Icon_Flag_BG /></IconButton>
         }

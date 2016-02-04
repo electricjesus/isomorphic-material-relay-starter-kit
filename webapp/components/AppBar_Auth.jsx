@@ -39,24 +39,24 @@ class AppBar_Auth extends React.Component
     };
   }
 
-  _handle_Open_Dialog_UserNameAndPassword( )
+  _handle_onTouchTap_Login_LogIn = ( ) =>
   {
     this.setState( {
       Dialog_UserNameAndPassword_IsOpen: true
     } );
-  }
+  };
 
-  _handleUserNameEnterKeyDown( )
+  _handle_onEnterKeyDown_UserName = ( ) =>
   {
-    this.refs.Password.focus( );
-  }
+    this.refs.password.focus( );
+  };
 
-  _handlePasswordEnterKeyDown( )
+  _handle_onEnterKeyDown_Password = ( ) =>
   {
-    this._handleLogInOK( );
-  }
+    this._handle_onTouchTap_LogIn_OK( );
+  };
 
-  _handleLogInOK( )
+  _handle_onTouchTap_LogIn_OK = ( ) =>
   {
     this.setState( {
       Dialog_UserNameAndPassword_IsOpen: false,
@@ -75,21 +75,21 @@ class AppBar_Auth extends React.Component
       ( response ) => this._handleAuthSuccess( response ),
       ( response ) => this._handleAuthFailure( response )
     );
-  }
+  };
 
-  _handleLogInCancel( )
+  _handle_onTouchTap_LogIn_Cancel = ( ) =>
   {
     this.setState( {
       Dialog_UserNameAndPassword_IsOpen: false
     } );
-  }
+  };
 
-  _handleLoggingInCancel( )
+  _handle_onTouchTap_LogingIn_Cancel = ( ) =>
   {
     this.setState( {
       Dialog_LoginInProgress_IsOpen: false
     } );
-  }
+  };
 
   _handleAuthSuccess( response )
   {
@@ -116,12 +116,12 @@ class AppBar_Auth extends React.Component
     } );
   }
 
-  _handleLogInFaulureCancel( )
+  _handle_onTouchTap_LogInFailure_Cancel = ( ) =>
   {
     this.setState( {
       Dialog_LoginFaulure_IsOpen: false
     } );
-  }
+  };
 
   _handle_AuthorizedUserIcon_TouchTap = ( event ) =>
   {
@@ -136,7 +136,7 @@ class AppBar_Auth extends React.Component
     this.setState( {
       Popover_AuthorizedUser_IsOpen: false,
     } );
-    this._handle_Open_Dialog_UserNameAndPassword( );
+    this._handle_onTouchTap_Login_LogIn( );
   };
 
   _handle_Popover_AuthorizedUser_LogOut = ( ) =>
@@ -161,22 +161,22 @@ class AppBar_Auth extends React.Component
         open={ this.state.Dialog_UserNameAndPassword_IsOpen }
         title="Log In"
         actions={ [
-          <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handleLogInCancel.bind( this ) } />,
-          <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handleLogInOK.bind( this ) } />,
+          <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handle_onTouchTap_LogIn_Cancel } />,
+          <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handle_onTouchTap_LogIn_OK } />,
         ] }
       >
         <TextField
           ref="username"
           floatingLabelText="E-Mail"
           fullWidth={ true }
-          onEnterKeyDown={ this._handleUserNameEnterKeyDown.bind( this ) }
+          onEnterKeyDown={ this._handle_onEnterKeyDown_UserName }
         />
         <TextField
           ref="password"
           type="password"
           floatingLabelText="Password"
           fullWidth={ true }
-          onEnterKeyDown={ this._handlePasswordEnterKeyDown.bind( this ) }
+          onEnterKeyDown={ this._handle_onEnterKeyDown_Password }
         />
       Valid user name/combinations are: jack/secret jill/birthday
       </Dialog>
@@ -190,7 +190,7 @@ class AppBar_Auth extends React.Component
         open={ this.state.Dialog_LoginInProgress_IsOpen }
         title="Logging In ..."
         actions={ [
-          <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handleLoggingInCancel.bind( this ) } />,
+          <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handle_onTouchTap_LogingIn_Cancel } />,
         ] }
       >
         <LinearProgress mode="indeterminate" />
@@ -205,7 +205,7 @@ class AppBar_Auth extends React.Component
         open={ this.state.Dialog_LoginFaulure_IsOpen }
         title="Login failed"
         actions={ [
-          <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handleLogInFaulureCancel.bind( this ) } />,
+          <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handle_onTouchTap_LogInFailure_Cancel } />,
         ] }
       >
         { this.state.Dialog_LoginFaulure_Message }
@@ -249,7 +249,7 @@ class AppBar_Auth extends React.Component
   {
     if( this.props.Viewer.User_IsAnonymous )
       return(
-        <IconButton key='login' tooltip="Log In"onTouchTap={ this._handle_Open_Dialog_UserNameAndPassword.bind( this ) }>
+        <IconButton key='login' tooltip="Log In" onTouchTap={ this._handle_onTouchTap_Login_LogIn }>
           <IconSocialPersonOutline />
           { this.Dialog_UserNameAndPassword( ) }
           { this.Dialog_LoginInProgress( ) }

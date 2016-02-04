@@ -7,17 +7,17 @@ import NavigationMoreVert from 'material-ui/lib/svg-icons/navigation/more-vert';
 
 export default class AppBar_NavigationMenu extends React.Component
 {
-  _handleLeftMenuTouchTap( e, item )
+  _handle_onItemTouchTap_NavMenu = ( e, item ) =>
   {
     this.context.router.push( item.key );
-  }
+  };
 
   render( )
   {
     return(
       <IconMenu key="top-menu"
         anchorOrigin={ { vertical: "bottom" } }
-        onItemTouchTap={ this._handleLeftMenuTouchTap.bind( this ) }
+        onItemTouchTap={ this._handle_onItemTouchTap_NavMenu }
         iconButtonElement={
           <IconButton><NavigationMoreVert /></IconButton>
         }
