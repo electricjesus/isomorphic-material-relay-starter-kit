@@ -26,6 +26,7 @@ The following articles explain in detail certain aspects of this repository:
 |----------------|----------------|
 | [React](https://facebook.github.io/react/) | Library for building SPA. |
 | [Material UI](http://www.material-ui.com/) | Library for implementing Material Design in React. All user interface in this kit is built exclusively with Material UI components. |
+| [material-ui-country-flags](https://github.com/codefoundries/material-ui-country-flags) | Library with flag icons for Material-UI, used for the language selector. |
 | [Relay](https://facebook.github.io/relay/) | A Javascript framework for building data-driven react applications. |
 | [GraphQL](https://facebook.github.io/graphql/) | A query language created by Facebook in 2012 for describing the capabilities and requirements of data models for client‐server applications. |
 | [Express GraphQL](https://github.com/graphql/express-graphql) | A Node.js express library that allows the creation of GraphQL servers. |
