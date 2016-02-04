@@ -11,7 +11,7 @@ import ToDo_Item from './ToDo_Item.jsx';
 
 class ToDo_List extends React.Component
 {
-  _handleMarkAllOnCheck( event, checked )
+  _handle_onCheck_MarkAll = ( event, checked ) =>
   {
     Relay.Store.commitUpdate(
       new ToDo_list_updateMarkAllMutation( {
@@ -20,7 +20,7 @@ class ToDo_List extends React.Component
         Viewer: this.props.Viewer,
       } )
     );
-  }
+  };
 
   renderToDos( )
   {
@@ -33,15 +33,15 @@ class ToDo_List extends React.Component
     );
   }
 
-  _handleTabsChange( value )
+  _handle_requestChange = ( value ) =>
   {
     this.context.router.push( '/ToDos/' + value );
-  }
+  };
 
   renderTabs( )
   {
     return(
-      <Tabs valueLink={ { value: this.props.relay.variables.status, requestChange: this._handleTabsChange.bind( this ) } }>
+      <Tabs valueLink={ { value: this.props.relay.variables.status, requestChange: this._handle_requestChange } }>
         <Tab label="All" value="any" />
         <Tab label="Active" value="active" />
         <Tab label="Completed" value="completed" />
@@ -59,7 +59,7 @@ class ToDo_List extends React.Component
         <Checkbox
           label="Mark all as complete"
           defaultChecked={ numToDos === numCompletedToDos }
-          onCheck={ this._handleMarkAllOnCheck.bind( this ) }
+          onCheck={ this._handle_onCheck_MarkAll }
         />
         <List>
           { this.renderToDos( ) }

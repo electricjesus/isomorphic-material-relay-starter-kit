@@ -16,19 +16,14 @@ import ToDo_Properties from './ToDo_Properties.jsx';
 
 class ToDo_Item extends React.Component
 {
-  state =
-  {
-    isEditing: false,
-  };
-
-  _ToDo_update( ToDo_properties )
+  _handle_updateHandler_ToDo = ( ToDo_properties ) =>
   {
     Relay.Store.commitUpdate(
       new ToDo_updateRenameMutation( { ToDo: this.props.ToDo, ...ToDo_properties } )
     );
-  }
+  };
 
-  _handleCompletedCheck( event, ToDo_Complete )
+  _handle_onCheck_Completed = ( event, ToDo_Complete ) =>
   {
     Relay.Store.commitUpdate(
       new ToDo_updateStatusMutation({
@@ -37,7 +32,7 @@ class ToDo_Item extends React.Component
         Viewer: this.props.Viewer,
       })
     );
-  }
+  };
 
   _handleTextInputSave( ToDo_Text )
   {
@@ -53,7 +48,7 @@ class ToDo_Item extends React.Component
     );
   }
 
-  _handleTouchTap( e, item )
+  _handle_onItemTouchTap = ( e, item ) =>
   {
     switch( item.ref )
     {
@@ -68,14 +63,14 @@ class ToDo_Item extends React.Component
       default:
         break;
     }
-  }
+  };
 
   render( )
   {
     let rightIconMenu = (
      <IconMenu
        iconButtonElement={<IconButton><NavigationMoreVert /></IconButton>}
-       onItemTouchTap={ this._handleTouchTap.bind( this ) }
+       onItemTouchTap={ this._handle_onItemTouchTap }
       >
        <MenuItem ref="edit" index={0}>Edit</MenuItem>
        <MenuItem ref="delete" index={1}>Delete</MenuItem>
@@ -89,7 +84,7 @@ class ToDo_Item extends React.Component
           leftCheckbox={
             <Checkbox
               defaultChecked={ this.props.ToDo.ToDo_Complete }
-              onCheck={ this._handleCompletedCheck.bind( this ) }
+              onCheck={ this._handle_onCheck_Completed }
             />
           }
           rightIconButton={ rightIconMenu }
@@ -97,7 +92,7 @@ class ToDo_Item extends React.Component
         <ToDo_Properties
           ref="ToDo_Properties"
           ToDo_Text={ this.props.ToDo.ToDo_Text }
-          updateHandler={ this._ToDo_update.bind( this ) }
+          updateHandler={ this._handle_updateHandler_ToDo }
         />
       </div>
     );

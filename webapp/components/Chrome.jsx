@@ -14,7 +14,9 @@ import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
 import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 
 import AppBar_Auth from './AppBar_Auth.jsx'
+import AppBar_Language from './AppBar_Language.jsx'
 import AppBar_NavigationMenu from './AppBar_NavigationMenu.jsx'
+
 
 class Chrome extends React.Component
 {
@@ -36,10 +38,10 @@ class Chrome extends React.Component
     this.setState({muiTheme: newMuiTheme});
   }
 
-  _handleOnFocusIncomplete( )
+  _handle_onFocus_IncompleteTODOs = ( ) =>
   {
     this.context.router.push( '/ToDos/active' );
-  }
+  };
 
   render( )
   {
@@ -50,7 +52,7 @@ class Chrome extends React.Component
     if( incompleteCount > 0 )
       incompleteNotification.push(
         <Badge key="top-incomplete" style={ { marginTop: -11, marginBottom: -17 } } badgeContent={ incompleteCount } primary={ true } badgeStyle={{top:20, right:16}}>
-          <IconButton tooltip="Incomplete TODOs" onFocus={ this._handleOnFocusIncomplete.bind( this ) }>
+          <IconButton tooltip="Incomplete TODOs" onFocus={ this._handle_onFocus_IncompleteTODOs }>
             <IconNotificationsEventAvailable />
           </IconButton>
         </Badge>
@@ -73,7 +75,8 @@ class Chrome extends React.Component
           <ToolbarGroup float="right">
             { incompleteNotification }
             <ToolbarSeparator />
-            <AppBar_Auth />
+            <AppBar_Auth Viewer={this.props.Viewer} />
+            <AppBar_Language Viewer={this.props.Viewer} />
           </ToolbarGroup>
         </ToolBar>
 
@@ -99,6 +102,7 @@ export default Relay.createContainer( Chrome, {
       fragment on Viewer {
         ToDo_TotalCount,
         ToDo_CompletedCount,
+        ${AppBar_Auth.getFragment('Viewer')},
       }
     `,
   },

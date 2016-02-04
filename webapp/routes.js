@@ -1,10 +1,14 @@
 import Chrome from './components/Chrome.jsx';
 import Compendium from './components/Compendium.jsx';
+import Ensayo_List from './components/Ensayo_List.jsx';
+import Ensayo_Screen from './components/Ensayo_Screen.jsx';
 import Home_Screen from './components/Home_Screen.jsx';
 import MUI_Icons from './components/MUI_Icons.jsx';
 import MUI_Home from './components/MUI_Home.jsx';
-import ToDo_Screen from './components/ToDo_Screen.jsx';
 import ToDo_List from './components/ToDo_List.jsx';
+import ToDo_Screen from './components/ToDo_Screen.jsx';
+import Translaticiarum_List from './components/Translaticiarum_List.jsx';
+import Translaticiarum_Screen from './components/Translaticiarum_Screen.jsx';
 import ViewerQueries from './queries/ViewerQueries';
 
 export default [
@@ -21,6 +25,15 @@ export default [
             path: 'Compendiums',
             indexRoute: {
                 component: Compendium,
+                queries: ViewerQueries,
+            },
+          },
+          {
+            path: 'Ensayos',
+            component: Ensayo_Screen,
+            queries: ViewerQueries,
+            indexRoute: {
+                component: Ensayo_List,
                 queries: ViewerQueries,
             },
           },
@@ -54,6 +67,15 @@ export default [
                     queries: ViewerQueries,
                 },
             ],
+          },
+          {
+            path: 'Translaticiarums',
+            component: Translaticiarum_Screen,
+            queries: ViewerQueries,
+            indexRoute: {
+                component: Translaticiarum_List,
+                queries: ViewerQueries,
+            },
           },
         ],
     },

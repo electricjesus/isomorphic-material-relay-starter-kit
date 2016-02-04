@@ -1,15 +1,21 @@
 import { globalIdField } from "graphql-relay";
-import { GraphQLInt, GraphQLString, GraphQLObjectType } from "graphql";
+import { GraphQLBoolean, GraphQLInt, GraphQLString, GraphQLObjectType } from "graphql";
 import { connectionArgs, connectionFromArray } from "graphql-relay";
 
-import NodeInterface from "../interface/NodeInterface";
-
-import User from '../../data/model/User';
-import { DA_Compendium_list_get } from '../../data/da/Compendium';
-import { DA_ToDo_list_get } from '../../data/da/ToDo';
 
 import CompendiumsConnection from "./CompendiumsConnection";
+import { DA_Compendium_list_get } from '../../data/da/Compendium';
+import { DA_Ensayo_list_get } from '../../data/da/Ensayo';
+import { DA_ToDo_list_get } from '../../data/da/ToDo';
+import { DA_Translaticiarum_list_get } from '../../data/da/Translaticiarum';
+import NodeInterface from "../interface/NodeInterface";
+import EnsayosConnection from "./EnsayosConnection";
 import ToDosConnection from "./ToDosConnection";
+import TranslaticiarumsConnection from "./TranslaticiarumsConnection";
+import User from '../../data/model/User';
+import { Uuid } from '../../data/da_cassandra/_client.js';
+
+const Uuid_0 = Uuid.fromString( '00000000-0000-0000-0000-000000000000' );
 
 export default new GraphQLObjectType( {
   name: 'Viewer',
@@ -17,6 +23,16 @@ export default new GraphQLObjectType( {
   isTypeOf: object => object instanceof User,
   fields: {
     id: globalIdField('Viewer'),
+
+    // ->->-> User properties
+
+    User_IsAnonymous:  { type: GraphQLBoolean, resolve: (obj) => obj.id.equals( Uuid_0 ) },
+    User_DisplayName:  { type: GraphQLString,  resolve: (obj) => obj.User_DisplayName },
+    User_ProfilePhoto: { type: GraphQLString,  resolve: (obj) => obj.User_ProfilePhoto },
+    User_Email:        { type: GraphQLString,  resolve: (obj) => obj.User_Email },
+    User_Locale:       { type: GraphQLString,  resolve: (obj) => obj.User_Locale },
+
+    // <-<-<- User properties
 
     // ->->-> Compendium access through user
 
@@ -27,6 +43,16 @@ export default new GraphQLObjectType( {
     },
 
     // <-<-<- Compendium access through user
+
+    // ->->-> Ensayo access through user
+
+    Ensayos: {
+      type: EnsayosConnection.connectionType,
+      args: { ...connectionArgs },
+      resolve: ( obj, { ...args }, { rootValue: {user_id} } ) => DA_Ensayo_list_get( user_id ).then( ( arr_Ensayo ) => connectionFromArray( arr_Ensayo, args ) )
+    },
+
+    // <-<-<- Ensayo access through user
 
     // ->->-> ToDo access through user
 
@@ -51,5 +77,15 @@ export default new GraphQLObjectType( {
     },
 
     // <-<-<- ToDo access through user
+
+    // ->->-> Translaticiarum access through user
+
+    Translaticiarums: {
+      type: TranslaticiarumsConnection.connectionType,
+      args: { ...connectionArgs },
+      resolve: ( obj, { ...args }, { rootValue: {user_id} } ) => DA_Translaticiarum_list_get( user_id ).then( ( arr_Translaticiarum ) => connectionFromArray( arr_Translaticiarum, args ) )
+    },
+
+    // <-<-<- Translaticiarum access through user
   },
 } );
