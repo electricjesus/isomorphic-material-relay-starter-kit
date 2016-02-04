@@ -40,7 +40,7 @@ class Translaticiarum_Item extends React.Component
     );
   }
 
-  _handleTouchTap( e, item )
+  _handle_onItemTouchTap( e, item )
   {
     switch( item.ref )
     {
@@ -77,7 +77,7 @@ class Translaticiarum_Item extends React.Component
     const rightIconMenu = (
       <IconMenu
         iconButtonElement={<IconButton><NavigationMoreVert /></IconButton>}
-        onItemTouchTap={ this._handleTouchTap.bind( this ) }
+        onItemTouchTap={ this._handle_onItemTouchTap.bind( this ) }
       >
         <MenuItem ref="edit" index={0}>Edit</MenuItem>
         <MenuItem ref="delete" index={1}>Delete</MenuItem>

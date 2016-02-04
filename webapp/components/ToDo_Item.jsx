@@ -48,7 +48,7 @@ class ToDo_Item extends React.Component
     );
   }
 
-  _handle_onTouchTap = ( e, item ) =>
+  _handle_onItemTouchTap = ( e, item ) =>
   {
     switch( item.ref )
     {
@@ -70,7 +70,7 @@ class ToDo_Item extends React.Component
     let rightIconMenu = (
      <IconMenu
        iconButtonElement={<IconButton><NavigationMoreVert /></IconButton>}
-       onItemTouchTap={ this._handle_onTouchTap }
+       onItemTouchTap={ this._handle_onItemTouchTap }
       >
        <MenuItem ref="edit" index={0}>Edit</MenuItem>
        <MenuItem ref="delete" index={1}>Delete</MenuItem>
