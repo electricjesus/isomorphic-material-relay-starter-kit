@@ -96,6 +96,3 @@ export default class Translaticiarum_Properties extends React.Component
     );
   }
 }
-
-// .toLocaleDateString( 'en-US' )
-// .toLocaleTimeString( 'en-US' )
