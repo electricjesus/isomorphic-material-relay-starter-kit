@@ -8,6 +8,7 @@ import MUI_Home from './components/MUI_Home.jsx';
 import ToDo_List from './components/ToDo_List.jsx';
 import ToDo_Screen from './components/ToDo_Screen.jsx';
 import Translaticiarum_List from './components/Translaticiarum_List.jsx';
+import Translaticiarum_Grid from './components/Translaticiarum_Grid.jsx';
 import Translaticiarum_Screen from './components/Translaticiarum_Screen.jsx';
 import ViewerQueries from './queries/ViewerQueries';
 
@@ -76,6 +77,11 @@ export default [
                 component: Translaticiarum_List,
                 queries: ViewerQueries,
             },
+          },
+          {
+            path: 'TranslaticiarumsGrid',
+            component: Translaticiarum_Grid,
+            queries: ViewerQueries,
           },
         ],
     },

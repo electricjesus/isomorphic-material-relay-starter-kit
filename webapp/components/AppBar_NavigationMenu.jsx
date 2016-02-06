@@ -29,6 +29,7 @@ export default class AppBar_NavigationMenu extends React.Component
         <MenuItem key="/mui/icons" primaryText="MUI Icons" />
         <MenuItem key="/ToDos" primaryText="To Do" />
         <MenuItem key="/Translaticiarums" primaryText="Translaticiarums" />
+        <MenuItem key="/TranslaticiarumsGrid" primaryText="Translaticiarums Grid" />
       </IconMenu>
     );
   }
