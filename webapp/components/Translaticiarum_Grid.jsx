@@ -11,11 +11,25 @@ import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import TextField from 'material-ui/lib/text-field';
 
 import Translaticiarum_addMutation from '../mutations/Translaticiarum_addMutation';
+import Translaticiarum_deleteMutation from '../mutations/Translaticiarum_deleteMutation';
+import Translaticiarum_updateMutation from '../mutations/Translaticiarum_updateMutation';
 
 import Translaticiarum_Icon from './Translaticiarum_Icon';
 import Translaticiarum_Properties from './Translaticiarum_Properties.jsx';
 
 const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ];
+
+function createDateAsUTC( date )
+{
+  return new Date( Date.UTC(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    date.getHours(),
+    date.getMinutes(),
+    date.getSeconds()
+  ) );
+}
 
 //@Dimensions( )
 class Translaticiarum_Grid extends React.Component
@@ -31,14 +45,15 @@ class Translaticiarum_Grid extends React.Component
     Date_Start.setMilliseconds( 0 );
 
     this.state = {
-      Date_Start: Date_Start,
+      Date_Start: createDateAsUTC( Date_Start ),
     };
   }
 
   _handle_onChange_Date_Start = ( event, value ) =>
   {
+    console.log( "Date:" + value );
     this.setState( {
-      Date_Start: value
+      Date_Start: createDateAsUTC( value )
     } );
   };
 
@@ -54,7 +69,64 @@ class Translaticiarum_Grid extends React.Component
     this.refs.Translaticiarum_Properties._handle_Open( );
   };
 
-  renderCell( ix2, translaticiarumType, transliticiarumDay )
+//   getKeys (obj){
+//    var keys = [];
+//    for(var key in obj){
+//       keys.push(key);
+//    }
+//    return keys;
+// }
+
+  getTranslaticiarumByDateAndType( transliticiarumDays )
+  {
+    //console.log( this.getKeys( this.props.Viewer.Translaticiarums.edges[ 0 ].node ).join( " " ) );
+
+    const dayCount = transliticiarumDays.length - 1; // First element is null
+
+    // First, organize array with the epoch time for every day beging and end
+    // let arrDayBoundaries = [ ];
+    // for( let ixDay = 1; ixDay <= dayCount; ixDay++ )
+    // {
+    //   const epoch = transliticiarumDays[ ixDay ].getTime( );
+    //   arrDayBoundaries[ ixDay ] = {
+    //     start: epoch,
+    //     stop: epoch + 24*60*60*1000,
+    //   };
+    // }
+    //console.log( JSON.stringify( arrDayBoundaries ) );
+
+    // Array with the dates
+    const results = { };
+    for( let ixDay = 1; ixDay <= dayCount; ixDay++ )
+    {
+      console.log( "GT:" + transliticiarumDays[ ixDay ].getTime( ) );
+      results[ transliticiarumDays[ ixDay ].getTime( ) ] = { };
+    }
+
+    console.log( JSON.stringify( results ) );
+
+    this.props.Viewer.Translaticiarums.edges.map( ( edge ) => {
+
+      const Translaticiarum_Date_Epoch = new Date( edge.node.Translaticiarum_Date ).getTime( );
+      console.log( "Translaticiarum_Date_Epoch:" + Translaticiarum_Date_Epoch );
+
+      const resultsForDay = results[ Translaticiarum_Date_Epoch ];
+      if( resultsForDay != null )
+      {
+        const type = edge.node.Translaticiarum_Type;
+        let arrTranslaticiarum = resultsForDay[ type ];
+        if( arrTranslaticiarum == null )
+          arrTranslaticiarum = resultsForDay[ type ] = [ ];
+
+        arrTranslaticiarum.push( edge.node )
+      }
+
+    } );
+
+    return results;
+  }
+
+  renderCell( TranslaticiarumByDateAndType, translaticiarumType, transliticiarumDay )
   {
     let cell;
 
@@ -76,11 +148,22 @@ class Translaticiarum_Grid extends React.Component
       if( transliticiarumDay == null )
         cell =Translaticiarum_Icon( translaticiarumType );
       else
-        cell = "2";
+      {
+        cell = "-";
+        const TranslaticiarumByType = TranslaticiarumByDateAndType[ transliticiarumDay.getTime( ) ];
+        if( TranslaticiarumByType != null )
+        {
+          const arrTranslaticiarum = TranslaticiarumByType[ translaticiarumType ];
+          if( arrTranslaticiarum != null )
+          {
+            cell = "X";
+          }
+        }
+      }
     }
 
     return(
-      <td key={ ix2 }>{ cell }</td>
+      <td key={ transliticiarumDay }>{ cell }</td>
     );
   }
 
@@ -97,6 +180,8 @@ class Translaticiarum_Grid extends React.Component
     for( let day = 0; day < numberOfDays; day++ )
       transliticiarumDays.push( new Date( this.state.Date_Start.getTime( ) + day * 24*60*60*1000) );
 
+    const TranslaticiarumByDateAndType = this.getTranslaticiarumByDateAndType( transliticiarumDays );
+
     console.log( "this.state.Date_Start = " + this.state.Date_Start );
     console.log( "this.props.containerWidth = " + this.props.containerWidth );
     console.log( "this.props.containerHeight = " + this.props.containerHeight );
@@ -106,13 +191,12 @@ class Translaticiarum_Grid extends React.Component
 
         <CardHeader initiallyExpanded={true} title="Translaticiarum" subtitle="This means routine in Latin" />
 
-
         <table>
           <tbody>
-            { translaticiarumTypes.map( ( translaticiarumType, ix1 ) =>
-              <tr key={ ix1 }>
-                { transliticiarumDays.map( ( transliticiarumDay, ix2 ) =>
-                  this.renderCell( ix2, translaticiarumType, transliticiarumDay )
+            { translaticiarumTypes.map( ( translaticiarumType ) =>
+              <tr key={ translaticiarumType }>
+                { transliticiarumDays.map( ( transliticiarumDay ) =>
+                  this.renderCell( TranslaticiarumByDateAndType, translaticiarumType, transliticiarumDay )
                 ) }
               </tr>
             ) }
@@ -154,7 +238,20 @@ export default Relay.createContainer( Dimensions( )( Translaticiarum_Grid ), {
   fragments: {
     Viewer: () => Relay.QL`
       fragment on Viewer {
+        Translaticiarums(first: 2147483647) {
+          edges {
+            node {
+              id,
+              Translaticiarum_Date,
+              Translaticiarum_Time,
+              Translaticiarum_Type,
+              ${Translaticiarum_deleteMutation.getFragment('Translaticiarum')},
+              ${Translaticiarum_updateMutation.getFragment('Translaticiarum')},
+            },
+          },
+        },
         ${Translaticiarum_addMutation.getFragment('Viewer')},
+        ${Translaticiarum_deleteMutation.getFragment('Viewer')},
       }
     `,
   },

@@ -53,7 +53,11 @@ class Translaticiarum_Item extends React.Component
   {
     const theDate = dateFromUTCString( this.props.Translaticiarum.Translaticiarum_Date );
     const theTime = dateFromUTCString( this.props.Translaticiarum.Translaticiarum_Time );
-    const theDateTime = new Date( theDate.getTime( ) + theTime.getTime( ) );
+
+    theDate.setHours( theTime.getHours( ) );
+    theDate.setMinutes( theTime.getMinutes( ) );
+    theDate.setSeconds( theTime.getSeconds( ) );
+    theDate.setMilliseconds( theTime.getMilliseconds( ) );
 
     const rightIconMenu = (
       <IconMenu
@@ -69,7 +73,7 @@ class Translaticiarum_Item extends React.Component
       <div>
         <ListItem
           leftIcon={ Translaticiarum_Icon( this.props.Translaticiarum.Translaticiarum_Type ) }
-          primaryText={ theDateTime.toUTCString( ) }
+          primaryText={ theDate.toUTCString( ) }
           rightIconButton={ rightIconMenu }
         />
         <Translaticiarum_Properties

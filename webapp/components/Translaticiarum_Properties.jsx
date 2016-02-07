@@ -29,17 +29,31 @@ export default class Translaticiarum_Properties extends React.Component
     } );
   }
 
+  createDateAsUTC( date )
+  {
+    return new Date( Date.UTC(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds()
+    ) );
+  }
+
   _handle_onChange_Translaticiarum_Date = ( event, value ) =>
   {
     this.setState( {
-      Translaticiarum_Date: value
+      Translaticiarum_Date: this.createDateAsUTC( value )
     } );
   };
 
   _handle_onChange_Translaticiarum_Time = ( event, value ) =>
   {
+    console.log( "value.getHours( )= " + value.getHours( ) );
+    console.log( "value.getMinutes( )= " + value.getMinutes( ) );
     this.setState( {
-      Translaticiarum_Time: value
+      Translaticiarum_Time: this.createDateAsUTC( value )
     } );
   };
 
