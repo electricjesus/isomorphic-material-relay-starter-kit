@@ -1,6 +1,6 @@
 {
   "name": "isomorphic-material-relay-starter-kit",
-  "version": "0.7.12",
+  "version": "0.7.13",
   "dependencies": {
     "abbrev": {
       "version": "1.0.7",
@@ -3721,6 +3721,11 @@
       "version": "0.14.7",
       "from": "react-addons-update@>=0.14.0 <0.15.0",
       "resolved": "https://registry.npmjs.org/react-addons-update/-/react-addons-update-0.14.7.tgz"
+    },
+    "react-dimensions": {
+      "version": "1.0.2",
+      "from": "react-dimensions@*",
+      "resolved": "https://registry.npmjs.org/react-dimensions/-/react-dimensions-1.0.2.tgz"
     },
     "react-dom": {
       "version": "0.14.7",

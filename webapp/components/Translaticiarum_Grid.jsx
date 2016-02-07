@@ -1,4 +1,5 @@
 import React from 'react';
+import Dimensions from 'react-dimensions'
 import Relay from 'react-relay';
 
 import Card from 'material-ui/lib/card/card';
@@ -11,17 +12,26 @@ import TextField from 'material-ui/lib/text-field';
 
 import Translaticiarum_addMutation from '../mutations/Translaticiarum_addMutation';
 
+import Translaticiarum_Icon from './Translaticiarum_Icon';
 import Translaticiarum_Properties from './Translaticiarum_Properties.jsx';
 
+const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ];
 
+//@Dimensions( )
 class Translaticiarum_Grid extends React.Component
 {
   constructor( props )
   {
     super( props );
 
+    const Date_Start = new Date( );
+    Date_Start.setHours( 0 );
+    Date_Start.setMinutes( 0 );
+    Date_Start.setSeconds( 0 );
+    Date_Start.setMilliseconds( 0 );
+
     this.state = {
-      Date_Start: new Date( ),
+      Date_Start: Date_Start,
     };
   }
 
@@ -44,28 +54,65 @@ class Translaticiarum_Grid extends React.Component
     this.refs.Translaticiarum_Properties._handle_Open( );
   };
 
+  renderCell( ix2, translaticiarumType, transliticiarumDay )
+  {
+    let cell;
+
+    // Type 0 does not exist, this indicates that a row should be dates
+    if( translaticiarumType == 0 )
+    {
+      // Blank cell top left
+      if( transliticiarumDay == null )
+        cell = "";
+      else
+      {
+        // Will display day of week
+        cell = dayOfWeek[ transliticiarumDay.getDay( ) ];
+      }
+    }
+    else
+    {
+      // On the left, the types of translaticiarums
+      if( transliticiarumDay == null )
+        cell =Translaticiarum_Icon( translaticiarumType );
+      else
+        cell = "2";
+    }
+
+    return(
+      <td key={ ix2 }>{ cell }</td>
+    );
+  }
+
   render( )
   {
-    let translaticiarumTypes = [0, 1, 2, 3, 4, 5, 6, 7];
-    let transliticiarumDays= [null, new Date(Date.now() + 1 * 24*60*60*1000), new Date(Date.now() + 2 * 24*60*60*1000) ];
+    let translaticiarumTypes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+    // Depending on width, determine the number of days shows. Each day is 100 pixels
+    let numberOfDays = Math.floor( this.props.containerWidth / 100 );
+    if( numberOfDays < 1 ) numberOfDays = 1;
+    else if( numberOfDays > 7 ) numberOfDays = 7;
+
+    let transliticiarumDays= [ null ];
+    for( let day = 0; day < numberOfDays; day++ )
+      transliticiarumDays.push( new Date( this.state.Date_Start.getTime( ) + day * 24*60*60*1000) );
+
+    console.log( "this.state.Date_Start = " + this.state.Date_Start );
+    console.log( "this.props.containerWidth = " + this.props.containerWidth );
+    console.log( "this.props.containerHeight = " + this.props.containerHeight );
 
     return (
       <Card initiallyExpanded={true}>
 
         <CardHeader initiallyExpanded={true} title="Translaticiarum" subtitle="This means routine in Latin" />
 
-        <DatePicker
-          hintText="Date Start"
-          value={ this.state.Date_Start }
-          onChange={ this._handle_onChange_Date_Start }
-        />
 
         <table>
           <tbody>
             { translaticiarumTypes.map( ( translaticiarumType, ix1 ) =>
               <tr key={ ix1 }>
-                { translaticiarumTypes.map( ( translaticiarumType, ix2 ) =>
-                  <td key={ ix2 }>x</td>
+                { transliticiarumDays.map( ( transliticiarumDay, ix2 ) =>
+                  this.renderCell( ix2, translaticiarumType, transliticiarumDay )
                 ) }
               </tr>
             ) }
@@ -73,6 +120,11 @@ class Translaticiarum_Grid extends React.Component
         </table>
 
         <CardActions initiallyExpanded={true}>
+          <DatePicker
+            hintText="Date Start"
+            value={ this.state.Date_Start }
+            onChange={ this._handle_onChange_Date_Start }
+          />
           <FloatingActionButton
 						secondary={true}
 						linkButton={true}
@@ -98,7 +150,7 @@ class Translaticiarum_Grid extends React.Component
   }
 }
 
-export default Relay.createContainer( Translaticiarum_Grid, {
+export default Relay.createContainer( Dimensions( )( Translaticiarum_Grid ), {
   fragments: {
     Viewer: () => Relay.QL`
       fragment on Viewer {
