@@ -10,6 +10,8 @@ import DatePicker from 'material-ui/lib/date-picker/date-picker';
 import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import TextField from 'material-ui/lib/text-field';
 
+import { dateLocalToUTC, dateUTCToLocal, dateFormat } from '../scripts/DateTimeHelpers'
+
 import Translaticiarum_addMutation from '../mutations/Translaticiarum_addMutation';
 import Translaticiarum_deleteMutation from '../mutations/Translaticiarum_deleteMutation';
 import Translaticiarum_updateMutation from '../mutations/Translaticiarum_updateMutation';
@@ -18,18 +20,6 @@ import Translaticiarum_Icon from './Translaticiarum_Icon';
 import Translaticiarum_Properties from './Translaticiarum_Properties.jsx';
 
 const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ];
-
-function createDateAsUTC( date )
-{
-  return new Date( Date.UTC(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate(),
-    date.getHours(),
-    date.getMinutes(),
-    date.getSeconds()
-  ) );
-}
 
 //@Dimensions( )
 class Translaticiarum_Grid extends React.Component
@@ -45,15 +35,14 @@ class Translaticiarum_Grid extends React.Component
     Date_Start.setMilliseconds( 0 );
 
     this.state = {
-      Date_Start: createDateAsUTC( Date_Start ),
+      Date_Start: Date_Start,
     };
   }
 
   _handle_onChange_Date_Start = ( event, value ) =>
   {
-    console.log( "Date:" + value );
     this.setState( {
-      Date_Start: createDateAsUTC( value )
+      Date_Start: value
     } );
   };
 
@@ -69,46 +58,20 @@ class Translaticiarum_Grid extends React.Component
     this.refs.Translaticiarum_Properties._handle_Open( );
   };
 
-//   getKeys (obj){
-//    var keys = [];
-//    for(var key in obj){
-//       keys.push(key);
-//    }
-//    return keys;
-// }
-
   getTranslaticiarumByDateAndType( transliticiarumDays )
   {
-    //console.log( this.getKeys( this.props.Viewer.Translaticiarums.edges[ 0 ].node ).join( " " ) );
-
     const dayCount = transliticiarumDays.length - 1; // First element is null
-
-    // First, organize array with the epoch time for every day beging and end
-    // let arrDayBoundaries = [ ];
-    // for( let ixDay = 1; ixDay <= dayCount; ixDay++ )
-    // {
-    //   const epoch = transliticiarumDays[ ixDay ].getTime( );
-    //   arrDayBoundaries[ ixDay ] = {
-    //     start: epoch,
-    //     stop: epoch + 24*60*60*1000,
-    //   };
-    // }
-    //console.log( JSON.stringify( arrDayBoundaries ) );
 
     // Array with the dates
     const results = { };
     for( let ixDay = 1; ixDay <= dayCount; ixDay++ )
     {
-      console.log( "GT:" + transliticiarumDays[ ixDay ].getTime( ) );
       results[ transliticiarumDays[ ixDay ].getTime( ) ] = { };
     }
-
-    console.log( JSON.stringify( results ) );
 
     this.props.Viewer.Translaticiarums.edges.map( ( edge ) => {
 
       const Translaticiarum_Date_Epoch = new Date( edge.node.Translaticiarum_Date ).getTime( );
-      console.log( "Translaticiarum_Date_Epoch:" + Translaticiarum_Date_Epoch );
 
       const resultsForDay = results[ Translaticiarum_Date_Epoch ];
       if( resultsForDay != null )
@@ -156,14 +119,17 @@ class Translaticiarum_Grid extends React.Component
           const arrTranslaticiarum = TranslaticiarumByType[ translaticiarumType ];
           if( arrTranslaticiarum != null )
           {
-            cell = "X";
+            cell = "";
+            for( let a_Translaticiarum of arrTranslaticiarum )
+              cell += dateFormat( dateUTCToLocal( new Date( a_Translaticiarum.Translaticiarum_Time ) ), "h:mmtt" );
+            //cell = "X";
           }
         }
       }
     }
 
     return(
-      <td key={ transliticiarumDay }>{ cell }</td>
+      <td style={ { width: 100 } }key={ transliticiarumDay }>{ cell }</td>
     );
   }
 
@@ -171,20 +137,18 @@ class Translaticiarum_Grid extends React.Component
   {
     let translaticiarumTypes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
+    const firstDayEpoch = dateLocalToUTC( this.state.Date_Start ).getTime( );
+
     // Depending on width, determine the number of days shows. Each day is 100 pixels
-    let numberOfDays = Math.floor( this.props.containerWidth / 100 );
+    let numberOfDays = Math.floor( ( this.props.containerWidth - 120 ) / 100 );
     if( numberOfDays < 1 ) numberOfDays = 1;
     else if( numberOfDays > 7 ) numberOfDays = 7;
 
     let transliticiarumDays= [ null ];
     for( let day = 0; day < numberOfDays; day++ )
-      transliticiarumDays.push( new Date( this.state.Date_Start.getTime( ) + day * 24*60*60*1000) );
+      transliticiarumDays.push( new Date( firstDayEpoch + day * 24*60*60*1000 ) );
 
     const TranslaticiarumByDateAndType = this.getTranslaticiarumByDateAndType( transliticiarumDays );
-
-    console.log( "this.state.Date_Start = " + this.state.Date_Start );
-    console.log( "this.props.containerWidth = " + this.props.containerWidth );
-    console.log( "this.props.containerHeight = " + this.props.containerHeight );
 
     return (
       <Card initiallyExpanded={true}>

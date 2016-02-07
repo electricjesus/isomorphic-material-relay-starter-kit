@@ -10,7 +10,6 @@ import ImageLandscape from 'material-ui/lib/svg-icons/image/landscape'; // Hike
 
 export default function( theType )
 {
-  console.log( theType );
   let itemIcon;
   if( theType == 1 ) itemIcon = <ActionAccountBalance />; // Speak in senate
   else if( theType == 2 ) itemIcon = <ActionAccessibility />; // Exercise

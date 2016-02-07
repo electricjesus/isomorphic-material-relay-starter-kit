@@ -4,7 +4,7 @@ import Dialog from 'material-ui/lib/dialog';
 import RaisedButton from 'material-ui/lib/raised-button';
 import TextField from 'material-ui/lib/text-field';
 
-import dateFromUTCString from '../scripts/dateFromUTCString'
+import { dateFromUTCString } from '../scripts/DateTimeHelpers'
 
 
 export default class Ensayo_Properties extends React.Component

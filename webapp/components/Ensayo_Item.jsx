@@ -16,7 +16,7 @@ import ContentCreate from 'material-ui/lib/svg-icons/content/create'; // Write p
 import HardwareHeadset from 'material-ui/lib/svg-icons/hardware/headset'; // Listen to music
 import ImageLandscape from 'material-ui/lib/svg-icons/image/landscape'; // Hike
 
-import dateFromUTCString from '../scripts/dateFromUTCString'
+import { dateFromUTCString } from '../scripts/DateTimeHelpers'
 
 import Ensayo_deleteMutation from '../mutations/Ensayo_deleteMutation';
 import Ensayo_updateMutation from '../mutations/Ensayo_updateMutation';

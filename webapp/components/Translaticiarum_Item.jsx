@@ -7,7 +7,7 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import NavigationMoreVert from 'material-ui/lib/svg-icons/navigation/more-vert';
 
-import dateFromUTCString from '../scripts/dateFromUTCString'
+import { dateFromUTCString, dateUTCToLocal } from '../scripts/DateTimeHelpers'
 
 import Translaticiarum_deleteMutation from '../mutations/Translaticiarum_deleteMutation';
 import Translaticiarum_updateMutation from '../mutations/Translaticiarum_updateMutation';
@@ -37,11 +37,9 @@ class Translaticiarum_Item extends React.Component
     switch( item.ref )
     {
       case 'edit':
-        console.log( 'edit' );
         this.refs.Translaticiarum_Properties._handle_Open( );
         break;
       case 'delete':
-        console.log( 'delete' );
         this._Translaticiarum_delete( );
         break;
       default:
@@ -54,10 +52,11 @@ class Translaticiarum_Item extends React.Component
     const theDate = dateFromUTCString( this.props.Translaticiarum.Translaticiarum_Date );
     const theTime = dateFromUTCString( this.props.Translaticiarum.Translaticiarum_Time );
 
-    theDate.setHours( theTime.getHours( ) );
-    theDate.setMinutes( theTime.getMinutes( ) );
-    theDate.setSeconds( theTime.getSeconds( ) );
-    theDate.setMilliseconds( theTime.getMilliseconds( ) );
+    const theDateTime = dateUTCToLocal( new Date( theDate.getTime( ) + theTime.getTime( ) ) );
+    // theDate.setHours( theTime.getHours( ) );
+    // theDate.setMinutes( theTime.getMinutes( ) );
+    // theDate.setSeconds( theTime.getSeconds( ) );
+    // theDate.setMilliseconds( theTime.getMilliseconds( ) );
 
     const rightIconMenu = (
       <IconMenu
@@ -73,7 +72,7 @@ class Translaticiarum_Item extends React.Component
       <div>
         <ListItem
           leftIcon={ Translaticiarum_Icon( this.props.Translaticiarum.Translaticiarum_Type ) }
-          primaryText={ theDate.toUTCString( ) }
+          primaryText={ theDateTime.toString( ) }
           rightIconButton={ rightIconMenu }
         />
         <Translaticiarum_Properties
