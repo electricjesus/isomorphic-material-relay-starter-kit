@@ -102,7 +102,7 @@ class Translaticiarum_Grid extends React.Component
       else
       {
         // Will display day of week
-        cell = dayOfWeek[ transliticiarumDay.getDay( ) ];
+        cell = dayOfWeek[ dateUTCToLocal( transliticiarumDay ).getUTCDay( ) ];
       }
     }
     else
