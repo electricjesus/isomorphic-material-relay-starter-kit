@@ -8,6 +8,11 @@ import CardText from 'material-ui/lib/card/card-text';
 
 class Ensayo_PublicListing extends React.Component
 {
+  _handle_onClick( id )
+  {
+    this.context.router.push( '/Ensayo_PublicListing/' + id );
+  };
+
   renderEnsayos( )
   {
     return this.props.Viewer.Ensayos.edges.map(edge =>
@@ -16,7 +21,9 @@ class Ensayo_PublicListing extends React.Component
           title={ edge.node.Ensayo_Title }
           subtitle={ edge.node.Ensayo_Keywords }
         />
-        <CardText>
+        <CardText
+          onClick={ ( ) => this._handle_onClick( edge.node.id ) }
+        >
           { edge.node.Ensayo_Content }
         </CardText>
       </Card>
@@ -32,6 +39,11 @@ class Ensayo_PublicListing extends React.Component
     );
   }
 }
+
+Ensayo_PublicListing.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+};
+
 
 export default Relay.createContainer( Ensayo_PublicListing, {
   fragments: {

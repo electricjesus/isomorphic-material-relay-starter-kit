@@ -1,3 +1,4 @@
+import Helmet from "react-helmet";
 import React from 'react';
 import Relay from 'react-relay';
 
@@ -60,6 +61,12 @@ class Chrome extends React.Component
 
     return (
       <AppCanvas>
+        <Helmet
+          title="Isomorphic Material Relay Starter Kit"
+          meta={ [
+            { name : "description", content: "Starter kit featuring Cassandra, Relay, React, Material-UI" },
+          ] }
+        />
         <ToolBar
           style={ {
             backgroundColor: 'rgba(125, 88, 88, 0.06)',

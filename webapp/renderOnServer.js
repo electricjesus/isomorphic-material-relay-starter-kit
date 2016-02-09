@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import IsomorphicRouter from 'isomorphic-relay-router';
+import Helmet from 'react-helmet';
 import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -60,11 +61,15 @@ export default ( req, res, next, assetsPath ) =>
               const reactOutput = ReactDOMServer.renderToString(
                   <IsomorphicRouter.RouterContext {...renderProps} />
               );
+              const helmet = Helmet.rewind( );
 
               res.render( path.resolve( __dirname, '..', 'webapp/views', 'index.ejs' ), {
                   preloadedData: JSON.stringify(data),
                   assetsPath: assetsPath,
                   reactOutput,
+                  title: helmet.title,
+                  meta: helmet.meta,
+                  link: helmet.link,
                   isomorphicVars: isoVars
               } );
             }
