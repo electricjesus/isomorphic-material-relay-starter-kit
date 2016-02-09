@@ -8,16 +8,6 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 import NavigationMoreVert from 'material-ui/lib/svg-icons/navigation/more-vert';
 
 
-import ActionAccountBalance from 'material-ui/lib/svg-icons/action/account-balance'; // Speak in senate
-import ActionAccessibility from 'material-ui/lib/svg-icons/action/accessibility'; // Exercise
-import ActionDoneAll from 'material-ui/lib/svg-icons/action/done-all'; // Get things done
-import ActionTrendingUp from 'material-ui/lib/svg-icons/action/trending-up'; // Play the stock market
-import ContentCreate from 'material-ui/lib/svg-icons/content/create'; // Write poems
-import HardwareHeadset from 'material-ui/lib/svg-icons/hardware/headset'; // Listen to music
-import ImageLandscape from 'material-ui/lib/svg-icons/image/landscape'; // Hike
-
-import { dateFromUTCString } from '../scripts/DateTimeHelpers'
-
 import Ensayo_deleteMutation from '../mutations/Ensayo_deleteMutation';
 import Ensayo_updateMutation from '../mutations/Ensayo_updateMutation';
 
@@ -59,10 +49,6 @@ class Ensayo_Item extends React.Component
 
   render( )
   {
-    const theDate = dateFromUTCString( this.props.Ensayo.Ensayo_Title );
-    const theTime = dateFromUTCString( this.props.Ensayo.Ensayo_Keywords );
-    const theDateTime = new Date( theDate.getTime( ) + theTime.getTime( ) );
-
     const rightIconMenu = (
       <IconMenu
         iconButtonElement={<IconButton><NavigationMoreVert /></IconButton>}

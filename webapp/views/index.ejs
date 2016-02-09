@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Isomorphic Material React Relay</title>
-  <meta name="description" content="Material UI, React, Relay">
+  <title><%- title %></title>
+  <%- meta %>
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -12,8 +12,10 @@
   <meta name="mobile-web-app-capable" content="yes">
 
   <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-
   <link rel="stylesheet" href="<%- assetsPath %>/app.css">
+
+  <%- link %>
+
 </head>
 <body style="font-family: 'Roboto', sans-serif; margin: 0px; font-size: 13px; line-height: 20px;">
   <script>window.isomorphicVars = <%- isomorphicVars %></script>
