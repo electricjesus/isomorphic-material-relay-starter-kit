@@ -25,6 +25,8 @@ class Chrome extends React.Component
   {
     super( );
 
+    // Consider passing user agent here for server rendering per http://www.material-ui.com/#/get-started/server-rendering
+    // For more information https://github.com/codefoundries/isomorphic-material-relay-starter-kit/issues/43
     this.state = {
       muiTheme: ThemeManager.getMuiTheme( LightRawTheme ),
     };
