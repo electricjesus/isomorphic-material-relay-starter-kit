@@ -10,6 +10,10 @@ class Ensayo_PublicItem extends React.Component
 {
   render( )
   {
+    // In a fairly barbaric way, limit the length of headings so that they are not considered spam
+    let contentH1 = this.props.Viewer.Ensayo.Ensayo_Title.substring( 0, 100 );
+    let contentH2 = this.props.Viewer.Ensayo.Ensayo_Keywords.substring( 0, 100 );
+
     return (
       <div>
         <Helmet
@@ -20,8 +24,8 @@ class Ensayo_PublicItem extends React.Component
         />
         <Card>
           <CardHeader
-            title={ <h1 style={ { fontSize: 15 } }>{ this.props.Viewer.Ensayo.Ensayo_Title }</h1> }
-            subtitle={ <h2 style={ { fontSize: 14, fontWeight: 'normal' } }>{this.props.Viewer.Ensayo.Ensayo_Keywords }</h2> }
+            title={ <h1 style={ { fontSize: 15 } }>{ contentH1 }</h1> }
+            subtitle={ <h2 style={ { fontSize: 14, fontWeight: 'normal' } }>{ contentH2 }</h2> }
           />
           <CardText>
             { this.props.Viewer.Ensayo.Ensayo_Content }
