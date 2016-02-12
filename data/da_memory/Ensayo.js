@@ -27,7 +27,7 @@ EnsayoAddMock( {
   id:               Uuid.fromString( 'fa666f10-483d-43bd-8ee2-4e4921c9cf82' ),
   Ensayo_User_id:   userID_0,
   Ensayo_Title:     'Facebook just taught us all how to build websites',
-  Ensayo_Keywords:  'Overview of the advantages of Relay over previous approaches',
+  Ensayo_Keywords:  'Overview of the advantages of Relay over previous approaches focusing on the components declaring their data needs and use of GraphQL.',
   Ensayo_Content:   'In 2003, Brad Fitzpatrick released Memcached, and began talking about LiveJournal architecture. This became the prototype for the next generation of sites and apps, and is still largely the same way web apps are built today. https://blog.gyrosco.pe/facebook-just-taught-us-all-how-to-build-websites-51f1e7e996f2#.m7sk5nj5q'
 } );
 
