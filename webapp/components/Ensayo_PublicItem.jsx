@@ -20,8 +20,8 @@ class Ensayo_PublicItem extends React.Component
         />
         <Card>
           <CardHeader
-            title={ this.props.Viewer.Ensayo.Ensayo_Title }
-            subtitle={ this.props.Viewer.Ensayo.Ensayo_Keywords }
+            title={ <h1 style={ { fontSize: 15 } }>{ this.props.Viewer.Ensayo.Ensayo_Title }</h1> }
+            subtitle={ <h2 style={ { fontSize: 14, fontWeight: 'normal' } }>{this.props.Viewer.Ensayo.Ensayo_Keywords }</h2> }
           />
           <CardText>
             { this.props.Viewer.Ensayo.Ensayo_Content }
