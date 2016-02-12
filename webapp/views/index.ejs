@@ -19,6 +19,7 @@
 </head>
 <body style="font-family: 'Roboto', sans-serif; margin: 0px; font-size: 13px; line-height: 20px;">
   <script>window.isomorphicVars = <%- isomorphicVars %></script>
+  <script>window.process = { env: { NODE_ENV: '<%- NODE_ENV %>' } }</script>
   <div id="root"><%- reactOutput %></div>
   <script id="preloadedData" type="application/json"><%- preloadedData %></script>
   <script src="<%- assetsPath %>/app.js"></script>

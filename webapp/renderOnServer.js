@@ -70,7 +70,8 @@ export default ( req, res, next, assetsPath ) =>
                   title: helmet.title,
                   meta: helmet.meta,
                   link: helmet.link,
-                  isomorphicVars: isoVars
+                  isomorphicVars: isoVars,
+                  NODE_ENV: process.env.NODE_ENV,
               } );
             }
             catch( err )
