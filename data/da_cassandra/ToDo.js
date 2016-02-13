@@ -5,7 +5,7 @@ import ToDo from '../model/ToDo'
 
 // Data access functions
 
-export function DA_ToDo_add( fields )
+export function DA_ToDo_add( User_id, fields )
 {
   const id = Uuid.random( );
   let cqlText = 'INSERT INTO "ToDo" (id, "ToDo_User_id", "ToDo_Text", "ToDo_Complete" ) VALUES (?, ?, ?, false);';
@@ -21,7 +21,7 @@ export function DA_ToDo_add( fields )
   ;
 }
 
-export function DA_ToDo_update( id, fields )
+export function DA_ToDo_update( User_id, id, fields )
 {
   // We will not update ToDo_User_id since it makes no sense to update it
   let cqlText = 'UPDATE "ToDo" SET ';
@@ -50,7 +50,7 @@ export function DA_ToDo_update( id, fields )
   return runQueryNoResult( cqlText, cqlParams );
 }
 
-export function DA_ToDo_get( id )
+export function DA_ToDo_get( User_id, id )
 {
   const cqlText = 'SELECT * FROM "ToDo" WHERE id = ?;';
   const cqlParams = [ id ];

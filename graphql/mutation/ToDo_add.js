@@ -22,7 +22,7 @@ export default mutationWithClientMutationId( {
       resolve: ( {localToDoId}, args, { rootValue: {user_id} } ) =>
       {
         let a_ToDo;
-        return DA_ToDo_get( localToDoId )
+        return DA_ToDo_get( user_id, localToDoId )
         .then( ( retrieved_ToDo ) => {
           a_ToDo = retrieved_ToDo;
         } )
@@ -40,6 +40,6 @@ export default mutationWithClientMutationId( {
     },
   },
   mutateAndGetPayload: ( {ToDo_Text}, { rootValue: {user_id} } ) =>
-    DA_ToDo_add( { ToDo_User_id: user_id, ToDo_Text: ToDo_Text, ToDo_Complete: false } )
+    DA_ToDo_add( user_id, { ToDo_User_id: user_id, ToDo_Text: ToDo_Text, ToDo_Complete: false } )
     .then( ( localToDoId ) => ( {localToDoId} ) )
 } );

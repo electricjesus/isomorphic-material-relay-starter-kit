@@ -17,16 +17,16 @@ export default mutationWithClientMutationId( {
   outputFields: {
     ToDo: {
       type: ToDoType,
-      resolve: ( {localToDoId} ) => DA_ToDo_get( localToDoId ),
+      resolve: ( {localToDoId}, { ...args }, { rootValue: {user_id} } ) => DA_ToDo_get( user_id, localToDoId ),
     },
     Viewer: {
       type: ViewerType,
       resolve: ( parent, args, { rootValue: {user_id} } ) => DA_User_get( user_id )
     },
   },
-  mutateAndGetPayload: ( { id, ToDo_Complete } ) => {
+  mutateAndGetPayload: ( { id, ToDo_Complete }, { rootValue: {user_id} } ) => {
     var localToDoId = fromGlobalId(id).id;
-    return DA_ToDo_update( localToDoId, { ToDo_Complete: ToDo_Complete } )
+    return DA_ToDo_update( user_id, localToDoId, { ToDo_Complete: ToDo_Complete } )
     .then( ( ) => ( {localToDoId} ) )
     ;
   },

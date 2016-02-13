@@ -25,7 +25,7 @@ function resolveNodeField( source, args, { rootValue: {user_id} } )
 
     case "Compendium":         return DA_Compendium_get( user_id, id );
     case "Ensayo":             return DA_Ensayo_get( user_id, id );
-    case "ToDo":               return DA_ToDo_get( id );
+    case "ToDo":               return DA_ToDo_get( user_id, id );
     case "Translaticiarum":    return DA_Translaticiarum_get( user_id, id );
   }
 };
