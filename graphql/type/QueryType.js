@@ -10,7 +10,7 @@ import { DA_Ensayo_get } from '../../data/da/Ensayo';
 import { DA_ToDo_get } from '../../data/da/ToDo';
 import { DA_Translaticiarum_get } from '../../data/da/Translaticiarum';
 
-function resolveNodeField( source, args )
+function resolveNodeField( source, args, { rootValue: {user_id} } )
 {
   // the node field will receive a globally
   // unique id, and here we convert that back
@@ -24,9 +24,9 @@ function resolveNodeField( source, args )
     case "Viewer":             return DA_User_get( id );
 
     case "Compendium":         return DA_Compendium_get( id );
-    case "Ensayo":             return DA_Ensayo_get( id );
+    case "Ensayo":             return DA_Ensayo_get( user_id, id );
     case "ToDo":               return DA_ToDo_get( id );
-    case "Translaticiarum":    return DA_Translaticiarum_get( id );
+    case "Translaticiarum":    return DA_Translaticiarum_get( user_id, id );
   }
 };
 

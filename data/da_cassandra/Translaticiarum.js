@@ -5,7 +5,7 @@ import Translaticiarum from '../model/Translaticiarum'
 
 // Data access functions
 
-export function DA_Translaticiarum_add( fields )
+export function DA_Translaticiarum_add( User_id, fields )
 {
   const id = Uuid.random( );
   let cqlText = 'INSERT INTO "Translaticiarum" (id, "Translaticiarum_User_id", "Translaticiarum_Date", "Translaticiarum_Time", "Translaticiarum_Type" ) VALUES (?, ?, ?, ?, ?);';
@@ -23,7 +23,7 @@ export function DA_Translaticiarum_add( fields )
   ;
 }
 
-export function DA_Translaticiarum_update( id, fields )
+export function DA_Translaticiarum_update( User_id, id, fields )
 {
   // We will not update Translaticiarum_User_id since it makes no sense to update it
   let cqlText = 'UPDATE "Translaticiarum" SET ';
@@ -59,7 +59,7 @@ export function DA_Translaticiarum_update( id, fields )
   return runQueryNoResult( cqlText, cqlParams );
 }
 
-export function DA_Translaticiarum_get( id )
+export function DA_Translaticiarum_get( User_id, id )
 {
   const cqlText = 'SELECT * FROM "Translaticiarum" WHERE id = ?;';
   const cqlParams = [ id ];

@@ -5,7 +5,7 @@ import Ensayo from '../model/Ensayo'
 
 // Data access functions
 
-export function DA_Ensayo_add( fields )
+export function DA_Ensayo_add( User_id, fields )
 {
   const id = Uuid.random( );
   let cqlText = 'INSERT INTO "Ensayo" (id, "Ensayo_User_id", "Ensayo_Title", "Ensayo_Keywords", "Ensayo_Content" ) VALUES (?, ?, ?, ?, ?);';
@@ -23,7 +23,7 @@ export function DA_Ensayo_add( fields )
   ;
 }
 
-export function DA_Ensayo_update( id, fields )
+export function DA_Ensayo_update( User_id, id, fields )
 {
   // We will not update Ensayo_User_id since it makes no sense to update it
   let cqlText = 'UPDATE "Ensayo" SET ';
@@ -59,7 +59,7 @@ export function DA_Ensayo_update( id, fields )
   return runQueryNoResult( cqlText, cqlParams );
 }
 
-export function DA_Ensayo_get( id )
+export function DA_Ensayo_get( User_id, id )
 {
   const cqlText = 'SELECT * FROM "Ensayo" WHERE id = ?;';
   const cqlParams = [ id ];

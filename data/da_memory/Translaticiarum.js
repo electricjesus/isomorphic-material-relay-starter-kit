@@ -31,7 +31,7 @@ export function DA_Translaticiarum_add( fields )
   }, 100 ) );
 }
 
-export function DA_Translaticiarum_update( id, fields )
+export function DA_Translaticiarum_update( User_id, id, fields )
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
@@ -45,7 +45,7 @@ export function DA_Translaticiarum_update( id, fields )
   }, 100 ) );
 }
 
-export function DA_Translaticiarum_get( id )
+export function DA_Translaticiarum_get( User_id, id )
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {

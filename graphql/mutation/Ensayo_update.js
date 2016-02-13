@@ -17,12 +17,12 @@ export default mutationWithClientMutationId( {
   outputFields: {
     Ensayo: {
       type: EnsayoType,
-      resolve: ( {localEnsayoId} ) => DA_Ensayo_get( localEnsayoId ),
+      resolve: ( {localEnsayoId}, { ...args }, { rootValue: {user_id} } ) => DA_Ensayo_get( user_id, localEnsayoId ),
     }
   },
-  mutateAndGetPayload: ( {id, Ensayo_Content, Ensayo_Title, Ensayo_Keywords } ) => {
+  mutateAndGetPayload: ( {id, Ensayo_Content, Ensayo_Title, Ensayo_Keywords }, { rootValue: {user_id} } ) => {
     var localEnsayoId = fromGlobalId(id).id;
-    return DA_Ensayo_update( localEnsayoId, {
+    return DA_Ensayo_update( user_id, localEnsayoId, {
       Ensayo_Content: Ensayo_Content,
       Ensayo_Title: Ensayo_Title,
       Ensayo_Keywords: Ensayo_Keywords,

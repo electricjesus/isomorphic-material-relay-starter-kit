@@ -59,7 +59,7 @@ export default new GraphQLObjectType( {
       resolve: ( parent, { id }, { rootValue: {user_id} } ) =>
       {
         var localId = fromGlobalId(id).id;
-        return DA_Ensayo_get( localId );
+        return DA_Ensayo_get( user_id, localId );
       }
     },
 

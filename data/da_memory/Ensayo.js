@@ -57,7 +57,7 @@ EnsayoAddMock( {
 
 // Data access functions
 
-export function DA_Ensayo_add( fields )
+export function DA_Ensayo_add( User_id, fields )
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
@@ -77,7 +77,7 @@ export function DA_Ensayo_add( fields )
   }, 100 ) );
 }
 
-export function DA_Ensayo_update( id, fields )
+export function DA_Ensayo_update( User_id, id, fields )
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
@@ -91,7 +91,7 @@ export function DA_Ensayo_update( id, fields )
   }, 100 ) );
 }
 
-export function DA_Ensayo_get( id )
+export function DA_Ensayo_get( User_id, id )
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {

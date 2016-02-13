@@ -19,12 +19,12 @@ export default mutationWithClientMutationId( {
   outputFields: {
     Translaticiarum: {
       type: TranslaticiarumType,
-      resolve: ( {localTranslaticiarumId} ) => DA_Translaticiarum_get( localTranslaticiarumId ),
+      resolve: ( {localTranslaticiarumId}, { ...args }, { rootValue: {user_id} } ) => DA_Translaticiarum_get( user_id, localTranslaticiarumId ),
     }
   },
-  mutateAndGetPayload: ( {id, Translaticiarum_Type, Translaticiarum_Date, Translaticiarum_Time } ) => {
+  mutateAndGetPayload: ( {id, Translaticiarum_Type, Translaticiarum_Date, Translaticiarum_Time }, { rootValue: {user_id} } ) => {
     var localTranslaticiarumId = fromGlobalId(id).id;
-    return DA_Translaticiarum_update( localTranslaticiarumId, {
+    return DA_Translaticiarum_update( user_id, localTranslaticiarumId, {
       Translaticiarum_Type: Translaticiarum_Type,
       Translaticiarum_Date: Translaticiarum_Date,
       Translaticiarum_Time: Translaticiarum_Time,

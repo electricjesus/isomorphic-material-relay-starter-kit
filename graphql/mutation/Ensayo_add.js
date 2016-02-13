@@ -26,7 +26,7 @@ export default mutationWithClientMutationId( {
       resolve: ( {localEnsayoId}, args, { rootValue: {user_id} } ) =>
       {
         let a_Ensayo;
-        return DA_Ensayo_get( localEnsayoId )
+        return DA_Ensayo_get( user_id, localEnsayoId )
         .then( ( retrieved_Ensayo ) => {
           a_Ensayo = retrieved_Ensayo;
         } )
@@ -44,7 +44,7 @@ export default mutationWithClientMutationId( {
     },
   },
   mutateAndGetPayload: ( { Ensayo_Content, Ensayo_Title, Ensayo_Keywords }, { rootValue: {user_id} } ) =>
-    DA_Ensayo_add( {
+    DA_Ensayo_add( user_id, {
       Ensayo_User_id: user_id,
       Ensayo_Content: Ensayo_Content,
       Ensayo_Title: Ensayo_Title,
