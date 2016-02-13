@@ -37,9 +37,9 @@ export function DA_User_getByUserName( username )
   }, 100 ) );
 }
 
-export function DA_User_get( id )
+export function DA_User_get( User_id )
 {
   return new Promise( ( resolve, reject ) =>
-    setTimeout( ( ) => resolve( usersById[ id.toString( ) ] ), 100 )
+    setTimeout( ( ) => resolve( usersById[ User_id.toString( ) ] ), 100 )
   );
 }

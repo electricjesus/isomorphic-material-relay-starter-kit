@@ -29,7 +29,7 @@ export default mutationWithClientMutationId( {
   outputFields: {
     Compendium: {
       type: CompendiumType,
-      resolve: ( {localId} ) => DA_Compendium_get( localId ),
+      resolve: ( {localId}, { ...args }, { rootValue: {user_id} } ) => DA_Compendium_get( user_id, localId ),
     },
   },
   mutateAndGetPayload: ( {
@@ -52,6 +52,7 @@ export default mutationWithClientMutationId( {
   } ) => {
     var localId = fromGlobalId( id ).id;
     return DA_Compendium_update(
+      user_id,
       localId,
       {
         Compendium_FirstTextInput,

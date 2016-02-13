@@ -15,10 +15,10 @@ export function DA_User_getByUserName( username )
   return runQueryOneResult( User, query.text, query.values );
 }
 
-export function DA_User_get( id )
+export function DA_User_get( User_id )
 {
   // Anonymous user is not even recorded in the database
-  if( id === '00000000-0000-0000-0000-000000000000' )
+  if( User_id === '00000000-0000-0000-0000-000000000000' )
   {
     return new Promise( ( resolve, reject ) =>
       resolve( User_0 )
@@ -28,7 +28,7 @@ export function DA_User_get( id )
   {
     const query = sql.select( )
       .from( '"User"' )
-      .where( 'id=?', id )
+      .where( 'id=?', User_id )
       .toParam( )
     ;
     return runQueryOneResult( User, query.text, query.values );
