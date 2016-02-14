@@ -83,23 +83,41 @@ export function DA_ToDo_list_get( User_id, status )
   return runQuery( ToDo, cqlText, cqlParams );
 }
 
-// ->->-> To be modified later
-
 export function DA_ToDo_list_updateMarkAll( User_id, ToDo_Complete )
 {
-  // TODO this needs to be done in CQL
-  User_id = 0;
-  var changedToDos = [];
-  DA_ToDo_list_get( User_id ).forEach(a_ToDo => {
-    if (a_ToDo.ToDo_Complete !== ToDo_Complete) {
-      a_ToDo.ToDo_Complete = ToDo_Complete;
-      changedToDos.push(a_ToDo);
-    }
-  });
-  return changedToDos.map(a_ToDo => a_ToDo.id);
-}
+  console.log( "DA_ToDo_list_updateMarkAll: " + ToDo_Complete );
 
-// <-<-<- To be modified later
+  var changedToDos = [ ];
+  return DA_ToDo_list_get( User_id )
+  .then( ( arr_ToDo ) => {
+    let promisedToDoUpdates = [ ];
+    arr_ToDo.forEach( a_ToDo =>
+    {
+      if( a_ToDo.ToDo_Complete !== ToDo_Complete )
+      {
+        a_ToDo.ToDo_Complete = ToDo_Complete;
+        changedToDos.push( a_ToDo );
+
+        console.log( "DA_ToDo_list_updateMarkAll: " + a_ToDo.id.toString( ));
+        promisedToDoUpdates.push( DA_ToDo_update(
+          User_id,
+          a_ToDo.id,
+          { ToDo_Complete: ToDo_Complete }
+        ) );
+      }
+    } );
+    console.log( "DA_ToDo_list_updateMarkAll RET changedToDos:" + JSON.stringify( changedToDos ) );
+    return(
+      Promise.all( promisedToDoUpdates )
+    );
+  } )
+  .then( ( arr ) => {
+    console.log( "DA_ToDo_list_updateMarkAll FINALE: " + ToDo_Complete );
+    console.log( "changedToDos:" + JSON.stringify( changedToDos ) );
+    return changedToDos.map( a_ToDo => a_ToDo.id );
+  } )
+  ;
+}
 
 export function DA_ToDo_list_deleteCompleted( User_id )
 {
