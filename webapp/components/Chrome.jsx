@@ -3,9 +3,8 @@ import React from 'react';
 import Relay from 'react-relay';
 
 import AppCanvas from 'material-ui/lib/app-canvas';
-//import Colors from 'material-ui/lib/styles/colors';
 import Badge from 'material-ui/lib/badge';
-//import LightRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
+import ColorManipulator from 'material-ui/lib/utils/color-manipulator';
 import IconButton from 'material-ui/lib/icon-button';
 import IconNotificationsEventAvailable from 'material-ui/lib/svg-icons/notification/event-available';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
@@ -67,8 +66,9 @@ class Chrome extends React.Component
         />
         <ToolBar
           style={ {
-            backgroundColor: 'rgba(125, 88, 88, 0.06)',
-            boxShadow: '0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24)',
+            color: RawMUITheme.palette.primary1Color,
+            textColor: RawMUITheme.palette.alternateTextColor,
+            backgroundColor: ColorManipulator.darken( RawMUITheme.palette.accent2Color, 0.05 ),
           } }
         >
           <ToolbarGroup firstChild={true} float="left">
