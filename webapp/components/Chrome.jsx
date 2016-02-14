@@ -34,7 +34,7 @@ class Chrome extends React.Component
     } );
   }
 
-  _handle_onFocus_IncompleteTODOs = ( ) =>
+  _handle_onTouchTap_IncompleteTODOs = ( ) =>
   {
     this.context.router.push( '/ToDos/active' );
   }
@@ -48,7 +48,7 @@ class Chrome extends React.Component
     if( incompleteCount > 0 )
       incompleteNotification.push(
         <Badge key="top-incomplete" style={ { marginTop: -11, marginBottom: -17 } } badgeContent={ incompleteCount } primary={ true } badgeStyle={{top:20, right:16}}>
-          <IconButton tooltip="Incomplete TODOs" onFocus={ this._handle_onFocus_IncompleteTODOs }>
+          <IconButton tooltip="Incomplete TODOs" onTouchTap={ this._handle_onTouchTap_IncompleteTODOs }>
             <IconNotificationsEventAvailable />
           </IconButton>
         </Badge>
