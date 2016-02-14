@@ -3,9 +3,9 @@ import React from 'react';
 import Relay from 'react-relay';
 
 import AppCanvas from 'material-ui/lib/app-canvas';
-import Colors from 'material-ui/lib/styles/colors';
+//import Colors from 'material-ui/lib/styles/colors';
 import Badge from 'material-ui/lib/badge';
-import LightRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
+//import LightRawTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
 import IconButton from 'material-ui/lib/icon-button';
 import IconNotificationsEventAvailable from 'material-ui/lib/svg-icons/notification/event-available';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
@@ -17,7 +17,9 @@ import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 import AppBar_Auth from './AppBar_Auth.jsx'
 import AppBar_Language from './AppBar_Language.jsx'
 import AppBar_NavigationMenu from './AppBar_NavigationMenu.jsx'
+import RawMUITheme from '../styles/RawMUITheme.js'
 
+var muiTheme = ThemeManager.getMuiTheme( RawMUITheme );
 
 class Chrome extends React.Component
 {
@@ -27,19 +29,13 @@ class Chrome extends React.Component
 
     // Consider passing user agent here for server rendering per http://www.material-ui.com/#/get-started/server-rendering
     // For more information https://github.com/codefoundries/isomorphic-material-relay-starter-kit/issues/43
-    this.state = {
-      muiTheme: ThemeManager.getMuiTheme( LightRawTheme ),
-    };
   }
 
-  componentWillMount( )
-  {
-    let newMuiTheme = ThemeManager.modifyRawThemePalette(this.state.muiTheme, {
-      accent1Color: Colors.deepOrange500,
-    });
-
-    this.setState({muiTheme: newMuiTheme});
-  }
+  getChildContext() {
+      return {
+        muiTheme: muiTheme,
+      };
+    }
 
   _handle_onFocus_IncompleteTODOs = ( ) =>
   {
@@ -102,6 +98,9 @@ class Chrome extends React.Component
 
 Chrome.contextTypes = {
   router: React.PropTypes.object.isRequired,
+};
+
+Chrome.childContextTypes = {
   muiTheme: React.PropTypes.object,
 };
 
