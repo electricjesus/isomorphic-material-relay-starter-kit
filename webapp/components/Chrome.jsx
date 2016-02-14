@@ -8,19 +8,33 @@ import ColorManipulator from 'material-ui/lib/utils/color-manipulator';
 import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
 import IconButton from 'material-ui/lib/icon-button';
 import IconNotificationsEventAvailable from 'material-ui/lib/svg-icons/notification/event-available';
+import LeftNav from 'material-ui/lib/left-nav';
+import List from 'material-ui/lib/lists/list';
+import ListItem from 'material-ui/lib/lists/list-item';
+import NavigationMoreVert from 'material-ui/lib/svg-icons/navigation/more-vert';
+import {SelectableContainerEnhance} from 'material-ui/lib/hoc/selectable-enhance';
 import ToolBar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
 import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 
+const SelectableList = SelectableContainerEnhance(List);
+
 import AppBar_Auth from './AppBar_Auth.jsx'
 import AppBar_Language from './AppBar_Language.jsx'
-import AppBar_NavigationMenu from './AppBar_NavigationMenu.jsx'
 import RawMUITheme from '../styles/RawMUITheme.js'
 
 
 class Chrome extends React.Component
 {
+  constructor( props )
+  {
+    super( props );
+
+    this.state = {
+      leftNavOpen: false,
+    };
+  }
   getChildContext( )
   {
     return ( {
@@ -34,10 +48,28 @@ class Chrome extends React.Component
     } );
   }
 
+  _handle_onTouchTap_NavigationToggle = ( ) =>
+  {
+    this._handle_onRequestChange( ! this.state.leftNavOpen );
+  }
+
+  _handle_onRequestChange = ( open ) =>
+  {
+    this.setState( {
+      leftNavOpen: open,
+    } );
+  }
+
   _handle_onTouchTap_IncompleteTODOs = ( ) =>
   {
     this.context.router.push( '/ToDos/active' );
   }
+
+  _handle_onRequestChangeList = ( event, value ) =>
+  {
+    this.context.router.push( value );
+    this._handle_onTouchTap_NavigationToggle( );
+  };
 
   render( )
   {
@@ -62,6 +94,31 @@ class Chrome extends React.Component
             { name : "description", content: "Starter kit featuring Cassandra, Relay, React, Material-UI" },
           ] }
         />
+        <LeftNav
+          open={ this.state.leftNavOpen }
+          style={ { marginTop: 56, } }
+          onRequestChange={ this._handle_onRequestChange }
+        >
+          <SelectableList
+            valueLink={ { value: location.pathname, requestChange: this._handle_onRequestChangeList } }
+          >
+            <ListItem
+              primaryText="Starter Kit"
+              primaryTogglesNestedList={true}
+              nestedItems={ [
+                <ListItem primaryText="Home" value="/" />,
+                <ListItem primaryText="Compendium" value="/compendiums" />,
+                <ListItem primaryText="Ensayo" value="/Ensayos" />,
+                <ListItem primaryText="Ensayo Public" value="/Ensayo_PublicListing" />,
+                <ListItem primaryText="MUI" value="/mui" />,
+                <ListItem primaryText="MUI Icons" value="/mui/icons" />,
+                <ListItem primaryText="To Do" value="/ToDos" />,
+                <ListItem primaryText="Translaticiarum" value="/Translaticiarums" />,
+                <ListItem primaryText="Translaticiarums Grid" value="/TranslaticiarumsGrid" />,
+              ] }
+            />
+          </SelectableList>
+        </LeftNav>
         <ToolBar
           style={ {
             color: RawMUITheme.palette.primary1Color,
@@ -70,7 +127,9 @@ class Chrome extends React.Component
           } }
         >
           <ToolbarGroup firstChild={true} float="left">
-            <AppBar_NavigationMenu />
+            <IconButton key="top-menu" onTouchTap={ this._handle_onTouchTap_NavigationToggle }>
+              <NavigationMoreVert />
+            </IconButton>
           </ToolbarGroup>
           <ToolbarGroup float="left">
             <ToolbarTitle text="IMRSK" />
