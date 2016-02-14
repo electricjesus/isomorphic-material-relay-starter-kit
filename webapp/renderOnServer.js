@@ -58,6 +58,9 @@ export default ( req, res, next, assetsPath ) =>
               // fear, we are in a queue.
               GLOBAL.navigator = { userAgent: req.headers[ 'user-agent' ] };
 
+              // Setting up static, global location for the leftNav
+              GLOBAL.location = { pathname: req.originalUrl };
+
               const reactOutput = ReactDOMServer.renderToString(
                   <IsomorphicRouter.RouterContext {...renderProps} />
               );
