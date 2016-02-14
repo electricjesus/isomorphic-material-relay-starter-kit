@@ -5,9 +5,9 @@ import Relay from 'react-relay';
 import AppCanvas from 'material-ui/lib/app-canvas';
 import Badge from 'material-ui/lib/badge';
 import ColorManipulator from 'material-ui/lib/utils/color-manipulator';
+import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
 import IconButton from 'material-ui/lib/icon-button';
 import IconNotificationsEventAvailable from 'material-ui/lib/svg-icons/notification/event-available';
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import ToolBar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
@@ -18,28 +18,26 @@ import AppBar_Language from './AppBar_Language.jsx'
 import AppBar_NavigationMenu from './AppBar_NavigationMenu.jsx'
 import RawMUITheme from '../styles/RawMUITheme.js'
 
-var muiTheme = ThemeManager.getMuiTheme( RawMUITheme );
 
 class Chrome extends React.Component
 {
-  constructor( )
+  getChildContext( )
   {
-    super( );
-
-    // Consider passing user agent here for server rendering per http://www.material-ui.com/#/get-started/server-rendering
-    // For more information https://github.com/codefoundries/isomorphic-material-relay-starter-kit/issues/43
+    return ( {
+      muiTheme: getMuiTheme(
+        RawMUITheme,
+        {
+          avatar: { borderColor: null, },
+          userAgent: navigator.userAgent,
+        }
+      ),
+    } );
   }
-
-  getChildContext() {
-      return {
-        muiTheme: muiTheme,
-      };
-    }
 
   _handle_onFocus_IncompleteTODOs = ( ) =>
   {
     this.context.router.push( '/ToDos/active' );
-  };
+  }
 
   render( )
   {
