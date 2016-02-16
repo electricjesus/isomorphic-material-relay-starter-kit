@@ -5,7 +5,7 @@ import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Relay from 'react-relay';
-import RelayStoreData from 'react-relay/lib/RelayStoreData';
+//import RelayStoreData from 'react-relay/lib/RelayStoreData';
 import {match} from 'react-router';
 import seqqueue from 'seq-queue';
 
@@ -39,7 +39,7 @@ export default ( req, res, next, assetsPath ) =>
         queueTask => {
           // Setting the STATIC network layer. No fear about it being static - we are in a queue!
           Relay.injectNetworkLayer( new Relay.DefaultNetworkLayer( GRAPHQL_URL, { headers: headers } ) );
-          RelayStoreData.getDefaultInstance( ).getChangeEmitter( ).injectBatchingStrategy(() => { } );
+          //RelayStoreData.getDefaultInstance( ).getChangeEmitter( ).injectBatchingStrategy(() => { } );
 
           if( error )
             next(error);
@@ -50,7 +50,7 @@ export default ( req, res, next, assetsPath ) =>
           else
               res.status( 404 ).send( 'Not Found' );
 
-          function render( data )
+          function render( { data, props } )
           {
             try
             {
@@ -62,7 +62,7 @@ export default ( req, res, next, assetsPath ) =>
               GLOBAL.location = { pathname: req.originalUrl };
 
               const reactOutput = ReactDOMServer.renderToString(
-                  <IsomorphicRouter.RouterContext {...renderProps} />
+                  <IsomorphicRouter.RouterContext {...props} />
               );
               const helmet = Helmet.rewind( );
 
