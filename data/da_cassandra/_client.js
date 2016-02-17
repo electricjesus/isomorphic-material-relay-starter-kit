@@ -9,11 +9,11 @@ export const Uuid = cassandraDriver.types.Uuid;
 
 let options =
 {
-  contactPoints: process.env.CASSANDRA_CONNECTION_POINTS.split(','),
+  contactPoints: process.env.CASSANDRA_CONNECTION_POINTS != null ? process.env.CASSANDRA_CONNECTION_POINTS.split(',') : [ 'localhost' ], // Assume localhost if not defined
   keyspace: process.env.CASSANDRA_KEYSPACE
 };
 
-if (process.env.CASSANDRA_USER)
+if( process.env.CASSANDRA_USER )
 {
   options.authProvider =
     new cassandraDriver.auth.PlainTextAuthProvider(
