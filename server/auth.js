@@ -13,7 +13,7 @@ auth.use( bodyParser.json( ) );
 
 auth.post('/login', (req, res, next) =>
 {
-  let username = req.body.username;
+  let username = req.body.username.toLowerCase( );
   let password = req.body.password;
 
   DA_User_getByUserName( username )
@@ -47,7 +47,7 @@ auth.post('/login', (req, res, next) =>
 
 auth.post('/createuser', (req, res, next) =>
 {
-  let username = req.body.username;
+  let username = req.body.username.toLowerCase( );
   let password = req.body.password;
 
   DA_User_getByUserName( username )

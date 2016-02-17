@@ -11,7 +11,7 @@ IMRSK started as an off-shoot of multiple projects and boilerplates we use at [C
 
 ## Help wanted
 
-If you like to help, please review the list of items where [help is needed](https://github.com/codefoundries/isomorphic-material-relay-starter-kit/labels/Help%20wanted)
+If you like to help, please review the list of items where [help is needed](https://github.com/codefoundries/isomorphic-material-relay-starter-kit/labels/Help%20wanted).
 
 
 ## Articles
@@ -303,7 +303,7 @@ It contains a boilerplate with several simple code examples. It consists of modi
 * [Xpepermint's isomorphic-react-relay-boilerplate](https://github.com/xpepermint/isomorphic-react-relay-boilerplate). The project organization was initially borrowed from this project, although it has since diverged.
 * [coryhouse's react-slingshot](https://github.com/coryhouse/react-slingshot). Ideas about he documentation are borrowed from this project.
 * [ryancole's league](https://github.com/ryancole/league). The organization of the GraphQL schema is borrowed from this project.
-* [itayadler's cassandra-paginating-static-columns](https://github.com/itayadler/cassandra-paginating-static-columns/blob/master/index.js). The general approach to working with Cassandra was inistially borrowed from this project. However, over time the implementation became very different.
+* [itayadler's cassandra-paginating-static-columns](https://github.com/itayadler/cassandra-paginating-static-columns/blob/master/index.js). The general approach to working with Cassandra was initially borrowed from this project. However, over time the implementation became very different.
 
 Examples from other open source projects have also been incorporated.
 
