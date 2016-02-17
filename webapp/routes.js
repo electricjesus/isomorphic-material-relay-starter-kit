@@ -4,6 +4,7 @@ import Ensayo_List from './components/Ensayo_List.jsx';
 import Ensayo_Screen from './components/Ensayo_Screen.jsx';
 import Ensayo_PublicItem from './components/Ensayo_PublicItem.jsx';
 import Ensayo_PublicListing from './components/Ensayo_PublicListing.jsx';
+import GraphiQLBrowser from './components/GraphiQLBrowser.jsx';
 import Home_Screen from './components/Home_Screen.jsx';
 import MUI_Icons from './components/MUI_Icons.jsx';
 import MUI_Home from './components/MUI_Home.jsx';
@@ -26,6 +27,13 @@ export default [
       queries: ViewerQueries,
     },
     childRoutes: [
+      {
+        path: 'graphiql',
+        indexRoute: {
+          component: GraphiQLBrowser,
+          queries: ViewerQueries,
+        },
+      },
       {
         path: 'Compendiums',
         indexRoute: {

@@ -1,14 +1,10 @@
 import chalk from 'chalk';
-import squel from 'squel';
 import cassandraDriver from 'cassandra-driver';
 
 // Read environment
 require( 'dotenv' ).load( );
 
 
-squel.registerValueHandler( cassandraDriver.types.Uuid, function( uuid ){ return uuid; } );
-
-export const sql = squel;
 export const Uuid = cassandraDriver.types.Uuid;
 
 let options =

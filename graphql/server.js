@@ -41,7 +41,8 @@ router.use( '/', ( req, res, next ) =>
       return( {
         schema: schema,
         rootValue: { user_id: user_id },
-        pretty: true
+        pretty: true,
+        graphiql: true,
       } )
     } )( req, res, next );
 
