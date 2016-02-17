@@ -1,14 +1,12 @@
 import chalk from 'chalk';
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import graphQLHTTP from 'express-graphql';
 import compression from 'compression';
-import jwt from 'jwt-simple';
 import path from 'path';
 
 import auth from './auth'; // Authentication server
-import webapp from '../webapp/server'; // React server
-import schema from '../graphql/schema'; // Schema for GraphQL server
+import webapp from '../webapp/server'; // Isomorphic React server
+import graphql from '../graphql/server'; // GraphQL server
 
 // Read environment
 require( 'dotenv' ).load( );
@@ -27,42 +25,8 @@ router.set( 'x-powered-by', false );
 router.use( compression( ) );
 router.use( cookieParser( ) );
 
-/*
-TODO - rewrite this way to check for user
-app.post('/graphql', (req, res) => {
-  // execute GraphQL!
-  graphql(schema, req.body)
-    .then(result => res.send(result));
-});
-
-http://davidandsuzi.com/writing-a-basic-api-with-graphql/
-*/
-
-// Graphql server
-router.use( '/graphql', graphQLHTTP( request => {
-  let user_id = '00000000-0000-0000-0000-000000000000'; // Anonymous
-  try
-  {
-    if( request.cookies.auth_token )
-      if( request.cookies.auth_token.length > 10 )
-      {
-        var decoded = jwt.decode( request.cookies.auth_token, process.env.JWT_SECRET );
-        user_id = decoded.user_id;
-      }
-  }
-  catch( err )
-  {
-    console.log( chalk.bold.red( "Failure while decoding JWT token, using anonymous instead." ) );
-    console.log( chalk.red( err.message ) );
-    console.log( chalk.blue( '.' ) );
-  }
-
-  return( {
-    schema: schema,
-    rootValue: { user_id: user_id },
-    pretty: true
-  } )
-} ) );
+// GraphQL server
+router.use( '/graphql', graphql );
 
 // Authentication server
 router.use( '/auth', auth );
