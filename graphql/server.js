@@ -3,6 +3,7 @@ import express from 'express';
 import graphQLHTTP from 'express-graphql';
 import jwt from 'jwt-simple';
 
+import { DA_User_get } from '../data/da/User';
 import schema from './schema'; // Schema for GraphQL server
 
 let router = express( );
@@ -26,13 +27,27 @@ router.use( '/', ( req, res, next ) =>
     console.log( chalk.blue( '.' ) );
   }
 
-  graphQLHTTP( request => {
-    return( {
-      schema: schema,
-      rootValue: { user_id: user_id },
-      pretty: true
-    } )
-  } )( req, res, next );
+  DA_User_get( user_id )
+  .then( ( a_User) =>
+  {
+    if ( ! a_User )
+    {
+      // User not found in database
+      user_id = '00000000-0000-0000-0000-000000000000'; // Anonymous
+      res.cookie( 'auth_token', '', { httpOnly: true, expires: new Date( 1 ) } ); // Expire cookie
+    }
+
+    graphQLHTTP( request => {
+      return( {
+        schema: schema,
+        rootValue: { user_id: user_id },
+        pretty: true
+      } )
+    } )( req, res, next );
+
+  } )
+  ;
+
 } );
 
 export default router;
