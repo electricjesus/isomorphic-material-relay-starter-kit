@@ -8,6 +8,12 @@ IMRSK started as an off-shoot of multiple projects and boilerplates we use at [C
 | Run locally | [Local Setup](#local-setup) |
 | Run on [Heroku](https://www.heroku.com/nodejs) | [Heroku Setup](#heroku-setup) |
 
+
+## Help wanted
+
+If you like to help, please review the list of items where [help is needed](https://github.com/codefoundries/isomorphic-material-relay-starter-kit/labels/Help%20wanted)
+
+
 ## Articles
 
 The following articles explain in detail certain aspects of this repository:
