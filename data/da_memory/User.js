@@ -27,7 +27,6 @@ export function DA_User_add( fields )
   return DA_User_getByUserName( fields.username )
   .then( ( a_User ) =>
   {
-
     if ( ! a_User )
     {
       var new_User = new User( fields );
@@ -35,8 +34,6 @@ export function DA_User_add( fields )
       new_User.id = Uuid.random( );
 
       User_listById[ new_User.id.toString( ) ] = new_User;
-
-console.log( JSON.stringify( User_listById ) );
 
       return new_User;
     }
