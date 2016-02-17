@@ -75,7 +75,6 @@ auth.post('/createuser', (req, res, next) =>
   } )
   .catch( ( reason ) =>
   {
-    console.log( "CATCH: " + reason );
     res.status( 401 ).json( { error: reason } );
   } )
   ;
@@ -84,7 +83,7 @@ auth.post('/createuser', (req, res, next) =>
 
 auth.post('/logout', (req, res, next) =>
 {
-  res.cookie( 'auth_token', token, { httpOnly: true, expires: new Date( 1 ) } );
+  res.cookie( 'auth_token', '', { httpOnly: true, expires: new Date( 1 ) } );
   res.json( { success : true } );
 } );
 

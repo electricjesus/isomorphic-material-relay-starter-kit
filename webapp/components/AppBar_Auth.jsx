@@ -38,6 +38,9 @@ class AppBar_Auth extends React.Component
       Dialog_CreateUser_IsOpen : false,
       Dialog_CreateUserInProgress_IsOpen: false,
       Dialog_CreateUserFailed_IsOpen: false,
+      Dialog_LogOutConfirmation_IsOpen : false,
+      Dialog_LogOutInProgress_IsOpen: false,
+      Dialog_LogOutFailed_IsOpen: false,
       Popover_AuthorizedUser_IsOpen : false,
     };
   }
@@ -97,6 +100,35 @@ class AppBar_Auth extends React.Component
       Dialog_CreateUserInProgress_IsOpen: false,
       Dialog_CreateUserFailed_IsOpen: true,
       Dialog_CreateUserFailed_Message: message,
+    } );
+  }
+
+
+
+  //
+
+  _handle_LogOutConfirmation_Response_Success( response )
+  {
+    try{
+      let responseJSON = JSON.parse( response );
+      if( responseJSON.success != true ) throw new Error( "Log Out failed" );
+    } catch( err ) { _handle_LogOutConfirmation_Response_Failure( 1 ); return; }
+
+    location.replace( location.href );
+  }
+
+  _handle_LogOutConfirmation_Response_Failure( response )
+  {
+    let message;
+    try{
+      let responseJSON = JSON.parse( response );
+      message = responseJSON.error;
+    } catch( err ) { message = "Improper server response"; }
+
+    this.setState( {
+      Dialog_LogOutInProgress_IsOpen: false,
+      Dialog_LogOutFailed_IsOpen: true,
+      Dialog_LogOutFailed_Message: message,
     } );
   }
 
@@ -191,6 +223,59 @@ class AppBar_Auth extends React.Component
 
   //
 
+  Dialog_AuthenticationInProgress( )
+  {
+    return(
+      <Dialog
+        open={ this.state.Dialog_AuthenticationInProgress_IsOpen }
+        title="Logging In ..."
+        actions={ [
+          <FlatButton key="Cancel" label="Cancel" onTouchTap={ this._handle_onTouchTap_AuthenticationInProgress_Cancel } />,
+        ] }
+      >
+        <LinearProgress mode="indeterminate" />
+      </Dialog>
+    );
+  }
+
+  _handle_onTouchTap_AuthenticationInProgress_Cancel = ( ) =>
+  {
+    this.setState( {
+      Dialog_AuthenticationInProgress_IsOpen: false
+    } );
+  };
+
+
+
+  //
+
+  Dialog_AuthenticationFailed( )
+  {
+    return(
+      <Dialog
+        open={ this.state.Dialog_AuthenticationFailed_IsOpen }
+        title="Login failed"
+        actions={ [
+          <FlatButton key="OK" label="OK" primary={true} onTouchTap={ this._handle_onTouchTap_LogInFailure_OK } />,
+        ] }
+      >
+        { this.state.Dialog_AuthenticationFailed_Message }
+      </Dialog>
+    );
+  }
+
+  _handle_onTouchTap_LogInFailure_OK = ( ) =>
+  {
+    this.setState( {
+      Dialog_AuthenticationFailed_IsOpen: false
+    } );
+  };
+
+
+
+
+  //
+
   Dialog_CreateUser( )
   {
     return(
@@ -252,58 +337,6 @@ class AppBar_Auth extends React.Component
 
   //
 
-  Dialog_AuthenticationInProgress( )
-  {
-    return(
-      <Dialog
-        open={ this.state.Dialog_AuthenticationInProgress_IsOpen }
-        title="Logging In ..."
-        actions={ [
-          <FlatButton key="Cancel" label="Cancel" onTouchTap={ this._handle_onTouchTap_AuthenticationInProgress_Cancel } />,
-        ] }
-      >
-        <LinearProgress mode="indeterminate" />
-      </Dialog>
-    );
-  }
-
-  _handle_onTouchTap_AuthenticationInProgress_Cancel = ( ) =>
-  {
-    this.setState( {
-      Dialog_AuthenticationInProgress_IsOpen: false
-    } );
-  };
-
-
-
-  //
-
-  Dialog_AuthenticationFailed( )
-  {
-    return(
-      <Dialog
-        open={ this.state.Dialog_AuthenticationFailed_IsOpen }
-        title="Login failed"
-        actions={ [
-          <FlatButton key="OK" label="OK" primary={true} onTouchTap={ this._handle_onTouchTap_LogInFailure_OK } />,
-        ] }
-      >
-        { this.state.Dialog_AuthenticationFailed_Message }
-      </Dialog>
-    );
-  }
-
-  _handle_onTouchTap_LogInFailure_OK = ( ) =>
-  {
-    this.setState( {
-      Dialog_AuthenticationFailed_IsOpen: false
-    } );
-  };
-
-
-
-  //
-
   Dialog_CreateUserInProgress( )
   {
     return(
@@ -357,6 +390,116 @@ class AppBar_Auth extends React.Component
 
   //
 
+  Dialog_LogOutConfirmation( )
+  {
+    return(
+      <Dialog
+        open={ this.state.Dialog_LogOutConfirmation_IsOpen }
+        title="Log Out"
+        actions={ [
+          <FlatButton key="Cancel" label="Cancel" onTouchTap={ this._handle_onTouchTap_LogOutConfirmation_Cancel } />,
+          <FlatButton key="LogOut" label="Log Out" primary={true} onTouchTap={ this._handle_onTouchTap_LogOutConfirmation_LogOut } />,
+        ] }
+      >
+      <List subheader="You are currently logged in as">
+        <ListItem
+          primaryText={ this.props.Viewer.User_DisplayName }
+          leftAvatar={<Avatar src={ this.props.Viewer.User_ProfilePhoto } />}
+        />
+      </List>
+      <List subheader="Are you sure you want to log out?" />
+      </Dialog>
+    );
+  }
+
+  _handle_onTouchTap_LogOutConfirmation_LogOut = ( ) =>
+  {
+    this.setState( {
+      Dialog_LogOutConfirmation_IsOpen: false,
+      Dialog_LogOutInProgress_IsOpen: true,
+    } );
+
+    var loc = window.location;
+    var host = loc.protocol + "//" + loc.hostname + ":" + loc.port;
+
+    postXHR(
+      host + '/auth/logout',
+      { },
+      ( response ) => this._handle_LogOutConfirmation_Response_Success( response ),
+      ( response ) => this._handle_LogOutConfirmation_Response_Failure( response )
+    );
+  }
+
+  _handle_onTouchTap_LogOutConfirmation_Cancel = ( ) =>
+  {
+    this.setState( {
+      Dialog_LogOutConfirmation_IsOpen: false
+    } );
+  };
+
+
+
+  //
+
+  Dialog_LogOutInProgress( )
+  {
+    return(
+      <Dialog
+        open={ this.state.Dialog_LogOutInProgress_IsOpen }
+        title="Logging out ..."
+        actions={ [
+          <FlatButton key="Cancel" label="Cancel" onTouchTap={ this._handle_onTouchTap_LogOutInProgress_Cancel } />,
+        ] }
+      >
+        <LinearProgress mode="indeterminate" />
+      </Dialog>
+    );
+  }
+
+  _handle_onTouchTap_LogOutInProgress_Cancel = ( ) =>
+  {
+    this.setState( {
+      Dialog_LogOutInProgress_IsOpen: false
+    } );
+  };
+
+
+
+
+  //
+
+  Dialog_LogOutFailed( )
+  {
+    return(
+      <Dialog
+        open={ this.state.Dialog_LogOutFailed_IsOpen }
+        title="Log out failed."
+        actions={ [
+          <FlatButton key="OK" label="OK" primary={true} onTouchTap={ this._handle_onTouchTap_LogOutFailed_OK } />,
+        ] }
+      >
+        <List subheader=" You are still logged in as">
+          <ListItem
+            primaryText={ this.props.Viewer.User_DisplayName }
+            leftAvatar={<Avatar src={ this.props.Viewer.User_ProfilePhoto } />}
+          />
+        </List>
+        <List subheader={ this.state.Dialog_LogOutFailed_Message } />
+      </Dialog>
+    );
+  }
+
+  _handle_onTouchTap_LogOutFailed_OK = ( ) =>
+  {
+    this.setState( {
+      Dialog_LogOutFailed_IsOpen: false
+    } );
+  };
+
+
+
+  //
+
   Popover_AuthorizedUser( )
   {
     return (
@@ -399,11 +542,10 @@ class AppBar_Auth extends React.Component
 
   _handle_Popover_AuthorizedUser_LogOut = ( ) =>
   {
-    // TODO
-    // Since the cookie is an HTTP ONLY cookie, it can not be changed from the client.
-    // A Request to the server will be required to log out
-    document.cookie = 'auth_token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    location.replace( location.href );
+    this.setState( {
+      Popover_AuthorizedUser_IsOpen: false,
+      Dialog_LogOutConfirmation_IsOpen: true
+    } );
   };
 
   _handle_Popover_AuthorizedUser_Close = ( ) =>
@@ -443,6 +585,9 @@ class AppBar_Auth extends React.Component
           { this.Dialog_CreateUser( ) }
           { this.Dialog_CreateUserInProgress( ) }
           { this.Dialog_CreateUserFailed( ) }
+          { this.Dialog_LogOutConfirmation( ) }
+          { this.Dialog_LogOutInProgress( ) }
+          { this.Dialog_LogOutFailed( ) }
         </IconButton>
       );
   }
