@@ -27,6 +27,17 @@ router.set( 'x-powered-by', false );
 router.use( compression( ) );
 router.use( cookieParser( ) );
 
+/*
+TODO - rewrite this way to check for user
+app.post('/graphql', (req, res) => {
+  // execute GraphQL!
+  graphql(schema, req.body)
+    .then(result => res.send(result));
+});
+
+http://davidandsuzi.com/writing-a-basic-api-with-graphql/
+*/
+
 // Graphql server
 router.use( '/graphql', graphQLHTTP( request => {
   let user_id = '00000000-0000-0000-0000-000000000000'; // Anonymous

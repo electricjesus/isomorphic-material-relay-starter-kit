@@ -14,21 +14,44 @@ function DA_User_GetUUIDByID( id )
 
 // Mock data
 
-var usersById = { };
-usersById[ DA_User_GetUUIDByID( 0 ) ] = new User( { id: Uuid.fromString( DA_User_GetUUIDByID( 0 ) ), username: '', password: '', User_DisplayName: 'Anonymous', User_ProfilePhoto: '', User_Email: '', User_Locale: '' } );
-usersById[ DA_User_GetUUIDByID( 1 ) ] = new User( { id: Uuid.fromString( DA_User_GetUUIDByID( 1 ) ), username: 'jack', password: 'secret', User_DisplayName: 'Jack Van Der Cub', User_ProfilePhoto: '/profile_photos/jack.jpg', User_Email: 'jack@example.com', User_Locale: '' } );
-usersById[ DA_User_GetUUIDByID( 2 ) ] = new User( { id: Uuid.fromString( DA_User_GetUUIDByID( 2 ) ), username: 'jill', password: 'birthday', User_DisplayName: 'Jill McBear', User_ProfilePhoto: '/profile_photos/jill.jpg', User_Email: 'jill@example.com', User_Locale: '' } );
+var User_listById = { };
+User_listById[ DA_User_GetUUIDByID( 0 ) ] = new User( { id: Uuid.fromString( DA_User_GetUUIDByID( 0 ) ), username: '', password: '', User_DisplayName: 'Anonymous', User_ProfilePhoto: '', User_Email: '', User_Locale: '' } );
+User_listById[ DA_User_GetUUIDByID( 1 ) ] = new User( { id: Uuid.fromString( DA_User_GetUUIDByID( 1 ) ), username: 'jack', password: 'secret', User_DisplayName: 'Jack Van Der Cub', User_ProfilePhoto: '/profile_photos/jack.jpg', User_Email: 'jack@example.com', User_Locale: '' } );
+User_listById[ DA_User_GetUUIDByID( 2 ) ] = new User( { id: Uuid.fromString( DA_User_GetUUIDByID( 2 ) ), username: 'jill', password: 'birthday', User_DisplayName: 'Jill McBear', User_ProfilePhoto: '/profile_photos/jill.jpg', User_Email: 'jill@example.com', User_Locale: '' } );
 
 
 // Data access functions
+
+export function DA_User_add( fields )
+{
+  return DA_User_getByUserName( username )
+  .then( ( a_User ) =>
+  {
+
+    if ( ! a_User )
+    {
+      var new_User = new User( fields );
+
+      new_User.id = Uuid.random( );
+
+      User_listById[ new_User.id.toString( ) ] = new_User;
+
+console.log( JSON.stringify( User_listById ) );
+
+      resolve( new_User );
+    }
+    else throw new Error( "User name already in use" );
+  } )
+  ;
+}
 
 export function DA_User_getByUserName( username )
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
-    for( let user_id in usersById )
+    for( let user_id in User_listById )
     {
-      let a_User = usersById[ user_id ];
+      let a_User = User_listById[ user_id ];
       if( a_User.username === username )
         resolve( a_User );
     }
@@ -40,6 +63,6 @@ export function DA_User_getByUserName( username )
 export function DA_User_get( User_id )
 {
   return new Promise( ( resolve, reject ) =>
-    setTimeout( ( ) => resolve( usersById[ User_id.toString( ) ] ), 100 )
+    setTimeout( ( ) => resolve( User_listById[ User_id.toString( ) ] ), 100 )
   );
 }

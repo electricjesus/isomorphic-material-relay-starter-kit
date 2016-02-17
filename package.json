@@ -80,6 +80,7 @@
     "babel-relay-plugin": "^0.6.3",
     "babel-relay-plugin-loader": "^0.6.4",
     "babel-runtime": "^6.5.0",
+    "bcrypt": "^0.8.5",
     "body-parser": "^1.14.1",
     "cassandra-driver": "^3.0.0",
     "chalk": "^1.1.1",
