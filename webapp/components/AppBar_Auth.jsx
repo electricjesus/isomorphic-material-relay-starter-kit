@@ -209,6 +209,7 @@ class AppBar_Auth extends React.Component
     this.setState( {
       Dialog_AuthenticationChallenge_IsOpen: false,
       Dialog_CreateUser_IsOpen: true,
+      Dialog_CreateUser_PasswordStrength: 0,
     } );
   }
 
@@ -284,23 +285,27 @@ class AppBar_Auth extends React.Component
         title="Create New User"
         actions={ [
           <FlatButton key="Cancel" label="Cancel" onTouchTap={ this._handle_onTouchTap_CreateUser_Cancel } />,
-          <FlatButton key="Create" label="Create" primary={true} onTouchTap={ this._handle_onTouchTap_CreateUser_Create } />,
+          <FlatButton key="Create" label="Create" primary={true} disabled={ this.state.Dialog_CreateUser_PasswordStrength < 60 } onTouchTap={ this._handle_onTouchTap_CreateUser_Create } />,
         ] }
       >
         <TextField
           ref="username"
           floatingLabelText="E-Mail"
           fullWidth={ true }
-          onEnterKeyDown={ this._handle_onEnterKeyDown_AuthenticationChallenge_UserName }
         />
         <TextField
           ref="password"
           type="password"
           floatingLabelText="Password"
           fullWidth={ true }
+          onChange={ this._handle_onChange_CreateUser_Password }
         />
-        <br/><br/>Password strength:
-        <LinearProgress mode="determinate" value={ 50 } />
+        <br/><br/>Password strength
+        <LinearProgress
+          mode="determinate"
+          value={ this.state.Dialog_CreateUser_PasswordStrength }
+          color={ this.state.Dialog_CreateUser_PasswordStrength < 60 ? "#ff0000" : ( this.state.Dialog_CreateUser_PasswordStrength < 80 ? "#c0c000" : "#00d000" ) }
+        />
       </Dialog>
     );
   }
@@ -325,6 +330,43 @@ class AppBar_Auth extends React.Component
       ( response ) => this._handle_CreateUser_Response_Failure( response )
     );
   }
+
+  scorePassword( pass )
+  {
+    let score = 0;
+    if (!pass)
+        return score;
+
+    // award every unique letter until 5 repetitions
+    let letters = new Object();
+    for (var i=0; i<pass.length; i++) {
+        letters[pass[i]] = (letters[pass[i]] || 0) + 1;
+        score += 5.0 / letters[pass[i]];
+    }
+
+    // bonus points for mixing it up
+    let variations = {
+        digits: /\d/.test(pass),
+        lower: /[a-z]/.test(pass),
+        upper: /[A-Z]/.test(pass),
+        nonWords: /\W/.test(pass),
+    }
+
+    let variationCount = 0;
+    for (var check in variations) {
+        variationCount += (variations[check] == true) ? 1 : 0;
+    }
+    score += (variationCount - 1) * 10;
+
+    return parseInt(score);
+  }
+
+  _handle_onChange_CreateUser_Password = ( ) =>
+  {
+    this.setState( {
+      Dialog_CreateUser_PasswordStrength: this.scorePassword( this.refs.password.getValue( ) ),
+    } );
+  };
 
   _handle_onTouchTap_CreateUser_Cancel = ( ) =>
   {
