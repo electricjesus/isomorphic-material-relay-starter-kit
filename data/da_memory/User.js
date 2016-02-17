@@ -24,7 +24,7 @@ User_listById[ DA_User_GetUUIDByID( 2 ) ] = new User( { id: Uuid.fromString( DA_
 
 export function DA_User_add( fields )
 {
-  return DA_User_getByUserName( username )
+  return DA_User_getByUserName( fields.username )
   .then( ( a_User ) =>
   {
 
@@ -38,7 +38,7 @@ export function DA_User_add( fields )
 
 console.log( JSON.stringify( User_listById ) );
 
-      resolve( new_User );
+      return new_User;
     }
     else throw new Error( "User name already in use" );
   } )

@@ -284,7 +284,7 @@ class AppBar_Auth extends React.Component
         title="Create New User"
         actions={ [
           <FlatButton key="Cancel" label="Cancel" onTouchTap={ this._handle_onTouchTap_CreateUser_Cancel } />,
-          <FlatButton key="CreateUser" label="Create User" primary={true} onTouchTap={ this._handle_onTouchTap_AuthenticationChallenge_LogIn } />,
+          <FlatButton key="Create" label="Create" primary={true} onTouchTap={ this._handle_onTouchTap_CreateUser_Create } />,
         ] }
       >
         <TextField
@@ -305,7 +305,7 @@ class AppBar_Auth extends React.Component
     );
   }
 
-  _handle_onTouchTap_CreateUser_OK = ( ) =>
+  _handle_onTouchTap_CreateUser_Create = ( ) =>
   {
     this.setState( {
       Dialog_CreateUser_IsOpen: false,
