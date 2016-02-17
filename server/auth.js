@@ -75,7 +75,6 @@ auth.post('/createuser', (req, res, next) =>
   } )
   .catch( ( reason ) =>
   {
-    console.log( "CATCH: " + reason );
     res.status( 401 ).json( { error: "" + reason } );
   } )
   ;
