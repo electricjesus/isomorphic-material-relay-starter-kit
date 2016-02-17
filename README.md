@@ -259,12 +259,34 @@ Below is the list of the main files and folders for this project. Asterisk on th
 | `webapp/scripts/`                             | Scripts used by the client. | [*](./webapp/scripts/) |
 | `webapp/styles/`                              | Styles used by the client. | [*](./webapp/styles/) |
 | `webapp/styles/main.css`                      | Example style included in the app. Currently not used. | [*](./webapp/styles/main.css) |
+| `webapp/styles/RawMUITheme.js`                | Theme for Material-UI. | [*](./webapp/styles/RawMUITheme.js) |
 | `webapp/views/`                               | Views served by the express web app. | [*](./webapp/views/) |
 | `webapp/views/index.ejs`                      | Template for the HTML served by the isomorphic server rendered. | [*](./webapp/views/index.ejs) |
 | `webapp/app.js`                               | Starts the client-side SPA using data generated during server rendering. | [*](./webapp/app.js) |
 | `webapp/renderOnServer.js`                    | Performs server-side rendering. | [*](./webapp/renderOnServer.js) |
 | `webapp/routes.js`                            | Routes in a data structure consumed both by express router and react router. | [*](./webapp/routes.js) |
 | `webapp/server.js`                            | Server for the web app. | [*](./webapp/server.js) |
+
+
+
+## Customizing the look and feel
+
+Material-UI provides powerful means for [customizing the colors and the overall look of the application](http://www.material-ui.com/#/customization/themes). The IMRSK uses a custom theme defined in [./webapp/styles/RawMUITheme.js](./webapp/styles/RawMUITheme.js):
+
+``` Javascript
+primary1Color: Colors.blue500,
+primary2Color: Colors.blue700,
+primary3Color: Colors.lightBlack,
+accent1Color: Colors.purpleA200,
+accent2Color: Colors.blueGrey100,
+accent3Color: Colors.blueGrey500,
+textColor: Colors.darkBlack,
+alternateTextColor: Colors.white,
+canvasColor: Colors.white,
+borderColor: Colors.grey300,
+disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3),
+pickerHeaderColor: Colors.blue500,
+```
 
 
 
