@@ -66,7 +66,8 @@ auth.post('/createuser', (req, res, next) =>
         User_DisplayName: 'New User',
         User_ProfilePhoto: '',
         User_Email: '',
-        User_Locale: ''
+        User_Locale: '',
+        User_AuthToken: Math.random( ).toString( 36 )
       } ) )
       ;
   } )

@@ -6,6 +6,9 @@ import jwt from 'jwt-simple';
 import { DA_User_get } from '../data/da/User';
 import schema from './schema'; // Schema for GraphQL server
 
+// Read environment
+require( 'dotenv' ).load( );
+
 let router = express( );
 
 router.use( '/', ( req, res, next ) =>
@@ -27,10 +30,20 @@ router.use( '/', ( req, res, next ) =>
     console.log( chalk.blue( '.' ) );
   }
 
+  const user_auth_token = req.get( 'user_auth_token' );
+
   DA_User_get( user_id )
   .then( ( a_User) =>
   {
+    let authenticationFailed = false;
     if ( ! a_User )
+      authenticationFailed = true;
+    else
+      if( user_auth_token != process.env.USER_AUTH_SECRET )
+        if( user_auth_token != a_User.User_AuthToken )
+          authenticationFailed = true;
+
+    if( authenticationFailed )
     {
       // User not found in database
       user_id = '00000000-0000-0000-0000-000000000000'; // Anonymous

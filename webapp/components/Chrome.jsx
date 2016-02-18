@@ -168,12 +168,12 @@ Chrome.childContextTypes = {
   muiTheme: React.PropTypes.object,
 };
 
+// It is important to retrieve User_AuthToken, since it is used in app.js
 export default Relay.createContainer( Chrome, {
   fragments: {
     Viewer: () => Relay.QL`
       fragment on Viewer {
-        ToDo_TotalCount,
-        ToDo_CompletedCount,
+        User_AuthToken,
         ${AppBar_Auth.getFragment('Viewer')},
       }
     `,

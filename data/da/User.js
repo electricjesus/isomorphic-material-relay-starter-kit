@@ -2,7 +2,7 @@ import {
   DA_User_add,
   DA_User_getByUserName,
   DA_User_get,
-} from '../da_cassandra/User';
+} from '../da_memory/User';
 
 export {
   DA_User_add,
