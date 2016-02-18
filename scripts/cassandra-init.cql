@@ -19,10 +19,10 @@ CREATE INDEX "User_username_ix"
 ON "User"( username );
 
 insert into "User"( id, "username", "password", "User_DisplayName", "User_ProfilePhoto", "User_Email", "User_Locale" )
-values( d362e1df-1fa8-466b-b311-af90b2a71e8e, 'jack', 'secret', 'Jack Van Der Cub', '/profile_photos/jack.jpg', 'jack@example.com', '' );
+values( d362e1df-1fa8-466b-b311-af90b2a71e8e, 'jack', '$2a$08$nRpts0s9gv3DwvpBY1ptRe6M1ushtVHHrU6W53zmp4g4OqngAi78y', 'Jack Van Der Cub', '/profile_photos/jack.jpg', 'jack@example.com', '' );
 
 insert into "User"( id, "username", "password", "User_DisplayName", "User_ProfilePhoto", "User_Email", "User_Locale" )
-values( 33171548-39d3-45d8-ab5c-5eedefe01dfc, 'jill', 'birthday', 'Jill McBear', '/profile_photos/jill.jpg', 'jill@example.com', '' );
+values( 33171548-39d3-45d8-ab5c-5eedefe01dfc, 'jill', '$2a$08$RLCA/lRJNQCcPNmCadXu2OVZeB8x4S0pMhkOLnV0uppbDYcGa5gMu', 'Jill McBear', '/profile_photos/jill.jpg', 'jill@example.com', '' );
 
 
 

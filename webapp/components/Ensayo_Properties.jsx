@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Dialog from 'material-ui/lib/dialog';
-import RaisedButton from 'material-ui/lib/raised-button';
+import FlatButton from 'material-ui/lib/flat-button';
 import TextField from 'material-ui/lib/text-field';
 
 import { dateFromUTCString } from '../scripts/DateTimeHelpers'
@@ -53,8 +53,8 @@ export default class Ensayo_Properties extends React.Component
           open={ this.state.Dialog_IsOpen }
           title="Ensayo"
           actions={ [
-            <RaisedButton key="Cancel" label="Cancel" onTouchTap={ this._handle_onTouchTap_Cancel } />,
-            <RaisedButton key="OK" label="OK" primary={true} onTouchTap={ this._handle_onTouchTap_OK } />,
+            <FlatButton key="Cancel" label="Cancel" onTouchTap={ this._handle_onTouchTap_Cancel } />,
+            <FlatButton key="OK" label="OK" primary={true} onTouchTap={ this._handle_onTouchTap_OK } />,
           ] }
         >
           <TextField

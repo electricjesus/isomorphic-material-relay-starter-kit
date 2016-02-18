@@ -103,10 +103,17 @@ class Chrome extends React.Component
             valueLink={ { value: location.pathname, requestChange: this._handle_onRequestChangeList } }
           >
             <ListItem
-              primaryText="Starter Kit"
+              primaryText="System"
               primaryTogglesNestedList={true}
               nestedItems={ [
                 <ListItem primaryText="Home" value="/" />,
+                <ListItem primaryText="GraphiQL" value="/graphiql" />,
+              ] }
+            />
+            <ListItem
+              primaryText="Examples"
+              primaryTogglesNestedList={true}
+              nestedItems={ [
                 <ListItem primaryText="Compendium" value="/compendiums" />,
                 <ListItem primaryText="Ensayo" value="/Ensayos" />,
                 <ListItem primaryText="Ensayo Public" value="/Ensayo_PublicListing" />,
