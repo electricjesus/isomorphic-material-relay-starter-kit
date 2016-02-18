@@ -191,6 +191,7 @@ The following environment variables can be used to control the server:
 | PORT                           | Port for serving the SPA web application and API.                                                       |
 | HOST                           | Host for for serving, for instance `127.0.0.1`.                                                         |
 | PUBLIC_URL                     | URL through which browsers and other clients can access the server - isomorphic pages, public, GraphQL. Optional. Should not be empty. Example: `https://example.com` |
+| USER_AUTH_SECRET               | Secret passed by server rendered to GraphQL server telling it to trust the auth_token without requiring the user_auth_token in the header to be correct. Instead it constains this very secret. |
 | JWT_SECRET                     | Secret used for JWT tokens.                                                                             |
 | CASSANDRA_CONNECTION_POINTS    | Cassandra connection point comma separated list. `localhost` if on the same machine.                    |
 | CASSANDRA_KEYSPACE             | Cassandra keyspace/database.                                                                            |
