@@ -1,3 +1,5 @@
+/* @flow */
+
 import Helmet from "react-helmet";
 import React from 'react';
 import Relay from 'react-relay';
@@ -20,9 +22,9 @@ import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 
 const SelectableList = SelectableContainerEnhance(List);
 
-import AppBar_Auth from './AppBar_Auth.jsx'
-import AppBar_Language from './AppBar_Language.jsx'
-import RawMUITheme from '../styles/RawMUITheme.js'
+import AppBar_Auth from './AppBar_Auth.jsx';
+import AppBar_Language from './AppBar_Language.jsx';
+import RawMUITheme from '../styles/RawMUITheme.js';
 
 
 class Chrome extends React.Component
@@ -35,6 +37,7 @@ class Chrome extends React.Component
       leftNavOpen: false,
     };
   }
+
   getChildContext( )
   {
     return ( {
@@ -51,19 +54,19 @@ class Chrome extends React.Component
   _handle_onTouchTap_NavigationToggle = ( ) =>
   {
     this._handle_onRequestChange( ! this.state.leftNavOpen );
-  }
+  };
 
   _handle_onRequestChange = ( open ) =>
   {
     this.setState( {
       leftNavOpen: open,
     } );
-  }
+  };
 
   _handle_onTouchTap_IncompleteTODOs = ( ) =>
   {
     this.context.router.push( '/ToDos/active' );
-  }
+  };
 
   _handle_onRequestChangeList = ( event, value ) =>
   {

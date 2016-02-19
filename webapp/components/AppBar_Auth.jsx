@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react';
 import Relay from 'react-relay';
 
@@ -54,12 +56,12 @@ class AppBar_Auth extends React.Component
     try{
       let responseJSON = JSON.parse( response );
       if( responseJSON.success != true ) throw new Error( "Login failed" );
-    } catch( err ) { _handle_Authentication_Response_Failure( 1 ); return; }
+    } catch( err ) { this._handle_Authentication_Response_Failure( "1" ); return; }
 
     location.replace( location.href );
   }
 
-  _handle_Authentication_Response_Failure( response )
+  _handle_Authentication_Response_Failure( response : string )
   {
     let message;
     try{
@@ -83,12 +85,12 @@ class AppBar_Auth extends React.Component
     try{
       let responseJSON = JSON.parse( response );
       if( responseJSON.success != true ) throw new Error( "New User Creation failed" );
-    } catch( err ) { _handle_CreateUser_Response_Failure( 1 ); return; }
+    } catch( err ) { this._handle_CreateUser_Response_Failure( "1" ); return; }
 
     location.replace( location.href );
   }
 
-  _handle_CreateUser_Response_Failure( response )
+  _handle_CreateUser_Response_Failure( response : string )
   {
     let message;
     try{
@@ -112,7 +114,7 @@ class AppBar_Auth extends React.Component
     try{
       let responseJSON = JSON.parse( response );
       if( responseJSON.success != true ) throw new Error( "Log Out failed" );
-    } catch( err ) { _handle_LogOutConfirmation_Response_Failure( 1 ); return; }
+    } catch( err ) { this._handle_LogOutConfirmation_Response_Failure( "1" ); return; }
 
     location.replace( location.href );
   }
@@ -211,7 +213,7 @@ class AppBar_Auth extends React.Component
       Dialog_CreateUser_IsOpen: true,
       Dialog_CreateUser_PasswordStrength: 0,
     } );
-  }
+  };
 
   _handle_onTouchTap_AuthenticationChallenge_Cancel = ( ) =>
   {
@@ -329,7 +331,7 @@ class AppBar_Auth extends React.Component
       ( response ) => this._handle_CreateUser_Response_Success( response ),
       ( response ) => this._handle_CreateUser_Response_Failure( response )
     );
-  }
+  };
 
   scorePassword( pass )
   {
@@ -470,7 +472,7 @@ class AppBar_Auth extends React.Component
       ( response ) => this._handle_LogOutConfirmation_Response_Success( response ),
       ( response ) => this._handle_LogOutConfirmation_Response_Failure( response )
     );
-  }
+  };
 
   _handle_onTouchTap_LogOutConfirmation_Cancel = ( ) =>
   {

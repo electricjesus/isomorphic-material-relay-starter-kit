@@ -1,3 +1,5 @@
+/* @flow */
+
 import Helmet from "react-helmet";
 import React from 'react';
 import Relay from 'react-relay';
