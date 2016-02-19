@@ -11,7 +11,7 @@ import { dateFromUTCString } from '../scripts/DateTimeHelpers'
 
 export default class Ensayo_Properties extends React.Component
 {
-  constructor( props )
+  constructor( props : any )
   {
     super( props );
 
@@ -20,12 +20,12 @@ export default class Ensayo_Properties extends React.Component
     };
   }
 
-  _handle_Open( )
+  _handle_Open = ( ) =>
   {
     this.setState( {
       Dialog_IsOpen: true
     } );
-  }
+  };
 
   _handle_onTouchTap_Cancel = ( ) =>
   {
@@ -68,7 +68,7 @@ export default class Ensayo_Properties extends React.Component
           <TextField
             ref="Ensayo_Description"
             defaultValue={ this.props.Ensayo_Description }
-            floatingLabelText="Keywords"
+            floatingLabelText="Description"
             fullWidth={ true }
           />
           <TextField
@@ -82,3 +82,10 @@ export default class Ensayo_Properties extends React.Component
     );
   }
 }
+
+Ensayo_Properties.propTypes = {
+  Ensayo_Title: React.PropTypes.string.isRequired,
+  Ensayo_Description: React.PropTypes.string.isRequired,
+  Ensayo_Content: React.PropTypes.string.isRequired,
+  updateHandler: React.PropTypes.func.isRequired,
+};

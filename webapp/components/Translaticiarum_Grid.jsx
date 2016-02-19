@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react';
 import Dimensions from 'react-dimensions'
 import Relay from 'react-relay';

@@ -3,6 +3,7 @@
 [include]
 
 [libs]
+node-modules/
 
 [options]
 esproposal.class_static_fields=enable

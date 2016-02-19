@@ -333,11 +333,11 @@ class AppBar_Auth extends React.Component
     );
   };
 
-  scorePassword( pass )
+  scorePassword( pass ) /*: number*/
   {
     let score = 0;
     if (!pass)
-        return score;
+        return 0;
 
     // award every unique letter until 5 repetitions
     let letters = new Object();
@@ -360,7 +360,7 @@ class AppBar_Auth extends React.Component
     }
     score += (variationCount - 1) * 10;
 
-    return parseInt(score);
+    return score;
   }
 
   _handle_onChange_CreateUser_Password = ( ) =>
