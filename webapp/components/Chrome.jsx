@@ -128,9 +128,11 @@ class Chrome extends React.Component
         </LeftNav>
         <ToolBar
           style={ {
+            zIndex: 2,
+            position: 'fixed',
             color: RawMUITheme.palette.primary1Color,
             textColor: RawMUITheme.palette.alternateTextColor,
-            backgroundColor: ColorManipulator.darken( RawMUITheme.palette.accent2Color, 0.05 ),
+            backgroundColor: RawMUITheme.palette.accent3Color,
           } }
         >
           <ToolbarGroup firstChild={true} float="left">
@@ -139,7 +141,7 @@ class Chrome extends React.Component
             </IconButton>
           </ToolbarGroup>
           <ToolbarGroup float="left">
-            <ToolbarTitle text="IMRSK" />
+            <ToolbarTitle text="IMRSK" style={ { color: RawMUITheme.palette.alternateTextColor, } }/>
           </ToolbarGroup>
           <ToolbarGroup float="right">
             { incompleteNotification }
@@ -149,7 +151,7 @@ class Chrome extends React.Component
           </ToolbarGroup>
         </ToolBar>
 
-        <div style={ { paddingTop: 10, paddingLeft: 4, paddingRight: 4, } }>
+        <div style={ { paddingTop: 60, paddingLeft: 4, paddingRight: 4, } }>
           {this.props.children}
         </div>
 
