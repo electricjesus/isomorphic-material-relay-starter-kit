@@ -49,7 +49,7 @@ export default mutationWithClientMutationId( {
     Compendium_LikedSunset_Green,
     Compendium_LikedSunset_Other,
     Compendium_LikedSunset_OtherText,
-  } ) => {
+  }, { rootValue: {user_id} } ) => {
     var localId = fromGlobalId( id ).id;
     return DA_Compendium_update(
       user_id,
