@@ -20,6 +20,7 @@ The following articles explain in detail certain aspects of this repository:
 
 * [Cassandra, meet Relay. Relay, meet Cassandra](http://codefoundries.com/developer/cassandra/cassandra-meet-relay.html).
 * [Isomorphic Server Variables](http://codefoundries.com/developer/single-page-application/isomorphic-server-variables.html).
+* [SEO with Relay and Helmet](http://codefoundries.com/developer/single-page-application/seo-isomorphic-react-helmet.html).
 
 
 ## Underlying technologies
