@@ -130,9 +130,7 @@ class Chrome extends React.Component
           style={ {
             zIndex: 2,
             position: 'fixed',
-            color: RawMUITheme.palette.primary1Color,
-            textColor: RawMUITheme.palette.alternateTextColor,
-            backgroundColor: RawMUITheme.palette.accent3Color,
+            backgroundColor: RawMUITheme.palette.accent2Color,
           } }
         >
           <ToolbarGroup firstChild={true} float="left">
@@ -141,7 +139,7 @@ class Chrome extends React.Component
             </IconButton>
           </ToolbarGroup>
           <ToolbarGroup float="left">
-            <ToolbarTitle text="IMRSK" style={ { color: RawMUITheme.palette.alternateTextColor, } }/>
+            <ToolbarTitle text="IMRSK" />
           </ToolbarGroup>
           <ToolbarGroup float="right">
             { incompleteNotification }
