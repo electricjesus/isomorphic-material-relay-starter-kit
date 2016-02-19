@@ -37,7 +37,7 @@ export default class Ensayo_Properties extends React.Component
     this.props.updateHandler( {
       Ensayo_Content: this.refs.Ensayo_Content.getValue( ),
       Ensayo_Title: this.refs.Ensayo_Title.getValue( ),
-      Ensayo_Keywords: this.refs.Ensayo_Keywords.getValue( ),
+      Ensayo_Description: this.refs.Ensayo_Description.getValue( ),
     } );
 
     this.setState( {
@@ -64,8 +64,8 @@ export default class Ensayo_Properties extends React.Component
             fullWidth={ true }
           />
           <TextField
-            ref="Ensayo_Keywords"
-            defaultValue={ this.props.Ensayo_Keywords }
+            ref="Ensayo_Description"
+            defaultValue={ this.props.Ensayo_Description }
             floatingLabelText="Keywords"
             fullWidth={ true }
           />

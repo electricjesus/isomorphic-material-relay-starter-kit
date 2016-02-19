@@ -18,7 +18,7 @@ export default mutationWithClientMutationId( {
   inputFields: {
     Ensayo_Content: { type: new GraphQLNonNull( GraphQLString ) },
     Ensayo_Title: { type: new GraphQLNonNull( GraphQLString ) },
-    Ensayo_Keywords: { type: new GraphQLNonNull( GraphQLString ) },
+    Ensayo_Description: { type: new GraphQLNonNull( GraphQLString ) },
   },
   outputFields: {
     EnsayosEdge: {
@@ -43,12 +43,12 @@ export default mutationWithClientMutationId( {
       resolve: ( parent, args, { rootValue: {user_id} } ) => DA_User_get( user_id )
     },
   },
-  mutateAndGetPayload: ( { Ensayo_Content, Ensayo_Title, Ensayo_Keywords }, { rootValue: {user_id} } ) =>
+  mutateAndGetPayload: ( { Ensayo_Content, Ensayo_Title, Ensayo_Description }, { rootValue: {user_id} } ) =>
     DA_Ensayo_add( user_id, {
       Ensayo_User_id: user_id,
       Ensayo_Content: Ensayo_Content,
       Ensayo_Title: Ensayo_Title,
-      Ensayo_Keywords: Ensayo_Keywords,
+      Ensayo_Description: Ensayo_Description,
     } )
     .then( ( localEnsayoId ) => ( {localEnsayoId} ) )
 } );

@@ -8,12 +8,12 @@ import Ensayo from '../model/Ensayo'
 export function DA_Ensayo_add( User_id, fields )
 {
   const id = Uuid.random( );
-  let cqlText = 'INSERT INTO "Ensayo" (id, "Ensayo_User_id", "Ensayo_Title", "Ensayo_Keywords", "Ensayo_Content" ) VALUES (?, ?, ?, ?, ?);';
+  let cqlText = 'INSERT INTO "Ensayo" (id, "Ensayo_User_id", "Ensayo_Title", "Ensayo_Description", "Ensayo_Content" ) VALUES (?, ?, ?, ?, ?);';
   let cqlParams = [
     id,
     fields.Ensayo_User_id,
     fields.Ensayo_Title,
-    fields.Ensayo_Keywords,
+    fields.Ensayo_Description,
     fields.Ensayo_Content,
   ];
   return runQueryNoResult( cqlText, cqlParams )
@@ -38,11 +38,11 @@ export function DA_Ensayo_update( User_id, id, fields )
     cqlParams.push( fields.Ensayo_Title );
     followingItem = true;
   }
-  if( 'Ensayo_Keywords' in fields )
+  if( 'Ensayo_Description' in fields )
   {
     if( followingItem ) cqlText += ', ';
-    cqlText += '"Ensayo_Keywords" = ?';
-    cqlParams.push( fields.Ensayo_Keywords );
+    cqlText += '"Ensayo_Description" = ?';
+    cqlParams.push( fields.Ensayo_Description );
     followingItem = true;
   }
   if( 'Ensayo_Content' in fields )

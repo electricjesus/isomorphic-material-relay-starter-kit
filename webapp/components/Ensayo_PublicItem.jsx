@@ -12,14 +12,14 @@ class Ensayo_PublicItem extends React.Component
   {
     // In a fairly barbaric way, limit the length of headings so that they are not considered spam
     let contentH1 = this.props.Viewer.Ensayo.Ensayo_Title.substring( 0, 100 );
-    let contentH2 = this.props.Viewer.Ensayo.Ensayo_Keywords.substring( 0, 100 );
+    let contentH2 = this.props.Viewer.Ensayo.Ensayo_Description.substring( 0, 100 );
 
     return (
       <div>
         <Helmet
           title={ this.props.Viewer.Ensayo.Ensayo_Title }
           meta={ [
-            { name: "description", content: this.props.Viewer.Ensayo.Ensayo_Keywords },
+            { name: "description", content: this.props.Viewer.Ensayo.Ensayo_Description },
           ] }
         />
         <Card>
@@ -54,7 +54,7 @@ export default Relay.createContainer( Ensayo_PublicItem, {
         Ensayo(id:$id){
           id,
           Ensayo_Title,
-          Ensayo_Keywords,
+          Ensayo_Description,
           Ensayo_Content,
         }
         User_IsAnonymous,

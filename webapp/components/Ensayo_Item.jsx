@@ -69,7 +69,7 @@ class Ensayo_Item extends React.Component
           ref="Ensayo_Properties"
           Ensayo_Content={ this.props.Ensayo.Ensayo_Content }
           Ensayo_Title={ this.props.Ensayo.Ensayo_Title }
-          Ensayo_Keywords={ this.props.Ensayo.Ensayo_Keywords }
+          Ensayo_Description={ this.props.Ensayo.Ensayo_Description }
           updateHandler={ this._handle_updateHandler_Ensayo }
         />
       </div>
@@ -83,7 +83,7 @@ export default Relay.createContainer( Ensayo_Item, {
       fragment on Ensayo {
         id,
         Ensayo_Title,
-        Ensayo_Keywords,
+        Ensayo_Description,
         Ensayo_Content,
         ${Ensayo_deleteMutation.getFragment('Ensayo')},
         ${Ensayo_updateMutation.getFragment('Ensayo')},

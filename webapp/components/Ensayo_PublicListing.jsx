@@ -19,7 +19,7 @@ class Ensayo_PublicListing extends React.Component
       <Card key={ edge.node.id }>
         <CardHeader
           title={ edge.node.Ensayo_Title }
-          subtitle={ edge.node.Ensayo_Keywords }
+          subtitle={ edge.node.Ensayo_Description }
         />
         <CardText
           onClick={ ( ) => this._handle_onClick( edge.node.id ) }
@@ -54,7 +54,7 @@ export default Relay.createContainer( Ensayo_PublicListing, {
             node {
               id,
               Ensayo_Title,
-              Ensayo_Keywords,
+              Ensayo_Description,
               Ensayo_Content,
             },
           },

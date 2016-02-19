@@ -37,7 +37,7 @@ export default class Ensayo_addMutation extends Relay.Mutation {
     return {
       Ensayo_Content: this.props.Ensayo_Content,
       Ensayo_Title: this.props.Ensayo_Title,
-      Ensayo_Keywords: this.props.Ensayo_Keywords,
+      Ensayo_Description: this.props.Ensayo_Description,
     };
   }
   getOptimisticResponse() {
@@ -46,7 +46,7 @@ export default class Ensayo_addMutation extends Relay.Mutation {
         node: {
           Ensayo_Content: this.props.Ensayo_Content,
           Ensayo_Title: this.props.Ensayo_Title,
-          Ensayo_Keywords: this.props.Ensayo_Keywords,
+          Ensayo_Description: this.props.Ensayo_Description,
         },
       },
       Viewer: {

@@ -57,14 +57,14 @@ scalar DateTime
 type Ensayo implements Node {
   id: ID!
   Ensayo_Title: String
-  Ensayo_Keywords: String
+  Ensayo_Description: String
   Ensayo_Content: String
 }
 
 input Ensayo_addInput {
   Ensayo_Content: String!
   Ensayo_Title: String!
-  Ensayo_Keywords: String!
+  Ensayo_Description: String!
   clientMutationId: String!
 }
 
@@ -89,7 +89,7 @@ input Ensayo_updateInput {
   id: ID!
   Ensayo_Content: String!
   Ensayo_Title: String!
-  Ensayo_Keywords: String!
+  Ensayo_Description: String!
   clientMutationId: String!
 }
 
