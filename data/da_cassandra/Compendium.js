@@ -1,3 +1,5 @@
+/* @flow */
+
 import { runQuery, runQueryOneResult, runQueryNoResult } from './_client.js';
 
 import Compendium from '../model/Compendium'

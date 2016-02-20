@@ -1,3 +1,5 @@
+/* @flow */
+
 import Chrome from './components/Chrome.jsx';
 import Compendium from './components/Compendium.jsx';
 import Ensayo_List from './components/Ensayo_List.jsx';

@@ -1,3 +1,5 @@
+/* @flow */
+
 import { fromGlobalId } from "graphql-relay";
 import { GraphQLID, GraphQLNonNull, GraphQLObjectType } from "graphql";
 

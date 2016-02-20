@@ -1,3 +1,5 @@
+/* @flow */
+
 import chalk from 'chalk';
 import cassandraDriver from 'cassandra-driver';
 

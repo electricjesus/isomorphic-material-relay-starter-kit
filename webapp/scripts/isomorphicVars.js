@@ -1,3 +1,5 @@
+/* @flow */
+
 export function isomorphicVars( )
 {
   if( typeof( window ) == 'undefined' )

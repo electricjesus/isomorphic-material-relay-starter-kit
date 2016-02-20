@@ -9,7 +9,7 @@ import TextField from 'material-ui/lib/text-field';
 
 export default class ToDo_Properties extends React.Component
 {
-  constructor( props )
+  constructor( props : any )
   {
     super( props );
 

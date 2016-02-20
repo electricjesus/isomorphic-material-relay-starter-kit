@@ -1,3 +1,5 @@
+/* @flow */
+
 import { Uuid } from '../da_cassandra/_client.js';
 
 

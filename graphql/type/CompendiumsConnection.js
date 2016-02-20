@@ -1,3 +1,5 @@
+/* @flow */
+
 import { connectionDefinitions } from "graphql-relay";
 
 import CompendiumType from "./CompendiumType";

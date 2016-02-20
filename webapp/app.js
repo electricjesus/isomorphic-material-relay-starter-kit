@@ -1,3 +1,5 @@
+/* @flow */
+
 import { browserHistory } from 'react-router';
 
 // First load isomorphic-relay:

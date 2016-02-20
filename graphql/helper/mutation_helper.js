@@ -1,3 +1,5 @@
+/* @flow */
+
 import chalk from 'chalk';
 import { cursorForObjectInConnection } from "graphql-relay";
 

@@ -1,3 +1,5 @@
+/* @flow */
+
 import chalk from 'chalk';
 import IsomorphicRouter from 'isomorphic-relay-router';
 import Helmet from 'react-helmet';

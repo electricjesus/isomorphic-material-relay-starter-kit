@@ -1,3 +1,5 @@
+/* @flow */
+
 import Relay from 'react-relay';
 
 export default class ToDo_addMutation extends Relay.Mutation {

@@ -13,7 +13,7 @@ import { dateFromUTCString, dateUTCToLocal, dateLocalToUTC } from '../scripts/Da
 
 export default class Translaticiarum_Properties extends React.Component
 {
-  constructor( props )
+  constructor( props : any )
   {
     super( props );
 

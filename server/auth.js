@@ -1,3 +1,5 @@
+/* @flow */
+
 import bcrypt from 'bcrypt';
 import bodyParser from 'body-parser';
 import express from 'express';

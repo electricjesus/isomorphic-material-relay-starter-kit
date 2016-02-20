@@ -1,3 +1,5 @@
+/* @flow */
+
 import {GraphQLObjectType} from "graphql";
 
 // ->->-> Compendium mutations imports

@@ -1,3 +1,5 @@
+/* @flow */
+
 import { runQuery, runQueryOneResult, runQueryNoResult, Uuid } from './_client.js';
 
 import Ensayo from '../model/Ensayo'

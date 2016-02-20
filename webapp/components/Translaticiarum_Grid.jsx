@@ -60,7 +60,7 @@ class Translaticiarum_Grid extends React.Component
     this.refs.Translaticiarum_Properties._handle_Open( );
   };
 
-  getTranslaticiarumByDateAndType( transliticiarumDays )
+  getTranslaticiarumByDateAndType( transliticiarumDays : Array<Date> )
   {
     const dayCount = transliticiarumDays.length - 1; // First element is null
 
@@ -146,9 +146,9 @@ class Translaticiarum_Grid extends React.Component
     if( numberOfDays < 1 ) numberOfDays = 1;
     else if( numberOfDays > 7 ) numberOfDays = 7;
 
-    let transliticiarumDays= [ null ];
+    let transliticiarumDays : Array<Date> = [ ];
     for( let day = 0; day < numberOfDays; day++ )
-      transliticiarumDays.push( new Date( firstDayEpoch + day * 24*60*60*1000 ) );
+      transliticiarumDays[ day + 1] = new Date( firstDayEpoch + day * 24*60*60*1000 );
 
     const TranslaticiarumByDateAndType = this.getTranslaticiarumByDateAndType( transliticiarumDays );
 

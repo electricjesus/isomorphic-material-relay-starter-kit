@@ -1,3 +1,5 @@
+/* @flow */
+
 import chalk from 'chalk';
 
 import { fromGlobalId, mutationWithClientMutationId, cursorForObjectInConnection } from "graphql-relay";

@@ -1,3 +1,5 @@
+/* @flow */
+
 export function postXHR( url, jsondata, onSuccess, onFailure )
 {
   console.log('postXHR: posting to ' + url + ', ' + JSON.stringify( jsondata ) );

@@ -1,3 +1,5 @@
+/* @flow */
+
 import {
   DA_Translaticiarum_add,
   DA_Translaticiarum_update,

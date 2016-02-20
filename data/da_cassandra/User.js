@@ -1,3 +1,5 @@
+/* @flow */
+
 import { runQueryNoResult, runQueryOneResult } from './_client.js';
 import User from '../model/User'
 import { Uuid } from '../../data/da_cassandra/_client.js';

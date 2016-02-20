@@ -1,3 +1,5 @@
+/* @flow */
+
 import {
   DA_Ensayo_add,
   DA_Ensayo_update,

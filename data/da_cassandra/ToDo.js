@@ -1,3 +1,5 @@
+/* @flow */
+
 import { runQuery, runQueryOneResult, runQueryNoResult, Uuid } from './_client.js';
 
 import ToDo from '../model/ToDo'
@@ -21,7 +23,7 @@ export function DA_ToDo_add( User_id, fields )
   ;
 }
 
-export function DA_ToDo_update( User_id, id, fields )
+export function DA_ToDo_update( User_id, id, fields : any )
 {
   // We will not update ToDo_User_id since it makes no sense to update it
   let cqlText = 'UPDATE "ToDo" SET ';

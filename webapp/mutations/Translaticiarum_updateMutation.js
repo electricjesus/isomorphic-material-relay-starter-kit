@@ -1,3 +1,5 @@
+/* @flow */
+
 import Relay from 'react-relay';
 
 export default class Translaticiarum_updateMutation extends Relay.Mutation {

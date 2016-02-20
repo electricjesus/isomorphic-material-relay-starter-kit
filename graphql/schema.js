@@ -1,3 +1,5 @@
+/* @flow */
+
 import {GraphQLSchema} from "graphql";
 
 // graphql types
