@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 import bcrypt from 'bcrypt';
 import bodyParser from 'body-parser';

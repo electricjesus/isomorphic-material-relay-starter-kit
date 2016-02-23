@@ -1,5 +1,3 @@
-/* @flow */
-
 // Class used by GraphQL Server
 export default class Ensayo
 {
@@ -7,7 +5,7 @@ export default class Ensayo
   {
     this.id = fields.id;
     this.Ensayo_User_id = fields.Ensayo_User_id;
-    this.Ensayo_Title = fields.Ensayo_Title;
+    this.Ensayo_Title = fields.Ensayo_User_id;
     this.Ensayo_Description = fields.Ensayo_Description;
     this.Ensayo_Content = fields.Ensayo_Content;
   }

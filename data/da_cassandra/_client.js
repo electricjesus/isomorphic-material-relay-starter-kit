@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 import chalk from 'chalk';
 import cassandraDriver from 'cassandra-driver';
@@ -12,7 +12,8 @@ export const Uuid = cassandraDriver.types.Uuid;
 let options =
 {
   contactPoints: process.env.CASSANDRA_CONNECTION_POINTS != null ? process.env.CASSANDRA_CONNECTION_POINTS.split(',') : [ 'localhost' ], // Assume localhost if not defined
-  keyspace: process.env.CASSANDRA_KEYSPACE
+  keyspace: process.env.CASSANDRA_KEYSPACE,
+  authProvider: null
 };
 
 if( process.env.CASSANDRA_USER )
@@ -26,7 +27,7 @@ if( process.env.CASSANDRA_USER )
 
 export const client = new cassandraDriver.Client(options);
 
-function ensureNoErrorOrReport( qText, qVar, err, reject )
+function ensureNoErrorOrReport( qText : string, qVar : Array<any>, err : any, reject : any )
 {
   if( err )
   {
@@ -41,7 +42,7 @@ function ensureNoErrorOrReport( qText, qVar, err, reject )
     return true;
 }
 
-export function runQuery( objectPrototype, qText, qVar )
+export function runQuery( objectPrototype : any, qText : string, qVar : Array<mixed> ) : Promise
 {
   //console.log( "runQuery [" + qText + "] params=" + JSON.stringify( qVar ) );
   return new Promise( ( resolve, reject ) =>
@@ -61,7 +62,7 @@ export function runQuery( objectPrototype, qText, qVar )
   } );
 }
 
-export function runQueryOneResult( objectPrototype, qText, qVar )
+export function runQueryOneResult( objectPrototype : any, qText : string, qVar : Array<mixed> ) : Promise
 {
   //console.log( "runQueryOneResult [" + qText + "] params=" + JSON.stringify( qVar ) );
   return new Promise( ( resolve, reject ) =>
@@ -81,7 +82,7 @@ export function runQueryOneResult( objectPrototype, qText, qVar )
   } );
 }
 
-export function runQueryNoResult( qText, qVar )
+export function runQueryNoResult( qText : string, qVar : Array<any> ) : Promise
 {
   //console.log( "runQueryNoResult [" + qText + "] params=" + JSON.stringify( qVar ) );
   return new Promise( ( resolve, reject ) =>

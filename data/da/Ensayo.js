@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 import {
   DA_Ensayo_add,

@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 import { Uuid } from '../da_cassandra/_client.js';
 
@@ -94,9 +94,9 @@ export function DA_ToDo_list_updateMarkAll( User_id, ToDo_Complete )
 {
   return DA_ToDo_list_get( User_id )
   .then( ( arr_ToDo ) => {
+    var changedToDos = [ ];
     arr_ToDo.forEach( a_ToDo =>
     {
-      var changedToDos = [ ];
       if( a_ToDo.ToDo_Complete !== ToDo_Complete )
       {
         a_ToDo.ToDo_Complete = ToDo_Complete;
@@ -110,10 +110,12 @@ export function DA_ToDo_list_updateMarkAll( User_id, ToDo_Complete )
 export function DA_ToDo_list_deleteCompleted( User_id )
 {
   throw new Error( "The code below should be re-written with promises" );
+  /*
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
     var ToDo_listToRemove = DA_ToDo_list_get( User_id ).filter( a_ToDo => a_ToDo.ToDo_Complete );
     ToDo_listToRemove.forEach( a_ToDo => DA_ToDo_delete( User_id, a_ToDo.id ) );
     resolve( ToDo_listToRemove.map( a_ToDo => a_ToDo.id ) );
   }, 100 ) );
+  */
 }

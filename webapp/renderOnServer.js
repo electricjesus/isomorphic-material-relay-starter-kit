@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 import chalk from 'chalk';
 import IsomorphicRouter from 'isomorphic-relay-router';

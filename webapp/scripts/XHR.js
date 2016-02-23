@@ -1,6 +1,6 @@
-/* @flow */
+/* @flow weak */
 
-export function postXHR( url, jsondata, onSuccess, onFailure )
+export function postXHR( url : string, jsondata : any, onSuccess , onFailure )
 {
   console.log('postXHR: posting to ' + url + ', ' + JSON.stringify( jsondata ) );
 

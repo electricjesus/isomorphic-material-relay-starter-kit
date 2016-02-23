@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 import { runQueryNoResult, runQueryOneResult } from './_client.js';
 import User from '../model/User'
@@ -6,7 +6,7 @@ import { Uuid } from '../../data/da_cassandra/_client.js';
 
 const User_0 = new User( { id: Uuid.fromString( '00000000-0000-0000-0000-000000000000' ), username: '', password: '', User_DisplayName: 'Anonymous', "User_ProfilePhoto": '', User_Email: '', User_Locale: '', User_AuthToken: '' } );
 
-export function DA_User_add( fields )
+export function DA_User_add( fields : any ) : User
 {
   return DA_User_getByUserName( fields.username )
   .then( ( a_User ) =>
@@ -37,7 +37,7 @@ export function DA_User_add( fields )
   ;
 }
 
-export function DA_User_getByUserName( username )
+export function DA_User_getByUserName( username : string ) : Promise
 {
   const cqlText = 'SELECT * FROM "User" WHERE "username" = ?;';
   const cqlParams = [
@@ -47,7 +47,7 @@ export function DA_User_getByUserName( username )
   return runQueryOneResult( User, cqlText, cqlParams );
 }
 
-export function DA_User_get( User_id )
+export function DA_User_get( User_id : Uuid ) : Promise
 {
   // Anonymous user is not even recorded in the database
   if( User_id === '00000000-0000-0000-0000-000000000000' )

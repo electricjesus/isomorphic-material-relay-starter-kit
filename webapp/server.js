@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 import path from 'path';
 import express from 'express';

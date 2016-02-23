@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 import { browserHistory } from 'react-router';
 
