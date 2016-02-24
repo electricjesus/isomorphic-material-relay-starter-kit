@@ -15,6 +15,7 @@ import ToDo_Screen from './components/ToDo_Screen.jsx';
 import Translaticiarum_List from './components/Translaticiarum_List.jsx';
 import Translaticiarum_Grid from './components/Translaticiarum_Grid.jsx';
 import Translaticiarum_Screen from './components/Translaticiarum_Screen.jsx';
+import User_Properties from './components/User_Properties.jsx';
 
 import ViewerQueries from './queries/ViewerQueries';
 
@@ -110,6 +111,13 @@ export default [
         path: 'TranslaticiarumsGrid',
         component: Translaticiarum_Grid,
         queries: ViewerQueries,
+      },
+      {
+        path: 'User',
+        indexRoute: {
+          component: User_Properties,
+          queries: ViewerQueries,
+        },
       },
     ],
   },

@@ -89,6 +89,14 @@ class Chrome extends React.Component
         </Badge>
       );
 
+    let systemMenuContents = [
+      <ListItem primaryText="Home" value="/" />,
+      <ListItem primaryText="GraphiQL" value="/graphiql" />,
+    ];
+
+    if( ! this.props.Viewer.User_IsAnonymous )
+      systemMenuContents.push( <ListItem primaryText="User Profile" value="/User" /> );
+
     return (
       <AppCanvas>
         <Helmet
@@ -108,10 +116,7 @@ class Chrome extends React.Component
             <ListItem
               primaryText="System"
               primaryTogglesNestedList={true}
-              nestedItems={ [
-                <ListItem primaryText="Home" value="/" />,
-                <ListItem primaryText="GraphiQL" value="/graphiql" />,
-              ] }
+              nestedItems={ systemMenuContents }
             />
             <ListItem
               primaryText="Examples"
@@ -176,6 +181,7 @@ export default Relay.createContainer( Chrome, {
   fragments: {
     Viewer: () => Relay.QL`
       fragment on Viewer {
+        User_IsAnonymous,
         User_AuthToken,
         ${AppBar_Auth.getFragment('Viewer')},
       }
