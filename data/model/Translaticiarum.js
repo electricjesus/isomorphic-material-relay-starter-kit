@@ -1,5 +1,3 @@
-/* @flow */
-
 // Class used by GraphQL Server
 export default class Translaticiarum
 {

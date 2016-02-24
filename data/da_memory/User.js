@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 import { Uuid } from '../da_cassandra/_client.js';
 
@@ -7,11 +7,12 @@ import User from '../model/User'
 
 // Helper function to make sure we get our proper FK ID values
 // The are constant so that we can use our cookies between server restarts
-function DA_User_GetUUIDByID( id )
+function DA_User_GetUUIDByID( id : number ) : string
 {
   if( id === 0 ) return '00000000-0000-0000-0000-000000000000'; // Anonymous user uses UUID also
-  if( id === 1 ) return 'd362e1df-1fa8-466b-b311-af90b2a71e8e';
-  if( id === 2 ) return '33171548-39d3-45d8-ab5c-5eedefe01dfc';
+  else if( id === 1 ) return 'd362e1df-1fa8-466b-b311-af90b2a71e8e';
+  else if( id === 2 ) return '33171548-39d3-45d8-ab5c-5eedefe01dfc';
+  else throw new Error( 'Bad ID' );
 }
 
 // Mock data
@@ -24,7 +25,7 @@ User_listById[ DA_User_GetUUIDByID( 2 ) ] = new User( { id: Uuid.fromString( DA_
 
 // Data access functions
 
-export function DA_User_add( fields )
+export function DA_User_add( fields : any ) : Promise
 {
   return DA_User_getByUserName( fields.username )
   .then( ( a_User ) =>
@@ -44,7 +45,7 @@ export function DA_User_add( fields )
   ;
 }
 
-export function DA_User_getByUserName( username )
+export function DA_User_getByUserName( username : string ) : Promise
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
@@ -59,7 +60,7 @@ export function DA_User_getByUserName( username )
   }, 100 ) );
 }
 
-export function DA_User_get( User_id )
+export function DA_User_get( User_id : Uuid ) : Promise
 {
   return new Promise( ( resolve, reject ) =>
     setTimeout( ( ) => resolve( User_listById[ User_id.toString( ) ] ), 100 )

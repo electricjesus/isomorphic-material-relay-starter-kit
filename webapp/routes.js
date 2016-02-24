@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 import Chrome from './components/Chrome.jsx';
 import Compendium from './components/Compendium.jsx';

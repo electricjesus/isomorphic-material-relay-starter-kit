@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 import { runQuery, runQueryOneResult, runQueryNoResult, Uuid } from './_client.js';
 
@@ -7,7 +7,7 @@ import Ensayo from '../model/Ensayo'
 
 // Data access functions
 
-export function DA_Ensayo_add( User_id, fields )
+export function DA_Ensayo_add( User_id : Uuid, fields ) : Promise
 {
   const id = Uuid.random( );
   let cqlText = 'INSERT INTO "Ensayo" (id, "Ensayo_User_id", "Ensayo_Title", "Ensayo_Description", "Ensayo_Content" ) VALUES (?, ?, ?, ?, ?);';
@@ -25,7 +25,7 @@ export function DA_Ensayo_add( User_id, fields )
   ;
 }
 
-export function DA_Ensayo_update( User_id, id, fields )
+export function DA_Ensayo_update( User_id : Uuid, id : Uuid, fields ) : Promise
 {
   // We will not update Ensayo_User_id since it makes no sense to update it
   let cqlText = 'UPDATE "Ensayo" SET ';
@@ -61,7 +61,7 @@ export function DA_Ensayo_update( User_id, id, fields )
   return runQueryNoResult( cqlText, cqlParams );
 }
 
-export function DA_Ensayo_get( User_id, id )
+export function DA_Ensayo_get( User_id : Uuid, id : Uuid ) : Promise
 {
   const cqlText = 'SELECT * FROM "Ensayo" WHERE id = ?;';
   const cqlParams = [ id ];
@@ -69,7 +69,7 @@ export function DA_Ensayo_get( User_id, id )
   return runQueryOneResult( Ensayo, cqlText, cqlParams );
 }
 
-export function DA_Ensayo_delete( User_id, id )
+export function DA_Ensayo_delete( User_id : Uuid, id : Uuid ) : Promise
 {
   const cqlText = 'DELETE FROM "Ensayo" WHERE id = ?;';
   const cqlParams = [ id ];
@@ -77,7 +77,7 @@ export function DA_Ensayo_delete( User_id, id )
   return runQueryOneResult( Ensayo, cqlText, cqlParams );
 }
 
-export function DA_Ensayo_list_get( User_id )
+export function DA_Ensayo_list_get( User_id : Uuid ) : Promise
 {
   let cqlText = 'SELECT * FROM "Ensayo" WHERE "Ensayo_User_id" = ?;';
   let cqlParams = [ User_id ];

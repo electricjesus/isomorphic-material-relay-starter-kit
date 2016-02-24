@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 const TimeZoneOffset = new Date( 1970, 0, 1 ).getTime( );
 
