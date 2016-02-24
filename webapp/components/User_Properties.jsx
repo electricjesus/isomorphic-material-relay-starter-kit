@@ -7,6 +7,7 @@ import Card from 'material-ui/lib/card/card';
 import CardHeader from 'material-ui/lib/card/card-header';
 import CardText from 'material-ui/lib/card/card-text';
 import MenuItem from 'material-ui/lib/menus/menu-item';
+import RaisedButton from 'material-ui/lib/raised-button';
 import SelectField from 'material-ui/lib/select-field';
 import TextField from 'material-ui/lib/text-field';
 
@@ -29,6 +30,19 @@ class User_Properties extends React.Component
     this.setState( {
       User_ProfilePhoto: value
     } );
+  };
+
+  _handleUpdate = ( ) =>
+  {
+    Relay.Store.commitUpdate(
+      new Viewer_updateMutation( {
+        Viewer:             this.props.Viewer,
+        User_DisplayName:   this.refs.User_DisplayName.getValue( ),
+        User_ProfilePhoto:  this.state.User_ProfilePhoto,
+        User_Email:         this.refs.User_Email.getValue( ),
+        User_Locale:        this.refs.User_Locale.getValue( ),
+      } )
+    );
   };
 
   render( )
@@ -68,6 +82,19 @@ class User_Properties extends React.Component
               <MenuItem value={ "/profile_photos/panda.jpg" }  primaryText="Panda"/>
             </SelectField>
             <img src={ this.state.User_ProfilePhoto }/>
+            <TextField
+              ref="User_Locale"
+              defaultValue={ this.props.Viewer.User_Locale }
+              floatingLabelText="Locale"
+              fullWidth={ true }
+            />
+            <div>
+              <RaisedButton
+                label="Update"
+                secondary={true}
+                onTouchTap={ ( ) => this._handleUpdate( ) }
+              />
+            </div>
           </CardText>
         </Card>
       );
