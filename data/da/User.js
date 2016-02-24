@@ -4,10 +4,12 @@ import {
   DA_User_add,
   DA_User_getByUserName,
   DA_User_get,
+  DA_User_update,
 } from '../da_memory/User';
 
 export {
   DA_User_add,
   DA_User_getByUserName,
   DA_User_get,
+  DA_User_update,
 };

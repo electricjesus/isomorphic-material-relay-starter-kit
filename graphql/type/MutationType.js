@@ -38,6 +38,12 @@ import Translaticiarum_update from "../mutation/Translaticiarum_update";
 
 // <-<-<- Translaticiarum mutations imports
 
+// ->->-> Viewer mutations imports
+
+import Viewer_update from "../mutation/Viewer_update";
+
+// <-<-<- Viewer mutations imports
+
 
 export default new GraphQLObjectType( {
   name: 'Mutation',
@@ -78,6 +84,12 @@ export default new GraphQLObjectType( {
     Translaticiarum_update: Translaticiarum_update,
 
     // <-<-<- Translaticiarum mutations
+
+    // ->->-> Viewer mutations
+
+    Viewer_update: Viewer_update,
+
+    // <-<-<- Viewer mutations
 
   },
 } );

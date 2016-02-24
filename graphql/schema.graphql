@@ -122,6 +122,7 @@ type Mutation {
   Translaticiarum_add(input: Translaticiarum_addInput!): Translaticiarum_addPayload
   Translaticiarum_delete(input: Translaticiarum_deleteInput!): Translaticiarum_deletePayload
   Translaticiarum_update(input: Translaticiarum_updateInput!): Translaticiarum_updatePayload
+  Viewer_update(input: Viewer_updateInput!): Viewer_updatePayload
 }
 
 interface Node {
@@ -291,4 +292,18 @@ type Viewer implements Node {
   ToDo_TotalCount: Int
   ToDo_CompletedCount: Int
   Translaticiarums(after: String, first: Int, before: String, last: Int): TranslaticiarumsConnection
+}
+
+input Viewer_updateInput {
+  id: ID!
+  User_DisplayName: String!
+  User_ProfilePhoto: String!
+  User_Email: String!
+  User_Locale: String!
+  clientMutationId: String!
+}
+
+type Viewer_updatePayload {
+  Viewer: Viewer
+  clientMutationId: String!
 }

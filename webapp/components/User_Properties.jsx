@@ -10,6 +10,8 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 import SelectField from 'material-ui/lib/select-field';
 import TextField from 'material-ui/lib/text-field';
 
+import Viewer_updateMutation from '../mutations/Viewer_updateMutation';
+
 
 class User_Properties extends React.Component
 {
@@ -81,6 +83,7 @@ export default Relay.createContainer( User_Properties, {
         User_ProfilePhoto,
         User_Email,
         User_Locale,
+        ${Viewer_updateMutation.getFragment('Viewer')},
       }
     `,
   }

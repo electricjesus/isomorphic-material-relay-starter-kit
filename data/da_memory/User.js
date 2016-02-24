@@ -66,3 +66,18 @@ export function DA_User_get( User_id : Uuid ) : Promise
     setTimeout( ( ) => resolve( User_listById[ User_id.toString( ) ] ), 100 )
   );
 }
+
+export function DA_User_update( User_id : Uuid, id : Uuid, fields : any )
+{
+  return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
+  {
+    var a_User = User_listById[ id ];
+
+    a_User.User_DisplayName   = fields.User_DisplayName;
+    a_User.User_ProfilePhoto  = fields.User_ProfilePhoto;
+    a_User.User_Email         = fields.User_Email;
+    a_User.User_Locale        = fields.User_Locale;
+
+    resolve( );
+  }, 100 ) );
+}
