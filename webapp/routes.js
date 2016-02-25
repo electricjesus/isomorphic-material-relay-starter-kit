@@ -16,6 +16,7 @@ import Translaticiarum_List from './components/Translaticiarum_List.jsx';
 import Translaticiarum_Grid from './components/Translaticiarum_Grid.jsx';
 import Translaticiarum_Screen from './components/Translaticiarum_Screen.jsx';
 import User_Properties from './components/User_Properties.jsx';
+import User_UpdatePassword from './components/User_UpdatePassword.jsx';
 
 import ViewerQueries from './queries/ViewerQueries';
 
@@ -118,6 +119,13 @@ export default [
           component: User_Properties,
           queries: ViewerQueries,
         },
+        childRoutes: [
+          {
+            path: 'UpdatePassword',
+            component: User_UpdatePassword,
+            queries: ViewerQueries,
+          },
+        ],
       },
     ],
   },
