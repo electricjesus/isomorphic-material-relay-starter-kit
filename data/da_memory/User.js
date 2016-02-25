@@ -81,3 +81,15 @@ export function DA_User_update( User_id : Uuid, id : Uuid, fields : any )
     resolve( );
   }, 100 ) );
 }
+
+export function DA_User_updatePassword( User_id : Uuid, id : Uuid, password : string )
+{
+  return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
+  {
+    var a_User = User_listById[ id ];
+
+    a_User.password = password;
+
+    resolve( );
+  }, 100 ) );
+}
