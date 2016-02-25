@@ -18,7 +18,7 @@ export default class Viewer_updateMutation extends Relay.Mutation
     return Relay.QL`
       fragment on Viewer_updatePayload {
         Viewer {
-          User_Password,
+          id
         }
       }
     `;
