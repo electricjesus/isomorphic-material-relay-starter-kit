@@ -89,9 +89,11 @@ class Chrome extends React.Component
         </Badge>
       );
 
+    // TODO Temporary example how to modify the menu depending on whether the user has logged in or not.
+    // Later integrate with example of requesting login and
+    // https://github.com/codefoundries/isomorphic-material-relay-starter-kit/issues/36
     let systemMenuContents = [
       <ListItem primaryText="Home" value="/" />,
-      <ListItem primaryText="GraphiQL" value="/graphiql" />,
     ];
 
     if( ! this.props.Viewer.User_IsAnonymous )
