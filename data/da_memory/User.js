@@ -82,13 +82,13 @@ export function DA_User_update( User_id : Uuid, id : Uuid, fields : any )
   }, 100 ) );
 }
 
-export function DA_User_updatePassword( User_id : Uuid, id : Uuid, password : string )
+export function DA_User_updatePassword( User_id : Uuid, id : Uuid, User_Password : string )
 {
   return new Promise( ( resolve, reject ) => setTimeout( ( ) =>
   {
     var a_User = User_listById[ id ];
 
-    a_User.password = password;
+    a_User.password = User_Password;
 
     resolve( );
   }, 100 ) );

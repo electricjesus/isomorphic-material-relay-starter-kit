@@ -80,12 +80,12 @@ export function DA_User_update( User_id : Uuid, id : Uuid, fields : any ) : Prom
   return runQueryNoResult( cqlText, cqlParams );
 }
 
-export function DA_User_updatePassword( User_id : Uuid, id : Uuid, password : string ) : Promise
+export function DA_User_updatePassword( User_id : Uuid, id : Uuid, User_Password : string ) : Promise
 {
   // We will not update User_User_id since it makes no sense to update it
   let cqlText = 'UPDATE "User" SET "password" = ? WHERE id = ?;';
   let cqlParams = [
-    password,
+    User_Password,
     id,
   ];
   return runQueryNoResult( cqlText, cqlParams );

@@ -123,6 +123,7 @@ type Mutation {
   Translaticiarum_delete(input: Translaticiarum_deleteInput!): Translaticiarum_deletePayload
   Translaticiarum_update(input: Translaticiarum_updateInput!): Translaticiarum_updatePayload
   Viewer_update(input: Viewer_updateInput!): Viewer_updatePayload
+  Viewer_updatePassword(input: Viewer_updatePasswordInput!): Viewer_updatePasswordPayload
 }
 
 interface Node {
@@ -300,6 +301,17 @@ input Viewer_updateInput {
   User_ProfilePhoto: String!
   User_Email: String!
   User_Locale: String!
+  clientMutationId: String!
+}
+
+input Viewer_updatePasswordInput {
+  id: ID!
+  User_Password: String!
+  clientMutationId: String!
+}
+
+type Viewer_updatePasswordPayload {
+  Viewer: Viewer
   clientMutationId: String!
 }
 
