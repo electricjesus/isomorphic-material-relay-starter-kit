@@ -563,8 +563,8 @@ class AppBar_Auth extends React.Component
           </List>
           <Divider />
           <List>
-            <ListItem primaryText="Profile" />
-            <ListItem primaryText="Settings" />
+            <ListItem primaryText="Profile" onTouchTap={ this._handle_Popover_AuthorizedUser_Profile } />
+            <ListItem primaryText="Change Password" onTouchTap={ this._handle_Popover_AuthorizedUser_ChangePassword } />
           </List>
           <Divider />
           <List>
@@ -575,6 +575,22 @@ class AppBar_Auth extends React.Component
       </Popover>
     );
   }
+
+  _handle_Popover_AuthorizedUser_Profile = ( ) =>
+  {
+    this.setState( {
+      Popover_AuthorizedUser_IsOpen: false,
+    } );
+    this.context.router.push( '/User' );
+  };
+
+  _handle_Popover_AuthorizedUser_ChangePassword = ( ) =>
+  {
+    this.setState( {
+      Popover_AuthorizedUser_IsOpen: false,
+    } );
+    this.context.router.push( '/User/UpdatePassword' );
+  };
 
   _handle_Popover_AuthorizedUser_LogInAsADifferentUser = ( ) =>
   {
@@ -648,6 +664,7 @@ class AppBar_Auth extends React.Component
 AppBar_Auth.contextTypes = {
   router: React.PropTypes.object.isRequired
 };
+
 
 export default Relay.createContainer( AppBar_Auth, {
   fragments: {

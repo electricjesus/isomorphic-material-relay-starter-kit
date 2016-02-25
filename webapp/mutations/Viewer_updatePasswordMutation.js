@@ -2,7 +2,7 @@
 
 import Relay from 'react-relay';
 
-export default class Viewer_updateMutation extends Relay.Mutation
+export default class Viewer_updatePasswordMutation extends Relay.Mutation
 {
   static fragments = {
     Viewer: ( ) => Relay.QL`
@@ -12,11 +12,11 @@ export default class Viewer_updateMutation extends Relay.Mutation
     `,
   };
   getMutation( ) {
-    return Relay.QL`mutation{Viewer_update}`;
+    return Relay.QL`mutation{Viewer_updatePassword}`;
   }
   getFatQuery( ) {
     return Relay.QL`
-      fragment on Viewer_updatePayload {
+      fragment on Viewer_updatePasswordPayload {
         Viewer {
           id
         }

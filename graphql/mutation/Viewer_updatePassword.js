@@ -1,5 +1,6 @@
 /* @flow weak */
 
+import bcrypt from 'bcrypt';
 import { fromGlobalId, mutationWithClientMutationId } from "graphql-relay";
 import { GraphQLString, GraphQLID, GraphQLNonNull } from "graphql";
 
@@ -20,16 +21,18 @@ export default mutationWithClientMutationId( {
       resolve: ( {localId}, { ...args }, { rootValue: {user_id} } ) => DA_User_get( user_id, localId ),
     },
   },
-  mutateAndGetPayload: ( {
-    id,
-    User_Password,
-  }, { rootValue: {user_id} } ) => {
+  mutateAndGetPayload: ( { id, User_Password, }, { rootValue: {user_id} } ) =>
+  {
     var localId = fromGlobalId( id ).id;
-    return DA_User_updatePassword(
+
+    return new Promise( ( resolve ) => {
+      bcrypt.hash( User_Password, 8, ( err, hash ) => resolve( hash ) );
+    } )
+    .then( ( hash ) => DA_User_updatePassword(
       user_id,
       localId,
-      User_Password,
-    )
+      hash,
+    ) )
     .then( ( ) => {
       return {localId};
     } )
