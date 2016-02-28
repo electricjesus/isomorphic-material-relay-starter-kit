@@ -5,7 +5,7 @@ IMRSK started as an off-shoot of multiple projects and boilerplates we use at [C
 | How to try     | **Link**|
 |----------------|----------------|
 | Live Demo on [Heroku](https://www.heroku.com/) | [http://isomorphic-material-relay.herokuapp.com/](http://isomorphic-material-relay.herokuapp.com/) This is a free dyno, so give it some time to spin up. |
-| Live Demo on [Open Shift](https://www.openshift.com/) | [http://app-imrsk.rhcloud.com/](http://app-imrsk.rhcloud.com/) |
+| Live Demo on [Open Shift](https://www.openshift.com/) | [http://app-imrsk.rhcloud.com/](http://app-imrsk.rhcloud.com/) Under active development, might be down. |
 | Run locally | [Local Setup](#local-setup) |
 | Run on [Heroku](https://www.heroku.com/nodejs) | [Heroku Setup](#heroku-setup) |
 
