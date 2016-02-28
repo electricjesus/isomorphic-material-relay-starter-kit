@@ -4,6 +4,7 @@ import chalk from 'chalk';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
+import log from './log.js';
 import path from 'path';
 
 import auth from './auth'; // Authentication server
@@ -12,6 +13,8 @@ import graphql from '../graphql/server'; // GraphQL server
 
 // Read environment
 require( 'dotenv' ).load( );
+
+log.log( 'info', 'Message for Winston - test - starting app' );
 
 console.log( chalk.blue( '----------------------------------------------------------------------------------------------------' ) );
 console.log( 'Application ' + chalk.bold.magenta( process.env.npm_package_name ) + ' version ' + chalk.bold.magenta( process.env.npm_package_version ) + ' running in ' + chalk.bold.magenta( process.env.NODE_ENV ) );

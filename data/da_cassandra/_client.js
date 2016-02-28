@@ -3,29 +3,12 @@
 import chalk from 'chalk';
 import cassandraDriver from 'cassandra-driver';
 
-// Read environment
-require( 'dotenv' ).load( );
+import options from './_options.js';
 
 
 export const Uuid = cassandraDriver.types.Uuid;
+export const client = new cassandraDriver.Client( options );
 
-let options =
-{
-  contactPoints: process.env.CASSANDRA_CONNECTION_POINTS != null ? process.env.CASSANDRA_CONNECTION_POINTS.split(',') : [ 'localhost' ], // Assume localhost if not defined
-  keyspace: process.env.CASSANDRA_KEYSPACE,
-  authProvider: null
-};
-
-if( process.env.CASSANDRA_USER )
-{
-  options.authProvider =
-    new cassandraDriver.auth.PlainTextAuthProvider(
-      process.env.CASSANDRA_USER,
-      process.env.CASSANDRA_PASSWORD
-    );
-}
-
-export const client = new cassandraDriver.Client(options);
 
 function ensureNoErrorOrReport( qText : string, qVar : Array<any>, err : any, reject : any )
 {
