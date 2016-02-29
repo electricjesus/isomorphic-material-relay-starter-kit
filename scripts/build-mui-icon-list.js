@@ -12,7 +12,7 @@ rrs('./node_modules/material-ui/src/svg-icons/').forEach(function(file) {
 		let index = 0, found = false;
 
 		// In order to display all the icons, comment out the following:
-		if( key > 50 ) return;
+		//if( key > 50 ) return;
 
 		while(found === false && index < fileLines.length)
 		{
@@ -63,15 +63,6 @@ let sourceCode = [
   `  }`,
   `};`,
   ``,
-  `export default Relay.createContainer(MUI_Icons, {`,
-  `  fragments: {`,
-  `    Viewer: () => Relay.QL\``,
-  `      fragment on Viewer {`,
-  `        ToDo_TotalCount,`,
-  `      }`,
-  `    \`,`,
-  `  },`,
-  `});`,
 ];
 
 fs.writeFileSync('./webapp/components/MUI_Icons.jsx', sourceCode.join('\n'));

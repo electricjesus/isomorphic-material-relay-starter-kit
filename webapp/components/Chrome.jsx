@@ -63,11 +63,6 @@ class Chrome extends React.Component
     } );
   };
 
-  _handle_onTouchTap_IncompleteTODOs = ( ) =>
-  {
-    this.context.router.push( '/ToDos/active' );
-  };
-
   _handle_onRequestChangeList = ( event, value ) =>
   {
     this.context.router.push( value );
@@ -76,18 +71,6 @@ class Chrome extends React.Component
 
   render( )
   {
-    let incompleteCount = this.props.Viewer.ToDo_TotalCount - this.props.Viewer.ToDo_CompletedCount;
-
-    let incompleteNotification = [ ];
-
-    if( incompleteCount > 0 )
-      incompleteNotification.push(
-        <Badge key="top-incomplete" style={ { marginTop: -11, marginBottom: -17 } } badgeContent={ incompleteCount } primary={ true } badgeStyle={{top:20, right:16}}>
-          <IconButton tooltip="Incomplete TODOs" onTouchTap={ this._handle_onTouchTap_IncompleteTODOs }>
-            <IconNotificationsEventAvailable />
-          </IconButton>
-        </Badge>
-      );
 
     // TODO Temporary example how to modify the menu depending on whether the user has logged in or not.
     // Later integrate with example of requesting login and
@@ -124,14 +107,7 @@ class Chrome extends React.Component
               primaryText="Examples"
               primaryTogglesNestedList={true}
               nestedItems={ [
-                <ListItem primaryText="Compendium" value="/compendiums" />,
-                <ListItem primaryText="Ensayo" value="/Ensayos" />,
-                <ListItem primaryText="Ensayo Public" value="/Ensayo_PublicListing" />,
-                <ListItem primaryText="MUI" value="/mui" />,
-                <ListItem primaryText="MUI Icons" value="/mui/icons" />,
-                <ListItem primaryText="To Do" value="/ToDos" />,
-                <ListItem primaryText="Translaticiarum" value="/Translaticiarums" />,
-                <ListItem primaryText="Translaticiarums Grid" value="/TranslaticiarumsGrid" />,
+                <ListItem primaryText="Checklists" value="/checklists" />,
               ] }
             />
           </SelectableList>
@@ -151,8 +127,7 @@ class Chrome extends React.Component
           <ToolbarGroup float="left">
             <ToolbarTitle text="IMRSK" />
           </ToolbarGroup>
-          <ToolbarGroup float="right">
-            { incompleteNotification }
+          <ToolbarGroup float="right">            
             <ToolbarSeparator />
             <AppBar_Auth Viewer={this.props.Viewer} />
             <AppBar_Language Viewer={this.props.Viewer} />
